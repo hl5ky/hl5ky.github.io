@@ -11,7 +11,7 @@ weight: 10
 보통의 로그북에서 입력하는 것과 비교하면 약 <span style="color:red">10배</span> 정도의 속도로 입력이 가능합니다.<br>
 
 프로그램 제작. DF3CB<br>
-사용설명서 작성. HL5KY (2015년 1월 4일)
+한글설명서 작성. HL5KY (2015년 1월 4일)
 {{% /pageinfo %}}
 
 FLE(Fast Log Entry)는 독일의 DF3CB가 만든 프로그램으로 종이로 된 교신 내용을 컴퓨터에 입력할때 보다 편리하게 입력할 수 있도록 도와줍니다.
@@ -36,6 +36,6 @@ FLE(Fast Log Entry)는 독일의 DF3CB가 만든 프로그램으로 종이로 �
 
 <div class="button_cont">
    <a class="example_d" href="/etc/img/사용설명서.pdf">
-    사용설명서 다운로드
+    한글 사용 설명서 다운로드
    </a>
 </div>
