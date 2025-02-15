@@ -1,5 +1,5 @@
 ---
-linkTitle: RCFoprb 설명서
+linkTitle: RCForb 설명서
 title: RCForb를 이용한 원격시스템
 # description:
 type: docs
