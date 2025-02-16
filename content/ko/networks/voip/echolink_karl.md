@@ -8,7 +8,7 @@ weight: 20
 
 {{% pageinfo %}}
 
-2003년 2월에 KARL지에 게재한 내용.
+2003년 2월호 KARL지에 게재한 내용.
 
 글. HL5KY
 
