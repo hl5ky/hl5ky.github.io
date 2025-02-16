@@ -38,8 +38,10 @@ weight: 20
 
 #### 1-3. 프로그램 인증 및 실행
 처음으로 프로그램을 실행하면 자동으로 설치마법사(Setup Wizard)가 실행되면서 다음과 같은 내용을 묻게 됩니다.<br>
-- 모드설정 : Computer mode, Sysop mode의 설정. PC사용자이므로 Computer mode선택▷ 인터넷연결속도 : 모뎀사용자는 Dial-up선택, ADSL등 고속통신 사용자는 DSL, cable 선택
-- Callsign : 자신의 호출부호▷ Password : 비밀번호(잊어버리면 다시 신청이 안 되니 주의하십시오)
+- 모드설정 : Computer mode, Sysop mode의 설정. PC사용자이므로 Computer mode선택
+- 인터넷연결속도 : 모뎀사용자는 Dial-up선택, ADSL등 고속통신 사용자는 DSL, cable 선택
+- Callsign : 자신의 호출부호
+- Password : 비밀번호(잊어버리면 다시 신청이 안 되니 주의하십시오)
 - Location : 위치를 대략 입력. 예를 들어 “Seoul, Korea”
 - Email : 자신의 email주소
 
