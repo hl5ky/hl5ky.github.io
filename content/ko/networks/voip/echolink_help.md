@@ -5,8 +5,8 @@ title: Echolink 도움말
 type: docs
 weight: 30
 ---
-Echolink {{< newtabref href="https://echolink.org" title="웹사이트" >}}에 있는 {{< newtabref href="http://www.echolink.org/help_ex/hh_start.htm" title="Help" >}}를 번역함.<br>
-2003년에 번역한 것이며 그 후 변경된 내용은 반영하였음.<br>
+Echolink {{< newtabref href="https://echolink.org" title="웹사이트" >}}에 있는 {{< newtabref href="http://www.echolink.org/help_ex/hh_start.htm" title="영문 Help" >}}를 번역함.<br>
+2003년에 번역한 것이며 그 후 변경된 내용은 일부 반영하였음.<br>
 번역. HL5KY.
 
 
