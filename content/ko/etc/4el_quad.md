@@ -151,7 +151,7 @@ Q 매칭<br>
 그림 7  설치개념도<br><br>
 
 
-<img src="/etc/img/quad_pic_8.png" style="width:600px;height:256"><br>
+<img src="/etc/img/quad_pic_8.png" style="width:700px;height:256"><br>
 그림 8  4엘레멘트 직사각형 쿼드 안테나<br><br>
 
 <b><span style="font-size:120%">8. 사용감 및 후기</span></b>
