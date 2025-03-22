@@ -1,5 +1,5 @@
 ---
-linkTitle: 전신연습장치 소개
+linkTitle: 전신연습장치 활용
 title: 전신연습 및 키어/디코더 소개
 # description: 
 type: docs
