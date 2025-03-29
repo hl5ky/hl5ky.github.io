@@ -27,7 +27,7 @@ HexBeam이라고 하는데 높은 곳에 위치해서 그런지 신호가 아주
 
 <img src="/recording/img/ea3huy_home.png" style="width:880px;height:256"><br>
 
-알베르토(Albert)는 몬트세라트(Montserrat)라는 곳에 사는데, 산악지역이 많고 주변 풍광이 아주 멋진 곳입니다. 몬트세라트 수도원은 천년 이상의 역사를 가진 수도원으로 역사적 가치와 함께 관광지로도 유명한 곳이라고 합니다. 알베트토의 QRZ.COM에는 이에 대한 상세한 설명을 해 두었습니다.
+알베르토(Albert)는 몬트세라트(Montserrat)라는 곳에 사는데, 산악지역이 많고 주변 풍광이 아주 멋진 곳입니다. 몬트세라트 수도원은 천년 이상의 역사를 가진 수도원으로 역사적 가치와 함께 관광지로도 유명한 곳이라고 합니다. 알베르토의 QRZ.COM에는 이에 대한 상세한 설명이 있습니다.
 
 <img src="/recording/img/ea3huy_monastery.png" style="width:880px;height:256"><br>
 
