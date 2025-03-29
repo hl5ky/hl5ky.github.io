@@ -19,7 +19,7 @@ EA3HUY의 신호가 강력하게 수신이 되었는데 독일식 영어 발음�
 
 <center><audio src="https://blog.kakaocdn.net/dn/bIEPw1/btsM0MOgNYz/kn5QOF6f4VyA91cMzfyYkK/tfile.mp3" controls="controls"></audio></center><br>
 
-HexBeam이라고 하는데 높은 곳에 위치해서 그런지 신호가 아주 좋았습니다. 1시간 동안 계속해서 안정된 신호로 수신되었습니다. 독일사람이냐고 물으니, 독일에서 오랫동안 생활을 하여서 발음이 조금 변했다고 합니다. 영어학습, CW, 나이 등에 관해서 재미있게 얘기를 나누었습니다.
+HexBeam 안테나를 사용한다고 하는데 높은 곳에 위치해서 그런지 신호가 아주 좋았습니다. 1시간 동안 계속해서 안정된 신호로 수신되었습니다. 독일사람이냐고 물으니, 독일에서 오랫동안 생활을 하여서 발음이 조금 변했다고 합니다. 영어학습, CW, 나이 등에 관해서 재미있게 얘기를 나누었습니다.
 
 <img src="/recording/img/ea3huy_map.png" style="width:480px;height:256"><br>
 
