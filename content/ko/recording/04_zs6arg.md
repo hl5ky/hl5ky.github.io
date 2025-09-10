@@ -27,10 +27,10 @@ DV통신은 기본적으로 인터넷을 사용하기 때문에 원거리에 있
  
 
 무전기에서 들리는 소리를 녹음한 것이 아니고, 브랜드마이스터의 Hoseline이라는 서비스를 통해서 녹음한 것이라서 음질이 그다지 좋지 않습니다.
+<br>
+<br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/nmCIF/btryOl5t7EN/LU5PMY3Dk4g4iRT09emU1k/tfile.mp3"
+controls></audio>
+<br>
 
-
-
-
-
-
-<center><audio src="https://blog.kakaocdn.net/dn/nmCIF/btryOl5t7EN/LU5PMY3Dk4g4iRT09emU1k/tfile.mp3" controls="controls"></audio></center>

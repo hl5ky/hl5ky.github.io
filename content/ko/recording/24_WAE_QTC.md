@@ -19,7 +19,11 @@ weight: 104
 
 V85RH가 파일업을 처리하다가 갑자기 상대국(DA0W)에서 "any QTC?"라고 말하자, V85RH는 호출부호와 함께 알 수 없는 숫자를 부릅니다. 상대국은 하나 하나 확인하면서 "Roger"라고 말하다가 모두 확인이 되니, "Roger, QSL, thank you 73"라고 하면서 교신을 마칩니다.
 
-<center><audio src="https://blog.kakaocdn.net/dn/cBOtRd/btsJLhC5VJ5/ZzbUbYzyeQOeeFzjLgYD9K/tfile.mp3" controls="controls"></audio></center><br>
+<br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/cBOtRd/btsJLhC5VJ5/ZzbUbYzyeQOeeFzjLgYD9K/tfile.mp3"
+controls></audio>
+<br><br>
 
 컨테스트는 누가 교신을 많이 하는지 경쟁하는 대회입니다. 점수의 계산은, <교신한 국수 X 교신한 나라의 숫자> 이렇게 계산하는 경우가 많습니다. 물론 각 컨테스트마다 약간의 차이는 있습니다. 그런데 WAE는 QTC라는 특이한 교신 내용이 있고, 이것을 점수에도 산정합니다.
 

@@ -14,8 +14,11 @@ weight: 94
 
 WD4NGB, Bruce가 CQ를 내는데 아주 강력하게 입감되었습니다.
 
-<center><audio src="https://blog.kakaocdn.net/dn/cdAijB/btsIpZqVrKZ/Q4yv0ECywTx5FYQWdVzpkk/tfile.mp3" controls="controls"></audio></center><br>
-
+<br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/cdAijB/btsIpZqVrKZ/Q4yv0ECywTx5FYQWdVzpkk/tfile.mp3"
+controls></audio>
+<br><br>
 
 테네시주에 사는 Bruce는 60년대부터 미군으로 근무하면서 전 세계 여러 나라를 다녔는데, 그 중에서 한국에는 4번이나 왔습니다. 4번째 근무했던 82년에는 HL9JV라는 호출부호를 취득하여 아마추어무선국을 운용하기도 하였습니다.
 

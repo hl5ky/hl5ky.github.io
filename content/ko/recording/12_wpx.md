@@ -18,8 +18,11 @@ weight: 65
 
 파일업을 받느라고 녹음하는 것을 잊고 있다가 중간쯤부터 녹음을 시작했습니다.<br>
 
-<center><audio src="https://blog.kakaocdn.net/dn/J3aHk/btr8zmtuRRg/DvYEKAgRen1PAW3GlpCXlK/tfile.mp3" controls="controls"></audio></center><br>
-
+<br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/J3aHk/btr8zmtuRRg/DvYEKAgRen1PAW3GlpCXlK/tfile.mp3"
+controls></audio>
+<br><br>
 
 
 컨테스트에서 교환하는 내용은, 리포트와 추가정보입니다. 상세한 내용은 각 컨테스트에 대한 안내를 보아야 합니다. WA7BNM의 웹페이지에 전 세계의 컨테스트에 대한 정보가 잘 정리되어 있습니다.

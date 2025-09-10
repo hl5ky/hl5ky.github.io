@@ -17,7 +17,11 @@ weight: 120
 
 EA3HUY의 신호가 강력하게 수신이 되었는데 독일식 영어 발음이 섞여있었습니다. 독일사람이 스페인에 살고 있거나 임시로 운용하는 것이라고 생각하였습니다. 미국과 교신을 마치고 QRZ을 부르는 소리가 들렸습니다. 잠시 기다렸지만 더 이상 신호가 들리지 않았습니다. "HL5KY listening"이라고 송신하니 "HL5, again please"라고 물어오면서 약 1시간 동안 재미있는 교신이 시작되었습니다. (녹음은 조금 늦게 시작)
 
-<center><audio src="https://blog.kakaocdn.net/dn/bIEPw1/btsM0MOgNYz/kn5QOF6f4VyA91cMzfyYkK/tfile.mp3" controls="controls"></audio></center><br>
+<br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/bIEPw1/btsM0MOgNYz/kn5QOF6f4VyA91cMzfyYkK/tfile.mp3"
+controls></audio>
+<br><br>
 
 HexBeam 안테나를 사용한다고 하는데 높은 곳에 위치해서 그런지 신호가 아주 좋았습니다. 1시간 동안 계속해서 안정된 신호로 수신되었습니다. 독일사람이냐고 물으니, 독일에서 오랫동안 생활을 하여서 발음이 조금 변했다고 합니다. 영어학습, CW, 나이 등에 관해서 재미있게 얘기를 나누었습니다.
 

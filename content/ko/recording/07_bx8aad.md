@@ -19,6 +19,11 @@ Gene은 소출력을 사용하기 때문에 음성 교신은 항상 불안정합
 
 녹음한 파일에서의 CW 속도는 대략 15WPM (약 75부호) 정도입니다. 영문으로 래그추어는 어떻게 이루어지는지 간접 경험을 해 볼수 있습니다.
 <br>
-<center><audio src="https://blog.kakaocdn.net/dn/Mn8Ji/btrGEwqY2i6/oUigilETq2qBuMZkB5UUH1/tfile.mp3" controls="controls"></audio></center><br>
+<br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/Mn8Ji/btrGEwqY2i6/oUigilETq2qBuMZkB5UUH1/tfile.mp3"
+controls></audio>
+<br><br>
+
 
 

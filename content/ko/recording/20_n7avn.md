@@ -14,8 +14,11 @@ weight: 96
 
 7월 3일 저녁에 14MHz에서 북미의 많은 국들이 불러오는 중에 "Mobile"이라고 하여 확인해보니 "Airborne Mobile" 이었습니다. 다행히 녹음 중이어서 음성 파일을 만들 수 있었습니다.
 
-
-<center><audio src="https://blog.kakaocdn.net/dn/cMLrHZ/btsIoZMdGgf/dZC99SgO0o0AAhAKkZBOvK/tfile.mp3" controls="controls"></audio></center><br>
+<br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/cMLrHZ/btsIoZMdGgf/dZC99SgO0o0AAhAKkZBOvK/tfile.mp3"
+controls></audio>
+<br><br>
 
 신호 상태는 그리 좋지는 않습니다. 중간부터 신호의 등락이 커서 알아듣기가 어려웠습니다. 위치는 알래스카의 앵커리지 부근이라고 합니다.
 

@@ -22,10 +22,14 @@ weight: 98
 
 직장 상사에게서 오두막을 무상으로 양도받아서 타워와 안테나를 세웠습니다. 일반 전기가 없기 때문에 태양열 판넬로 발전하고 배터리에 저장한 전기를 사용합니다. 그래서 보통 5w 정도의 저전력으로 송신합니다. 다행히 21MHz에서는 4el QUAD를 사용하고 있기 때문에 한국에서도 래그츄를 할 정도의 신호가 수신됩니다.
 
-<center><audio src="https://blog.kakaocdn.net/dn/bI102q/btsJnqms91S/3skmi5ImKFkEAWssTkMusK/tfile.mp3" controls="controls"></audio></center><br>
-
-
 <br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/bI102q/btsJnqms91S/3skmi5ImKFkEAWssTkMusK/tfile.mp3"
+controls></audio>
+<br><br>
+
+
+-------------
 <b><span style="font-size:120%">VA3AAA</span></b>   2024. 8. 25. 교신
 
 
@@ -35,9 +39,14 @@ WD4NGB에게서 소개받은 캐나다햄입니다. 오대호에 있는 아주 �
 
 교신이 끝나갈 무렵 누군가가 "여보세요"를 계속 외치고 있습니다. "QRZ 여보세요" 파일을 참고하시기 바랍니다.
 
-<center><audio src="https://blog.kakaocdn.net/dn/FWBPB/btsJmfM4Q4E/BI3Q4gsUAFkhhy6HTjfMr1/tfile.mp3" controls="controls"></audio></center><br>
-
 <br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/FWBPB/btsJmfM4Q4E/BI3Q4gsUAFkhhy6HTjfMr1/tfile.mp3"
+controls></audio>
+<br><br>
+
+
+--------------
 <b><span style="font-size:120%">VK3FLAK</span></b>   2014년 교신
 
 
@@ -51,9 +60,11 @@ Bob이 사는 곳은 작은 마을에서 약 8km 정도 떨어져 있고, 가장
 
 XYL도 VK3FQSO 로 무선국을 운용하고 있어서 저의 XYL과 자주 교신했습니다.
 
-
-<center><audio src="https://blog.kakaocdn.net/dn/8wIiy/btsJm3yqZlI/GvZ0Ff3Nl2h8wT2QIscBYK/tfile.mp3" controls="controls"></audio></center><br>
-
+<br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/8wIiy/btsJm3yqZlI/GvZ0Ff3Nl2h8wT2QIscBYK/tfile.mp3"
+controls></audio>
+<br><br>
 
 <br>
 

@@ -26,7 +26,11 @@ G3SED 2024년 9월 28일 교신
 
 오전에 CQ를 내니 북미에서 계속 호출해 오는 중에, W3HKK가 쉰 목소리이면서 강한 신호로 불러왔습니다. 얼른 로그북에 입력하고 응답을 했습니다. 로그북에 보니, 1980년도에 첫 교신을 하고 이번이 두 번째 교신입니다. 1966년부터 동일한 호출부호를 사용중이라고 합니다.
 
-<center><audio src="https://blog.kakaocdn.net/dn/blA0cf/btsJVGcJ9qx/K04Cfp7JZ1JyiuWXHZ185k/tfile.mp3" controls="controls"></audio></center><br>
+<br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/blA0cf/btsJVGcJ9qx/K04Cfp7JZ1JyiuWXHZ185k/tfile.mp3"
+controls></audio>
+<br><br>
 
 그때 저는 HM5KY 호출부호를 사용했습니다. 이후에 HL5KY로 바꾸었습니다. 지금은 HM이 북한의 프리픽스가 되었죠. 이런 내용을 설명하면 외국의 햄들이 아주 흥미로워합니다.
 
@@ -46,7 +50,11 @@ G3SED 2024년 9월 28일 교신
 
 로그북에 확인해 보니 1980년도에 교신한 사람입니다. 얼른 무전기를 켜고 주파수를 맞추니 마침 CQ를 내고 있어서 응답하였습니다. 44년만의 교신이라고 하니 아주 반가워 합니다.
 
-<center><audio src="https://blog.kakaocdn.net/dn/bMeW1a/btsJU72YZ4D/q4jLGdnJ1kS2IucKmIJBZk/tfile.mp3" controls="controls"></audio></center><br>
+<br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/bMeW1a/btsJU72YZ4D/q4jLGdnJ1kS2IucKmIJBZk/tfile.mp3"
+controls></audio>
+<br><br>
 
 아마추어무선 관련 사업을 하다가 이제는 은퇴하여 한적한 시골에서 햄을 즐기고 있다고 합니다. 부지가 넓어서 잔디깎는 기계를 이용하여도 3시간이 걸릴 정도로 넓은 곳에 마음대로 안테나를 설치한다고 하니 정말 부럽다는 생각이 듭니다.
 

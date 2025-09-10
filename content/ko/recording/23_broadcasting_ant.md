@@ -19,9 +19,12 @@ West Australia 에서 100w 출력으로 다이폴 안테나를 사용한다고 �
 
 단파 방송은 약 100kw 출력으로 송출합니다. 이 송신소에서 송출하는 방송 중에 한국어 방송도 있다고 하는군요. 18:30 KST에 9580 kHz에서 송출합니다.
 
-
-<center><audio src="https://blog.kakaocdn.net/dn/dff1bC/btsJlqB2PZK/kmuhcKIvdHuPPEMxl54BSK/tfile.mp3" controls="controls"></audio></center><br>
 <br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/dff1bC/btsJlqB2PZK/kmuhcKIvdHuPPEMxl54BSK/tfile.mp3"
+controls></audio>
+<br><br>
+
 <img src="/recording/img/vk6jms.png" style="width:600px;height:256"><br> 
 
 <br>

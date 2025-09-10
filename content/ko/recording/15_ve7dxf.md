@@ -16,7 +16,11 @@ weight: 75
 
 CQ를 내니 드문드문 불러오는 중에 오랫동안 알고 지내던 친구인 VE7DXF가 강한 신호로 응답해 왔습니다. 로그북을 볼 필요도 없이 이름을 부르면서 교신이 시작되었습니다.
 
-<center><audio src="https://blog.kakaocdn.net/dn/M9fpM/btsFh7ryjfg/tkaB3Kil3skAoPIeZw7cR1/tfile.mp3" controls="controls"></audio></center><br>
+<br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/M9fpM/btsFh7ryjfg/tkaB3Kil3skAoPIeZw7cR1/tfile.mp3"
+controls></audio>
+<br><br>
 
 Don은 본래 아이슬란드 출신으로, XYL도 아주 활발한 햄이었습니다. VE7SIS라는 호출부호를 가지고 있었는데, 오래 전에 SK하였습니다. 지금은 Don이 그 호출부호를 사용하고 있습니다.
 

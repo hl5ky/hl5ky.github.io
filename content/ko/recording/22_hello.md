@@ -19,9 +19,12 @@ weight: 100
 
 뉴욕에서 나오는 신호인데도 상당히 깨끗하게 잘 들어왔습니다. QRZ.COM을 보니 역시 안테나의 높이가 상당히 높습니다. 사진에서 보이는 2el 야기는 7MHz용이고, 그 위에 상대적으로 작게 보이는 안테나가 14~28MHz용입니다.
 
-
-<center><audio src="https://blog.kakaocdn.net/dn/dofUeE/btsJm8NbRFS/TdY4LfU13n5UPMk6KLkbN0/tfile.mp3" controls="controls"></audio></center><br>
 <br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/dofUeE/btsJm8NbRFS/TdY4LfU13n5UPMk6KLkbN0/tfile.mp3"
+controls></audio>
+<br><br>
+
 <img src="/recording/img/wr2dx.png" style="width:600px;height:256"><br> 
 
 <br>

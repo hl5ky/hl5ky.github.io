@@ -20,7 +20,11 @@ weight: 60
 
 CW 밴드에서 미국의 WB2DKH와 일본햄의 교신이 들립니다. WB2DKH는 뉴욕에서 100w로 송출한다고 하는데 549으로 충분히 수신이 가능하였습니다. 로그를 확인하니, 10여년전에 SSB로 교신을 하였고, 오래 전에 한국에서 HL9TY로 운용하였다는 기록이 있습니다. 일본햄과의 교신이 끝난 후에 호출하여 20여분간 대화를 나누었습니다. 한국에서의 운용, 종이 로그북을 전자 로그북으로 바꾸는 툴 등에 대한 얘기를 나누었습니다. 제가 호출했을 때, 본인의 주파수가 아니어서 "QSY DN" 즉 "주파수를 아래로 이동하자"고 하여 아래쪽의 주파수에서 다시 호출하는 부분이 있으니 참고하시기 바랍니다.
 
-<center><audio src="https://blog.kakaocdn.net/dn/quhHf/btr1p1Lo7JP/AszCeEKGXC8ewuAzreB82k/tfile.mp3" controls="controls"></audio></center><br>
+<br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/quhHf/btr1p1Lo7JP/AszCeEKGXC8ewuAzreB82k/tfile.mp3"
+controls></audio>
+<br><br>
 
 그런데 WB2DKH의 신호는 미국 동부의 신호에서 흔히 느껴지는 신호와는 조금 달랐습니다. 미국 동부에서 오는 신호는 북극과 가까운 지역을 통과하여 들어오기 때문에, 오로라의 영향으로, 20~30ms 정도의 짧은 QSB가 반복되어서 신호의 흔들림이 큽니다. 또한 HF의 신호가 감쇄되어 약하게 들립니다. 그런데 WB2DKH의 신호는 비교적 안정되어 있습니다.
 

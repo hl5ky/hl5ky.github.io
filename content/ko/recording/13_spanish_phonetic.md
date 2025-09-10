@@ -16,8 +16,11 @@ weight: 66
 
 아마 정답을 보지 않으면 알아듣기가 쉽지 않으실겁니다.
 
-
-<center><audio src="https://blog.kakaocdn.net/dn/ci4wcq/btsAXg7WVrw/zK1va2o9fFOMifadT2HE21/tfile.mp3" controls="controls"></audio></center><br>
+<br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/ci4wcq/btsAXg7WVrw/zK1va2o9fFOMifadT2HE21/tfile.mp3"
+controls></audio>
+<br><br>
 
 {{< alert title="정답 및 해설" >}}
 Japon Guatemala Uno Hotel Quito Argentina (JG1HQA)

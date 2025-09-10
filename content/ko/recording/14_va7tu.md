@@ -19,7 +19,11 @@ weight: 70
 
 마이크를 넘길 때 매번 호출부호를 부르지 않고 그냥 전화로 통화하듯이 대화합니다. 서로 신호가 좋고 간단히 짧은 질문/답변을 할 때는 이렇게 하는 것이 편합니다. 다만 중간에 한 번씩 정식으로 호출부호를 불러줄 필요가 있습니다. 미국의 규정에는 10분마다 한 번씩은 호출부호를 말하라고 되어 있습니다.
 
-<center><audio src="https://blog.kakaocdn.net/dn/LQQpt/btsFg4W91Wz/hajzj2God99pHozgOKAvNK/tfile.mp3" controls="controls"></audio></center><br>
+<br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/LQQpt/btsFg4W91Wz/hajzj2God99pHozgOKAvNK/tfile.mp3"
+controls></audio>
+<br><br>
 
 이쪽에서는 수신이 잘 되는데, 캐나다에서는 혼신/잡음이 있는지 중간에 수신이 조금 어려웠던 모양입니다. 적당히 대화를 나누고 교신을 마치니 다른 사람들도 이 YL과 교신을 하려고 호출을 합니다. 그 속에서 미국의 W0DXX는 저를 호출하네요. 그래서 "up 5"라고 말하고 주파수를 5kHz 위로 옮겨서 교신을 했습니다.
 

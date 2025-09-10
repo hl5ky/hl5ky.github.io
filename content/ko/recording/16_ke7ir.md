@@ -14,8 +14,11 @@ Patti는 햄생활이 거의 50년 정도되는 베테랑햄입니다. 이렇게
 
 북미와의 교신 중에 깨끗한 음성이 들려서 응답을 했습니다. 처음에는 YL인지 몰랐는데 이름을 듣고는 바로 녹음기를 켰습니다.
 
-<center><audio src="https://blog.kakaocdn.net/dn/BmnkN/btsFjKJoUGg/HllNxx3s3kUIYISl68IZz1/tfile.mp3" controls="controls"></audio></center><br>
-
+<br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dn/BmnkN/btsFjKJoUGg/HllNxx3s3kUIYISl68IZz1/tfile.mp3"
+controls></audio>
+<br><br>
 
 저의 XYL도 햄이며 교신을 통해서 만났다는 얘기를 했더니, Patti도 남편과는 무선을 통해서 만났다고 합니다.
 
