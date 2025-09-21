@@ -1,0 +1,29 @@
+---
+linkTitle: 바다로 둘러싸인 라군
+title: EA5/G4VZV 라군지역에서 이동운용
+# description:
+type: docs
+weight: 122
+---
+
+{{% pageinfo %}}
+2025년 8월 4일 교신
+{{% /pageinfo %}}
+
+단파대의 전파상태는 낚시와 비슷합니다. 해질 때와 해 뜰 때 원거리 교신이 잘 됩니다. XYL이 일찍 외출을 하는 바람에 일찍 일어났습니다.
+
+14MHz와 18MHz에서 유럽 신호가 많이 들렸습니다. XYL도 없으니 큰 소리를 내도 괜찮겠다는 생각에 SSB쪽을 택했습니다. 18MHz를 이리저리 돌리다보니 익숙한 호출부호가 들렸습니다. 영국햄인데 스페인에서 운용하는 분으로 QRZ.COM을 확인하니 주로 HF 이동국을 운용하는 햄이었습니다. 안테나를 들고 움직이면서 교신하는 Pedestrian Mobile국을 운용하는 분입니다.
+
+<br>
+<audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
+src="https://blog.kakaocdn.net/dna/cOmj7Q/dJMb8Y4gOpH/AAAAAAAAAAAAAAAAAAAAAOqej2WQhX_Q99JErJHkMaPfxSjQ5Qwvs7h8okLR-sSP/tfile.mp3?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1759244399&allow_ip=&allow_referer=&signature=187DAij6I8vCSofbHPOkxyeCE9M%3D"
+controls></audio>
+<br><br>
+
+이번에는 차로 이동하여 바닷가와 가까운 라군지역에서 운용한다고 합니다. Bonmati라는 지역이라고 하면서 구글맵에서 찾을 수 있을 것이라고 합니다. 그래서 구글맵을 열고 찾기 시작했는데 생각보다 찾기가 어렵네요. 서로 여기저기 위치를 말하면서 정확한 위치를 찾는데 한참 걸렸습니다. 저는 이런 과정이 참 재미있습니다. 게다가 요즘은 구글맵같은 좋은 지도가 있으니 찾기가 편하기도 하고 실제 모습을 볼 수 있어서 더욱 좋습니다.
+
+교신을 하면서 서로의 위치를 지도에서 확인하는 일은 교신에서 할 수 있는 재미있는 좋은 소재입니다. 그전에는 종이로 된 지도로 찾았지만 지금은 컴퓨터 지도를 이용하니 훨씬 편리합니다.
+
+라군은 갖힌 물이 있는 지역인데요, Bonmati Lagoon은 바닷물이 갖힌 호수입니다. 바다가 바로 붙어있는 지역이라서 자신이 운용하는 지역은 마치 바다 한가운데에 있는 것과 같다고 합니다. 물과 가까워서 그런지 작은 Whip 안테나로 70w 출력을 사용하는데 약 40분간 래그츄를 나눌 수 있었습니다.
+
+<img src="/recording/img/G4VZV.png" style="width:800px;height:256"><br>
