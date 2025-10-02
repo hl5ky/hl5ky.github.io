@@ -16,7 +16,7 @@ weight: 122
 
 <br>
 <audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
-src="https://blog.kakaocdn.net/dna/cOmj7Q/dJMb8Y4gOpH/AAAAAAAAAAAAAAAAAAAAAOqej2WQhX_Q99JErJHkMaPfxSjQ5Qwvs7h8okLR-sSP/tfile.mp3?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1759244399&allow_ip=&allow_referer=&signature=187DAij6I8vCSofbHPOkxyeCE9M%3D"
+source src=" https://sparkling-dango-db7052.netlify.app/HL5KY_G4VZV_250804.mp3"
 controls></audio>
 <br><br>
 
@@ -27,3 +27,5 @@ controls></audio>
 라군은 갖힌 물이 있는 지역인데요, Bonmati Lagoon은 바닷물이 갖힌 호수입니다. 바다가 바로 붙어있는 지역이라서 자신이 운용하는 지역은 마치 바다 한가운데에 있는 것과 같다고 합니다. 물과 가까워서 그런지 작은 Whip 안테나로 70w 출력을 사용하는데 약 40분간 래그츄를 나눌 수 있었습니다.
 
 <img src="/recording/img/G4VZV.png" style="width:800px;height:256"><br>
+
+
