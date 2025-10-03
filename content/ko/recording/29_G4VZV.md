@@ -16,7 +16,7 @@ weight: 122
 
 <br>
 <audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
-source src=" https://sparkling-dango-db7052.netlify.app/HL5KY_G4VZV_250804.mp3"
+source src=" https://hl5ky.netlify.app/HL5KY_G4VZV_250804.mp3"
 controls></audio>
 <br><br>
 
