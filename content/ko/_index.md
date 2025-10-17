@@ -16,13 +16,7 @@ title: Amateur Radio
 
 {{% blocks/lead color="primary" %}}
 
-<div style="text-align: left;">
-  <a href="https://hits.seeyoufarm.com">
-    <img
-      src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fhl5ky.github.io&count_bg=%230DC276&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=+%EB%B0%A9%EB%AC%B8%EC%9E%90+%EC%88%98+&edge_flat=false"
-    />
-  </a>
-</div>
+
 
 아마추어무선을 통한 전세계와의 우정, QSO 코흐법을 이용한 전신 학습<br>
 
