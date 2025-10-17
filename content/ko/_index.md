@@ -17,7 +17,6 @@ title: Amateur Radio
 {{% blocks/lead color="primary" %}}
 
 
-
 아마추어무선을 통한 전세계와의 우정, QSO 코흐법을 이용한 전신 학습<br>
 
 디지털통신(DMR, DSTAR)에 대한 안내, 실제 교신 녹음과 해설.
@@ -38,6 +37,8 @@ title: Amateur Radio
 
 {{% blocks/feature icon="fa-solid fa-walkie-talkie" title="남아프리카와의 DMR 교신 듣기!" url="/recording/04_zs6arg/" %}}
 아프리카는 단파대에서도 교신이 쉽지 않을뿐더러 장시간 대화는 더욱 어렵습니다. 인터넷을 사용하는 DMR에서는 전파상태와 상관이 없으므로 장시간 대화가 가능합니다.
+
 {{% /blocks/feature %}}
 
 {{% /blocks/section %}}
+

@@ -1,0 +1,31 @@
+/* footer 위에 자연스럽게 겹치는 StatCounter 아이콘 */
+
+.statcounter-wrapper {
+    position: fixed;      /* 화면 고정 */
+    right: 15px;          /* 오른쪽 여백 */
+    bottom: 8px;          /* 화면 아래 여백 */
+    opacity: 0.7;         /* 살짝 투명하게 */
+    z-index: 1000;        /* 항상 맨 위에 표시 */
+    pointer-events: auto; /* 클릭 가능 */
+  }
+  
+  .statcounter-wrapper:hover {
+    opacity: 1.0;
+  }
+  
+  /* footer에 추가 줄이 생긴 듯 보일 때 배경색 조정 (선택 사항) */
+  body > .statcounter-wrapper {
+    background: none !important;
+    display: inline-block;
+  }
+  
+  #sc-wrap {
+    pointer-events: auto;
+  }
+  
+  body > #sc-wrap {
+    display: inline !important;
+    height: 0 !important;
+    overflow: visible !important;
+  }
+  
