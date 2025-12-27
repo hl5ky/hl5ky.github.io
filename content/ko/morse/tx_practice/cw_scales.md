@@ -46,13 +46,13 @@ weight: 40
 2 EAWJ1  1JWAE  EAWJ1  1JWAE  EAWJ1  1JWAE<br>
 3 TMO78  87OMT  TMO78  87OMT  TMO78  87OMT<br>
 4 TNDB6  6BDNT  TNDB6  6BDNT  TNDB6  6BDNT<br>
-5 EARL<AS>  <AS>LRAE  EARL<AS>  <AS>LRAE  EARL<AS>  <AS>LRAE<br>
-6 IUFV<SN>  <SN>VFUI  IUFV<SN>  <SN>VFUI  IUFV<SN>  <SN>VFUI<br>
-7 TNKC</>  </>CKNT  TNKC</>  </>CKNT  TNKC</>  </>CKNT<br>
+5 EARL&lt;AS&gt;  &lt;AS&gt;LRAE  EARL&lt;AS&gt;  &lt;AS&gt;LRAE  EARL&lt;AS&gt;  &lt;AS&gt;LRAE<br>
+6 IUFV&lt;SN&gt;  &lt;SN&gt;VFUI  IUFV&lt;SN&gt;  &lt;SN&gt;VFUI  IUFV&lt;SN&gt;  &lt;SN&gt;VFUI<br>
+7 TNKC&lt;/&gt;  &lt;/&gt;CKNT  TNKC&lt;/&gt;  &lt;/&gt;CKNT  TNKC&lt;/&gt;  &lt;/&gt;CKNT<br>
 8 MGQZ4  4ZQGM  MGQZ4  4ZQGM  MGQZ4  4ZQGM<br>
 9 P23XY  YX32P  P23XY  YX32P  P23XY  YX32P<br>
 
-​< > 속의 부호는 연속부호 또는 특수부호입니다.
+&lt; &gt; 속의 부호는 연속부호 또는 특수부호입니다.
 <br><br>
 
 
