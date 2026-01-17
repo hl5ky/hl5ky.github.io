@@ -82,13 +82,13 @@ weight: 34
 - Ref (대구) 도시외곽  안테나: INV (5층건물위 급전점 12mH) 남북방향으로 설치
 <br><br>
 
-​<iframe src="https://play-tv.kakao.com/embed/player/cliplink/460692812?service=daum_tistory" width="860" height="484" frameborder="0" allowfullscreen="true"></iframe><br><br>
+​<iframe src="https://play-tv.kakao.com/embed/player/cliplink/460692812?service=daum_tistory" width="711" height="404" frameborder="0" allowfullscreen="true"></iframe><br><br>
 
 <img src="/etc/img/hf_comm_test_RX_sig.png"
-     style="width:900px; max-width:none; height:130px;">
+     style="width:800px; max-width:none; height:130px;">
 <br><br>
 
-<img src="/etc/img/hf_comm_test_output_sig.png" style="width:370px;height:256"><br><br>
+<img src="/etc/img/hf_comm_test_output_sig.png" style="width:350px;height:256"><br><br>
 <br><br>
 
 영상을 볼때, 아래와 같은 관점 또는 기본 지식을 가지고 본다면 보다 의미가 있으리라 생각합니다.
