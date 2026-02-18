@@ -1,5 +1,5 @@
 ---
-linkTitle: 스페인 카탈로니아
+linkTitle: ▪카탈로니아
 title: EA3HUY 스페인 카탈로니아
 # description:
 type: docs

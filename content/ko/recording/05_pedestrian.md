@@ -1,5 +1,5 @@
 ---
-linkTitle: 걸으면서 HF교신
+linkTitle: ▪걸으면서 HF교신
 title: 걸으면서 HF 원거리 교신
 # description:
 type: docs

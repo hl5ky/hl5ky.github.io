@@ -1,5 +1,5 @@
 ---
-linkTitle: 유럽 파일업
+linkTitle: ▪유럽 파일업
 title: 잠 못 드는 여름밤
 # description:
 type: docs

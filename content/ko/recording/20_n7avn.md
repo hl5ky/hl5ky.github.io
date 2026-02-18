@@ -1,5 +1,5 @@
 ---
-linkTitle: N7AVN 항공기 모빌
+linkTitle: ▪항공기 모빌
 title: 비행기에서 HF로 교신
 # description:
 type: docs

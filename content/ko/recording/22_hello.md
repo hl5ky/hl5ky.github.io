@@ -1,5 +1,5 @@
 ---
-linkTitle: QRZ 여보세요
+linkTitle: ▪QRZ 여보세요
 title: 여보세요를 계속 외치는 무선국
 # description:
 type: docs

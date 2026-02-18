@@ -1,5 +1,5 @@
 ---
-linkTitle: WB2DKH CW 교신
+linkTitle: ▪WB2DKH CW
 title: WB2DKH(ex-HL9TY) CW 교신
 # description:
 type: docs

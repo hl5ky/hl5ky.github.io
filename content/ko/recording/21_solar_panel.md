@@ -1,5 +1,5 @@
 ---
-linkTitle: 태양열발전 HF무선국
+linkTitle: ▪태양열발전
 title: 태양열 발전을 사용하는 HF국과 래그츄
 # description:
 type: docs

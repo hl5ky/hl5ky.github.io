@@ -1,5 +1,5 @@
 ---
-linkTitle: 44년만의 교신
+linkTitle: ▪44년만의 교신
 title: W3HKK, G3SED
 # description:
 type: docs

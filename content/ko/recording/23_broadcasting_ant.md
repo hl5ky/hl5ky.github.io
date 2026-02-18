@@ -1,5 +1,5 @@
 ---
-linkTitle: 방송국 안테나 사용
+linkTitle: ▪방송국 안테나
 title: 단파방송용 안테나를 사용하는 호주햄
 # description:
 type: docs

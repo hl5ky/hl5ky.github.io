@@ -1,5 +1,5 @@
 ---
-linkTitle: K6KPH CW 교신
+linkTitle: ▪K6KPH CW
 title: K6KPH의 담백한 버그키 송신
 # description:
 type: docs

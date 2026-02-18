@@ -1,5 +1,5 @@
 ---
-linkTitle: 바다로 둘러싸인 라군
+linkTitle: ▪라군지역
 title: EA5/G4VZV 라군지역에서 이동운용
 # description:
 type: docs

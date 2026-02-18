@@ -1,5 +1,5 @@
 ---
-linkTitle: WPX 컨테스트
+linkTitle: ▪WPX 컨테스트
 title: WPX 컨테스트 교신
 # description:
 type: docs

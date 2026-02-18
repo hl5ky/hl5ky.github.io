@@ -1,5 +1,5 @@
 ---
-linkTitle: 남아프리카와 DMR 교신
+linkTitle: ▪남아공 DMR
 title: ZS6ARG와의 DMR 교신
 # description: 
 type: docs

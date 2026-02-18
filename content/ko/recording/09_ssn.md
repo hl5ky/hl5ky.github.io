@@ -1,5 +1,5 @@
 ---
-linkTitle: 태양흑점지수
+linkTitle: ▪태양흑점지수
 title: 전파상태가 좋을 때는 높은 주파수를 공략
 # description:
 type: docs

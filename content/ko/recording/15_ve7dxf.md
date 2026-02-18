@@ -1,5 +1,5 @@
 ---
-linkTitle: 오랜 친구와의 만남
+linkTitle: ▪오랜 친구
 title: 캐나다 친구 VE7DXF
 # description:
 type: docs

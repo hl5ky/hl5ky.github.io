@@ -1,5 +1,5 @@
 ---
-linkTitle: 28MHz 빅파일업
+linkTitle: ▪28MHz 빅파일업
 title: 오랜만에 즐긴 막강한 파일업
 # description:
 type: docs

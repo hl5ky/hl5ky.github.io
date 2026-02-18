@@ -1,5 +1,5 @@
 ---
-linkTitle: WD4NGB ex-HL9JV
+linkTitle: ▪ex-HL9JV
 title: 의정부에서 미군으로 근무
 # description:
 type: docs

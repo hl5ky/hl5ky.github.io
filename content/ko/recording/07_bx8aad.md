@@ -1,5 +1,5 @@
 ---
-linkTitle: BX8AAD CW 교신
+linkTitle: ▪BX8AAD CW
 title: BX8AAD와 CW 연습 교신
 # description:
 type: docs
