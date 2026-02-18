@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪DDNS 설정
+linkTitle: ▪DDNS
 title: DDNS 설정 방법
 # description:
 type: docs
