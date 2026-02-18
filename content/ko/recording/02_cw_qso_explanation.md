@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪해외 CW 해설
+linkTitle: ▪해외CW해설
 title: 해외 CW 교신 동영상 및 해설
 # description:
 type: docs

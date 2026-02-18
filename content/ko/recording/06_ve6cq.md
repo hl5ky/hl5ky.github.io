@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪캐나다 SSB
+linkTitle: ▪캐나다SSB
 title: 14MHz에서 VE6CQ와의 교신
 # description:
 type: docs

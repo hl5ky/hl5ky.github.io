@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪남아공 DMR
+linkTitle: ▪남아공DMR
 title: ZS6ARG와의 DMR 교신
 # description: 
 type: docs
