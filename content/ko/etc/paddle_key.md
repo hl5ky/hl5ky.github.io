@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪CW장치 용어
+linkTitle: ▪CW장치용어
 title: 키, 키어, 패들 등의 용어 정리
 # description:
 type: docs

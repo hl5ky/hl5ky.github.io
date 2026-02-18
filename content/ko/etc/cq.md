@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪DV에서 CQ
+linkTitle: ▪DV에서CQ
 title: DV 통신 또는 리피터에서 CQ를 송출해도 되는가
 # description:
 type: docs

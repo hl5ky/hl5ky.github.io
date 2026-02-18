@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪28MHz QUAD
+linkTitle: ▪28MHzQUAD
 title: 28MHz 모노밴드 쿼드 안테나
 # description:
 type: docs

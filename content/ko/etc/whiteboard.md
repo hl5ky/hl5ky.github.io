@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪온라인 칠판
+linkTitle: ▪온라인칠판
 title: 온라인 칠판 (Whiteboard) 안내
 # description:
 type: docs

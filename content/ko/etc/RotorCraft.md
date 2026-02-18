@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪450도 로테이터
+linkTitle: ▪450도로테이터
 title: 450도까지 지원이 가능한 로테이터 컨트롤 프로그램
 # description:
 type: docs
