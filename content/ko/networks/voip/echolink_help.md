@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪Echolink도움말
+linkTitle: ▪에코링크도움말
 title: Echolink 도움말
 # description:
 type: docs

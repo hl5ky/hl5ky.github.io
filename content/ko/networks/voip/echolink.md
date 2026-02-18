@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪Echolink안내
+linkTitle: ▪에코링크안내
 title: Echolink (KARL지 2003년 2월호)
 # description:
 type: docs
