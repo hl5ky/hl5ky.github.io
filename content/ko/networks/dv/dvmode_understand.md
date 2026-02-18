@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪DV통신의시작
+linkTitle: ▪DV통신시작
 title: DV 통신의 이해와 시작
 # description:
 type: docs
