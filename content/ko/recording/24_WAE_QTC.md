@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪컨테스트 QTC?
+linkTitle: ▪컨테스트QTC?
 title: WAE 컨테스트에서 교환하는 QTC
 # description:
 type: docs
