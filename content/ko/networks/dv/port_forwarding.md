@@ -1,5 +1,5 @@
 ---
-linkTitle: 포트포워딩 설정방법
+linkTitle: ▪포트포워딩
 title: 포트포워딩 설정 방법
 # description:
 type: docs

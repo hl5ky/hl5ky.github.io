@@ -1,6 +1,6 @@
 ---
 title: 관심사
-linkTitle: 관심사
+linkTitle: ▪관심사
 type: docs
 weight: 10
 ---

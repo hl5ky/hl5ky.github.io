@@ -1,5 +1,5 @@
 ---
-linkTitle: 입문과정
+linkTitle: ▪입문과정
 title: 초보자 입문 과정
 # description: 
 type: docs

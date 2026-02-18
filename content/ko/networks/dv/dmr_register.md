@@ -1,5 +1,5 @@
 ---
-linkTitle: DMR ID등록방법
+linkTitle: ▪DMR ID 등록
 title: DMR ID 등록 방법
 # description:
 type: docs

@@ -1,5 +1,5 @@
 ---
-linkTitle: DMR의이해(1~5)
+linkTitle: ▪DMR의이해
 title: DMR의 이해 (1 ~ 5)
 # description:
 type: docs

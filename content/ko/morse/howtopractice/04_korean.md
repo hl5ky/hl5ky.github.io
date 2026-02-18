@@ -1,5 +1,5 @@
 ---
-linkTitle: 한글전신
+linkTitle: ▪한글전신
 title: 한글 전신 익히기
 # description: 
 type: docs

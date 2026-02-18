@@ -1,5 +1,5 @@
 ---
-linkTitle: 디코더의사용
+linkTitle: ▪디코더사용
 title: 디코더로 자동 수신
 # description: 
 type: docs

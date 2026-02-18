@@ -1,5 +1,5 @@
 ---
-linkTitle: 구봉산 비밀작전 실패
+linkTitle: ▪구봉산비밀작전
 title: 구봉산 비밀작전 실패의 전말
 # description:
 type: docs

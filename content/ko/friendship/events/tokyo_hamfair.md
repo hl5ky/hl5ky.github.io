@@ -1,5 +1,5 @@
 ---
-linkTitle: 동경햄페어
+linkTitle: ▪동경햄페어
 title: 동경 햄페어 (2019년)
 # description: 
 type: docs

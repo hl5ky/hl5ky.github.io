@@ -1,5 +1,5 @@
 ---
-linkTitle: 스케일 연습
+linkTitle: ▪스케일연습
 title: 전신 스케일 연습
 # description: 
 type: docs

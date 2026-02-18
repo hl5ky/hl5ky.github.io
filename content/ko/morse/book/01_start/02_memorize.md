@@ -1,5 +1,5 @@
 ---
-linkTitle: 부호의암기
+linkTitle: ▪부호암기
 title: 부호의 암기 
 # description: 
 type: docs

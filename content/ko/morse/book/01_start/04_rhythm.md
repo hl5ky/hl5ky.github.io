@@ -1,5 +1,5 @@
 ---
-linkTitle: 박자감이란
+linkTitle: ▪박자감
 title: 박자감이란
 # description: 
 type: docs

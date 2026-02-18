@@ -1,5 +1,5 @@
 ---
-linkTitle: 송신/수신 먼저
+linkTitle: ▪송신/수신
 title: 송신과 수신, 어느 것을 먼저 시작해야 할까
 # description: 
 type: docs

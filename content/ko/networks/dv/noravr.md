@@ -1,5 +1,5 @@
 ---
-linkTitle: NoraVR가상리피터
+linkTitle: ▪NoraVR
 title: NoraVR 가상리피터
 # description:
 type: docs

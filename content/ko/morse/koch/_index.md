@@ -1,5 +1,5 @@
 ---
-linkTitle: 부호연습(QSO코흐법)
+linkTitle: QSO 코흐법
 title: QSO 코흐법으로 부호 연습
 # description: 
 type: docs

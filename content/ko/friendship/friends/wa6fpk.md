@@ -1,5 +1,5 @@
 ---
-linkTitle: WA6FPK
+linkTitle: ▪WA6FPK
 title: WA6FPK
 # description: 
 type: docs

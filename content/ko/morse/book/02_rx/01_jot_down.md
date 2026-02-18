@@ -1,5 +1,5 @@
 ---
-linkTitle: 적으면서수신
+linkTitle: ▪적으면서
 title: 적으면서 수신하는 것은 실력 향상에 방해가 된다?
 # description: 
 type: docs

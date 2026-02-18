@@ -1,5 +1,5 @@
 ---
-linkTitle: 리모트 이용 통신실험
+linkTitle: ▪원격이용통신실험
 title: 리모트를 이용한 단파대 국내통신실험
 # description:
 type: docs

@@ -1,5 +1,5 @@
 ---
-linkTitle: VK4HF
+linkTitle: ▪VK4HF
 title: VK4HF
 # description: 
 type: docs

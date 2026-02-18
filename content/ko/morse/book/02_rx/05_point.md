@@ -1,5 +1,5 @@
 ---
-linkTitle: 수신의어려움
+linkTitle: ▪어려움
 title: 수신 연습의 어려움
 # description: 
 type: docs

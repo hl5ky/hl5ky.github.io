@@ -1,5 +1,5 @@
 ---
-linkTitle: VE7IBJ
+linkTitle: ▪VE7IBJ
 title: VE7IBJ
 # description: 
 type: docs

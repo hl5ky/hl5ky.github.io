@@ -1,5 +1,5 @@
 ---
-linkTitle: 버튼 및 메뉴 구성
+linkTitle: ▪버튼및메뉴
 title: 버튼 및 메뉴 구성
 # description: 
 type: docs

@@ -1,5 +1,5 @@
 ---
-linkTitle: 한글/영문 먼저
+linkTitle: ▪한글/영문
 title: 한글과 영문, 어느 것을 먼저 시작해야 할까
 # description: 
 type: docs

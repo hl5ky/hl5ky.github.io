@@ -1,5 +1,5 @@
 ---
-linkTitle: 키를 잡는 방법
+linkTitle: ▪키잡는방법
 title: 키를 잡는 방법
 # description: 
 type: docs

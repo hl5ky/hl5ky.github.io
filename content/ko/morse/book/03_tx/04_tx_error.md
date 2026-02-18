@@ -1,5 +1,5 @@
 ---
-linkTitle: 송신불량
+linkTitle: ▪송신불량
 title: 자신의 송신 속도 알기 및 문제점 파악
 # description: 
 type: docs

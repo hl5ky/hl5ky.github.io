@@ -1,5 +1,5 @@
 ---
-linkTitle: VK3MO
+linkTitle: ▪VK3MO
 title: VK3MO
 # description: 
 type: docs

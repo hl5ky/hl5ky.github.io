@@ -1,5 +1,5 @@
 ---
-linkTitle: 소문자사용
+linkTitle: ▪소문자
 title: 소문자로 적는 것이 빠르다
 # description: 
 type: docs

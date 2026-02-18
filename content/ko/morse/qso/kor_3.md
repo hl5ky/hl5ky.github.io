@@ -1,5 +1,5 @@
 ---
-linkTitle: 한글 예문 3
+linkTitle: ▪한글예문3
 title: 한글 교신 예문 3 (RST, QTH, 서로의 근황)
 # description: 
 type: docs

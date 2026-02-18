@@ -1,5 +1,5 @@
 ---
-linkTitle: 영문 10단계
+linkTitle: ▪영문10단계
 title: 영문 10단계
 # description: 
 type: docs

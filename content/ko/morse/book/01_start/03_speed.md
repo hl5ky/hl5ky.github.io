@@ -1,5 +1,5 @@
 ---
-linkTitle: 부호의속도
+linkTitle: ▪부호속도
 title: 모오스 부호의 속도
 # description: 
 type: docs

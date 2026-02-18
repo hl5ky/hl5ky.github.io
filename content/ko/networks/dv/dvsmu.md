@@ -1,5 +1,5 @@
 ---
-linkTitle: dvsMU (Multi User)
+linkTitle: ▪dvsMU
 title: DVSwitch Multi User 프로그램 공개
 # description:
 type: docs

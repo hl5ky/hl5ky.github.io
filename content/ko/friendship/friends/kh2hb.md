@@ -1,5 +1,5 @@
 ---
-linkTitle: KH2HB
+linkTitle: ▪KH2HB
 title: KH2HB & KH2HM
 # description: 
 type: docs

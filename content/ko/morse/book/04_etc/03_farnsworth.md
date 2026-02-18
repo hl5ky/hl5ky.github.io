@@ -1,5 +1,5 @@
 ---
-linkTitle: Farnsworth
+linkTitle: ▪Farnsworth
 title: Farnsworth (판쓰워쓰) 간격이란
 # description: 
 type: docs

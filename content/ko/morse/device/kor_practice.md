@@ -1,5 +1,5 @@
 ---
-linkTitle: 한글부호 단계별 내용
+linkTitle: ▪한부호단계
 title: 한글부호 단계별 내용
 # description: 
 type: docs

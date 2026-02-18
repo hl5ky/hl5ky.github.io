@@ -1,5 +1,5 @@
 ---
-linkTitle: 한글 4단계
+linkTitle: ▪한글 4단계
 title: 한글 4단계
 # description: 
 type: docs

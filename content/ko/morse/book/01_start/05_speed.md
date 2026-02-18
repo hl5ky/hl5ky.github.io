@@ -1,5 +1,5 @@
 ---
-linkTitle: 빠른속도 허와 실
+linkTitle: ▪속도허와실
 title: 교신 형태별 속도
 # description: 
 type: docs

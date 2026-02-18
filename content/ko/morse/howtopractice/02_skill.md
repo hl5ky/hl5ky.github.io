@@ -1,5 +1,5 @@
 ---
-linkTitle: 숙달단계
+linkTitle: ▪숙달단계
 title: 교신 숙달 단계
 # description: 
 type: docs

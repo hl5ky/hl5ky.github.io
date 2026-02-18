@@ -1,5 +1,5 @@
 ---
-linkTitle: 영문 예문 1
+linkTitle: ▪영문예문1
 title: 영문 교신 예문 1 (DS0AHQ 스케쥴교신)
 # description: 
 type: docs

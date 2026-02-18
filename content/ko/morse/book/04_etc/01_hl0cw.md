@@ -1,5 +1,5 @@
 ---
-linkTitle: 스케쥴 교신
+linkTitle: ▪스케쥴교신
 title: HL0CW, DS0AHQ 스케쥴 교신
 # description: 
 type: docs

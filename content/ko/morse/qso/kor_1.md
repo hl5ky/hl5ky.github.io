@@ -1,5 +1,5 @@
 ---
-linkTitle: 한글 예문 1
+linkTitle: ▪한글예문1
 title: 한글 교신 예문 1 (RST, 이름, QTH 교환)
 # description: 
 type: docs

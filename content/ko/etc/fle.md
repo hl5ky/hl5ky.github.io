@@ -1,5 +1,5 @@
 ---
-linkTitle: 종이로그를 컴퓨터에 입력
+linkTitle: ▪종이로그전산화
 title: 종이 로그를 컴퓨터에 입력하는 보조 프로그램
 # description:
 type: docs

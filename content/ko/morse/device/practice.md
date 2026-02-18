@@ -1,5 +1,5 @@
 ---
-linkTitle: 부호 연습 방법
+linkTitle: ▪부호연습
 title: 전신연습장치 사용시 부호연습방법
 # description: 
 type: docs

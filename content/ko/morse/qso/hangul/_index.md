@@ -1,5 +1,5 @@
 ---
-linkTitle: 한글 교신 예문 만들기
+linkTitle: ▪한글교신예문만들기
 title: 한글 교신의 다양한 예문으로 연습
 # description: 
 type: docs

@@ -1,5 +1,5 @@
 ---
-linkTitle: W8KJP
+linkTitle: ▪W8KJP
 title: W8KJP ex.HL9DC
 # description: 
 type: docs

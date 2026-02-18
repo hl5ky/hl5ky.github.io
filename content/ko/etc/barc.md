@@ -1,5 +1,5 @@
 ---
-linkTitle: BARC
+linkTitle: ▪BARC
 title: BARC(부산 아마츄어 무선클럽)의 창간호 이야기 (1976년)
 # description:
 type: docs

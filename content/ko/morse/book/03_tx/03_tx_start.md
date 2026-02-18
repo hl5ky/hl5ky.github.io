@@ -1,5 +1,5 @@
 ---
-linkTitle: 송신은언제부터
+linkTitle: ▪송신은언제
 title: 송신 연습은 언제부터 시작하는 것이 좋은가
 # description: 
 type: docs

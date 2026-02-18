@@ -1,5 +1,5 @@
 ---
-linkTitle: 컴퓨터로DMR수신
+linkTitle: ▪PC로DMR수신
 title: 컴퓨터만으로 DMR 수신 (BM의 새로운 Hoseline)
 # description:
 type: docs

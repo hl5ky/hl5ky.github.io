@@ -1,5 +1,5 @@
 ---
-linkTitle: 영문부호 단계별 내용
+linkTitle: ▪영부호단계
 title: 영문부호 단계별 내용
 # description: 
 type: docs

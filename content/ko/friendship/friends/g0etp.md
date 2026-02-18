@@ -1,5 +1,5 @@
 ---
-linkTitle: G0ETP
+linkTitle: ▪G0ETP
 title: G0ETP
 # description: 
 type: docs

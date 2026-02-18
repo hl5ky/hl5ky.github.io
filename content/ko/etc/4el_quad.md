@@ -1,5 +1,5 @@
 ---
-linkTitle: 28MHz 4el QUAD ANT
+linkTitle: ▪28MHz QUAD
 title: 28MHz 모노밴드 쿼드 안테나
 # description:
 type: docs

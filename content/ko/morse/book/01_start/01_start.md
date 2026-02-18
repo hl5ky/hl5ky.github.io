@@ -1,5 +1,5 @@
 ---
-linkTitle: 전신독학
+linkTitle: ▪전신독학
 title: 전신 독학자의 어려움
 # description: 
 type: docs

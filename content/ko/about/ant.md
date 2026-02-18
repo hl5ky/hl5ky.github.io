@@ -1,6 +1,6 @@
 ---
 title: 안테나
-linkTitle: 안테나
+linkTitle: ▪안테나
 type: docs
 weight: 40
 ---

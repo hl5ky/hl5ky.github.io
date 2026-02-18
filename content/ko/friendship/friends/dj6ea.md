@@ -1,5 +1,5 @@
 ---
-linkTitle: DJ6EA
+linkTitle: ▪DJ6EA
 title: DJ6EA
 # description: 
 type: docs

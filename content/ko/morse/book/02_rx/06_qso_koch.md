@@ -1,5 +1,5 @@
 ---
-linkTitle: QSO코흐법
+linkTitle: ▪QSO코흐법
 title: QSO 코흐법
 # description: 
 type: docs

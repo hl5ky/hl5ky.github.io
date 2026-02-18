@@ -1,5 +1,5 @@
 ---
-linkTitle: 영문 예문 3
+linkTitle: ▪영문예문3
 title: 영문 교신 예문 3 (RST, NAME 교환)
 # description: 
 type: docs

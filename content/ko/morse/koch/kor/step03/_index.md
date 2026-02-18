@@ -1,5 +1,5 @@
 ---
-linkTitle: 한글 3단계
+linkTitle: ▪한글 3단계
 title: 한글 3단계
 # description: 
 type: docs

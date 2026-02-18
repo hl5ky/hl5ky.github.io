@@ -1,5 +1,5 @@
 ---
-linkTitle: ZS2ABC
+linkTitle: ▪ZS2ABC
 title: ZS2ABC
 # description: 
 type: docs

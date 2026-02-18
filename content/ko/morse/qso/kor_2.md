@@ -1,5 +1,5 @@
 ---
-linkTitle: 한글 예문 2
+linkTitle: ▪한글예문2
 title: 한글 교신 예문 2 (RST, 이름, QTH, 날씨 교환)
 # description: 
 type: docs

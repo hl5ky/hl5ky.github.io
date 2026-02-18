@@ -1,5 +1,5 @@
 ---
-linkTitle: DU8DJ
+linkTitle: ▪DU8DJ
 title: DU8DJ
 # description: 
 type: docs

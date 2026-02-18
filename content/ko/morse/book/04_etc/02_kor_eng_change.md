@@ -1,5 +1,5 @@
 ---
-linkTitle: 한/영 전환부호
+linkTitle: ▪한/영전환
 title: 한글과 영어의 전환 부호
 # description: 
 type: docs

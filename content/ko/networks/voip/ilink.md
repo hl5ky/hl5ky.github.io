@@ -1,5 +1,5 @@
 ---
-linkTitle: iLINK 소개
+linkTitle: ▪iLINK 소개
 title: iLINK (최초의 아마추어무선용 VOIP 프로그램)
 # description:
 type: docs

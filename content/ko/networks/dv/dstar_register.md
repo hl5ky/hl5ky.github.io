@@ -1,5 +1,5 @@
 ---
-linkTitle: DSTAR사용자등록방법
+linkTitle: ▪DSTAR등록
 title: DSTAR 사용자 등록 방법
 # description:
 type: docs

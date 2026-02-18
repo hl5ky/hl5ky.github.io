@@ -1,5 +1,5 @@
 ---
-linkTitle: 이상한 부호
+linkTitle: ▪이상한부호
 title: 알 수 없는 부호 또는 단어
 # description: 
 type: docs

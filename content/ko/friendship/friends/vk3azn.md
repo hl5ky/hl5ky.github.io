@@ -1,5 +1,5 @@
 ---
-linkTitle: VK3AZN
+linkTitle: ▪VK3AZN
 title: VK3AZN
 # description: 
 type: docs

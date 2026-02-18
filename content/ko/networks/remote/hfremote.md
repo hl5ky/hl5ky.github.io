@@ -1,5 +1,5 @@
 ---
-linkTitle: HF원격운용시스템
+linkTitle: ▪HF원격시스템
 title: HF 원격 운용 시스템
 # description:
 type: docs

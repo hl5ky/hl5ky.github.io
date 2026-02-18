@@ -1,5 +1,5 @@
 ---
-linkTitle: 스트레이트키/패들
+linkTitle: ▪키종류별
 title: 송신 연습 시작시 스트레이트키와 패들 중 어느쪽을 사용해야 하는지
 # description: 
 type: docs

@@ -1,5 +1,5 @@
 ---
-linkTitle: 영문 예문 5
+linkTitle: ▪영문예문5
 title: 영문 교신 예문 5 (RST, NAME, QTH 교환)
 # description: 
 type: docs

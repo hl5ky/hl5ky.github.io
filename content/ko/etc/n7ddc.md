@@ -1,5 +1,5 @@
 ---
-linkTitle: N7DDC 튜너 사용방법
+linkTitle: ▪N7DDC 튜너
 title: N7DDC 오토튜너의 사용방법
 # description:
 type: docs

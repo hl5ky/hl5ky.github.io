@@ -1,5 +1,5 @@
 ---
-linkTitle: ZL1ACE
+linkTitle: ▪ZL1ACE
 title: ZL1ACE & ZL1ONE
 # description: 
 type: docs

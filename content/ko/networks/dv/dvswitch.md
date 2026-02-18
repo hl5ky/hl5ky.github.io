@@ -1,5 +1,5 @@
 ---
-linkTitle: DVSwitch서버이미지
+linkTitle: ▪DVSwitch서버
 title: DVSwitch 서버 이미지 공식 릴리즈 v.1.60
 # description:
 type: docs

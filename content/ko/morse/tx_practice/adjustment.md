@@ -1,5 +1,5 @@
 ---
-linkTitle: 장력/간격 조절방법
+linkTitle: ▪간격조절
 title: 키의 장력과 접점 간격 조절
 # description: 
 type: docs

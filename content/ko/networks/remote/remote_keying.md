@@ -1,5 +1,5 @@
 ---
-linkTitle: 원격CW키잉장치
+linkTitle: ▪원격CW키잉
 title: 원격 CW 키잉 장치
 # description:
 type: docs

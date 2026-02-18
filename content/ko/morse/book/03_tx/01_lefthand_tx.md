@@ -1,5 +1,5 @@
 ---
-linkTitle: 왼손으로송신
+linkTitle: ▪왼손송신
 title: 왼손으로 타전하는 것이 좋다?
 # description: 
 type: docs

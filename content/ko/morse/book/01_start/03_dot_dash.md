@@ -1,5 +1,5 @@
 ---
-linkTitle: 부호의기준
+linkTitle: ▪부호기준
 title: 모오스 부호의 기준
 # description: 
 type: docs

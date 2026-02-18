@@ -1,5 +1,5 @@
 ---
-linkTitle: 영문 예문 7
+linkTitle: ▪영문예문7
 title: 영문 교신 예문 7 (RST, NAME, QTH, WX, RIG, ANT 교환)
 # description: 
 type: docs

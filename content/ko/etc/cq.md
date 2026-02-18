@@ -1,6 +1,6 @@
 ---
-linkTitle: DV 통신 / 리피터에서 CQ
-title: DV 통신 또는 리피터에서 CQ를 송신해도 되는가
+linkTitle: ▪DV에서 CQ
+title: DV 통신 또는 리피터에서 CQ를 송출해도 되는가
 # description:
 type: docs
 weight: 15

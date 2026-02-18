@@ -1,6 +1,6 @@
 ---
 title: 무선 장비
-linkTitle: 무선장비
+linkTitle: ▪무선장비
 type: docs
 weight: 30
 ---

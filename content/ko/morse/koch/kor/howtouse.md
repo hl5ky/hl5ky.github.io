@@ -1,5 +1,5 @@
 ---
-linkTitle: 프로그램사용방법
+linkTitle: ▪사용방법
 title: QSO 코흐법 프로그램 사용방법
 # description: 
 type: docs

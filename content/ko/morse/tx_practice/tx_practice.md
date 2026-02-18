@@ -1,5 +1,5 @@
 ---
-linkTitle: 송신연습방법
+linkTitle: ▪송신연습
 title: 송신 연습 방법
 # description: 
 type: docs

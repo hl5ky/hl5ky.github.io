@@ -1,5 +1,5 @@
 ---
-linkTitle: VK8KTC
+linkTitle: ▪VK8KTC
 title: VK8KTC
 # description: 
 type: docs
