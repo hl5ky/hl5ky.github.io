@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪방법순서마음
+linkTitle: ▪방법및마음
 title: 방법보다 순서, 순서보다 마음가짐이 중요하다
 # description: 
 type: docs

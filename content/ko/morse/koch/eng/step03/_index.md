@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪영문 3단계
+linkTitle: ▪영문3단계
 title: 영문 3단계
 # description: 
 type: docs

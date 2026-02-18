@@ -1,6 +1,6 @@
 
 ---
-linkTitle: ▪스페인식 포네틱
+linkTitle: ▪스페인식포네틱
 title: 알아듣기 힘든 포네틱 코드
 # description:
 type: docs

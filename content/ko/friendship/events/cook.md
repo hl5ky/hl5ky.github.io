@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪쿡섬 페디션
+linkTitle: ▪쿡섬페디션
 title: 남태평양 쿡섬 페디션 (2007년)
 # description: 
 type: docs

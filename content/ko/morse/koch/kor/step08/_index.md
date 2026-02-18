@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪한글 8단계
+linkTitle: ▪한글8단계
 title: 한글 8단계
 # description: 
 type: docs

@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪한글10단계
+linkTitle: ▪한 10단계
 title: 한글 10단계 - 교신 예문 연습
 # description: 
 type: docs

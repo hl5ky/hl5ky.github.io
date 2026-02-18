@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪영문13단계
+linkTitle: ▪영 13단계
 title: 영문 13단계
 # description: 
 type: docs

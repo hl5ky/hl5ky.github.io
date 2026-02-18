@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪한글 6단계
+linkTitle: ▪한글6단계
 title: 한글 6단계
 # description: 
 type: docs

@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪한글 2단계
+linkTitle: ▪한글2단계
 title: 한글 2단계
 # description: 
 type: docs

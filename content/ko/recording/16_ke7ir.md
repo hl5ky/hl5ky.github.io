@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪미국의 할머니햄
+linkTitle: ▪미국할머니햄
 title: 무선을 통한 Love Story
 # description:
 type: docs
