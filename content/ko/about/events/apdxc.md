@@ -7,7 +7,7 @@ weight: 20
 ---
 
 {{% pageinfo %}}
-사진만 준비한 상태
+사진
 {{% /pageinfo %}} 
 
 <img src="../../img_oversea/ap_01.jpg" style="width:600px;height:500"><br><br>
