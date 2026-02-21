@@ -7,7 +7,7 @@ weight: 10
 ---
 
 {{% pageinfo %}}
-작성 중
+사진과 간단한 글만 준비한 상태
 {{% /pageinfo %}} 
 
 <img src="../../img_oversea/cook_10.jpg" style="width:600px;height:500"><br>

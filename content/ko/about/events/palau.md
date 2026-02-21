@@ -7,7 +7,7 @@ weight: 40
 ---
 
 {{% pageinfo %}}
-작성 중
+
 {{% /pageinfo %}} 
 
 
