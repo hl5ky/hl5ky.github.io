@@ -1,6 +1,6 @@
 ---
 linkTitle: ▪여행블로그
-title: 
+title: 여행블로그
 # description: 
 type: docs
 weight: 20
