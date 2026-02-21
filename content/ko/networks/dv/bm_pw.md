@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪BM비밀번호
+linkTitle: ▪BM p/w
 title: 브랜드마이스터 핫스팟 비밀번호
 # description:
 type: docs

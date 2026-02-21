@@ -4,7 +4,7 @@ linkTitle: 기타
 type: docs
 icon: fa-solid fa-screwdriver-wrench
 
-menu: {main: {weight: 60}}
+menu: {main: {weight: 80}}
 ---
 
 

@@ -52,15 +52,15 @@ resampleFilter = "CatmullRom"
 quality = 75
 anchor = "smart"
 
-[[menu.main]]
-    name = '여행블로그'
-    pre = '<i class="fa-solid fa-plane-departure"></i>'
-    post = '<sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs"></i></sup>'
-    # post = "<span class='alert'>New!</span>"
-    url = 'https://blog.naver.com/etyuni'
-    weight = 200
-    [menu.main.params]
-      rel = 'external'
+#[[menu.main]]
+#    name = '여행블로그'
+#    pre = '<i class="fa-solid fa-plane-departure"></i>'
+#    post = '<sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs"></i></sup>'
+#    # post = "<span class='alert'>New!</span>"
+#    url = 'https://blog.naver.com/etyuni'
+#    weight = 200
+#    [menu.main.params]
+#      rel = 'external'
 
 [services]
 [services.googleAnalytics]

@@ -26,7 +26,7 @@ title: Amateur Radio
 
 {{% blocks/section color="dark" type="row" %}}
 
-{{% blocks/feature icon="fa-solid fa-user-group" title="HL5BTF와 VK4BTF의 아름다운 인연!" url="/friendship/special/vk4btf/" %}}
+{{% blocks/feature icon="fa-solid fa-user-group" title="HL5BTF와 VK4BTF의 아름다운 인연!" url="/about/hl5btf/vk4btf/" %}}
 호주로 이민간 네덜란드인이 아마추어무선을 시작하여 한국 여성햄과 교신을 하게 되는데, 이전에 일본에서 만났던 한국 여성과 동일한 이름임을 알고 놀랍니다.
 {{% /blocks/feature %}}
 
