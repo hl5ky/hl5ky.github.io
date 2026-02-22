@@ -9,7 +9,7 @@ weight: 170
 {{% pageinfo %}}
 name : STEPHEN NEL<br>
 QTH   : TAURANGA, New Zealand<br>
-작성 중<br>
+2007년 8월 15일 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}
 

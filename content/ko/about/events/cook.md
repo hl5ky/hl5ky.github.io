@@ -9,9 +9,9 @@ weight: 10
 2007년 8월 14일 작성.
 {{% /pageinfo %}} 
 
-오랜만에 뉴질랜드로 여행할 계획을 잡았습니다. 뉴질랜드에 사는 {{< newtabref href="/../../about/friends/zl1sn/" title="ZL1SN" >}}집에 방문하여 2주간을 지낼 계획입니다. ZL1SN, Steve는 남아프리카에서 뉴질랜드로 이민 온 사람으로 Echolink를 통해서 오랫동안 교신했는데 직접 만나는 것은 처음입니다. Steve의 집에 베이스캠프를 차리고 {{< newtabref href="/../../about/friends/zl1ace/" title="ZL1ACE" >}}, {{< newtabref href="/../../about/friends/zl1aif/" title="ZL1AIF" >}} 그리고 이민 간 한국햄 HL5VC도 만날 생각이었습니다.
+오랜만에 뉴질랜드로 여행할 계획을 잡았습니다. 뉴질랜드에 사는 {{< newtabref href="/../../about/friends/zl1sn/" title="ZL1SN" >}}집에 방문하여 2주간을 지낼 계획입니다. ZL1SN, Steve는 남아프리카에서 뉴질랜드로 이민 온 사람으로 Echolink를 통해서 오랫동안 교신했는데 직접 만나는 것은 처음입니다. Steve의 집에 베이스캠프를 차리고 {{< newtabref href="/../../about/friends/zl1ace/" title="ZL1ACE" >}}, {{< newtabref href="/../../about/friends/zl1aif/" title="ZL1AIF" >}} 그리고 이민 간 한국햄 HL5VC도 만날 생각입니다.
 
-그런데 Steve가, 2주간이나 뉴질랜드에 있기에는 너무 지루하니 태평양의 섬으로 패케지 여행을 가자고 하였습니다. 마침 싸게 나온 상품이 있다고 하여 쿡섬으로 5박6일의 여행을 계획하였습니다.
+그런데 Steve가, 2주간이나 뉴질랜드에 있기에는 너무 지루하니 태평양의 섬으로 여행을 가자고 하였습니다. 마침 싸게 나온 자유여행상품이 있다고 하여 쿡섬으로 5박6일의 여행을 계획하였습니다.
 
 쿡섬까지 가는데 무선 운용을 안하기는 너무 아깝죠. 쿡섬은 DXCC로 2개의 Entity가 있습니다. North Cook과 South Cook으로 되어 있는데 우리가 가는 곳은 South Cook입니다. North Cook보다 인기가 덜 하기는 하지만 유럽쪽으로는 여전히 인기가 있습니다.
 
