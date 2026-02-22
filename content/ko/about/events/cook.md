@@ -9,7 +9,7 @@ weight: 10
 2007년 8월 14일 작성.
 {{% /pageinfo %}} 
 
-직장을 바꾼 후에 장기간 여행이 가능하게 되었습니다. 뉴질랜드에 사는 ZL1SN을 방문하는 것으로 2주간의 여행을 계획하였습니다. ZL1SN, Steve는 남아프리카에서 뉴질랜드로 이민 온 사람으로 Echolink를 통해서 자주 교신했습니다. Steve의 집에 베이스캠프를 차리고 가까이 사는 ZL1AIF 그리고 이민 간 한국햄 HL5VC도 만날 생각이었습니다.
+직장을 바꾼 후에 장기간 여행이 가능하게 되었습니다. 뉴질랜드에 사는 {{< newtabref href="/../../about/friends/zl1sn/" title="ZL1SN" >}}을 방문하는 것으로 2주간의 여행을 계획하였습니다. ZL1SN, Steve는 남아프리카에서 뉴질랜드로 이민 온 사람으로 Echolink를 통해서 자주 교신했습니다. Steve의 집에 베이스캠프를 차리고 가까이 사는 {{< newtabref href="/../../about/friends/zl1ace/" title="ZL1ACE" >}}, {{< newtabref href="/../../about/friends/zl1aif/" title="ZL1AIF" >}} 그리고 이민 간 한국햄 HL5VC도 만날 생각이었습니다.
 
 그런데 Steve가 2주간이나 뉴질랜드에 있기에는 너무 지루하니 태평양의 섬으로 패케지 여행을 가자고 하였습니다. 마침 싸게 나온 상품이 있다고 하여 쿡섬으로 5박6일의 여행을 계획하였습니다.
 
