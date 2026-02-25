@@ -8,7 +8,7 @@ weight: 160
 {{% pageinfo %}}
 name : 'Tom'  Takemae<br>
 QTH   : La Crescenta, CA, USA<br>
-1998. 8. 18일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 8. 18.**</span> 작성<br>
 2009. 1. 10일 추가 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}

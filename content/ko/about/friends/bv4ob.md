@@ -8,7 +8,7 @@ weight: 30
 {{% pageinfo %}}
 name : Anthony Li<br>
 QTH   : Taichung,Taiwan<br>
-1998. 5. 12일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 5. 17.**</span> 작성<br> 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}
 

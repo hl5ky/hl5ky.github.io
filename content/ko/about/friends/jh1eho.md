@@ -8,7 +8,7 @@ weight: 70
 {{% pageinfo %}}
 name : Matthew Komatsuzawa<br>
 QTH   : Ami, Ibaraki, JAPAN<br>
-1998. 8. 4일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 8. 4.**</span> 작성<br>
 2019. 11. 20일 추가 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}

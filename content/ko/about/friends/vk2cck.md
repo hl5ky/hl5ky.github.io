@@ -9,7 +9,7 @@ weight: 125
 {{% pageinfo %}}
 name : Graeme Jones<br>
 QTH   : Sydney, Australia<br>
-1998. 9. 21일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 6. 21.**</span> 작성<br>
 2019. 4. 10일 추가 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}

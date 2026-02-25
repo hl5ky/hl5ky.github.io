@@ -8,7 +8,7 @@ weight: 145
 {{% pageinfo %}}
 name : Terry Crothers<br>
 QTH   : Groote Eylandt, Northern Territory, Australia<br>
-1998. 6. 1일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 6. 1.**</span> 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}
 

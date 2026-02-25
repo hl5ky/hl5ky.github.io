@@ -8,7 +8,7 @@ weight: 115
 {{% pageinfo %}}
 name : Roy Hafeli<br>
 QTH   : Mission, BC, Canada<br>
-1998. 7. 13일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 7. 13.**</span> 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}
 

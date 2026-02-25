@@ -291,7 +291,7 @@ HL0M 방문
 
  
 
-처음으로 교신할 때는 17살이었던 독일의 DL9LBD, 마이클과는 정기적인 교신뿐만 아니라 많은 편지도 교환하였다. 결혼한 후에도 계속해서 연락을 하였고, 2012년에는 독일에 방문하여 20여 년만에 처음으로 만났는데 초등학교 고학년의 딸을 둔 학부모가 되어 있었다.
+처음으로 교신할 때는 17살이었던 독일의 {{< newtabref href="/../../about/friends/dl9lbd/" title="DL9LBD" >}}, 마이클과는 정기적인 교신뿐만 아니라 많은 편지도 교환하였다. 결혼한 후에도 계속해서 연락을 하였고, 2012년에는 독일에 방문하여 20여 년만에 처음으로 만났는데 초등학교 고학년의 딸을 둔 학부모가 되어 있었다.
 
  
 
@@ -299,10 +299,10 @@ HL0M 방문
 
  
 
-DJ6EA, ZL1SN, VK3AZN은 언제 방문해도 환영해 주는 가족과 같은 친구가 되었다. 그리고 김윤희를 한국의 여자친구라고 부르며 즐거운 교신을 나눈 ZS2ABC, 은하수가 보이는 언덕위의 집에 살았던 ZL1AIF, 한국 노래를 좋아하는 일본계 미국인 WA6FPK, 부모님과 같이 다정하게 반겨주던 VK2AHJ 부부, 한국을 좋아해서 한국인과 결혼한 VK2CCK 등 많은 친구를 만났다.
+{{< newtabref href="/../../about/friends/dj6ea/" title="DJ6EA" >}}, {{< newtabref href="/../../about/friends/zl1sn/" title="ZL1SN" >}}, {{< newtabref href="/../../about/friends/vk3azn/" title="VK3AZN" >}}은 언제 방문해도 환영해 주는 가족과 같은 친구가 되었다. 그리고 김윤희를 한국의 여자친구라고 부르며 즐거운 교신을 나눈 {{< newtabref href="/../../about/friends/zs2abc/" title="ZS2ABC" >}}, 은하수가 보이는 언덕위의 집에 살았던 {{< newtabref href="/../../about/friends/zl1aif/" title="ZL1AIF" >}}, 한국 노래를 좋아하는 일본계 미국인 {{< newtabref href="/../../about/friends/wa6fpk/" title="WA6FPK" >}}, 부모님처럼 다정하게 반겨주던 {{< newtabref href="/../../about/friends/vk2ahj/" title="VK2AHJ" >}} 부부, 한국을 좋아해서 한국인과 결혼한 VK2CCK 등 많은 친구를 만났다.
 
 
-미국 연수때 동료들과 함께 만났을때 멋진 식사를 대접해 준 KB6TJX는 매너도 너무 좋아서 동료들의 부러움을 사기도 했다. 그 외에, VK5YM, N6POP, VK4ADZ, ZL2AOH 등 이미 돌아가신 분도 있지만, 그들의 가족과는 계속 연락하며 지내고 있다. 
+미국 연수때 동료들과 함께 만났을때 멋진 식사를 대접해 준 KB6TJX는 매너도 너무 좋아서 동료들의 부러움을 사기도 했다. 그 외에, VK5YM, N6POP, VK4ADZ, {{< newtabref href="/../../about/friends/zl2aoh/" title="ZL2AOH" >}} 등 이미 돌아가신 분도 있지만, 그들의 가족과는 계속 연락하며 지내고 있다. 
 
 ### 글쓴이 맺음말 ###
 

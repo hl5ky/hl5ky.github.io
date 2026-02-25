@@ -8,7 +8,7 @@ weight: 110
 {{% pageinfo %}}
 name : Mike Filippov<br>
 QTH   : Vladivostok, Far East Russia<br>
-1998. 8. 23일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 8. 23.**</span> 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}
 

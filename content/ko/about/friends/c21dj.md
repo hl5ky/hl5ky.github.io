@@ -8,7 +8,7 @@ weight: 35
 {{% pageinfo %}}
 name : Darkey Jeremiah<br>
 QTH   : Republic of Nauru, Central pacific<br>
-1998. 8. 30일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 8. 30.**</span> 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}
 

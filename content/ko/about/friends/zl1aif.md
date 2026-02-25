@@ -9,7 +9,7 @@ weight: 165
 {{% pageinfo %}}
 name : Donal M. Reid<br>
 QTH   : Opotiki, New Zealand<br>
-1998. 7. 6일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 7. 6.**</span> 작성<br>
 2019. 12. 7일 추가 작성<br>
 글. HL5BTF.
 {{% /pageinfo %}}

@@ -8,7 +8,7 @@ weight: 65
 {{% pageinfo %}}
 name : Yoshi Tsutsumi<br>
 QTH   : Inuyama city, Japan<br>
-1998. 9. 29일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 9. 29.**</span> 작성<br>
 2019. 11 .20일 추가 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}

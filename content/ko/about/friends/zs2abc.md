@@ -8,7 +8,7 @@ weight: 200
 {{% pageinfo %}}
 name : Pierre Knobel<br>
 QTH   : Jeffrey's Bay, South Africa<br>
-1998. 8. 10일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 8. 10.**</span> 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}
 

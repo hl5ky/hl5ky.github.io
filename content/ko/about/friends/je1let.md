@@ -8,7 +8,7 @@ weight: 62
 {{% pageinfo %}}
 name : Otokozawa Masahiko<br>
 QTH   : Odawara, JAPAN<br>
-1998. 11. 8일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 11. 8.**</span> 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}
 

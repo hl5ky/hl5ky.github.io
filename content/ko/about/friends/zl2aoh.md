@@ -9,7 +9,7 @@ weight: 175
 {{% pageinfo %}}
 name : Ralph Sutton<br>
 QTH   : Wellington, New Zealand<br>
-1998. 9. 6일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 9. 6.**</span> 작성<br>
 글. HL5BTF.
 {{% /pageinfo %}}
 

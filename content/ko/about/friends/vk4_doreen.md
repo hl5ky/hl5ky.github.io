@@ -9,7 +9,7 @@ weight: 142
 {{% pageinfo %}}
 name : Doreen Sullivan<br>
 QTH   : Queensland, Australia<br>
-1998. 7. 26일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 7. 26.**</span> 작성<br>
 2019. 11. 20일 추가 작성<br>
 글. HL5BTF.
 {{% /pageinfo %}}

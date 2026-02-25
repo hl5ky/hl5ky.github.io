@@ -9,7 +9,7 @@ weight: 120
 {{% pageinfo %}}
 name : George C. Paterson<br>
 QTH   : Sydney, AUSTRALIA<br>
-1998. 6. 15일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 6. 15.**</span> 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}
 

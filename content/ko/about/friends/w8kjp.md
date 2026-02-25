@@ -8,7 +8,7 @@ weight: 155
 {{% pageinfo %}}
 name : Del Clouser<br>
 QTH   : Orlando, FL, USA<br>
-1998. 9. 14일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 9. 14.**</span> 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}
 

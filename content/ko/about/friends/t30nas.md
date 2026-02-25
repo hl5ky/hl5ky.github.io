@@ -8,7 +8,7 @@ weight: 105
 {{% pageinfo %}}
 name : Steve Dives<br>
 QTH   : Kiribati Is., Central Pacific<br>
-1998. 5. 17일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 5. 17.**</span> 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}
 

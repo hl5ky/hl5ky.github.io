@@ -8,7 +8,7 @@ weight: 45
 {{% pageinfo %}}
 name : Peter Holthusen<br>
 QTH   : Breman, GERMANY<br>
-1998. 6. 8일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 6. 8.**</span> 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}
 

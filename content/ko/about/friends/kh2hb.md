@@ -9,7 +9,7 @@ weight: 85
 {{% pageinfo %}}
 name : Ricky and Lorena<br>
 QTH  : Agana, Guam<br>
-1998. 6. 22일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 6. 22.**</span> 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}
 

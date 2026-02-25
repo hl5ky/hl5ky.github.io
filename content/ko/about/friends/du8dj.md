@@ -8,7 +8,7 @@ weight: 55
 {{% pageinfo %}}
 name : Alfred C. Sarau<br>
 QTH   : Zamboanga city, Philippines<br>
-1998. 7. 20일 작성<br>
+<span style="color:red; background-color:#fff5b1">**1998. 7. 20.**</span> 작성<br>
 글. HL5KY.
 {{% /pageinfo %}}
 
