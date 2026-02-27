@@ -5,6 +5,9 @@ title: 크로스 모드, 크로스 밴드 교신
 type: docs
 weight: 20
 ---
+{{% pageinfo %}}
+<span style="color:brown">에피소드 - 1970년대 초보햄의 좌충우돌기</span>
+{{% /pageinfo %}}
 
 ### 무선국 허가 신청 ###
 

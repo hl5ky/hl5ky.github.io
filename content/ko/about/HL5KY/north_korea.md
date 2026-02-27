@@ -5,7 +5,9 @@ title: 전신으로 듣는 로동신문
 type: docs
 weight: 40
 ---
-
+{{% pageinfo %}}
+<span style="color:brown">에피소드 - 1970년대 초보햄의 좌충우돌기</span>
+{{% /pageinfo %}}
 
 ### 간첩 신고
 

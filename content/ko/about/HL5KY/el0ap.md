@@ -5,6 +5,9 @@ title: EL0AP/MM
 type: docs
 weight: 60
 ---
+{{% pageinfo %}}
+<span style="color:brown">에피소드 - 1970년대 초보햄의 좌충우돌기</span>
+{{% /pageinfo %}}
 
 ### EL0AP/MM
 

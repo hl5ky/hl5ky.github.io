@@ -5,6 +5,9 @@ title: 다양한 경고장
 type: docs
 weight: 50
 ---
+{{% pageinfo %}}
+<span style="color:brown">에피소드 - 1970년대 초보햄의 좌충우돌기</span>
+{{% /pageinfo %}}
 
 ### 경고장이란
 
