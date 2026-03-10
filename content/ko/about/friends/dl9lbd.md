@@ -26,19 +26,17 @@ Michael이 취업을 하고 부모님의 집을 떠나면서 HF의 교신은 계
 
 
 <img src="../../img_oversea/dl9lbd_02.jpg" style="width:600px;height:500"><br>
-Michael, DL9LBD 1988년.
-<br><br>
+Michael, DL9LBD 1988년 (아래는 자필로 사진 설명)
+<br>
 
-<img src="../../img_oversea/dl9lbd_04.jpg" style="width:450px;height:500"><br>
-1988년에 받은 엽서.
+<img src="../../img_oversea/dl9lbd_4.jpg" style="width:450px;height:500"><br>
 <br><br>
 
 <img src="../../img_oversea/dl9lbd_01.jpg" style="width:600px;height:500"><br>
-1988년에 사용한 QUAD 안테나.
-<br><br>
+1988년에 사용한 QUAD 안테나 (아래는 자필로 사진 설명)
+<br>
 
-<img src="../../img_oversea/dl9lbd_03.jpg" style="width:370px;height:500"><br>
-1988년에 받은 엽서.
+<img src="../../img_oversea/dl9lbd_3.jpg" style="width:370px;height:500"><br>
 <br><br>
 
 <img src="../../img_oversea/dl9lbd_08.jpg" style="width:600px;height:500"><br>
