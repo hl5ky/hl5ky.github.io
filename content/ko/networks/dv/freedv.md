@@ -20,7 +20,7 @@ FreeDV가 개발된 것은 십수 년이 흘렀고, 몇 년 전에도 시도해 
 
 이 정도의 수준이라면 이제 매니아들만 사용하는 실험적인 단계는 넘어섰다고 생각하여 국내 햄들에게도 소개하고자 한다.
 <br><br>
-18MHz에서 독일과 FreeDV 교신 들어보기 (후반부에는 일반 SSB로 전환하여 테스트 함)
+독일과의 FreeDV 교신 들어보기 (후반부에는 일반 SSB로 전환하여 테스트 함)
 <br><br>
 <audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
 src="https://hl5ky-github-data.netlify.app/hl5ky_dl9rdm_260217_freedv_1.mp3"
