@@ -24,7 +24,7 @@ src="https://hl5ky-github-data.netlify.app/hl5ky_dl9rdm_260217_freedv_1.mp3"
 controls></audio>
 <br><br>
 
-교신후에 QRZ.COM에서 주소를 확인하여 녹음파일을 email로 보냈는데 되돌아왔습니다. 나중에 다시 14MHz에서 교신이 되어서 email주소와 녹음파일에 대해서 얘기를 나누었습니다. 이때는 노이즈와 신호가 거의 비슷하여 SNR 1~2dB 정도였습니다.
+교신후에 QRZ.COM에서 주소를 확인하여 녹음파일을 email로 보냈는데 되돌아왔습니다. 나중에 다시 14MHz에서 교신이 되어서 email주소와 녹음파일에 대해서 얘기를 나누었습니다. 이때는 노이즈와 신호가 거의 비슷하여 SNR 0~2dB 정도였습니다.
 <br><br>
 <audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
 src="https://hl5ky-github-data.netlify.app/hl5ky_dl9rdm_260217_freedv_2.mp3"
