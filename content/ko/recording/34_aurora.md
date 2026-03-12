@@ -24,7 +24,7 @@ KN2CZZ의 CQ 신호가 약하게 들리면서 음색이 탁하게 들린다. 이
 아래 그림에서 보듯이, 장점 하나가 여러 개의 신호로 보이고 단점도 불필요한 신호와 겹쳐 있다. 장단점 사이가 불분명해지므로 속도를 늦추는 것이 좋다. 속도는 약 18wpm 이다.
 
 <br>
-<img src="/recording/img/kn2czz_1.png" style="width:480px;height:256"><br><br>
+<img src="/recording/img/kn2czz_1.png" style="width:380px;height:256"><br><br>
 
 <audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
 src="https://hl5ky-github-data.netlify.app/hl5ky_kn2czz_260312.mp3"
