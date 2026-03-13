@@ -61,9 +61,12 @@ English난에 영어로 변경
 
 --------------------------------------------
 
-{{% detail summary="Code 영상 링크" %}}
+{{% detail summary="Code YouTube 영상 링크" %}}
 ```go
-<iframe src="파일 링크" width="860" height="484" frameborder="0" allowfullscreen="true"></iframe>
+<iframe src="유큐브 embed 링크" width="640" height="360"></iframe>
+
+https://www.youtube.com/embed/ + 링크코드
+
 ```
 {{% /detail %}}
 
