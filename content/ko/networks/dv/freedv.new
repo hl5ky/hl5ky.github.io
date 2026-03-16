@@ -26,8 +26,8 @@ FreeDV가 개발된 것은 십수 년이 흘렀고, 몇 년 전에도 시도해 
 src="https://hl5ky-github-data.netlify.app/hl5ky_dl9rdm_260217_freedv_1.mp3"
 controls></audio>
 <br>
-- {{< newtabref href="../../../recording/33_freedv_dl/" title="녹음파일 및 해설 1: 독일과의 교신 해설 및 14MHz의 교신 녹음" >}}<br>
-- {{< newtabref href="../../../recording/32_freedv_ja/" title="녹음파일 및 해설 2: 일본과의 교신 및 해설" >}}
+- {{< newtabref href="../../../recording/33_freedv_dl/" title="독일과의 교신 해설 및 14MHz의 교신 녹음" >}}<br>
+- {{< newtabref href="../../../recording/32_freedv_ja/" title="일본과의 교신 및 해설" >}}
 <br><br>
 
 {{% detail summary="1. 개발의 역사" %}}<br>
