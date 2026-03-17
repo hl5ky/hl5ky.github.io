@@ -287,7 +287,7 @@ HL0M 방문
 
 ### 친구들 ###
 
-아마추어무선은 과학기술에 대한 호기심으로 즐기는 취미라고 생각하지만, 김윤희의 경우에는 기술에 대한 흥미보다 사람들과의 교류에 더욱 관심이 많았고, 아마추어무선을 통해서 전 세계의 많은 친구를 만날 수 있었다.
+아마추어무선은 과학기술에 대한 호기심으로 즐기는 취미라고 생각하지만, 김윤희의 경우에는 기술에 대한 흥미보다 사람들과의 교류에 더욱 관심이 많았고, 아마추어무선을 통해서 전 세계의 많은 친구들을 만날 수 있었다.
 
  
 
@@ -299,12 +299,12 @@ HL0M 방문
 
  
 
-{{< newtabref href="/../../about/friends/dj6ea/" title="DJ6EA" >}}, {{< newtabref href="/../../about/friends/zl1sn/" title="ZL1SN" >}}, {{< newtabref href="/../../about/friends/vk3azn/" title="VK3AZN" >}}은 언제 방문해도 환영해 주는 가족과 같은 친구가 되었다. 그리고 김윤희를 한국의 여자친구라고 부르며 즐거운 교신을 나눈 {{< newtabref href="/../../about/friends/zs2abc/" title="ZS2ABC" >}}, 은하수가 보이는 언덕위의 집에 살았던 {{< newtabref href="/../../about/friends/zl1aif/" title="ZL1AIF" >}}, 한국 노래를 좋아하는 일본계 미국인 {{< newtabref href="/../../about/friends/wa6fpk/" title="WA6FPK" >}}, 부모님처럼 다정하게 반겨주던 {{< newtabref href="/../../about/friends/vk2ahj/" title="VK2AHJ" >}} 부부, 한국을 좋아해서 한국인과 결혼한 VK2CCK 등 많은 친구를 만났다.
+{{< newtabref href="/../../about/friends/dj6ea/" title="DJ6EA" >}}, {{< newtabref href="/../../about/friends/zl1sn/" title="ZL1SN" >}}, {{< newtabref href="/../../about/friends/vk3azn/" title="VK3AZN" >}}은 언제 방문해도 환영해 주는 가족과 같은 친구가 되었다. 그리고 김윤희를 한국의 여자친구라고 부르며 즐거운 교신을 나눈 {{< newtabref href="/../../about/friends/zs2abc/" title="ZS2ABC" >}}, 은하수가 보이는 언덕위의 집에 살았던 {{< newtabref href="/../../about/friends/zl1aif/" title="ZL1AIF" >}}, 한국 노래를 좋아하는 일본계 미국인 {{< newtabref href="/../../about/friends/wa6fpk/" title="WA6FPK" >}}, 부모님처럼 다정하게 반겨주던 {{< newtabref href="/../../about/friends/vk2ahj/" title="VK2AHJ" >}} 부부, 한국을 좋아해서 한국인과 결혼한 {{< newtabref href="/../../about/friends/vk2cck/" title="VK2CCK" >}} 등 많은 친구를 만났다.
 
 
 미국 연수때 동료들과 함께 만났을때 멋진 식사를 대접해 준 KB6TJX는 매너도 너무 좋아서 동료들의 부러움을 사기도 했다. 그 외에, VK5YM, N6POP, VK4ADZ, {{< newtabref href="/../../about/friends/zl2aoh/" title="ZL2AOH" >}} 등 이미 돌아가신 분도 있지만, 그들의 가족과는 계속 연락하며 지내고 있다. 
 
-### 글쓴이 맺음말 ###
+### 글쓴이(HL5KY) 맺음말 ###
 
 ​누군가 나에게 “아마추어무선은 당신에게 어떤 의미인가?”라고 묻는다면 “사람과 인연”이라고 말하고 싶다. 혼자 즐기지만 외롭지 않은 취미, 상대가 있어야 완전해지는 취미, 무전기라는 쇳덩이를 만지지만 결국 사람과 함께하는 취미, 이것이 아마추어무선이다.
 
