@@ -20,7 +20,7 @@ FreeDV가 개발된 것은 십수 년이 흘렀고, 몇 년 전에도 시도해 
 
 이 정도의 수준이라면 이제 매니아들만 사용하는 실험적인 단계는 넘어섰다고 생각하여 국내 햄들에게도 소개하고자 한다.
 <br><br>
-아래의 파일은 독일과 FreeDV로 교신한 내용이며, 후반부에는 일반 SSB로 교신한 내용도 있으니 비교해 보시기 바란다. <span style="color:blue">SSB에서는 알아듣기가 어려운데, FreeDV에서는 잡음없이 깨끗하게 수신된다</span>.
+아래의 파일은 독일과 FreeDV로 교신한 내용이며, 후반부(4:00부터)에는 일반 SSB로 교신한 내용도 있으니 비교해 보시기 바란다. <span style="color:blue">SSB에서는 알아듣기가 어려운데, FreeDV에서는 잡음없이 깨끗하게 수신된다</span>.
 <br><br>
 <audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
 src="https://hl5ky-github-data.netlify.app/hl5ky_dl9rdm_260217_freedv_1.mp3"
