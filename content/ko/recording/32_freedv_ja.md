@@ -21,4 +21,4 @@ src="https://hl5ky-github-data.netlify.app/hl5ky_ja7vnt_260213_freedv.mp3"
 controls></audio>
 <br><br>
 
-{{< newtabref href="../../networks/dv/freedv" title="FreeDV 안내" >}}
+{{< newtabref href="../../etc/freedv" title="FreeDV 안내" >}}
