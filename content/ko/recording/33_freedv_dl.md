@@ -24,6 +24,8 @@ src="https://hl5ky-github-data.netlify.app/hl5ky_dl9rdm_260217_freedv_1.mp3"
 controls></audio>
 <br><br>
 
+상대방의 소리가 이중으로 들리고 외부 잡음도 들리는 것은, 수신시에도 마이크가 켜져 있었기 때문임. 실제로는 더욱 깨끗하게 들렸음.
+
 ### 14MHz 다시 교신
 
 교신후에 QRZ.COM에서 주소를 확인하여 녹음파일을 email로 보냈는데 되돌아왔다. 나중에 다시 14MHz에서 교신이 되어서 email주소와 녹음파일에 대해서 얘기를 나누었다. 이때는 노이즈와 신호가 거의 비슷하여 SNR 0~2dB 정도였다.
