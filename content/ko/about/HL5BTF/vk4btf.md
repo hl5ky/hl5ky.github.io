@@ -9,11 +9,9 @@ weight: 1
 
 
 {{% pageinfo %}}
-이 이야기는 HAM을 통한 아름다운 인연에 관한 <span style="color:blue">**실화**</span>입니다.
-
+이 이야기는 HAM을 통한 아름다운 인연에 관한 <span style="color:blue">**실화**</span>이다.
 
 KARL지 2021년 11/12월호에 게재.
-
 
 글. HL5KY.
 {{% /pageinfo %}}
