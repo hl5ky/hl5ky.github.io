@@ -1,6 +1,6 @@
 ---
 linkTitle: ▪KC6OWH/MM
-title: KC6OWH/MM
+title: 무선은 사람을 싣고
 # description: 
 type: docs
 weight: 80
