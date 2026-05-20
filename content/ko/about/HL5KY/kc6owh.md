@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪KC6OWH/MM
+linkTitle: ▪강동석
 title: 무선은 사랑을 싣고
 # description: 
 type: docs
