@@ -19,7 +19,7 @@ CW 수신이 가능한 분들은 녹음파일에서 상대의 호출부호가 �
 
 <br>
 <audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
-src="https://hl5ky-github-data.netlify.app/hl5ky_jh1kyt_qsb_260501.mp3"
+src="https://hl5ky-hp.pages.dev/HL5KY_JH1KYT_QSB_260501.mp3"
 controls></audio>
 <br>
 <br>

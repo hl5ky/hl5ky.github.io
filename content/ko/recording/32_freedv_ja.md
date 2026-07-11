@@ -17,7 +17,7 @@ weight: 128
 
 <br>
 <audio style="width: 850px; border: 1px solid black; border-radius: 20px;"
-src="https://hl5ky-github-data.netlify.app/hl5ky_ja7vnt_260213_freedv.mp3"
+src="https://hl5ky-hp.pages.dev/HL5KY_JA7VNT_260213_FREEDV.mp3"
 controls></audio>
 <br><br>
 
