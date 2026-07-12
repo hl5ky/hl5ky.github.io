@@ -55,21 +55,29 @@ controls></audio>
 
 <span style="color:blue">HL5KY : HB9QO DE HL5KY HL5KY K</span>
 
-HB9QO : HL5KY DE HB9QO    R GE DR OM    TU CALL    RST 579 579    NAME BRUNO BRUNO (QSB)    QTH NR LUCERNE NR LUCERNE    BT    HW?    HL5KY DE HB9QO K
+HB9QO : HL5KY DE HB9QO    R GE DR OM    TU CALL    RST 579 579    NAME BRUNO BRUNO (QSB)    QTH NR LUCERNE NR LUCERNE    BT    HW?    HL5KY DE HB9QO K<br>
+( OM 안녕하십니까. 호출 감사합니다. 신호는 579입니다. 저의 이름은 BRUNO이며 QTH는 LUCERNE 근처입니다. )
 
-<span style="color:blue">HL5KY : R FB BRUNO    TNX FM NR LUCERNE    RST 559 559    OP JOE JOE    PWR 500W 500W    ES    5EL 5EL YAGI    HW?    HB9QO DE HL5KY K</span>
+<span style="color:blue">HL5KY : R FB BRUNO    TNX FM NR LUCERNE    RST 559 559    OP JOE JOE    PWR 500W 500W    ES    5EL 5EL YAGI    HW?    HB9QO DE HL5KY K<br>
+( BRUNO 잘 수신했습니다. LUCERNE 근처에서 나오시는 군요, 감사합니다. 신호는 559입니다. 이름은 JOE 입니다. 출력은 500w, 안테나는 5el 야기입니다. )</span>
 
-HB9QO : DE HB9QO    FB JOE    FB SIGS    BT    NW 56/79 SOME QSB    BT    HR ABT 90W    TO    3EL TRIBAND YAGI    BT    WX HOT 33C DURING DAY NW 22C    BT    HW?    HL5KY DE HB9QO K
+HB9QO : DE HB9QO    FB JOE    FB SIGS    BT    NW 56/79 SOME QSB    BT    HR ABT 90W    TO    3EL TRIBAND YAGI    BT    WX HOT 33C DURING DAY NW 22C    BT    HW?    HL5KY DE HB9QO K<br>
+( 잘 수신했습니다, JOE. 신호가 좋습니다. QSB가 있어서 S메타가 6~7 정도입니다. 이곳의 출력은 90w, 안테나는 3밴드용 3el 야기입니다. 날씨는 매우 더워서, 낮에는 33도이고 지금은 22도입니다. 잘 수신하셨나요? )
 
-<span style="color:blue">HL5KY : R FB BRUNO    YES QSB BUT GUD SIG    BT    HR WX HOT BUT NOT AS BAD AS YOURS HI    BT    I READ YOU BEEN ONLY CW SINCE 1954 ,    NO VOICE AT ALL?    AR    HB9QO DE HL5KY K</span>
+<span style="color:blue">HL5KY : R FB BRUNO    YES QSB BUT GUD SIG    BT    HR WX HOT BUT NOT AS BAD AS YOURS HI    BT    I READ YOU BEEN ONLY CW SINCE 1954 ,    NO VOICE AT ALL?    AR    HB9QO DE HL5KY K<br>
+( 잘 수신했습니다, BRUNO. 예 QSB가 있지만 좋은 신호입니다. 여기 날씨도 덥지만 그쪽만큼은 아닙니다. hi 읽어보니(QRZ.COM에서) 1954년부터 CW만 운용하셨다고요. 음성교신은 전혀 하지 않으셨나요? )</span>
 
-HB9QO : DE HB9QO    OK JOE    YES CW ONLY    DONT HAVE A MICROFONE HERE HI    BT    BT    YES SINCE 1954    BT    AGE HERE 91 OT HI    BT    RIG IS TENTEC OMNI C    BT    100W    ES    NW 90W    BT    HW?    HL5KY DE HB9QO K
+HB9QO : DE HB9QO    OK JOE    YES CW ONLY    DONT HAVE A MICROFONE HERE HI    BT    BT    YES SINCE 1954    BT    AGE HERE 91 OT HI    BT    RIG IS TENTEC OMNI C    BT    100W    ES    NW 90W    BT    HW?    HL5KY DE HB9QO K<br>
+( 그래요, JOE. CW만 운용했습니다. 1954년부터는 마이크도 없었습니다. hi 나이는 91세입니다. 무전기는 TENTEC사의 OMNI C 100w 용이지만 지금은 90w 사용하고 있습니다. )
 
-<span style="color:blue">HL5KY : FB    GREAT ONLY CW SUCH A LONG TIME HI    BT    OK TENTEC    BT    I USED TO USE TENTEC BACK IN 90S    BT    LIKED IT VY MUCH ESPECIALLY ITS LOW INTERNAL NOISE HI    BT    IT IS AN EARLY MORNING    I THINK WL GO BACTE(실수) BACK TO BED HI    73    HB9QO DE HL5KY K</span>
+<span style="color:blue">HL5KY : FB    GREAT ONLY CW SUCH A LONG TIME HI    BT    OK TENTEC    BT    I USED TO USE TENTEC BACK IN 90S    BT    LIKED IT VY MUCH ESPECIALLY ITS LOW INTERNAL NOISE HI    BT    IT IS AN EARLY MORNING    I THINK WL GO BACTE(실수) BACK TO BED HI    73    HB9QO DE HL5KY K<br>
+( 그렇게 긴 시간동안 CW만 운용하시다니 대단하십니다. TENTEC은 제가 90년대에 사용했습니다. 내부 노이즈가 작은 점이 좋았습니다. 여기는 이른 아침입니다. 다시 자려고 생각합니다. hi )</span>
 
-HB9QO : DE HB9QO    FB JOE    BT    OK ABT TENTEC    TOO BAD THIS CO Y(실수) NO LONGER EXISTS    BT    BT    AGREE LOW NOISE STUFF    BT    ALSO M(실수) ALSO HAVE ITALIAN SDR BY ELAD    BUT QRP 5W ONLY    BT    TKS MOST INTERESTING QSO JOE    GL ES HVE GUD RSTF(?) SLEEP    HRE LOCAL TIME 3 ? (실수) E E SRI 2305 SO MY BED TIME    73 GL JOE    AR    HL5KY DE HB9QO SK K
+HB9QO : DE HB9QO    FB JOE    BT    OK ABT TENTEC    TOO BAD THIS CO Y(실수) NO LONGER EXISTS    BT    BT    AGREE LOW NOISE STUFF    BT    ALSO M(실수) ALSO HAVE ITALIAN SDR BY ELAD    BUT QRP 5W ONLY    BT    TKS MOST INTERESTING QSO JOE    GL ES HVE GUD RSTF(?) SLEEP    HRE LOCAL TIME 3 ? (실수) E E SRI 2305 SO MY BED TIME    73 GL JOE    AR    HL5KY DE HB9QO SK K<br>
+( TENTEC 회사가 더 이상 존재하지 않는 것이 아쉽습니다. 그래요 노이즈가 낮다는 것은 저도 동감입니다. 저는 이태리 ELAD사의 SDR 무전기도 있는데요, QRP용이라 5w밖에 안됩니다. 오늘 즐거운 교신 감사합니다, JOE. 남은 잠 잘 주무시기 바랍니다. 이곳 시간은 23시5분입니다. 저도 이제 자야겠습니다. )
 
-<span style="color:blue">HL5KY : R FB    BT    LOCAL TIME IS 0600    BT    TOO EARLY FER YOUNG MAN HI    BT    TNX QSO 73    HB9QO HL5KY SK E E</span>
+<span style="color:blue">HL5KY : R FB    BT    LOCAL TIME IS 0600    BT    TOO EARLY FER YOUNG MAN HI    BT    TNX QSO 73    HB9QO HL5KY SK E E<br>
+( 예, 이쪽 시간은 6시입니다. 젊은 사람이 깨어 있기에는 너무 이른 시간이죠. hi 감사합니다. 73 )</span>
 
 HB9QO : R HI    TKS AGN JOE    GB    DE HB9QO SK E E
 
