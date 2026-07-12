@@ -23,7 +23,11 @@ Bob은 2014년 경에 대우조선의 전기 감독관으로 근무했으며, �
 <br><br>
 
 
-<iframe title="20160730_091439" width="750" height="430" src="https://play-tv.kakao.com/embed/player/cliplink/444993287?service=player_share" allowfullscreen frameborder="0" scrolling="no" allow="autoplay; fullscreen; encrypted-media"></iframe><br>
+<div style="text-align: center; margin: 20px 0; max-width: 850px; width: 100%; margin-left: auto; margin-right: auto;">
+  <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid #000; border-radius: 20px;">
+    <iframe src="https://www.youtube.com/embed/JW5PyZGoFDM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+  </div>
+</div><br>
 리모트 무선국. Noorat, Victoria.
 <br><br>
 

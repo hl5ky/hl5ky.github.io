@@ -26,7 +26,11 @@ weight: 124
 
 ​처음에는 스위스햄과 래그츄로 시작을 했는데 점점 많이 불러오는 통에 할 수 없이 짧게 많은 교신을 하는 형태로 바꾸었다. 음성만 올리면 심심할 것 같아서 QRZ.COM 등에서 사진을 가지고 와서 영상으로 제작하였다.
 
-​<iframe src="https://play-tv.kakao.com/embed/player/cliplink/457472937?service=daum_tistory" width="860" height="484" frameborder="0" allowfullscreen="true"></iframe>
+<div style="text-align: center; margin: 20px 0; max-width: 850px; width: 100%; margin-left: auto; margin-right: auto;">
+  <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid #000; border-radius: 20px;">
+    <iframe src="https://www.youtube.com/embed/Wsfl3IsCOT8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+  </div>
+</div>
 
 
 

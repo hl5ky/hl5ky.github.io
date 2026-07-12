@@ -41,7 +41,11 @@ XYL(Anita), HL5BTF, DJ6EA - 대학 도시로 유명한 튀빙겐.
 우간다에서 근무했을 때 모았던 아프리카 토속품으로 장식된 거실.
 <br>
 
-<iframe title="DJ6EA" width="800" height="460" src="https://play-tv.kakao.com/embed/player/cliplink/445018142?service=player_share" allowfullscreen frameborder="0" scrolling="no" allow="autoplay; fullscreen; encrypted-media"></iframe><br>
+<div style="text-align: center; margin: 20px 0; max-width: 850px; width: 100%; margin-left: auto; margin-right: auto;">
+  <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid #000; border-radius: 20px;">
+    <iframe src="https://www.youtube.com/embed/jIy66BlH90o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+  </div>
+</div>
 교신할 때 자주 들었던 산책코스를 함께 걸어봤습니다.
 <br><br>
 

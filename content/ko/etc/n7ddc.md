@@ -19,7 +19,11 @@ weight: 21
 저는 제품을 구입하지 않았기 때문에 실제 제품은 없습니다. 그래서 캐나다햄이 제작한 동영상을 이용하여 저의 음성으로 더빙하였습니다.
 
 
-<iframe title="N7DDC_AutoTuner" width="800" height="500" src="https://play-tv.kakao.com/embed/player/cliplink/444976260?service=player_share" allowfullscreen frameborder="0" scrolling="no" allow="autoplay; fullscreen; encrypted-media"></iframe> <br><br>
+<div style="text-align: center; margin: 20px 0; max-width: 850px; width: 100%; margin-left: auto; margin-right: auto;">
+  <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid #000; border-radius: 20px;">
+    <iframe src="https://www.youtube.com/embed/Cyof4xi5tVw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+  </div>
+</div><br>
 
 
 

@@ -25,7 +25,11 @@ Ian은 아주 높은 타워에 14MHz 안테나만 스택으로 사용하고 있�
 5el 와이드 스페이스 야기, 4스택, 합계 20엘레멘트.
 <br><br>
 
-<iframe title="20160728_111701" width="700" height="400" src="https://play-tv.kakao.com/embed/player/cliplink/444993251?service=player_share" allowfullscreen frameborder="0" scrolling="no" allow="autoplay; fullscreen; encrypted-media"></iframe><br>
+<div style="text-align: center; margin: 20px 0; max-width: 850px; width: 100%; margin-left: auto; margin-right: auto;">
+  <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid #000; border-radius: 20px;">
+    <iframe src="https://www.youtube.com/embed/Zahc1BW6hsI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+  </div>
+</div>
 여러 개의 타워와 주변 환경.
 <br><br>
 
@@ -41,6 +45,10 @@ Ian의 무선실. 안테나에 비해서 설비는 간단합니다.
 리모트를 설치하기 위해서 마련한 사이트의 안테나.
 <br><br>
 
-<iframe title="20160728_122645" width="700" height="400" src="https://play-tv.kakao.com/embed/player/cliplink/444993269?service=player_share" allowfullscreen frameborder="0" scrolling="no" allow="autoplay; fullscreen; encrypted-media"></iframe><br>
+<div style="text-align: center; margin: 20px 0; max-width: 850px; width: 100%; margin-left: auto; margin-right: auto;">
+  <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid #000; border-radius: 20px;">
+    <iframe src="https://www.youtube.com/embed/Rpy07pyyqIU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+  </div>
+</div>
 리모트 사이트의 영상. VK3AZN, VK3MO.
 <br><br>

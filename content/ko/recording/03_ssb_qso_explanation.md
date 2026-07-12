@@ -25,7 +25,11 @@ HF의 원거리 교신이 어떻게 이루어지는지 궁금해 하는 분들�
 <br>
 
 
-<iframe src="https://play-tv.kakao.com/embed/player/cliplink/429534357?service=daum_tistory" width="860" height="484" frameborder="0" allowfullscreen="true"></iframe>
+<div style="text-align: center; margin: 20px 0; max-width: 850px; width: 100%; margin-left: auto; margin-right: auto;">
+  <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid #000; border-radius: 20px;">
+    <iframe src="https://www.youtube.com/embed/hbtP4i9dr7M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+  </div>
+</div>
 
 
 ### 설명 1. 서로의 호출부호 확인 ###

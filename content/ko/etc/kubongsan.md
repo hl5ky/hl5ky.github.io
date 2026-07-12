@@ -14,8 +14,12 @@ weight: 23
 
 몇일전에 DS5GJS님에게서 연락이 왔다. 창원에서 D722LP/QRP란 특별한 호출부호로 QRP국을 운용중이며 생각보다 신호도 좋다고 한다. 어디서 구했는지 운용중인 동영상도 보내주었다. 야산에 있는 작은 정자에서 무선국을 운용중인 장면을 드론으로 촬영한 멋진 동영상이었다. 영상의 설명을 보니 운용하는 분은 DS5DPB님이며, 6K5ANI님이 함께 도움을 드렸다고 되어 있었다.<br><br>
 
-<iframe src="https://play-tv.kakao.com/embed/player/cliplink/429833711?service=daum_tistory" width="750" height="484" frameborder="0" allowfullscreen="true"></iframe><br><br>
-
+<div style="text-align: center; margin: 20px 0; max-width: 850px; width: 100%; margin-left: auto; margin-right: auto;">
+  <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid #000; border-radius: 20px;">
+    <iframe src="https://www.youtube.com/embed/-WgpOcYD8jE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+  </div>
+</div>
+6K5ANI 촬영 및 편집<br><br>
 
 특이한 점은 DS5DPB님의 키잉 방법이었다. 수동키를 사용하였는데, 엄지로 손잡이의 하부를 감싸지 않고 검지와 중지로 손잡이의 상부만 누르듯이 타전을 하였다. 마치 음악에 맞춰서 손가락으로 탁자를 두드리는 것 같았다. 그런데도 상당히 깨끗한 부호로 타전을 하였다. 나와는 약 한 달전에 처음으로 전신 교신을 하였는데 그 때도 차분하면서 정확하게 타전하였다. (교신을 할 때 녹음을 하였는데 아래에 그 날의 교신 일부를 첨부함)<br>
 

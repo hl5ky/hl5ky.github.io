@@ -22,7 +22,11 @@ weight: 50
 
 녹음 파일의 파형으로 영상을 만들고 중간 중간에 해설을 붙였습니다.
 
-<iframe src="https://play-tv.kakao.com/embed/player/cliplink/435821362?service=daum_tistory" width="760" height="473" frameborder="0" allowfullscreen="true"></iframe><br>
+<div style="text-align: center; margin: 20px 0; max-width: 850px; width: 100%; margin-left: auto; margin-right: auto;">
+  <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid #000; border-radius: 20px;">
+    <iframe src="https://www.youtube.com/embed/zR9Ja-Q4GJI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+  </div>
+</div>
 
 {{% alert title="단파대의 원거리 전파상태 요약 (한국시간 기준)" %}}
 새벽 (am3~7) - SSN이 낮을 때, 낮은주파수(7MHz이하)에서 서~서북(유럽,북부아프리카)이 좋다.<br>

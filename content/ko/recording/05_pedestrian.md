@@ -27,7 +27,11 @@ HF무전기와 안테나를 들고, 지고, 끌면서 운용하는 모빌국입�
 제가 교신했던 영국과 호주의 PM국들은 모두 해변에서 운용하고 있었습니다.
 아래의 영상은 2011~2022년 사이에 14MHz와 21MHz에서 교신했던 내용입니다.<br>
 <br>
-<iframe src="https://play-tv.kakao.com/embed/player/cliplink/427795122?service=daum_tistory" width="680" height="500" frameborder="0" allowfullscreen="true"></iframe><br>
+<div style="text-align: center; margin: 20px 0; max-width: 850px; width: 100%; margin-left: auto; margin-right: auto;">
+  <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid #000; border-radius: 20px;">
+    <iframe src="https://www.youtube.com/embed/fIIr5IzDqVI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+  </div>
+</div>
 <br>
 PM은 아니지만, 자동차로 강가에서 운용한 ZL3TV도 거의 항상 신호가 좋았습니다.
 또 다른 햄은 낚시대를 이용한 수직안테나에 수십미터의 나동선을 바닷물에 던져서 레디얼로 사용했는데 역시 신호가 아주 좋았습니다.<br>
