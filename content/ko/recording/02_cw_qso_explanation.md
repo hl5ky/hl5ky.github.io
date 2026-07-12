@@ -39,7 +39,9 @@ weight: 10
 - QSB : 페이딩
 - AGN : Again{{% /alert %}}
 
-<iframe src="https://play-tv.kakao.com/embed/player/cliplink/427636555?service=daum_tistory" width="860" height="484" frameborder="0" allowfullscreen="true"></iframe>
+<div style="text-align: center; margin: 20px 0;">
+<iframe width="850" height="480" src="https://www.youtube.com/embed/hwItpwUq7sk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="max-width: 100%; border: 1px solid #000; border-radius: 20px;"></iframe>
+</div>
 
 ​{{% alert title="KH6AQ와의 교신 내용 해설" %}}
 컴퓨터로그에 로깅을 하면서 교신을 하고 있어서, 입력을 하면 바로 이전 교신 기록을 볼 수 있습니다.
