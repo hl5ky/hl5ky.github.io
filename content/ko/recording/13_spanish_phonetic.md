@@ -41,7 +41,7 @@ Canada Xylophono Uno Tango Foxtrot (CX1TF)
 
 ITU에서 만든 포네틱코드는 그 이전에 있던 여러 형태의 포네틱코드를 참조하여 만들고 점차 개선하여 현재와 같은 코드로 만든 것입니다. 이것이 발표되기 전에 아마추어무선사들 중에는 그 이전의 포네틱코드에 익숙했던 사람들도 있고, ITU코드가 자리를 잡기 전에 햄들 나름대로 단어를 만들기도 했습니다.
 
-{{< newtabref href="https://www.hamradioschool.com/post/phonetic-alphabets" title="포테틱 코드" >}}<br>
+{{< newtabref href="https://www.hamradioschool.com/post/phonetic-alphabets" title="포네틱 코드" >}}<br>
 
 위의 링크에 보시면 ITU코드와 함께 DX포네틱코드(공식적인 명칭은 아님)란 것이 있습니다. 대부분 지명을 나타냅니다. 햄들은 교신상에서 서로의 QTH 정보를 교환하기 때문에 이런 지명에 익숙합니다. 그래서 지명을 이용한 코드를 많이 사용합니다.
 
