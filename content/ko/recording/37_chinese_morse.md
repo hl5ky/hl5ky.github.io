@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪이상한CW
+linkTitle: ▪중국모르스
 title: 중국 한자 전신
 # description:
 type: docs

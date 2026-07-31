@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪수도원귀신
+linkTitle: ▪폭염속시원
 title: 오래된 수도원의 귀신 (CT7AZT)
 # description:
 type: docs
