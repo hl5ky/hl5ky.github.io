@@ -21,7 +21,7 @@ weight: 40
 <br>
 <img src="/about/img/107_QUAD.jpg" style="width:400px;height:256"><br>
 
-> 1998년. 5band 2el QUAD antenna (homebrew)
+> 2000년. 5band 2el QUAD antenna (homebrew)
 
 <br>
 <img src="/about/img/109_QUAD.jpg" style="width:400px;height:256"><br>
