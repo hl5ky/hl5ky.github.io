@@ -206,7 +206,7 @@ Bernie에게 김윤희와의 정기 교신은 어느새 삶에서 가장 손꼽�
 
 
 <img src="../../img_oversea/hl0m.png#center"><br>
-[ HL0M 방문 ]
+[ HL0M 방문, 모든 이야기가 시작된 곳 ]
  
 
 ### 꽃가루의 기적 ###
