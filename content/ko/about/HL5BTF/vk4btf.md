@@ -1,20 +1,17 @@
 ---
-linkTitle: ▪소중한 인연
-title: HL5BTF와 VK4BTF 의 소중한 인연
-# description: HL5BTF와 VK4BTF의 소중한 인연
-type: docs
-# icon: fa-solid fa-star
+linkTitle: "소중한 인연"
+title: "HL5BTF와 VK4BTF 의 소중한 인연"
+type: "docs"
 weight: 1
 ---
 
-
-{{% pageinfo %}}
+{{< pageinfo >}}
 이 이야기는 HAM을 통한 아름다운 인연에 관한 <span style="color:blue">**실화**</span>이다.
 
 KARL지 2021년 11/12월호에 게재.
 
 글. HL5KY.
-{{% /pageinfo %}}
+{{< /pageinfo >}}
 
 
 
