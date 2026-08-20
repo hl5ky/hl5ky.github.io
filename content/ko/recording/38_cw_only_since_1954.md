@@ -89,7 +89,7 @@ GE : Good Evening<br>
 TU : Thank You<br>
 NR : Near<br>
 BT : 문장전치부호. 문장 시작시 보내는 부호이지만, 실제 교신에서는 문장과 문장의 구분으로 사용하는 경우가 많음.<br>
-FB : Find Business. 좋습니다.<br>
+FB : Fine Business. 좋습니다.<br>
 ES : And<br>
 HW? : How do you copy? 잘 수신하셨나요?<br>
 SIG, SIGS : Signal<br>
