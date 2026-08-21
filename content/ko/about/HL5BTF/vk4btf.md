@@ -179,7 +179,7 @@ Bernie에게 김윤희와의 정기 교신은 어느새 삶에서 가장 손꼽�
 <img src="../../img_oversea/will.png#center"><br>
 [ 유언장 ]<br>
 
-가진 것이 많지는 않았지만, 그는 자신이 세상에 남길 마지막 전부를 김윤희에게 물려주기로 결심하고 정식 유언장을 작성했다. 훗날 김윤희가 호주를 방문했을 때, Bernie는 한평생 소중히 간직해 온 여덟 개의 영롱한 오팔 원석을 그녀의 손에 쥐여주며 깊은 진심과 사랑을 건넸다.<br>
+가진 것이 많지는 않았지만, 그는 자신이 세상에 남길 마지막 전부를 김윤희에게 물려주기로 결심하고 정식 유언장을 작성했다. 훗날 우리가 호주를 방문했을 때, Bernie는 한평생 소중히 간직해 온 여덟 개의 영롱한 오팔 원석을 그녀의 손에 쥐여주며 깊은 진심과 사랑을 건넸다.<br>
 
 <img src="../../img_oversea/yuni_visit.png#center"><br>
 [ Bernie의 집에 방문한 김윤희 ]
@@ -223,7 +223,7 @@ Bernie에게 김윤희와의 정기 교신은 어느새 삶에서 가장 손꼽�
 
 ### 리니어앰프 선물 ### 
 
-1990년대 중반으로 접어들며 태양 흑점 활동이 점차 줄어들자 전파 상태도 눈에 띄게 나빠지기 시작했다. 게다가 김윤희가 살던 도심 환경은 단파대(HF) 잡음이 심해, 종종 Bernie의 신호가 거친 노이즈 속에 파묻히곤 했다. 그때까지 초급(Novice) 자격이었던 Bernie는 송신 출력을 높이는 데 한계가 있었고, 안정적인 원거리 교신에 유리한 ‘골든 밴드(Golden Band)’인 14MHz 대역도 운용할 수 없었다.<br>
+1990년대 중반으로 접어들며 태양 흑점 활동이 점차 줄어들자 전파 상태도 눈에 띄게 나빠지기 시작했다. 게다가 우리가 살던 도심 환경은 단파대(HF) 잡음이 심해, 종종 Bernie의 신호가 거친 노이즈 속에 파묻히곤 했다. 그때까지 초급(Novice) 자격이었던 Bernie는 송신 출력을 높이는 데 한계가 있었고, 안정적인 원거리 교신에 유리한 ‘골든 밴드(Golden Band)’인 14MHz 대역도 운용할 수 없었다.<br>
  
 
 > <span style="color:blue">**골든 밴드**</span>(Golden Band) : HF의 밴드 중에서 14MHz는 태양흑점지수가 다소 낮은 시기에도 원거리 교신이 잘 되기 때문에 골든 밴드라고 한다. 대개 상위 급수의 자격 취득자만 사용할 수 있다. 원거리 교신이 원활하기 때문에 평생 14MHz만 사용하는 사람도 많이 있다. 그중 VK3MO는 5el 4스텍 (20el) 안테나를 사용하여 14MHz만 운용하는 것으로 유명하다.
@@ -267,7 +267,7 @@ Bernie에게 김윤희와의 정기 교신은 어느새 삶에서 가장 손꼽�
 
 일본의 Keiko(JJ3GNR)는 다정한 친언니 같은 햄이었다. 평소 어학에 관심이 많았던 두 사람은 교신을 나눌 때마다 서로의 언어를 가르쳐주고 배우며 남다른 정을 쌓았다. 세월이 흐른 지금은 전파 대신 전화와 편지로 안부를 묻고, 때때로 바다를 건너 서로의 집을 오가며 변치 않는 자매 같은 우정을 이어가고 있다.
 
-그 밖에도 전 세계 하늘 아래에는 언제 찾아가도 두 팔 벌려 환영해 주는 가족 같은 친구들이 가득했다. 언제든 따뜻하게 맞아주는 {{< newtabref href="/../../about/friends/dj6ea/" title="DJ6EA" >}}, {{< newtabref href="/../../about/friends/zl1sn/" title="ZL1SN" >}}, {{< newtabref href="/../../about/friends/vk3azn/" title="VK3AZN" >}}은 물론, 김윤희를 ‘한국의 여자친구’라 부르며 유쾌하게 마이크를 잡던 남아프리카공화국의 {{< newtabref href="/../../about/friends/zs2abc/" title="ZS2ABC" >}}, 은하수가 쏟아지는 언덕 위 그림 같은 집에 살던 뉴질랜드의 {{< newtabref href="/../../about/friends/zs2abc/" title="ZS2ABC" >}}, 은하수가 보이는 언덕위의 집에 살았던 {{< newtabref href="/../../about/friends/zl1aif/" title="ZL1AIF" >}}, 구수한 한국 노래를 즐겨 부르던 일본계 미국인 {{< newtabref href="/../../about/friends/wa6fpk/" title="WA6FPK" >}}, 친부모처럼 푸근하게 품어주던 호주의 VK2AHJ 부부, 한국의 매력에 흠뻑 빠져 한국인과 백년가약을 맺은 {{< newtabref href="/../../about/friends/vk2cck/" title="VK2CCK" >}} 등 셀 수 없이 많은 이들이 그녀의 삶을 풍성하게 채워주었다.
+그 밖에도 전 세계 하늘 아래에는 언제 찾아가도 두 팔 벌려 환영해 주는 가족 같은 친구들이 가득했다. 언제든 따뜻하게 맞아주는 {{< newtabref href="/../../about/friends/dj6ea/" title="DJ6EA" >}}, {{< newtabref href="/../../about/friends/zl1sn/" title="ZL1SN" >}}, {{< newtabref href="/../../about/friends/vk3azn/" title="VK3AZN" >}}은 물론, 김윤희를 ‘한국의 여자친구’라 부르며 유쾌하게 마이크를 잡던 남아프리카공화국의 {{< newtabref href="/../../about/friends/zs2abc/" title="ZS2ABC" >}}, 은하수가 쏟아지는 언덕 위 그림 같은 집에 살던 뉴질랜드의 {{< newtabref href="/../../about/friends/zl1aif/" title="ZL1AIF" >}}, 구수한 한국 노래를 즐겨 부르던 일본계 미국인 {{< newtabref href="/../../about/friends/wa6fpk/" title="WA6FPK" >}}, 친부모처럼 푸근하게 품어주던 호주의 VK2AHJ 부부, 한국의 매력에 흠뻑 빠져 한국인과 백년가약을 맺은 {{< newtabref href="/../../about/friends/vk2cck/" title="VK2CCK" >}} 등 셀 수 없이 많은 이들이 그녀의 삶을 풍성하게 채워주었다.
 
 미국 연수 시절, 한국의 동료들과 함께 만났던 KB6TJX는 근사한 식사를 대접하며 신사다운 매너로 동료들의 부러움을 한 몸에 사기도 했다.
 
