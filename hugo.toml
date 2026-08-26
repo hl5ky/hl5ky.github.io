@@ -80,23 +80,23 @@ weight = 1
 title = "HL5KY & HL5BTF"
 description = "World Wide Friendship Through the Radio"
 
-#[languages.en]
-#languageName ="English"
-#contentDir = "content/en"
-#weight = 2
-#[languages.en.params]
-#title = "HL5KY & HL5BTF"
-#description = "World Wide Friendship Through the Radio"
+[languages.en]
+languageName ="English"
+contentDir = "content/en"
+weight = 2
+[languages.en.params]
+title = "HL5KY & HL5BTF"
+description = "World Wide Friendship Through the Radio"
 ##time_format_default = "Feb 01.2006"
 ##time_format_blog = "Feb 01.2006"
 
-#[languages.ja]
-#languageName ="Japanese"
-#contentDir = "content/ja"
-#weight = 3
-#[languages.ja.params]
-#title = "HL5KY & HL5BTF"
-#description = "World Wide Friendship Through the Radio"
+[languages.ja]
+languageName ="Japanese"
+contentDir = "content/ja"
+weight = 3
+[languages.ja.params]
+title = "HL5KY & HL5BTF"
+description = "World Wide Friendship Through the Radio"
 
 
 [markup]
