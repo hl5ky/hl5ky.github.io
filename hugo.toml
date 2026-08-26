@@ -1,4 +1,4 @@
-# baseURL = "https://hl5ky.githug.io/"
+# baseURL = "https://hl5ky.github.io/"
 baseURL = "/"
 title = "HL5KY & HL5BTF"
 
@@ -97,6 +97,20 @@ weight = 3
 [languages.ja.params]
 title = "HL5KY & HL5BTF"
 description = "World Wide Friendship Through the Radio"
+
+[languages.de]
+languageName = "Deutsch"
+contentDir = "content/de"
+weight = 4
+[languages.de.params]
+title = "HL5KY & HL5BTF"
+description = "Weltweite Freundschaft durch das Radio"
+
+# 언어별 드롭다운 메뉴를 만들기 위해서는 아래의 파일을 추가해야 함
+# layouts/partials/navbar.html
+#  layouts/partials 폴더에 여러 개의 파일을 만들어 두었음. 각각의 내용은 파일 속에 설명이 있음.
+
+
 
 
 [markup]
@@ -198,6 +212,8 @@ no = 'Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY
 # add "hide_readingtime: true" to the page's front matter
 [params.ui.readingtime]
 enable = false
+
+
 
 [params.links]
 

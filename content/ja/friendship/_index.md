@@ -4,7 +4,7 @@ linkTitle: Friendship
 type: docs
 icon: fa-solid fa-user-group
 
-menu: {main: {weight: 30}}
+menu: {main: {pre: <i class="fa-solid fa-user-group"></i>}}
 ---
 
 {{% pageinfo %}}

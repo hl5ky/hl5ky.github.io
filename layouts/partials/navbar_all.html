@@ -1,0 +1,90 @@
+{{/* ================= 다국어 드롭다운 메뉴 =================
+- 모든 언어에서 언어 드롭다운 메뉴가 정상 작동하도록 함
+
+- 필요시 navbar.html 로 이름을 바꾸어 사용할 수 있음    
+  */}}
+
+
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+  <a class="navbar-brand" href="{{ .Site.Home.RelPermalink }}">
+    {{- if .Site.Params.ui.navbar_logo -}}
+      <span class="navbar-brand__logo navbar-logo">
+        {{- if resources.Get "icons/logo.svg" -}}
+          {{ (resources.Get "icons/logo.svg").Content | safeHTML }}
+        {{- end -}}
+      </span>
+    {{- end -}}
+    <span class="navbar-brand__name">{{ .Site.Title }}</span>
+  </a>
+  
+  <div class="td-navbar-nav-scroll ms-md-auto ml-md-auto" id="main_navbar">
+    <ul class="navbar-nav mt-2 mt-lg-0">
+      {{ $p := . }}
+      {{ range .Site.Menus.main }}
+      <li class="nav-item me-3 mr-3 mb-2 mb-lg-0">
+        {{ $active := or ($p.IsMenuCurrent "main" .) ($p.HasMenuCurrent "main" .) }}
+        {{ $href := "" }}
+        {{ with .Page }}
+          {{ $active = or $active ( $.IsAncestor . ) }}
+          {{ $href = .RelPermalink }}
+        {{ else }}
+          {{ $href = .URL | relLangURL }}
+        {{ end }}
+        <a class="nav-link{{ if $active }} active{{ end }}" href="{{ $href }}" {{- if strings.HasPrefix .URL "http" }} target="_blank" rel="noopener" {{- end }}>
+          {{ .Pre }}<span>{{ .Name }}</span>{{ .Post }}
+        </a>
+      </li>
+      {{ end }}
+
+      {{/* ================= 다국어 드롭다운 메뉴 (호버 및 클릭 지원을 강제로 작동하도록 함) ================= */}}
+      {{ if .Site.IsMultiLingual }}
+      <li class="nav-item dropdown d-none d-lg-block lang-dropdown-wrapper">
+        <a class="nav-link dropdown-toggle text-white" href="javascript:void(0);" id="navbarDropdown" role="button"
+           onclick="this.parentElement.querySelector('.dropdown-menu').classList.toggle('show');" 
+           aria-expanded="false" style="cursor: pointer;">
+          {{ .Site.Language.LanguageName }}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-right shadow" aria-labelledby="navbarDropdown">
+          {{ if .IsTranslated }}
+            {{ range .AllTranslations }}
+            <li>
+              <a class="dropdown-item {{ if eq $.Site.Language.Lang .Language.Lang }}active{{ end }}" href="{{ .RelPermalink }}">
+                {{ .Language.LanguageName }}
+              </a>
+            </li>
+            {{ end }}
+          {{ else }}
+            {{ range .Site.Home.AllTranslations }}
+            <li>
+              <a class="dropdown-item {{ if eq $.Site.Language.Lang .Language.Lang }}active{{ end }}" href="{{ .RelPermalink }}">
+                {{ .Language.LanguageName }}
+              </a>
+            </li>
+            {{ end }}
+          {{ end }}
+        </ul>
+      </li>
+      {{ end }}
+      {{/* ============================================================================== */}}
+
+    </ul>
+  </div>
+  <div class="navbar-nav d-none d-lg-block ms-2 ml-2">
+    {{ partial "search-input.html" . }}
+  </div>
+</nav>
+
+{{/* 드롭다운 호버 및 표시 보장 CSS */}}
+<style>
+  .lang-dropdown-wrapper:hover .dropdown-menu {
+    display: block !important;
+    margin-top: 0;
+  }
+  .lang-dropdown-wrapper .dropdown-menu.show {
+    display: block !important;
+  }
+  .lang-dropdown-wrapper .dropdown-menu {
+    min-width: 130px;
+    z-index: 1050;
+  }
+</style>

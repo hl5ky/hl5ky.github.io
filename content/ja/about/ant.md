@@ -61,3 +61,8 @@ From 1990
 > 2023. Mosely Pro-67C Yagi antenna ( 7MHz~28MHz)<br>
 > Creative Design CD-78 (3.5MHz Rotatable Dipole)<br>
 > 50MHz 7el Yagi antenna
+
+<br>
+<img src="/about/img/ANT_3ea_Small_Size.png" style="width:1100px;height:256"><br>
+
+> 2024. Kojinsha KA1-406 Yagi antenna ( 7MHz~50MHz)<br>

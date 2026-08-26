@@ -1,10 +1,10 @@
 ---
-linkTitle: VK4BTF-eng
+linkTitle: VK4BTF-deu
 title: A warm story about HL5BTF & VK4BTF
 # description: HL5BTF와 VK4BTF의 소중한 인연
 type: docs
 # icon: fa-solid fa-star
-weight: 1
+weight: 5
 ---
 
 {{% pageinfo %}}
