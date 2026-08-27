@@ -1,6 +1,7 @@
 ---
 title: Example Page
-type: docs
+draft: false
+layout: "blank"
 ---
 
 
