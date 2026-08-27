@@ -7,11 +7,12 @@ icon: fa-solid fa-user-group
 menu: {main: {pre: <i class="fa-solid fa-user-group"></i>}}
 ---
 
+<!--
 {{% pageinfo %}}
 Under construction
 {{% /pageinfo %}} 
 
-<!--
+
 {{% pageinfo %}}
 <span style="color:brown">"한가한 일요일 아침, 무전기를 켜고  지구 반대편에 있는, 얼굴도 보지 못한 아르헨티나의 HAM과 잡담을 나눌 수 있는 취미의 왕 아마추어 무선."</span>
 

@@ -106,6 +106,14 @@ weight = 4
 title = "HL5KY & HL5BTF"
 description = "Weltweite Freundschaft durch das Radio"
 
+[languages.es]
+languageName = "Español"
+contentDir = "content/es"
+weight = 5
+[languages.es.params]
+title = "HL5KY & HL5BTF"
+description = "Amistad mundial a través de la radio"
+
 # 언어별 드롭다운 메뉴를 만들기 위해서는 아래의 파일을 추가해야 함
 # layouts/partials/navbar.html
 #  layouts/partials 폴더에 여러 개의 파일을 만들어 두었음. 각각의 내용은 파일 속에 설명이 있음.
