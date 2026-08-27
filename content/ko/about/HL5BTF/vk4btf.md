@@ -1,5 +1,5 @@
 ---
-linkTitle: 소중한 인연
+linkTitle: 반세기의 인연
 title: CQ, 반세기의 인연
 type: docs
 weight: 1
