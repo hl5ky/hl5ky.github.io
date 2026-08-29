@@ -556,7 +556,8 @@
       </div>
     </div>
 
-    <div class="display-panel">
+    <!-- 상황 표시 패널 -->
+    <div class="display-panel" id="displayPanel">
       <div class="aligned-container" id="waitingView">
         <div class="aligned-row">
           <div class="progress-bar-text" id="progressInfo">0 / 10</div>
@@ -572,12 +573,14 @@
       <div class="result-box" id="resultBox" style="display: none;"></div>
     </div>
 
-    <div class="judge-btn-group">
+    <!-- 하단 판정 버튼 -->
+    <div class="judge-btn-group" id="judgeBtnGroup">
       <button class="judge-btn" id="judgeCorrectBtn" disabled>맞음</button>
       <button class="judge-btn" id="judgeWrongBtn" disabled>틀림</button>
     </div>
   </div>
 
+  <!-- 최종 결과 성적표 화면 -->
   <div class="card" id="finalReportView">
     <h3 style="margin: 0 0 4px 0; color: #38bdf8;">연습 성적표</h3>
     <div class="score-circle">
@@ -1127,6 +1130,9 @@
           <td>${passMark}</td>
         </tr>`;
       }).join('');
+
+      // 결과 성적표로 자연스럽게 스크롤
+      document.getElementById('finalReportView').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     document.getElementById('toggleSettingsBtn').addEventListener('click', () => {
@@ -1168,6 +1174,14 @@
         container.style.display = 'none';
         btn.innerText = '⚙️ 세부 사항 설정';
       }
+
+      // 모바일 화면을 상황판 및 판정 버튼 쪽으로 자동 스크롤
+      setTimeout(() => {
+        const judgeGroup = document.getElementById('judgeBtnGroup');
+        if (judgeGroup) {
+          judgeGroup.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }
+      }, 50);
 
       saveSettings();
       await initAudio();
@@ -1236,6 +1250,9 @@
       const total = document.getElementById('totalCountInput').value || 10;
       document.getElementById('progressInfo').innerText = `0 / ${total}`;
       statusInfo.innerText = '대기 중';
+
+      // 상단으로 부드럽게 복귀
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // 시작 시 검증 및 로드
