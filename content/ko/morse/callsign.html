@@ -1066,7 +1066,7 @@
       }
     }
 
-    // [버스트 쵸핑 연타성 펄스 결합 무전기 잡음 합성기 (게인 밸런스 조정)]
+    // [버스트 쵸핑 연타성 펄스 결합 무전기 잡음 합성기]
     function startRealRadioNoise(volumePercent) {
       if (!audioCtx || noiseMasterGainNode || _CW_CORE_DSP() < 0.5) return;
 
@@ -1077,7 +1077,7 @@
       noiseMasterGainNode.gain.linearRampToValueAtTime(targetGain, audioCtx.currentTime + 0.2);
       noiseMasterGainNode.connect(audioCtx.destination);
 
-      // 2. 고속 쵸핑 게인 노드 (기저 잡음과 청감상 균형을 맞춘 부드러운 쵸핑)
+      // 2. 고속 쵸핑 게인 노드 (부드럽게 쪼개지는 게인 변조)
       chopperGainNode = audioCtx.createGain();
       chopperGainNode.gain.setValueAtTime(1.0, audioCtx.currentTime);
       chopperGainNode.connect(noiseMasterGainNode);
@@ -1092,7 +1092,7 @@
       chopperLfoGain.connect(chopperGainNode.gain);
       chopperLfoNode.start();
 
-      // 무작위 "샤샤샤샤샤" 연타 쵸핑 트리거 스케줄러 (과도한 음압 억제)
+      // 무작위 "샤샤샤샤샤" 연타 쵸핑 트리거 스케줄러
       function triggerChopperBurst() {
         if (!isRunning || !noiseMasterGainNode || !chopperLfoGain) return;
 
@@ -1102,7 +1102,6 @@
 
         chopperLfoNode.frequency.setValueAtTime(chopSpeed, now);
         chopperLfoGain.gain.cancelScheduledValues(now);
-        // 과도하게 튀지 않도록 LFO 변조 진폭을 0.28로 부드럽게 감쇄
         chopperLfoGain.gain.setValueAtTime(0.28, now);
         chopperLfoGain.gain.setValueAtTime(0.28, now + burstDuration);
         chopperLfoGain.gain.linearRampToValueAtTime(0, now + burstDuration + 0.12);
