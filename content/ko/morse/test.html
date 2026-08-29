@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CW 호출부호 식별 연습기</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 16px 16px 30px 16px;
+      line-height: 1.5;
+      color: #e2e8f0;
+      background-color: #1a202c;
+    }
+    
+    .title-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    h2 { 
+      margin: 0; 
+      font-size: 21px; 
+      color: #38bdf8;
+      letter-spacing: 0.5px;
+    }
+    .author-tag {
+      font-size: 13px;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+    .author-tag a {
+      color: #4ade80;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .author-tag a:hover {
+      text-decoration: underline;
+      color: #86efac;
+    }
+
+    .card {
+      background: #2d3748;
+      border: 1px solid #4a5568;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    }
+
+    .call-input-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .call-input-row label.main-label { 
+      font-weight: bold; 
+      font-size: 14px; 
+      white-space: nowrap;
+      color: #cbd5e1;
+    }
+    input[type="text"], input[type="password"] {
+      width: 125px;
+      padding: 8px 10px;
+      font-size: 18px;
+      font-weight: bold;
+      border: 2px solid #0284c7;
+      border-radius: 6px;
+      text-transform: uppercase;
+      font-family: monospace;
+      text-align: center;
+      color: #38bdf8;
+      background-color: #1a202c;
+      letter-spacing: 1px;
+    }
+    input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus {
+      outline: none;
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3);
+    }
+    
+    .show-toggle-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #cbd5e1;
+      cursor: pointer;
+      user-select: none;
+      padding: 6px 10px;
+      background: #1a202c;
+      border-radius: 6px;
+      border: 1px solid #4a5568;
+    }
+    .show-toggle-label input {
+      cursor: pointer;
+      accent-color: #0284c7;
+    }
+
+    .help-btn {
+      background-color: #1a202c;
+      border: 1.5px solid #718096;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 14px;
+      font-weight: normal;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+      margin-left: auto;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      transition: all 0.2s;
+      letter-spacing: 0.2px;
+    }
+    .help-btn:hover {
+      background-color: #2d3748;
+      border-color: #a0aec0;
+      color: #ffffff;
+    }
+
+    #helpContent {
+      margin-top: 12px;
+      padding: 12px;
+      background-color: #1a202c;
+      border: 1px dashed #4a5568;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #cbd5e1;
+      display: none;
+      line-height: 1.6;
+    }
+
+    .grid-settings {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      font-size: 13px;
+    }
+    .setting-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .setting-item label { 
+      font-weight: 600; 
+      color: #94a3b8; 
+    }
+    
+    .setting-item-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 38px;
+      margin-top: 18px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .setting-item-checkbox input {
+      cursor: pointer;
+      accent-color: #0284c7;
+      width: 16px;
+      height: 16px;
+    }
+    .setting-item-checkbox span {
+      font-size: 13px;
+      font-weight: 500;
+      color: #94a3b8;
+    }
+    .setting-item-checkbox span .white-text {
+      color: #ffffff;
+      font-weight: normal;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 7px;
+      font-size: 15px;
+      font-weight: bold;
+      border: 1px solid #4a5568;
+      border-radius: 6px;
+      text-align: center;
+      background-color: #1a202c;
+      color: #f1f5f9;
+    }
+
+    /* 세부 사항 설정 버튼 (슬림 사각형) */
+    .toggle-btn {
+      background-color: #1a202c;
+      border: 1px solid #4a5568;
+      border-radius: 6px;
+      color: #38bdf8;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 4px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 10px;
+      height: 26px;
+      line-height: 1;
+      transition: all 0.2s;
+    }
+    .toggle-btn:hover {
+      background-color: #242e3d;
+      border-color: #0284c7;
+      color: #7dd3fc;
+    }
+
+    .btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    button.action-btn {
+      height: 46px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    #startBtn { 
+      background-color: #0284c7; 
+      color: white; 
+      box-shadow: 0 2px 4px rgba(2, 132, 199, 0.3);
+    }
+    #startBtn:active:not(:disabled) { background-color: #0369a1; }
+    #startBtn:disabled {
+      background-color: #475569;
+      color: #94a3b8;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    
+    #stopBtn { 
+      background-color: #e11d48; 
+      color: white; 
+      box-shadow: 0 2px 4px rgba(225, 29, 72, 0.3);
+    }
+    #stopBtn:active:not(:disabled) { background-color: #be123c; }
+    #stopBtn:disabled {
+      background-color: #334155;
+      color: #64748b;
+      cursor: not-allowed;
+      opacity: 0.6;
+      box-shadow: none;
+    }
+
+    .display-panel {
+      padding: 14px 16px;
+      background-color: #111827;
+      border: 2px solid #374151;
+      border-radius: 10px;
+      height: 160px;
+      min-height: 160px;
+      max-height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 14px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .aligned-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+    }
+
+    .aligned-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 32px;
+      line-height: 32px;
+    }
+    
+    .progress-bar-text {
+      font-size: 24px;
+      font-weight: 900;
+      color: #38bdf8;
+      font-family: monospace;
+      letter-spacing: 2px;
+      text-align: center;
+      line-height: 32px;
+    }
+
+    .status-text { 
+      font-size: 13px; 
+      color: #9ca3af; 
+      text-align: center;
+      line-height: 32px;
+    }
+
+    .result-box {
+      font-family: monospace;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .no-react-splash {
+      font-size: 24px;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 2px;
+      line-height: 100px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .comp-value {
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-align: center;
+      line-height: 32px;
+      white-space: nowrap;
+    }
+
+    .listening {
+      font-size: 17px;
+      font-weight: normal;
+      letter-spacing: 0;
+      color: #38bdf8;
+      line-height: 32px;
+      animation: blink 1.2s infinite;
+      text-align: center;
+    }
+    @keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+    .call-target { color: #38bdf8; }
+    .call-correct { color: #4ade80; }
+    .call-typo { color: #f87171; }
+    
+    .diff-char {
+      text-decoration: underline;
+      background-color: rgba(239, 68, 68, 0.25);
+      color: #fca5a5;
+      padding: 0 4px;
+      border-radius: 4px;
+    }
+
+    .morse-diagram {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 3px 14px;
+      background-color: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 12px;
+      width: fit-content;
+      margin: 2px auto 0 auto;
+    }
+    .morse-unit {
+      height: 6px;
+      background-color: #f87171;
+      border-radius: 3px;
+      display: inline-block;
+    }
+    .morse-dit { width: 9px; }
+    .morse-dah { width: 26px; }
+    
+    .morse-label {
+      font-size: 20px;
+      font-weight: 900;
+      color: #fca5a5;
+      margin-right: 6px;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    .judge-btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .judge-btn {
+      height: 64px;
+      font-size: 21px;
+      font-weight: 900;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    #judgeCorrectBtn {
+      background-color: #059669;
+      box-shadow: 0 4px 10px rgba(5, 150, 105, 0.4);
+    }
+    #judgeCorrectBtn:active:not(:disabled) { background-color: #047857; }
+    
+    #judgeWrongBtn {
+      background-color: #dc2626;
+      box-shadow: 0 4px 10px rgba(220, 38, 38, 0.4);
+    }
+    #judgeWrongBtn:active:not(:disabled) { background-color: #b91c1c; }
+
+    .judge-btn:disabled {
+      background-color: #334155 !important;
+      color: #64748b !important;
+      cursor: not-allowed;
+      box-shadow: none !important;
+    }
+    .judge-btn.selected {
+      filter: brightness(0.8);
+      box-shadow: inset 0 3px 6px rgba(0,0,0,0.6) !important;
+    }
+
+    #finalReportView {
+      display: none;
+      text-align: center;
+      padding: 24px 16px;
+    }
+    .score-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 15px auto;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.4);
+    }
+    .score-num { font-size: 32px; font-weight: 900; line-height: 1; }
+    .score-total { font-size: 13px; opacity: 0.9; }
+    
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 14px;
+      font-family: monospace;
+      background: #1e293b;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .history-table th {
+      background: #0f172a;
+      color: #38bdf8;
+      padding: 10px 4px;
+      border-bottom: 2px solid #334155;
+      font-weight: 700;
+    }
+    .history-table td {
+      padding: 10px 4px;
+      border-bottom: 1px solid #334155;
+      vertical-align: middle;
+      color: #e2e8f0;
+    }
+    .history-table tr:nth-child(even) {
+      background: #172033;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="mainTrainView">
+    <div class="title-header">
+      <h2>CW 호출부호 식별 연습기</h2>
+      <span class="author-tag">by <a href="https://hl5ky.github.io/MORSE" target="_blank">HL5KY</a></span>
+    </div>
+
+    <div class="card">
+      <div class="call-input-row">
+        <label class="main-label" for="myCallsign">호출부호 입력</label>
+        <input type="text" id="myCallsign" value="HL5KY" maxlength="10">
+        
+        <label class="show-toggle-label" for="showCallToggle">
+          <input type="checkbox" id="showCallToggle"> 보이기
+        </label>
+        
+        <button class="help-btn" id="helpBtn">사용 방법 설명</button>
+      </div>
+
+      <div id="helpContent">
+        연습 프로그램에 대한 설명이 이곳에 표시됩니다.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="grid-settings">
+        <div class="setting-item">
+          <label>속도 (WPM)</label>
+          <input type="number" id="wpmInput" value="20" min="5" max="45" step="1">
+        </div>
+        <div class="setting-item">
+          <label>톤 주파수 (Hz)</label>
+          <input type="number" id="freqInput" value="650" min="400" max="1000" step="50">
+        </div>
+        <div class="setting-item">
+          <label>정답 확률 (%)</label>
+          <input type="number" id="correctProbInput" value="30" min="10" max="90" step="5">
+        </div>
+        <div class="setting-item">
+          <label>총 연습 횟수 (회)</label>
+          <input type="number" id="totalCountInput" value="10" min="3" max="50" step="1">
+        </div>
+      </div>
+
+      <!-- 세부 사항 설정 버튼 -->
+      <button class="toggle-btn" id="toggleSettingsBtn">⚙️ 세부 사항 설정</button>
+      
+      <div class="grid-settings" id="settingsContainer" style="display: none; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #4a5568;">
+        <div class="setting-item">
+          <label>호출부호 길이 변화 비율 (%)</label>
+          <input type="number" id="lenDiffProbInput" value="10" min="0" max="50" step="5">
+        </div>
+        <div class="setting-item">
+          <label>틀린 글자 재송신 횟수 (회)</label>
+          <input type="number" id="repeatCountInput" value="1" min="1" max="5" step="1">
+        </div>
+        <div class="setting-item">
+          <label>판단 입력 제한 (초)</label>
+          <input type="number" id="judgeTimeInput" value="2.0" min="1.0" max="5.0" step="0.5">
+        </div>
+        <div class="setting-item">
+          <label>틀린 글자 재송신 지연 (초)</label>
+          <input type="number" id="repeatDelayInput" value="1.0" min="0.3" max="3.0" step="0.1">
+        </div>
+        <div class="setting-item">
+          <label>다음 부호 대기 (초)</label>
+          <input type="number" id="delayInput" value="2.0" min="1.0" max="10.0" step="0.5">
+        </div>
+        <label class="setting-item-checkbox" for="showNoReactToggle">
+          <input type="checkbox" id="showNoReactToggle">
+          <span>반응이 없으면 <span class="white-text">무반응</span> 표시</span>
+        </label>
+      </div>
+
+      <div class="btn-group">
+        <button class="action-btn" id="startBtn">시작</button>
+        <button class="action-btn" id="stopBtn" disabled>정지</button>
+      </div>
+    </div>
+
+    <!-- 상황 표시 패널 -->
+    <div class="display-panel">
+      <div class="aligned-container" id="waitingView">
+        <div class="aligned-row">
+          <div class="progress-bar-text" id="progressInfo">0 / 10</div>
+        </div>
+        <div class="aligned-row">
+          <div class="status-text" id="statusInfo">대기 중</div>
+        </div>
+        <div class="aligned-row" id="listeningRow" style="display: none;">
+          <div id="listeningInfo" class="listening">▶ 수신 중...</div>
+        </div>
+      </div>
+      
+      <div class="result-box" id="resultBox" style="display: none;"></div>
+    </div>
+
+    <!-- 하단 판정 버튼 -->
+    <div class="judge-btn-group">
+      <button class="judge-btn" id="judgeCorrectBtn" disabled>맞음</button>
+      <button class="judge-btn" id="judgeWrongBtn" disabled>틀림</button>
+    </div>
+  </div>
+
+  <!-- 최종 결과 성적표 화면 -->
+  <div class="card" id="finalReportView">
+    <h3 style="margin: 0 0 4px 0; color: #38bdf8;">연습 성적표</h3>
+    <div class="score-circle">
+      <div class="score-num" id="finalScore">0</div>
+      <div class="score-total" id="finalTotal">/ 10</div>
+    </div>
+    <div id="accuracyText" style="font-weight: bold; margin-bottom: 12px; color: #4ade80;"></div>
+
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>회차</th>
+          <th>송신 부호</th>
+          <th>내 반응</th>
+          <th>판정</th>
+        </tr>
+      </thead>
+      <tbody id="historyTableBody"></tbody>
+    </table>
+
+    <button class="action-btn" id="restartBtn" style="background:#0284c7; color:white; width:100%; margin-top:16px;">다시 연습하기</button>
+  </div>
+
+  <script>
+    const MORSE_CODE = {
+      'A': '.-',    'B': '-...',  'C': '-.-.',  'D': '-..',   'E': '.',
+      'F': '..-.',  'G': '--.',   'H': '....',  'I': '..',    'J': '.---',
+      'K': '-.-',   'L': '.-..',  'M': '--',    'N': '-.',    'O': '---',
+      'P': '.--.',  'Q': '--.-',  'R': '.-.',   'S': '...',   'T': '-',
+      'U': '..-',   'V': '...-',  'W': '.--',   'X': '-..-',  'Y': '-.--',
+      'Z': '--..',  '1': '.----', '2': '..---', '3': '...--', '4': '....-',
+      '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.',
+      '0': '-----', '/': '-..-.'
+    };
+
+    const SIMILAR_MAP = {
+      'A': ['W', 'R', 'U', 'N', 'I', 'E'],
+      'B': ['D', '6', 'X', 'Z', '7', 'Y'],
+      'C': ['K', 'Y', 'R', 'X', 'Q'],
+      'D': ['B', 'N', 'X', 'M', 'K'],
+      'E': ['I', 'T', 'A', 'S'],
+      'F': ['L', 'V', 'R', 'U', 'S', 'Q'],
+      'G': ['M', 'O', 'Z', 'Q'],
+      'H': ['5', 'S', '4', 'V'],
+      'I': ['S', 'U', 'A', 'E'],
+      'J': ['1', 'W', 'P', 'Y'],
+      'K': ['N', 'C', 'Y', 'R', 'D'],
+      'L': ['F', 'R', 'P', 'W', 'J', 'Q'],
+      'M': ['G', 'O', 'N', 'T'],
+      'N': ['D', 'K', 'Y', 'C', 'A', 'T'],
+      'O': ['M', 'G', 'N', 'K', '0', '9'],
+      'P': ['J', 'W', 'L', 'R'],
+      'Q': ['G', 'Z', 'C', 'Y', 'F'],
+      'R': ['A', 'L', 'P', 'K', 'W'],
+      'S': ['H', 'I', 'V', 'U', 'W', '5'],
+      'T': ['M', 'E', 'N', 'O'],
+      'U': ['A', 'V', 'F', 'S', 'W', '4'],
+      'V': ['4', 'U', 'S', '3'],
+      'W': ['A', 'J', 'P', 'R'],
+      'X': ['D', 'B', 'K', 'Z', 'J'],
+      'Y': ['Q', 'C', 'K', 'J'],
+      'Z': ['G', '7', 'B', 'X', 'Q'],
+      '1': ['2', 'W', 'J', '0'],
+      '2': ['1', '3', 'U'],
+      '3': ['2', '4', 'V'],
+      '4': ['3', '5', 'V', 'H'],
+      '5': ['4', '6', 'H', 'S'],
+      '6': ['5', '7', 'B'],
+      '7': ['6', '8', 'Z'],
+      '8': ['7', '9', 'D'],
+      '9': ['8', '0', 'N'],
+      '0': ['9', '1', 'O', 'T'],
+      '/': ['X', 'D', 'N']
+    };
+
+    const STORAGE_KEY = 'cw_trainer_settings';
+
+    function saveSettings() {
+      const data = {
+        callsign: document.getElementById('myCallsign').value,
+        wpm: document.getElementById('wpmInput').value,
+        freq: document.getElementById('freqInput').value,
+        correctProb: document.getElementById('correctProbInput').value,
+        totalCount: document.getElementById('totalCountInput').value,
+        lenDiffProb: document.getElementById('lenDiffProbInput').value,
+        repeatCount: document.getElementById('repeatCountInput').value,
+        judgeTime: document.getElementById('judgeTimeInput').value,
+        repeatDelay: document.getElementById('repeatDelayInput').value,
+        delay: document.getElementById('delayInput').value,
+        showNoReact: document.getElementById('showNoReactToggle').checked
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function loadSettings() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) return;
+      try {
+        const data = JSON.parse(saved);
+        if (data.callsign) document.getElementById('myCallsign').value = data.callsign;
+        if (data.wpm) document.getElementById('wpmInput').value = data.wpm;
+        if (data.freq) document.getElementById('freqInput').value = data.freq;
+        if (data.correctProb) document.getElementById('correctProbInput').value = data.correctProb;
+        if (data.totalCount) document.getElementById('totalCountInput').value = data.totalCount;
+        if (data.lenDiffProb) document.getElementById('lenDiffProbInput').value = data.lenDiffProb;
+        if (data.repeatCount) document.getElementById('repeatCountInput').value = data.repeatCount;
+        if (data.judgeTime) document.getElementById('judgeTimeInput').value = data.judgeTime;
+        if (data.repeatDelay) document.getElementById('repeatDelayInput').value = data.repeatDelay;
+        if (data.delay) document.getElementById('delayInput').value = data.delay;
+        if (data.showNoReact !== undefined) {
+          document.getElementById('showNoReactToggle').checked = data.showNoReact;
+        }
+      } catch(e) {}
+    }
+
+    function applyCallsignVisibility(show) {
+      const callInput = document.getElementById('myCallsign');
+      callInput.type = show ? 'text' : 'password';
+    }
+
+    document.getElementById('showCallToggle').addEventListener('change', (e) => {
+      if (isRunning) {
+        applyCallsignVisibility(e.target.checked);
+      }
+    });
+
+    document.querySelectorAll('input').forEach(el => {
+      el.addEventListener('input', () => {
+        saveSettings();
+        if (el.id === 'totalCountInput' && !isRunning) {
+          const total = el.value || 10;
+          document.getElementById('progressInfo').innerText = `0 / ${total}`;
+        }
+      });
+    });
+
+    document.getElementById('helpBtn').addEventListener('click', () => {
+      const content = document.getElementById('helpContent');
+      content.style.display = (content.style.display === 'block') ? 'none' : 'block';
+    });
+
+    function generateTypoCallsign(callsign, allowLenDiff) {
+      if (!callsign || callsign.length === 0) return { call: 'HL5KY', diffIdx: -1, diffChar: '' };
+
+      const chars = callsign.split('');
+
+      if (allowLenDiff && callsign.length >= 4) {
+        const makeShorter = Math.random() < 0.5;
+        if (makeShorter && chars.length > 4) {
+          const dropIdx = chars.length - 1;
+          chars.splice(dropIdx, 1);
+          return { call: chars.join(''), diffIdx: dropIdx, diffChar: '(누락)' };
+        } else {
+          const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+          const addChar = pool[Math.floor(Math.random() * pool.length)];
+          chars.push(addChar);
+          return { call: chars.join(''), diffIdx: chars.length - 1, diffChar: addChar };
+        }
+      }
+
+      const targetIdx = Math.floor(Math.random() * chars.length);
+      const originalChar = chars[targetIdx];
+      let candidateList = SIMILAR_MAP[originalChar];
+      let newChar = originalChar;
+
+      if (candidateList && candidateList.length > 0) {
+        newChar = candidateList[Math.floor(Math.random() * candidateList.length)];
+      } else {
+        const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        newChar = pool[Math.floor(Math.random() * pool.length)];
+      }
+
+      chars[targetIdx] = newChar;
+      return { call: chars.join(''), diffIdx: targetIdx, diffChar: newChar };
+    }
+
+    let audioCtx = null;
+    let isRunning = false;
+    let timeoutId = null;
+    let wakeLock = null;
+    let resolveJudgeWait = null;
+    let activeOscillator = null;
+
+    let currentSession = {
+      total: 10,
+      currentRound: 0,
+      score: 0,
+      history: [],
+      userChoice: null
+    };
+
+    async function requestWakeLock() {
+      if ('wakeLock' in navigator) {
+        try { wakeLock = await navigator.wakeLock.request('screen'); } catch (err) {}
+      }
+    }
+    function releaseWakeLock() {
+      if (wakeLock !== null) { wakeLock.release().then(() => { wakeLock = null; }); }
+    }
+
+    async function initAudio() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        await audioCtx.resume();
+      }
+    }
+
+    function stopCurrentAudio() {
+      if (activeOscillator) {
+        try {
+          activeOscillator.stop();
+          activeOscillator.disconnect();
+        } catch(e) {}
+        activeOscillator = null;
+      }
+    }
+
+    function waitMs(ms) {
+      return new Promise(resolve => { timeoutId = setTimeout(resolve, ms); });
+    }
+
+    function waitJudgeTime(ms) {
+      return new Promise(resolve => {
+        resolveJudgeWait = resolve;
+        timeoutId = setTimeout(() => {
+          resolveJudgeWait = null;
+          resolve();
+        }, ms);
+      });
+    }
+
+    function playMorseText(text, wpm, toneFreq) {
+      return new Promise((resolve) => {
+        if (!isRunning) return resolve();
+
+        const dotDuration = (1200 / wpm) / 1000;
+        let currentTime = audioCtx.currentTime + 0.08;
+
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        activeOscillator = osc;
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(toneFreq, currentTime);
+
+        gainNode.gain.setValueAtTime(0, currentTime);
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        osc.start(currentTime);
+
+        const cleanText = text.toUpperCase();
+
+        for (let i = 0; i < cleanText.length; i++) {
+          const char = cleanText[i];
+          const pattern = MORSE_CODE[char];
+          if (!pattern) continue;
+
+          for (let j = 0; j < pattern.length; j++) {
+            const symbol = pattern[j];
+            const duration = (symbol === '.') ? dotDuration : (dotDuration * 3);
+
+            gainNode.gain.setValueAtTime(0, currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.8, currentTime + 0.005);
+            
+            currentTime += duration;
+
+            gainNode.gain.setValueAtTime(0.8, currentTime - 0.005);
+            gainNode.gain.linearRampToValueAtTime(0, currentTime);
+
+            currentTime += dotDuration;
+          }
+          currentTime += dotDuration * 2;
+        }
+
+        const stopTime = currentTime + 0.1;
+        osc.stop(stopTime);
+
+        osc.onended = () => {
+          stopCurrentAudio();
+          resolve();
+        };
+      });
+    }
+
+    function generateMorseDiagramHTML(char) {
+      const pattern = MORSE_CODE[char.toUpperCase()];
+      if (!pattern) return '';
+
+      let unitsHtml = '';
+      for (let s of pattern) {
+        if (s === '.') {
+          unitsHtml += `<span class="morse-unit morse-dit" title="Dit(점)"></span>`;
+        } else if (s === '-') {
+          unitsHtml += `<span class="morse-unit morse-dah" title="Dah(선)"></span>`;
+        }
+      }
+      return `<div class="morse-diagram"><span class="morse-label">${char} :</span>${unitsHtml}</div>`;
+    }
+
+    function renderSentCallHTML(sentCall, myCall, isCorrect) {
+      if (isCorrect) {
+        return `<span class="call-correct">${sentCall}</span>`;
+      }
+      let diffHtml = '';
+      for (let i = 0; i < sentCall.length; i++) {
+        const c = sentCall[i];
+        if (i < myCall.length && c !== myCall[i]) {
+          diffHtml += `<span class="diff-char">${c}</span>`;
+        } else if (i >= myCall.length) {
+          diffHtml += `<span class="diff-char">${c}</span>`;
+        } else {
+          diffHtml += c;
+        }
+      }
+      return `<span class="call-typo">${diffHtml}</span>`;
+    }
+
+    function renderComparisonHTML(sentCall, myCall, isCorrect, typoInfo) {
+      const sentHtml = renderSentCallHTML(sentCall, myCall, isCorrect);
+      let diagramHtml = '';
+      
+      if (!isCorrect && typoInfo && typoInfo.diffChar && typoInfo.diffChar !== '(누락)') {
+        diagramHtml = `
+          <div class="aligned-row">
+            ${generateMorseDiagramHTML(typoInfo.diffChar)}
+          </div>
+        `;
+      }
+
+      return `
+        <div class="aligned-container">
+          <div class="aligned-row">
+            <div class="comp-value call-target">${myCall}</div>
+          </div>
+          <div class="aligned-row">
+            <div class="comp-value">${sentHtml}</div>
+          </div>
+          ${diagramHtml}
+        </div>
+      `;
+    }
+
+    function setJudgeButtonsState(enabled, selectedType = null) {
+      const btnCorrect = document.getElementById('judgeCorrectBtn');
+      const btnWrong = document.getElementById('judgeWrongBtn');
+      
+      btnCorrect.disabled = !enabled;
+      btnWrong.disabled = !enabled;
+      
+      btnCorrect.classList.remove('selected');
+      btnWrong.classList.remove('selected');
+
+      if (selectedType === '맞음') {
+        btnCorrect.classList.add('selected');
+      } else if (selectedType === '틀림') {
+        btnWrong.classList.add('selected');
+      }
+    }
+
+    async function loopTrain() {
+      if (!isRunning) return;
+
+      const myCall = document.getElementById('myCallsign').value.trim().toUpperCase() || 'HL5KY';
+      const wpm = parseInt(document.getElementById('wpmInput').value) || 20;
+      const freq = parseInt(document.getElementById('freqInput').value) || 650;
+      const delaySec = parseFloat(document.getElementById('delayInput').value) || 2.0;
+      const baseCorrectProb = parseInt(document.getElementById('correctProbInput').value) || 30;
+      const lenDiffProb = parseInt(document.getElementById('lenDiffProbInput').value) || 10;
+      const repeatCount = parseInt(document.getElementById('repeatCountInput').value) || 1;
+      const judgeTimeSec = parseFloat(document.getElementById('judgeTimeInput').value) || 2.0;
+      const repeatDelaySec = parseFloat(document.getElementById('repeatDelayInput').value) || 1.0;
+      const totalRounds = parseInt(document.getElementById('totalCountInput').value) || 10;
+      const isAlwaysVisible = document.getElementById('showCallToggle').checked;
+      const showNoReact = document.getElementById('showNoReactToggle').checked;
+
+      currentSession.total = totalRounds;
+
+      if (currentSession.currentRound >= totalRounds) {
+        finishSession(myCall);
+        return;
+      }
+
+      currentSession.currentRound++;
+      currentSession.userChoice = null;
+
+      if (!isAlwaysVisible) {
+        applyCallsignVisibility(false);
+      } else {
+        applyCallsignVisibility(true);
+      }
+
+      const isFirstHalf = currentSession.currentRound <= Math.ceil(totalRounds / 2);
+      const actualCorrectProb = isFirstHalf ? Math.round(baseCorrectProb * 0.5) : baseCorrectProb;
+
+      const waitingView = document.getElementById('waitingView');
+      const resultBox = document.getElementById('resultBox');
+      const statusInfo = document.getElementById('statusInfo');
+      const progressInfo = document.getElementById('progressInfo');
+      const listeningRow = document.getElementById('listeningRow');
+      const listeningInfo = document.getElementById('listeningInfo');
+
+      waitingView.style.display = 'flex';
+      resultBox.style.display = 'none';
+      progressInfo.innerText = `${currentSession.currentRound} / ${totalRounds}`;
+      statusInfo.innerText = `송신 중 (${wpm} WPM)`;
+      listeningInfo.innerText = "▶ 수신 중...";
+      listeningRow.style.display = 'flex';
+      setJudgeButtonsState(false);
+
+      let sentCall = '';
+      let isCorrect = false;
+      let typoInfo = null;
+
+      if (Math.random() * 100 < actualCorrectProb) {
+        sentCall = myCall;
+        isCorrect = true;
+      } else {
+        const allowLenChange = (Math.random() * 100 < lenDiffProb);
+        typoInfo = generateTypoCallsign(myCall, allowLenChange);
+        sentCall = typoInfo.call;
+        isCorrect = false;
+      }
+
+      if (currentSession.currentRound === 1) {
+        await waitMs(100);
+      }
+
+      // 본 부호 송신
+      await playMorseText(sentCall, wpm, freq);
+      if (!isRunning) return;
+
+      // 판정 입력 대기 (수신 중 위치에서 동일한 크기로 '맞음 틀림 선택' 깜빡임)
+      setJudgeButtonsState(true);
+      statusInfo.innerText = `판단 입력 중...`;
+      listeningInfo.innerText = "▶ 맞음 틀림 선택";
+      listeningRow.style.display = 'flex';
+      await waitJudgeTime(judgeTimeSec * 1000);
+      if (!isRunning) return;
+
+      setJudgeButtonsState(false, currentSession.userChoice);
+
+      const userChoice = currentSession.userChoice;
+      let isPass = false;
+
+      if (userChoice === '맞음' && isCorrect) {
+        isPass = true;
+      } else if (userChoice === '틀림' && !isCorrect) {
+        isPass = true;
+      } else {
+        isPass = false;
+      }
+
+      if (isPass) currentSession.score++;
+
+      currentSession.history.push({
+        round: currentSession.currentRound,
+        sent: sentCall,
+        isCorrect: isCorrect,
+        userChoice: userChoice ? userChoice : '무반응',
+        isPass: isPass
+      });
+
+      // 설정에서 체크되어 있고 무반응인 경우에만 1.0초 동안 알림 표시
+      if (!userChoice && showNoReact) {
+        waitingView.style.display = 'none';
+        resultBox.style.display = 'flex';
+        resultBox.innerHTML = '<div class="no-react-splash">[ 무반응 ]</div>';
+        await waitMs(1000);
+        if (!isRunning) return;
+      }
+
+      // 2줄 비교 및 오타 다이어그램 표시
+      waitingView.style.display = 'none';
+      resultBox.style.display = 'flex';
+      applyCallsignVisibility(true);
+
+      resultBox.innerHTML = renderComparisonHTML(sentCall, myCall, isCorrect, typoInfo);
+
+      // 오타 재송신
+      if (!isCorrect && typoInfo && typoInfo.diffChar && typoInfo.diffChar !== '(누락)') {
+        for (let r = 0; r < repeatCount; r++) {
+          await waitMs(repeatDelaySec * 1000);
+          if (!isRunning) return;
+          await playMorseText(typoInfo.diffChar, wpm, freq);
+        }
+      }
+
+      if (!isRunning) return;
+
+      // 다음 대기
+      await waitMs(delaySec * 1000);
+
+      if (isRunning) {
+        loopTrain();
+      }
+    }
+
+    function finishSession(myCall) {
+      isRunning = false;
+      releaseWakeLock();
+      
+      document.getElementById('startBtn').disabled = false;
+      document.getElementById('stopBtn').disabled = true;
+      setJudgeButtonsState(false);
+      
+      applyCallsignVisibility(true);
+
+      document.getElementById('mainTrainView').style.display = 'none';
+      document.getElementById('finalReportView').style.display = 'block';
+
+      document.getElementById('finalScore').innerText = currentSession.score;
+      document.getElementById('finalTotal').innerText = `/ ${currentSession.total}`;
+
+      const pct = Math.round((currentSession.score / currentSession.total) * 100);
+      document.getElementById('accuracyText').innerText = `정답률: ${pct}%`;
+
+      const tbody = document.getElementById('historyTableBody');
+      tbody.innerHTML = currentSession.history.map(item => {
+        const callDisplay = renderSentCallHTML(item.sent, myCall, item.isCorrect);
+        
+        let reactColor = '#94a3b8';
+        if (item.userChoice === '맞음') reactColor = '#4ade80';
+        else if (item.userChoice === '틀림') reactColor = '#f87171';
+        else if (item.userChoice === '무반응') reactColor = '#ffffff';
+
+        const reactText = `<span style="color:${reactColor}; font-weight:bold;">${item.userChoice}</span>`;
+        const passMark = item.isPass 
+          ? '<b style="color:#4ade80; font-size:18px;">O</b>' 
+          : '<b style="color:#f87171; font-size:18px;">X</b>';
+
+        return `<tr>
+          <td>#${item.round}</td>
+          <td>${callDisplay}</td>
+          <td>${reactText}</td>
+          <td>${passMark}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    document.getElementById('toggleSettingsBtn').addEventListener('click', () => {
+      const container = document.getElementById('settingsContainer');
+      const btn = document.getElementById('toggleSettingsBtn');
+      if (container.style.display === 'none') {
+        container.style.display = 'grid';
+        btn.innerText = '⚙️ 세부 사항 닫기';
+      } else {
+        container.style.display = 'none';
+        btn.innerText = '⚙️ 세부 사항 설정';
+      }
+    });
+
+    function handleJudgeChoice(choice) {
+      currentSession.userChoice = choice;
+      setJudgeButtonsState(false, choice);
+
+      if (resolveJudgeWait) {
+        clearTimeout(timeoutId);
+        const resolve = resolveJudgeWait;
+        resolveJudgeWait = null;
+        resolve();
+      }
+    }
+
+    document.getElementById('judgeCorrectBtn').addEventListener('click', () => handleJudgeChoice('맞음'));
+    document.getElementById('judgeWrongBtn').addEventListener('click', () => handleJudgeChoice('틀림'));
+
+    document.getElementById('startBtn').addEventListener('click', async () => {
+      if (isRunning) return;
+
+      document.getElementById('startBtn').disabled = true;
+      document.getElementById('stopBtn').disabled = false;
+
+      const container = document.getElementById('settingsContainer');
+      const btn = document.getElementById('toggleSettingsBtn');
+      if (container.style.display !== 'none') {
+        container.style.display = 'none';
+        btn.innerText = '⚙️ 세부 사항 설정';
+      }
+
+      saveSettings();
+      await initAudio();
+      requestWakeLock();
+
+      currentSession.currentRound = 0;
+      currentSession.score = 0;
+      currentSession.history = [];
+      isRunning = true;
+
+      loopTrain();
+    });
+
+    document.getElementById('stopBtn').addEventListener('click', () => {
+      isRunning = false;
+      releaseWakeLock();
+      clearTimeout(timeoutId);
+      stopCurrentAudio();
+      if (resolveJudgeWait) {
+        resolveJudgeWait = null;
+      }
+
+      document.getElementById('startBtn').disabled = false;
+      document.getElementById('stopBtn').disabled = true;
+      setJudgeButtonsState(false);
+
+      applyCallsignVisibility(true);
+
+      const waitingView = document.getElementById('waitingView');
+      const resultBox = document.getElementById('resultBox');
+      const statusInfo = document.getElementById('statusInfo');
+      const listeningRow = document.getElementById('listeningRow');
+      const listeningInfo = document.getElementById('listeningInfo');
+
+      waitingView.style.display = 'flex';
+      resultBox.style.display = 'none';
+      listeningRow.style.display = 'none';
+      listeningInfo.innerText = "▶ 수신 중...";
+
+      const total = document.getElementById('totalCountInput').value || 10;
+      document.getElementById('progressInfo').innerText = `0 / ${total}`;
+      statusInfo.innerText = "연습 정지됨";
+    });
+
+    document.getElementById('restartBtn').addEventListener('click', () => {
+      document.getElementById('finalReportView').style.display = 'none';
+      document.getElementById('mainTrainView').style.display = 'block';
+      
+      document.getElementById('startBtn').disabled = false;
+      document.getElementById('stopBtn').disabled = true;
+      setJudgeButtonsState(false);
+      
+      applyCallsignVisibility(true);
+
+      const waitingView = document.getElementById('waitingView');
+      const resultBox = document.getElementById('resultBox');
+      const statusInfo = document.getElementById('statusInfo');
+      const listeningRow = document.getElementById('listeningRow');
+      const listeningInfo = document.getElementById('listeningInfo');
+
+      waitingView.style.display = 'flex';
+      resultBox.style.display = 'none';
+      listeningRow.style.display = 'none';
+      listeningInfo.innerText = "▶ 수신 중...";
+
+      const total = document.getElementById('totalCountInput').value || 10;
+      document.getElementById('progressInfo').innerText = `0 / ${total}`;
+      statusInfo.innerText = '대기 중';
+    });
+
+    loadSettings();
+    document.getElementById('showCallToggle').checked = false;
+    applyCallsignVisibility(true);
+
+    const initialTotal = document.getElementById('totalCountInput').value || 10;
+    document.getElementById('progressInfo').innerText = `0 / ${initialTotal}`;
+  </script>
+</body>
+</html>
