@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
+<!DOCTYPE html><html lang="ko"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>CW 호출부호 식별 연습기</title>
@@ -194,7 +192,7 @@
       color: #f1f5f9;
     }
 
-    /* 세부 사항 설정 버튼 (슬림 사각형) */
+    /* 세부 사항 설정 버튼 */
     .toggle-btn {
       background-color: #1a202c;
       border: 1px solid #4a5568;
@@ -479,14 +477,12 @@
     .history-table tr:nth-child(even) {
       background: #172033;
     }
-  </style>
-</head>
-<body>
+  </style></head><body>
 
   <div id="mainTrainView">
     <div class="title-header">
       <h2>CW 호출부호 식별 연습기</h2>
-      <span class="author-tag">by <a href="https://hl5ky.github.io/MORSE" target="_blank">HL5KY</a></span>
+      <span class="author-tag">by <a href="https://hl5ky.github.io/morse" target="_blank">HL5KY</a></span>
     </div>
 
     <div class="card">
@@ -510,11 +506,11 @@
       <div class="grid-settings">
         <div class="setting-item">
           <label>속도 (WPM)</label>
-          <input type="number" id="wpmInput" value="20" min="5" max="45" step="1">
+          <input type="number" id="wpmInput" value="15" min="5" max="45" step="1">
         </div>
         <div class="setting-item">
           <label>톤 주파수 (Hz)</label>
-          <input type="number" id="freqInput" value="650" min="400" max="1000" step="50">
+          <input type="number" id="freqInput" value="650" min="400" max="1000" step="10">
         </div>
         <div class="setting-item">
           <label>정답 확률 (%)</label>
@@ -526,7 +522,6 @@
         </div>
       </div>
 
-      <!-- 세부 사항 설정 버튼 -->
       <button class="toggle-btn" id="toggleSettingsBtn">⚙️ 세부 사항 설정</button>
       
       <div class="grid-settings" id="settingsContainer" style="display: none; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #4a5568;">
@@ -536,7 +531,7 @@
         </div>
         <div class="setting-item">
           <label>틀린 글자 재송신 횟수 (회)</label>
-          <input type="number" id="repeatCountInput" value="1" min="1" max="5" step="1">
+          <input type="number" id="repeatCountInput" value="2" min="1" max="5" step="1">
         </div>
         <div class="setting-item">
           <label>판단 입력 제한 (초)</label>
@@ -743,7 +738,7 @@
           const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
           const addChar = pool[Math.floor(Math.random() * pool.length)];
           chars.push(addChar);
-          return { call: chars.join(''), diffIdx: chars.length - 1, diffChar: addChar };
+          return { call: chars.join(''), diffIdx: dropIdx, diffChar: addChar };
         }
       }
 
@@ -953,12 +948,12 @@
       if (!isRunning) return;
 
       const myCall = document.getElementById('myCallsign').value.trim().toUpperCase() || 'HL5KY';
-      const wpm = parseInt(document.getElementById('wpmInput').value) || 20;
+      const wpm = parseInt(document.getElementById('wpmInput').value) || 15;
       const freq = parseInt(document.getElementById('freqInput').value) || 650;
       const delaySec = parseFloat(document.getElementById('delayInput').value) || 2.0;
       const baseCorrectProb = parseInt(document.getElementById('correctProbInput').value) || 30;
       const lenDiffProb = parseInt(document.getElementById('lenDiffProbInput').value) || 10;
-      const repeatCount = parseInt(document.getElementById('repeatCountInput').value) || 1;
+      const repeatCount = parseInt(document.getElementById('repeatCountInput').value) || 2;
       const judgeTimeSec = parseFloat(document.getElementById('judgeTimeInput').value) || 2.0;
       const repeatDelaySec = parseFloat(document.getElementById('repeatDelayInput').value) || 1.0;
       const totalRounds = parseInt(document.getElementById('totalCountInput').value) || 10;
@@ -1021,7 +1016,7 @@
       await playMorseText(sentCall, wpm, freq);
       if (!isRunning) return;
 
-      // 판정 입력 대기 (수신 중 위치에서 동일한 크기로 '맞음 틀림 선택' 깜빡임)
+      // 판정 입력 대기
       setJudgeButtonsState(true);
       statusInfo.innerText = `판단 입력 중...`;
       listeningInfo.innerText = "▶ 맞음 틀림 선택";
@@ -1052,7 +1047,7 @@
         isPass: isPass
       });
 
-      // 설정에서 체크되어 있고 무반응인 경우에만 1.0초 동안 알림 표시
+      // 무반응 알림 표시
       if (!userChoice && showNoReact) {
         waitingView.style.display = 'none';
         resultBox.style.display = 'flex';
@@ -1068,7 +1063,7 @@
 
       resultBox.innerHTML = renderComparisonHTML(sentCall, myCall, isCorrect, typoInfo);
 
-      // 오타 재송신
+      // 오타 재송신 (기본 2회 반복)
       if (!isCorrect && typoInfo && typoInfo.diffChar && typoInfo.diffChar !== '(누락)') {
         for (let r = 0; r < repeatCount; r++) {
           await waitMs(repeatDelaySec * 1000);
@@ -1244,6 +1239,4 @@
 
     const initialTotal = document.getElementById('totalCountInput').value || 10;
     document.getElementById('progressInfo').innerText = `0 / ${initialTotal}`;
-  </script>
-</body>
-</html>
+  </script></body></html>
