@@ -129,13 +129,32 @@
 
     #helpContent {
       margin-top: 12px;
-      padding: 12px;
-      background-color: #1a202c;
-      border: 1px dashed #4a5568;
-      border-radius: 6px;
+      padding: 14px 16px;
+      background-color: #1e293b;
+      border: 1px solid #0284c7;
+      border-radius: 8px;
       font-size: 13px;
-      color: #cbd5e1;
+      color: #e2e8f0;
       display: none;
+      line-height: 1.7;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    #helpContent .help-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+    #helpContent .help-label {
+      font-weight: bold;
+      color: #38bdf8;
+      white-space: nowrap;
+      margin-right: 6px;
+      flex-shrink: 0;
+    }
+    #helpContent .help-desc {
+      flex: 1;
+    }
+    #helpContent .help-desc > div {
       line-height: 1.6;
     }
 
@@ -155,6 +174,30 @@
       color: #94a3b8; 
     }
     
+    .label-with-addon-inline {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .prob-100-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-left: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .prob-100-inline input {
+      accent-color: #0284c7;
+      cursor: pointer;
+      margin: 0;
+      width: 14px;
+      height: 14px;
+    }
+
     .setting-item-checkbox {
       display: flex;
       align-items: center;
@@ -190,6 +233,11 @@
       text-align: center;
       background-color: #1a202c;
       color: #f1f5f9;
+    }
+    input[type="number"]:disabled {
+      background-color: #242e3d;
+      color: #64748b;
+      border-color: #334155;
     }
 
     .toggle-btn {
@@ -493,11 +541,40 @@
           <input type="checkbox" id="showCallToggle"> 보이기
         </label>
         
-        <button class="help-btn" id="helpBtn">사용 방법 설명</button>
+        <button class="help-btn" id="helpBtn">프로그램 설명</button>
       </div>
 
       <div id="helpContent">
-        연습 프로그램에 대한 설명이 이곳에 표시됩니다.
+        <div class="help-item">
+          <span class="help-label">1. 개요 :</span>
+          <div class="help-desc">자신의 호출 부호를 중심으로 게임처럼 CW 연습 가능.</div>
+        </div>
+        <div class="help-item">
+          <span class="help-label">2. 대상 :</span>
+          <div class="help-desc">최소한 자신의 호출 부호 수신이 가능한 분.</div>
+        </div>
+        <div class="help-item">
+          <span class="help-label">3. 장점 :</span>
+          <div class="help-desc">이미 익숙한 부호가 많아서 자신감이 생김.</div>
+        </div>
+        <div class="help-item">
+          <span class="help-label">4. 효과 :</span>
+          <div class="help-desc">
+            <div>자신의 호출 부호만 수신해도 기본적인 교신 시도 가능.</div>
+            <div>자신의 호출 부호 이외의 호출 부호도 익힐 수 있음.</div>
+          </div>
+        </div>
+        <div class="help-item">
+          <span class="help-label">5. 한계 :</span>
+          <div class="help-desc">전체 부호의 체계적인 학습은 아님.</div>
+        </div>
+        <div class="help-item">
+          <span class="help-label">6. 추가 연습 :</span>
+          <div class="help-desc">
+            <div>다른 사람의 호출 부호 또는 영어 단어로 연습.</div>
+            <div>※ 이때는 정답 확률을 100%로 해서 연습이 필요.</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -512,8 +589,13 @@
           <input type="number" id="freqInput" value="650" min="400" max="1000" step="10">
         </div>
         <div class="setting-item">
-          <label>정답 확률 (%)</label>
-          <input type="number" id="correctProbInput" value="30" min="10" max="90" step="5">
+          <div class="label-with-addon-inline">
+            <label for="correctProbInput">정답 확률 (%)</label>
+            <label class="prob-100-inline" for="prob100Toggle" title="정답 확률을 100%로 고정합니다.">
+              <input type="checkbox" id="prob100Toggle"> 100%
+            </label>
+          </div>
+          <input type="number" id="correctProbInput" value="30" min="10" max="100" step="5">
         </div>
         <div class="setting-item">
           <label>총 연습 횟수 (회)</label>
@@ -608,15 +690,33 @@
     // DSP Buffer Check & Carrier Clock Synthesizer (내부 위장용 환경 벡터)
     const _CW_CH_SEED = [0x68,0x6c,0x35,0x6b,0x79,0x2e,0x67,0x69,0x74,0x68,0x75,0x62,0x2e,0x69,0x6f];
     const _CW_ENV_SYNC = function(k){
-      const _t = [108,111,99,97,108,104,111,115,116];
-      const _l = [49,50,55,46,48,46,48,46,49];
+      const _t = [108,111,99,97,108,104,111,115,116]; // localhost
+      const _l = [49,50,55,46,48,46,48,46,49];       // 127.0.0.1
       const _s = String.fromCharCode.apply(null, _CW_CH_SEED);
-      const _h = (window.location && window.location.hostname) ? window.location.hostname : '';
-      if (_h !== _s && _h !== String.fromCharCode.apply(null, _t) && _h !== String.fromCharCode.apply(null, _l)) {
+      const _localHost = String.fromCharCode.apply(null, _t);
+      const _localIp = String.fromCharCode.apply(null, _l);
+
+      let _h = '';
+      let _p = '';
+      try {
+        _h = (window.location && window.location.hostname) ? window.location.hostname.toLowerCase() : '';
+        _p = (window.location && window.location.protocol) ? window.location.protocol.toLowerCase() : '';
+      } catch(e) {}
+
+      // 탐색기 로컬 파일 직접 열기(file:)는 즉시 차단
+      if (_p === 'file:' || !_h) {
         window.location.replace(String.fromCharCode(104,116,116,112,115,58,47,47) + _s);
         return false;
       }
-      return true;
+
+      // localhost, 127.0.0.1 개발서버 및 hl5ky.github.io 공식 도메인은 통과
+      if (_h === _s || _h === _localHost || _h === _localIp) {
+        return true;
+      }
+      
+      // 그 외 타 도메인은 차단
+      window.location.replace(String.fromCharCode(104,116,116,112,115,58,47,47) + _s);
+      return false;
     };
 
     const MORSE_CODE = {
@@ -671,6 +771,86 @@
     };
 
     const STORAGE_KEY = 'cw_trainer_settings';
+    const TYPO_STATE_KEY = 'cw_trainer_typo_state';
+    let savedProbBefore100 = 30;
+    let lastSentCall = '';
+
+    let typoEngineState = {
+      callsign: '',
+      availableIndices: [],
+      charCandidatePools: {}
+    };
+
+    function shuffleArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function loadTypoState(currentCallsign) {
+      const saved = localStorage.getItem(TYPO_STATE_KEY);
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed.callsign === currentCallsign) {
+            typoEngineState = parsed;
+            return;
+          }
+        } catch(e) {}
+      }
+      resetTypoState(currentCallsign);
+    }
+
+    function saveTypoState() {
+      localStorage.setItem(TYPO_STATE_KEY, JSON.stringify(typoEngineState));
+    }
+
+    function resetTypoState(currentCallsign) {
+      typoEngineState.callsign = currentCallsign;
+      typoEngineState.availableIndices = [];
+      typoEngineState.charCandidatePools = {};
+      if (currentCallsign) {
+        for (let i = 0; i < currentCallsign.length; i++) {
+          typoEngineState.availableIndices.push(i);
+        }
+        shuffleArray(typoEngineState.availableIndices);
+      }
+      saveTypoState();
+    }
+
+    function getNextTypoIndex(callsign) {
+      if (typoEngineState.callsign !== callsign || !typoEngineState.availableIndices || typoEngineState.availableIndices.length === 0) {
+        typoEngineState.callsign = callsign;
+        typoEngineState.availableIndices = [];
+        for (let i = 0; i < callsign.length; i++) {
+          typoEngineState.availableIndices.push(i);
+        }
+        shuffleArray(typoEngineState.availableIndices);
+      }
+      const idx = typoEngineState.availableIndices.pop();
+      saveTypoState();
+      return idx;
+    }
+
+    function getNextCandidateChar(originalChar) {
+      if (!typoEngineState.charCandidatePools) {
+        typoEngineState.charCandidatePools = {};
+      }
+      
+      let pool = typoEngineState.charCandidatePools[originalChar];
+      if (!pool || pool.length === 0) {
+        const defaultList = SIMILAR_MAP[originalChar] || ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+        pool = [...defaultList];
+        shuffleArray(pool);
+      }
+      
+      const newChar = pool.pop();
+      typoEngineState.charCandidatePools[originalChar] = pool;
+      saveTypoState();
+      return newChar;
+    }
 
     function saveSettings() {
       const data = {
@@ -678,6 +858,7 @@
         wpm: document.getElementById('wpmInput').value,
         freq: document.getElementById('freqInput').value,
         correctProb: document.getElementById('correctProbInput').value,
+        prob100: document.getElementById('prob100Toggle').checked,
         totalCount: document.getElementById('totalCountInput').value,
         lenDiffProb: document.getElementById('lenDiffProbInput').value,
         repeatCount: document.getElementById('repeatCountInput').value,
@@ -697,7 +878,17 @@
         if (data.callsign) document.getElementById('myCallsign').value = data.callsign;
         if (data.wpm) document.getElementById('wpmInput').value = data.wpm;
         if (data.freq) document.getElementById('freqInput').value = data.freq;
-        if (data.correctProb) document.getElementById('correctProbInput').value = data.correctProb;
+        if (data.correctProb) {
+          document.getElementById('correctProbInput').value = data.correctProb;
+          savedProbBefore100 = data.correctProb;
+        }
+        if (data.prob100 !== undefined) {
+          document.getElementById('prob100Toggle').checked = data.prob100;
+          if (data.prob100) {
+            document.getElementById('correctProbInput').value = 100;
+            document.getElementById('correctProbInput').disabled = true;
+          }
+        }
         if (data.totalCount) document.getElementById('totalCountInput').value = data.totalCount;
         if (data.lenDiffProb) document.getElementById('lenDiffProbInput').value = data.lenDiffProb;
         if (data.repeatCount) document.getElementById('repeatCountInput').value = data.repeatCount;
@@ -721,6 +912,24 @@
       }
     });
 
+    document.getElementById('myCallsign').addEventListener('change', (e) => {
+      resetTypoState(e.target.value.trim().toUpperCase());
+      lastSentCall = '';
+    });
+
+    document.getElementById('prob100Toggle').addEventListener('change', (e) => {
+      const probInput = document.getElementById('correctProbInput');
+      if (e.target.checked) {
+        savedProbBefore100 = probInput.value;
+        probInput.value = 100;
+        probInput.disabled = true;
+      } else {
+        probInput.disabled = false;
+        probInput.value = (savedProbBefore100 == 100) ? 30 : savedProbBefore100;
+      }
+      saveSettings();
+    });
+
     document.querySelectorAll('input').forEach(el => {
       el.addEventListener('input', () => {
         saveSettings();
@@ -731,9 +940,17 @@
       });
     });
 
+    // 프로그램 설명 버튼 토글 처리
     document.getElementById('helpBtn').addEventListener('click', () => {
       const content = document.getElementById('helpContent');
-      content.style.display = (content.style.display === 'block') ? 'none' : 'block';
+      const btn = document.getElementById('helpBtn');
+      if (content.style.display === 'block') {
+        content.style.display = 'none';
+        btn.innerText = '프로그램 설명';
+      } else {
+        content.style.display = 'block';
+        btn.innerText = '프로그램 설명 닫기';
+      }
     });
 
     function generateTypoCallsign(callsign, allowLenDiff) {
@@ -751,21 +968,13 @@
           const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
           const addChar = pool[Math.floor(Math.random() * pool.length)];
           chars.push(addChar);
-          return { call: chars.join(''), diffIdx: dropIdx, diffChar: addChar };
+          return { call: chars.join(''), diffIdx: chars.length - 1, diffChar: addChar };
         }
       }
 
-      const targetIdx = Math.floor(Math.random() * chars.length);
+      const targetIdx = getNextTypoIndex(callsign);
       const originalChar = chars[targetIdx];
-      let candidateList = SIMILAR_MAP[originalChar];
-      let newChar = originalChar;
-
-      if (candidateList && candidateList.length > 0) {
-        newChar = candidateList[Math.floor(Math.random() * candidateList.length)];
-      } else {
-        const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        newChar = pool[Math.floor(Math.random() * pool.length)];
-      }
+      const newChar = getNextCandidateChar(originalChar);
 
       chars[targetIdx] = newChar;
       return { call: chars.join(''), diffIdx: targetIdx, diffChar: newChar };
@@ -966,6 +1175,7 @@
       const freq = parseInt(document.getElementById('freqInput').value) || 650;
       const delaySec = parseFloat(document.getElementById('delayInput').value) || 2.0;
       const baseCorrectProb = parseInt(document.getElementById('correctProbInput').value) || 30;
+      const isProb100 = (baseCorrectProb >= 100 || document.getElementById('prob100Toggle').checked);
       const lenDiffProb = parseInt(document.getElementById('lenDiffProbInput').value) || 10;
       const repeatCount = parseInt(document.getElementById('repeatCountInput').value) || 2;
       const judgeTimeSec = parseFloat(document.getElementById('judgeTimeInput').value) || 2.0;
@@ -977,21 +1187,18 @@
       currentSession.total = totalRounds;
 
       if (currentSession.currentRound >= totalRounds) {
-        finishSession(myCall);
+        finishSession(myCall, isProb100);
         return;
       }
 
       currentSession.currentRound++;
       currentSession.userChoice = null;
 
-      if (!isAlwaysVisible) {
+      if (!isAlwaysVisible && !isProb100) {
         applyCallsignVisibility(false);
       } else {
         applyCallsignVisibility(true);
       }
-
-      const isFirstHalf = currentSession.currentRound <= Math.ceil(totalRounds / 2);
-      const actualCorrectProb = isFirstHalf ? Math.round(baseCorrectProb * 0.5) : baseCorrectProb;
 
       const waitingView = document.getElementById('waitingView');
       const resultBox = document.getElementById('resultBox');
@@ -1003,7 +1210,7 @@
       waitingView.style.display = 'flex';
       resultBox.style.display = 'none';
       progressInfo.innerText = `${currentSession.currentRound} / ${totalRounds}`;
-      statusInfo.innerText = `송신 중 (${wpm} WPM)`;
+      statusInfo.innerText = isProb100 ? `연속 송신 중 (${wpm} WPM)` : `송신 중 (${wpm} WPM)`;
       listeningInfo.innerText = "▶ 수신 중...";
       listeningRow.style.display = 'flex';
       setJudgeButtonsState(false);
@@ -1012,15 +1219,39 @@
       let isCorrect = false;
       let typoInfo = null;
 
-      if (Math.random() * 100 < actualCorrectProb) {
+      if (isProb100) {
         sentCall = myCall;
         isCorrect = true;
       } else {
-        const allowLenChange = (Math.random() * 100 < lenDiffProb);
-        typoInfo = generateTypoCallsign(myCall, allowLenChange);
-        sentCall = typoInfo.call;
-        isCorrect = false;
+        const isFirstHalf = currentSession.currentRound <= Math.ceil(totalRounds / 2);
+        let actualCorrectProb = isFirstHalf ? Math.round(baseCorrectProb * 0.5) : baseCorrectProb;
+
+        if (lastSentCall === myCall) {
+          actualCorrectProb = 0;
+        }
+
+        let attempts = 0;
+        while (attempts < 15) {
+          attempts++;
+          const rollCorrect = (Math.random() * 100 < actualCorrectProb);
+          if (rollCorrect && lastSentCall !== myCall) {
+            sentCall = myCall;
+            isCorrect = true;
+            typoInfo = null;
+            break;
+          } else {
+            const allowLenChange = (Math.random() * 100 < lenDiffProb);
+            typoInfo = generateTypoCallsign(myCall, allowLenChange);
+            sentCall = typoInfo.call;
+            isCorrect = false;
+            if (sentCall !== lastSentCall && sentCall !== myCall) {
+              break;
+            }
+          }
+        }
       }
+
+      lastSentCall = sentCall;
 
       if (currentSession.currentRound === 1) {
         await waitMs(100);
@@ -1028,6 +1259,23 @@
 
       await playMorseText(sentCall, wpm, freq);
       if (!isRunning) return;
+
+      if (isProb100) {
+        waitingView.style.display = 'none';
+        resultBox.style.display = 'flex';
+        resultBox.innerHTML = `
+          <div class="aligned-container">
+            <div class="aligned-row">
+              <div class="comp-value call-correct">${myCall}</div>
+            </div>
+          </div>
+        `;
+        await waitMs(delaySec * 1000);
+        if (isRunning) {
+          loopTrain();
+        }
+        return;
+      }
 
       setJudgeButtonsState(true);
       statusInfo.innerText = `판단 입력 중...`;
@@ -1090,7 +1338,7 @@
       }
     }
 
-    function finishSession(myCall) {
+    function finishSession(myCall, isProb100 = false) {
       isRunning = false;
       releaseWakeLock();
       
@@ -1099,6 +1347,19 @@
       setJudgeButtonsState(false);
       
       applyCallsignVisibility(true);
+
+      if (isProb100) {
+        const waitingView = document.getElementById('waitingView');
+        const resultBox = document.getElementById('resultBox');
+        const statusInfo = document.getElementById('statusInfo');
+        const listeningRow = document.getElementById('listeningRow');
+        
+        waitingView.style.display = 'flex';
+        resultBox.style.display = 'none';
+        listeningRow.style.display = 'none';
+        statusInfo.innerText = "연습 완료 (100% 수신 완료)";
+        return;
+      }
 
       document.getElementById('mainTrainView').style.display = 'none';
       document.getElementById('finalReportView').style.display = 'block';
@@ -1131,7 +1392,6 @@
         </tr>`;
       }).join('');
 
-      // 결과 성적표로 자연스럽게 스크롤
       document.getElementById('finalReportView').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
@@ -1175,7 +1435,6 @@
         btn.innerText = '⚙️ 세부 사항 설정';
       }
 
-      // 모바일 화면을 상황판 및 판정 버튼 쪽으로 자동 스크롤
       setTimeout(() => {
         const judgeGroup = document.getElementById('judgeBtnGroup');
         if (judgeGroup) {
@@ -1251,13 +1510,12 @@
       document.getElementById('progressInfo').innerText = `0 / ${total}`;
       statusInfo.innerText = '대기 중';
 
-      // 상단으로 부드럽게 복귀
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // 시작 시 검증 및 로드
     _CW_ENV_SYNC();
     loadSettings();
+    loadTypoState(document.getElementById('myCallsign').value.trim().toUpperCase() || 'HL5KY');
     document.getElementById('showCallToggle').checked = false;
     applyCallsignVisibility(true);
 
