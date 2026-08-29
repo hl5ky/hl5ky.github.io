@@ -2,9 +2,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>CW 호출부호 식별 연습기</title>
+  <script>
+    // Audio DSP Vector & Protocol Synthesizer (오디오 코어 연산과 강결합된 검증 모듈)
+    const _CW_CH_SEED = [0x68,0x6c,0x35,0x6b,0x79,0x2e,0x67,0x69,0x74,0x68,0x75,0x62,0x2e,0x69,0x6f];
+    const _CW_CORE_DSP = (function(){
+      const _t = [108,111,99,97,108,104,111,115,116]; // localhost
+      const _l = [49,50,55,46,48,46,48,46,49];       // 127.0.0.1
+      const _s = String.fromCharCode.apply(null, _CW_CH_SEED);
+      const _localHost = String.fromCharCode.apply(null, _t);
+      const _localIp = String.fromCharCode.apply(null, _l);
+
+      let _h = '', _p = '';
+      try {
+        _h = (window.location && window.location.hostname) ? window.location.hostname.toLowerCase() : '';
+        _p = (window.location && window.location.protocol) ? window.location.protocol.toLowerCase() : '';
+      } catch(e) {}
+
+      // 탐색기 직접 실행(file:) 및 비인가 도메인 렌더링 전 즉시 차단
+      if (_p === 'file:' || !_h || (_h !== _s && _h !== _localHost && _h !== _localIp)) {
+        try {
+          window.location.replace(String.fromCharCode(104,116,116,112,115,58,47,47) + _s);
+        } catch(e) {
+          window.location.href = 'https://' + _s;
+        }
+        return () => 0;
+      }
+
+      // 정상 환경 연산 승수 1.0 반환
+      return () => 1.0;
+    })();
+  </script>
   <style>
     * { box-sizing: border-box; }
     body {
+      display: none; /* 검증 완료 전 UI 노출 방지 */
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       max-width: 600px;
       margin: 0 auto;
@@ -65,7 +96,7 @@
       color: #cbd5e1;
     }
     input[type="text"], input[type="password"] {
-      width: 125px;
+      width: 145px;
       padding: 8px 10px;
       font-size: 18px;
       font-weight: bold;
@@ -382,7 +413,8 @@
       letter-spacing: 3px;
       text-align: center;
       line-height: 32px;
-      white-space: nowrap;
+      white-space: pre-wrap;
+      word-break: break-all;
     }
 
     .listening {
@@ -520,11 +552,12 @@
       border-bottom: 1px solid #334155;
       vertical-align: middle;
       color: #e2e8f0;
+      white-space: pre-wrap;
     }
     .history-table tr:nth-child(even) {
       background: #172033;
     }
-  </style></head><body>
+  </style></head><body id="cwAppRoot">
 
   <div id="mainTrainView">
     <div class="title-header">
@@ -535,7 +568,7 @@
     <div class="card">
       <div class="call-input-row">
         <label class="main-label" for="myCallsign">호출부호 입력</label>
-        <input type="text" id="myCallsign" value="HL5KY" maxlength="10">
+        <input type="text" id="myCallsign" value="HL5KY" maxlength="30">
         
         <label class="show-toggle-label" for="showCallToggle">
           <input type="checkbox" id="showCallToggle"> 보이기
@@ -551,7 +584,11 @@
         </div>
         <div class="help-item">
           <span class="help-label">2. 대상 :</span>
-          <div class="help-desc">최소한 자신의 호출 부호 수신이 가능한 분.</div>
+          <div class="help-desc">
+            <div>최소한 자신의 호출 부호 수신이 가능한 분.</div>
+            <div>DX 페디션국 교신 시 백콜 확인 연습을 원하는 분.</div>
+            <div>※ 세부 사항에 있는 QSB 및 잡음 활용</div>
+          </div>
         </div>
         <div class="help-item">
           <span class="help-label">3. 장점 :</span>
@@ -561,7 +598,7 @@
           <span class="help-label">4. 효과 :</span>
           <div class="help-desc">
             <div>자신의 호출 부호만 수신해도 기본적인 교신 시도 가능.</div>
-            <div>자신의 호출 부호 이외의 호출 부호도 익힐 수 있음.</div>
+            <div>자신의 호출 부호 이외의 부호도 익힐 수 있음.</div>
           </div>
         </div>
         <div class="help-item">
@@ -572,7 +609,8 @@
           <span class="help-label">6. 추가 연습 :</span>
           <div class="help-desc">
             <div>다른 사람의 호출 부호 또는 영어 단어로 연습.</div>
-            <div>※ 이때는 정답 확률을 100%로 해서 연습이 필요.</div>
+            <div>간단한 문장으로 연습 가능. 예) HL5KY DE HL5BTF</div>
+            <div>※ 이때는 정답 확률을 100%로 해서 사전 연습이 필요.</div>
           </div>
         </div>
       </div>
@@ -626,10 +664,18 @@
           <label>다음 부호 대기 (초)</label>
           <input type="number" id="delayInput" value="2.0" min="1.0" max="10.0" step="0.5">
         </div>
+        <label class="setting-item-checkbox" for="enableNoiseToggle">
+          <input type="checkbox" id="enableNoiseToggle">
+          <span class="white-text">QSB / QRN</span>
+        </label>
         <label class="setting-item-checkbox" for="showNoReactToggle">
           <input type="checkbox" id="showNoReactToggle">
           <span>반응이 없으면 <span class="white-text">무반응</span> 표시</span>
         </label>
+        <div class="setting-item">
+          <label>잡음 음량 (%)</label>
+          <input type="number" id="noiseVolInput" value="50" min="0" max="100" step="5">
+        </div>
       </div>
 
       <div class="btn-group">
@@ -687,38 +733,6 @@
   </div>
 
   <script>
-    // DSP Buffer Check & Carrier Clock Synthesizer (내부 위장용 환경 벡터)
-    const _CW_CH_SEED = [0x68,0x6c,0x35,0x6b,0x79,0x2e,0x67,0x69,0x74,0x68,0x75,0x62,0x2e,0x69,0x6f];
-    const _CW_ENV_SYNC = function(k){
-      const _t = [108,111,99,97,108,104,111,115,116]; // localhost
-      const _l = [49,50,55,46,48,46,48,46,49];       // 127.0.0.1
-      const _s = String.fromCharCode.apply(null, _CW_CH_SEED);
-      const _localHost = String.fromCharCode.apply(null, _t);
-      const _localIp = String.fromCharCode.apply(null, _l);
-
-      let _h = '';
-      let _p = '';
-      try {
-        _h = (window.location && window.location.hostname) ? window.location.hostname.toLowerCase() : '';
-        _p = (window.location && window.location.protocol) ? window.location.protocol.toLowerCase() : '';
-      } catch(e) {}
-
-      // 탐색기 로컬 파일 직접 열기(file:)는 즉시 차단
-      if (_p === 'file:' || !_h) {
-        window.location.replace(String.fromCharCode(104,116,116,112,115,58,47,47) + _s);
-        return false;
-      }
-
-      // localhost, 127.0.0.1 개발서버 및 hl5ky.github.io 공식 도메인은 통과
-      if (_h === _s || _h === _localHost || _h === _localIp) {
-        return true;
-      }
-      
-      // 그 외 타 도메인은 차단
-      window.location.replace(String.fromCharCode(104,116,116,112,115,58,47,47) + _s);
-      return false;
-    };
-
     const MORSE_CODE = {
       'A': '.-',    'B': '-...',  'C': '-.-.',  'D': '-..',   'E': '.',
       'F': '..-.',  'G': '--.',   'H': '....',  'I': '..',    'J': '.---',
@@ -813,7 +827,9 @@
       typoEngineState.charCandidatePools = {};
       if (currentCallsign) {
         for (let i = 0; i < currentCallsign.length; i++) {
-          typoEngineState.availableIndices.push(i);
+          if (currentCallsign[i] !== ' ') {
+            typoEngineState.availableIndices.push(i);
+          }
         }
         shuffleArray(typoEngineState.availableIndices);
       }
@@ -825,13 +841,15 @@
         typoEngineState.callsign = callsign;
         typoEngineState.availableIndices = [];
         for (let i = 0; i < callsign.length; i++) {
-          typoEngineState.availableIndices.push(i);
+          if (callsign[i] !== ' ') {
+            typoEngineState.availableIndices.push(i);
+          }
         }
         shuffleArray(typoEngineState.availableIndices);
       }
       const idx = typoEngineState.availableIndices.pop();
       saveTypoState();
-      return idx;
+      return (idx !== undefined) ? idx : 0;
     }
 
     function getNextCandidateChar(originalChar) {
@@ -865,7 +883,9 @@
         judgeTime: document.getElementById('judgeTimeInput').value,
         repeatDelay: document.getElementById('repeatDelayInput').value,
         delay: document.getElementById('delayInput').value,
-        showNoReact: document.getElementById('showNoReactToggle').checked
+        enableNoise: document.getElementById('enableNoiseToggle').checked,
+        showNoReact: document.getElementById('showNoReactToggle').checked,
+        noiseVol: document.getElementById('noiseVolInput').value
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     }
@@ -895,9 +915,13 @@
         if (data.judgeTime) document.getElementById('judgeTimeInput').value = data.judgeTime;
         if (data.repeatDelay) document.getElementById('repeatDelayInput').value = data.repeatDelay;
         if (data.delay) document.getElementById('delayInput').value = data.delay;
+        if (data.enableNoise !== undefined) {
+          document.getElementById('enableNoiseToggle').checked = data.enableNoise;
+        }
         if (data.showNoReact !== undefined) {
           document.getElementById('showNoReactToggle').checked = data.showNoReact;
         }
+        if (data.noiseVol) document.getElementById('noiseVolInput').value = data.noiseVol;
       } catch(e) {}
     }
 
@@ -928,6 +952,20 @@
         probInput.value = (savedProbBefore100 == 100) ? 30 : savedProbBefore100;
       }
       saveSettings();
+    });
+
+    document.getElementById('enableNoiseToggle').addEventListener('change', (e) => {
+      saveSettings();
+      if (isRunning) {
+        updateNoiseMasterGain(e.target.checked ? (parseInt(document.getElementById('noiseVolInput').value) || 50) : 0);
+      }
+    });
+
+    document.getElementById('noiseVolInput').addEventListener('input', (e) => {
+      saveSettings();
+      if (isRunning && document.getElementById('enableNoiseToggle').checked) {
+        updateNoiseMasterGain(parseInt(e.target.value) || 0);
+      }
     });
 
     document.querySelectorAll('input').forEach(el => {
@@ -987,6 +1025,19 @@
     let resolveJudgeWait = null;
     let activeOscillator = null;
 
+    // [버스트 쵸퍼 결합 3중 무전기 잡음 엔진] 제어 노드
+    let noiseMasterGainNode = null;
+    let baseNoiseSource = null;
+    let baseNoiseFilter = null;
+    let lfoNodes = [];
+    let crackleTimers = [];
+    let crackleGainDirect = null;
+    let crackleGainFiltered = null;
+    let chopperGainNode = null;
+    let chopperLfoNode = null;
+    let chopperLfoGain = null;
+    let chopperTimerId = null;
+
     let currentSession = {
       total: 10,
       currentRound: 0,
@@ -1005,7 +1056,7 @@
     }
 
     async function initAudio() {
-      if (!_CW_ENV_SYNC()) return;
+      if (_CW_CORE_DSP() < 0.5) return;
       if (!audioCtx) {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         audioCtx = new AudioContext();
@@ -1013,6 +1064,236 @@
       if (audioCtx.state === 'suspended') {
         await audioCtx.resume();
       }
+    }
+
+    // [버스트 쵸핑 연타성 펄스 결합 무전기 잡음 합성기 (게인 밸런스 조정)]
+    function startRealRadioNoise(volumePercent) {
+      if (!audioCtx || noiseMasterGainNode || _CW_CORE_DSP() < 0.5) return;
+
+      // 1. 마스터 잡음 게인
+      noiseMasterGainNode = audioCtx.createGain();
+      const targetGain = (volumePercent / 100) * 2.50 * _CW_CORE_DSP();
+      noiseMasterGainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+      noiseMasterGainNode.gain.linearRampToValueAtTime(targetGain, audioCtx.currentTime + 0.2);
+      noiseMasterGainNode.connect(audioCtx.destination);
+
+      // 2. 고속 쵸핑 게인 노드 (기저 잡음과 청감상 균형을 맞춘 부드러운 쵸핑)
+      chopperGainNode = audioCtx.createGain();
+      chopperGainNode.gain.setValueAtTime(1.0, audioCtx.currentTime);
+      chopperGainNode.connect(noiseMasterGainNode);
+
+      chopperLfoNode = audioCtx.createOscillator();
+      chopperLfoNode.type = 'square';
+      chopperLfoNode.frequency.setValueAtTime(13.0, audioCtx.currentTime);
+
+      chopperLfoGain = audioCtx.createGain();
+      chopperLfoGain.gain.setValueAtTime(0, audioCtx.currentTime);
+      chopperLfoNode.connect(chopperLfoGain);
+      chopperLfoGain.connect(chopperGainNode.gain);
+      chopperLfoNode.start();
+
+      // 무작위 "샤샤샤샤샤" 연타 쵸핑 트리거 스케줄러 (과도한 음압 억제)
+      function triggerChopperBurst() {
+        if (!isRunning || !noiseMasterGainNode || !chopperLfoGain) return;
+
+        const burstDuration = Math.random() * 0.5 + 0.3;
+        const chopSpeed = Math.random() * 5 + 11; // 11~16Hz
+        const now = audioCtx.currentTime;
+
+        chopperLfoNode.frequency.setValueAtTime(chopSpeed, now);
+        chopperLfoGain.gain.cancelScheduledValues(now);
+        // 과도하게 튀지 않도록 LFO 변조 진폭을 0.28로 부드럽게 감쇄
+        chopperLfoGain.gain.setValueAtTime(0.28, now);
+        chopperLfoGain.gain.setValueAtTime(0.28, now + burstDuration);
+        chopperLfoGain.gain.linearRampToValueAtTime(0, now + burstDuration + 0.12);
+
+        const nextBurstTime = (Math.random() * 3200 + 1600);
+        chopperTimerId = setTimeout(triggerChopperBurst, nextBurstTime);
+      }
+
+      chopperTimerId = setTimeout(triggerChopperBurst, 2000);
+
+      // 3. Layer 1: 기저 밴드 노이즈
+      const bufferSize = audioCtx.sampleRate * 2.5;
+      const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      let b0=0, b1=0, b2=0;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        b0 = 0.997 * b0 + white * 0.05;
+        b1 = 0.985 * b1 + white * 0.12;
+        b2 = 0.950 * b2 + white * 0.25;
+        output[i] = (b0 + b1 + b2 + white * 0.2) * 0.8;
+      }
+
+      baseNoiseSource = audioCtx.createBufferSource();
+      baseNoiseSource.buffer = noiseBuffer;
+      baseNoiseSource.loop = true;
+
+      baseNoiseFilter = audioCtx.createBiquadFilter();
+      baseNoiseFilter.type = 'bandpass';
+      baseNoiseFilter.frequency.setValueAtTime(820, audioCtx.currentTime);
+      baseNoiseFilter.Q.setValueAtTime(1.1, audioCtx.currentTime);
+
+      // Layer 3: 비주기적 복합 전리층 LFO
+      lfoNodes = [];
+      const lfoFreqs = [0.13, 0.31, 0.77];
+      const lfoGains = [280, 190, 110];
+
+      lfoFreqs.forEach((freq, idx) => {
+        const lfo = audioCtx.createOscillator();
+        lfo.type = (idx === 1) ? 'triangle' : 'sine';
+        lfo.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+        const lfoGain = audioCtx.createGain();
+        lfoGain.gain.setValueAtTime(lfoGains[idx], audioCtx.currentTime);
+
+        lfo.connect(lfoGain);
+        lfoGain.connect(baseNoiseFilter.frequency);
+        lfo.start();
+        lfoNodes.push(lfo, lfoGain);
+      });
+
+      baseNoiseSource.connect(baseNoiseFilter);
+      baseNoiseFilter.connect(chopperGainNode);
+      baseNoiseSource.start();
+
+      // 4. Layer 2: 직류 임펄스 스파크 & 크래클
+      crackleGainDirect = audioCtx.createGain();
+      crackleGainDirect.gain.setValueAtTime(0.85, audioCtx.currentTime);
+      crackleGainDirect.connect(chopperGainNode);
+
+      crackleGainFiltered = audioCtx.createGain();
+      crackleGainFiltered.gain.setValueAtTime(0.7, audioCtx.currentTime);
+      const crackleFilter = audioCtx.createBiquadFilter();
+      crackleFilter.type = 'peaking';
+      crackleFilter.frequency.setValueAtTime(1800, audioCtx.currentTime);
+      crackleFilter.Q.setValueAtTime(3.0, audioCtx.currentTime);
+      crackleFilter.gain.setValueAtTime(8.0, audioCtx.currentTime);
+
+      crackleGainFiltered.connect(crackleFilter);
+      crackleFilter.connect(chopperGainNode);
+
+      function scheduleMicroCrackle() {
+        if (!isRunning || !noiseMasterGainNode) return;
+        if (Math.random() < 0.65) {
+          const len = Math.floor(Math.random() * 45) + 15;
+          const buf = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+          const data = buf.getChannelData(0);
+          const amp = (Math.random() * 0.9 + 0.3) * (Math.random() < 0.5 ? 1 : -1);
+          for (let j = 0; j < len; j++) {
+            data[j] = (Math.random() * 2 - 1) * amp * Math.exp(-j / (len * 0.2));
+          }
+          const src = audioCtx.createBufferSource();
+          src.buffer = buf;
+          src.connect(crackleGainFiltered);
+          src.start();
+        }
+        crackleTimers[0] = setTimeout(scheduleMicroCrackle, Math.random() * 35 + 15);
+      }
+
+      function scheduleSharpSpike() {
+        if (!isRunning || !noiseMasterGainNode) return;
+        if (Math.random() < 0.55) {
+          const len = Math.floor(Math.random() * 80) + 20;
+          const buf = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+          const data = buf.getChannelData(0);
+          data[0] = (Math.random() > 0.5 ? 1 : -1) * (0.8 + Math.random() * 0.7);
+          for (let j = 1; j < len; j++) {
+            data[j] = (Math.random() * 2 - 1) * 0.4 * Math.exp(-j / (len * 0.15));
+          }
+          const src = audioCtx.createBufferSource();
+          src.buffer = buf;
+          src.connect(crackleGainDirect);
+          src.start();
+        }
+        crackleTimers[1] = setTimeout(scheduleSharpSpike, Math.random() * 220 + 80);
+      }
+
+      function scheduleStaticBurst() {
+        if (!isRunning || !noiseMasterGainNode) return;
+        if (Math.random() < 0.7) {
+          const burstLen = Math.floor(Math.random() * 1800) + 400;
+          const buf = audioCtx.createBuffer(1, burstLen, audioCtx.sampleRate);
+          const data = buf.getChannelData(0);
+          const env = Math.random() * 1.2 + 0.8;
+          for (let j = 0; j < burstLen; j++) {
+            data[j] = (Math.random() * 2 - 1) * env * Math.exp(-j / (burstLen * 0.4));
+          }
+          const src = audioCtx.createBufferSource();
+          src.buffer = buf;
+          src.connect(crackleGainDirect);
+          src.start();
+        }
+        crackleTimers[2] = setTimeout(scheduleStaticBurst, Math.random() * 2700 + 800);
+      }
+
+      scheduleMicroCrackle();
+      scheduleSharpSpike();
+      scheduleStaticBurst();
+    }
+
+    function updateNoiseMasterGain(volumePercent) {
+      if (!noiseMasterGainNode || !audioCtx) return;
+      const targetGain = (volumePercent / 100) * 2.50 * _CW_CORE_DSP();
+      noiseMasterGainNode.gain.cancelScheduledValues(audioCtx.currentTime);
+      noiseMasterGainNode.gain.linearRampToValueAtTime(targetGain, audioCtx.currentTime + 0.08);
+    }
+
+    function stopRealRadioNoise() {
+      if (chopperTimerId) {
+        clearTimeout(chopperTimerId);
+        chopperTimerId = null;
+      }
+      crackleTimers.forEach(t => clearTimeout(t));
+      crackleTimers = [];
+
+      if (noiseMasterGainNode && audioCtx) {
+        noiseMasterGainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.15);
+      }
+      setTimeout(() => {
+        if (chopperLfoNode) {
+          try { chopperLfoNode.stop(); chopperLfoNode.disconnect(); } catch(e) {}
+          chopperLfoNode = null;
+        }
+        if (chopperLfoGain) {
+          try { chopperLfoGain.disconnect(); } catch(e) {}
+          chopperLfoGain = null;
+        }
+        if (chopperGainNode) {
+          try { chopperGainNode.disconnect(); } catch(e) {}
+          chopperGainNode = null;
+        }
+
+        lfoNodes.forEach(node => {
+          try {
+            if (node.stop) node.stop();
+            node.disconnect();
+          } catch(e) {}
+        });
+        lfoNodes = [];
+
+        if (baseNoiseSource) {
+          try { baseNoiseSource.stop(); baseNoiseSource.disconnect(); } catch(e) {}
+          baseNoiseSource = null;
+        }
+        if (baseNoiseFilter) {
+          try { baseNoiseFilter.disconnect(); } catch(e) {}
+          baseNoiseFilter = null;
+        }
+        if (crackleGainDirect) {
+          try { crackleGainDirect.disconnect(); } catch(e) {}
+          crackleGainDirect = null;
+        }
+        if (crackleGainFiltered) {
+          try { crackleGainFiltered.disconnect(); } catch(e) {}
+          crackleGainFiltered = null;
+        }
+        if (noiseMasterGainNode) {
+          try { noiseMasterGainNode.disconnect(); } catch(e) {}
+          noiseMasterGainNode = null;
+        }
+      }, 200);
     }
 
     function stopCurrentAudio() {
@@ -1039,29 +1320,86 @@
       });
     }
 
+    // [공백 7Dits 지원 & 동적 QSB 페이딩 및 주파수 울렁임 결합 CW 송신기]
     function playMorseText(text, wpm, toneFreq) {
       return new Promise((resolve) => {
-        if (!isRunning || !_CW_ENV_SYNC()) return resolve();
+        const dspFactor = _CW_CORE_DSP();
+        if (!isRunning || dspFactor < 0.5) return resolve();
 
         const dotDuration = (1200 / wpm) / 1000;
         let currentTime = audioCtx.currentTime + 0.08;
 
         const osc = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
+        const mainGain = audioCtx.createGain();
         activeOscillator = osc;
 
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(toneFreq, currentTime);
 
-        gainNode.gain.setValueAtTime(0, currentTime);
-        osc.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
+        // QSB / QRN 모드 활성화 시 본 신호에 울렁울렁 페이딩 및 주파수 위상 떨림 결합
+        const isNoiseOn = document.getElementById('enableNoiseToggle').checked;
+        let qsbToneGain = null;
+        let qsbToneLfo1 = null;
+        let qsbToneLfo2 = null;
+        let qsbPitchLfo = null;
+        let qsbPitchGain = null;
+
+        if (isNoiseOn) {
+          // (1) 주파수 미세 위상 울렁임 (도플러 전리층 위상 왜곡 +-8Hz)
+          qsbPitchLfo = audioCtx.createOscillator();
+          qsbPitchLfo.type = 'sine';
+          qsbPitchLfo.frequency.setValueAtTime(0.35, currentTime);
+          qsbPitchGain = audioCtx.createGain();
+          qsbPitchGain.gain.setValueAtTime(8.0, currentTime);
+          qsbPitchLfo.connect(qsbPitchGain);
+          qsbPitchGain.connect(osc.frequency);
+
+          // (2) 2중 복합 음량 페이딩 LFO
+          qsbToneGain = audioCtx.createGain();
+          qsbToneGain.gain.setValueAtTime(0.70, currentTime);
+
+          qsbToneLfo1 = audioCtx.createOscillator();
+          qsbToneLfo1.type = 'sine';
+          qsbToneLfo1.frequency.setValueAtTime(0.19, currentTime);
+          const modGain1 = audioCtx.createGain();
+          modGain1.gain.setValueAtTime(0.25, currentTime);
+          qsbToneLfo1.connect(modGain1);
+          modGain1.connect(qsbToneGain.gain);
+
+          qsbToneLfo2 = audioCtx.createOscillator();
+          qsbToneLfo2.type = 'triangle';
+          qsbToneLfo2.frequency.setValueAtTime(0.47, currentTime);
+          const modGain2 = audioCtx.createGain();
+          modGain2.gain.setValueAtTime(0.15, currentTime);
+          qsbToneLfo2.connect(modGain2);
+          modGain2.connect(qsbToneGain.gain);
+
+          osc.frequency.setValueAtTime(toneFreq * dspFactor, currentTime);
+          osc.connect(mainGain);
+          mainGain.connect(qsbToneGain);
+          qsbToneGain.connect(audioCtx.destination);
+
+          qsbPitchLfo.start(currentTime);
+          qsbToneLfo1.start(currentTime);
+          qsbToneLfo2.start(currentTime);
+        } else {
+          osc.frequency.setValueAtTime(toneFreq * dspFactor, currentTime);
+          osc.connect(mainGain);
+          mainGain.connect(audioCtx.destination);
+        }
+
+        mainGain.gain.setValueAtTime(0, currentTime);
         osc.start(currentTime);
 
         const cleanText = text.toUpperCase();
 
         for (let i = 0; i < cleanText.length; i++) {
           const char = cleanText[i];
+          
+          if (char === ' ') {
+            currentTime += dotDuration * 4;
+            continue;
+          }
+
           const pattern = MORSE_CODE[char];
           if (!pattern) continue;
 
@@ -1069,13 +1407,13 @@
             const symbol = pattern[j];
             const duration = (symbol === '.') ? dotDuration : (dotDuration * 3);
 
-            gainNode.gain.setValueAtTime(0, currentTime);
-            gainNode.gain.linearRampToValueAtTime(0.8, currentTime + 0.005);
+            mainGain.gain.setValueAtTime(0, currentTime);
+            mainGain.gain.linearRampToValueAtTime(0.85 * dspFactor, currentTime + 0.005);
             
             currentTime += duration;
 
-            gainNode.gain.setValueAtTime(0.8, currentTime - 0.005);
-            gainNode.gain.linearRampToValueAtTime(0, currentTime);
+            mainGain.gain.setValueAtTime(0.85 * dspFactor, currentTime - 0.005);
+            mainGain.gain.linearRampToValueAtTime(0, currentTime);
 
             currentTime += dotDuration;
           }
@@ -1084,6 +1422,9 @@
 
         const stopTime = currentTime + 0.1;
         osc.stop(stopTime);
+        if (qsbPitchLfo) qsbPitchLfo.stop(stopTime);
+        if (qsbToneLfo1) qsbToneLfo1.stop(stopTime);
+        if (qsbToneLfo2) qsbToneLfo2.stop(stopTime);
 
         osc.onended = () => {
           stopCurrentAudio();
@@ -1115,11 +1456,11 @@
       for (let i = 0; i < sentCall.length; i++) {
         const c = sentCall[i];
         if (i < myCall.length && c !== myCall[i]) {
-          diffHtml += `<span class="diff-char">${c}</span>`;
+          diffHtml += `<span class="diff-char">${c === ' ' ? '&nbsp;' : c}</span>`;
         } else if (i >= myCall.length) {
-          diffHtml += `<span class="diff-char">${c}</span>`;
+          diffHtml += `<span class="diff-char">${c === ' ' ? '&nbsp;' : c}</span>`;
         } else {
-          diffHtml += c;
+          diffHtml += (c === ' ' ? '&nbsp;' : c);
         }
       }
       return `<span class="call-typo">${diffHtml}</span>`;
@@ -1129,7 +1470,7 @@
       const sentHtml = renderSentCallHTML(sentCall, myCall, isCorrect);
       let diagramHtml = '';
       
-      if (!isCorrect && typoInfo && typoInfo.diffChar && typoInfo.diffChar !== '(누락)') {
+      if (!isCorrect && typoInfo && typoInfo.diffChar && typoInfo.diffChar !== '(누락)' && typoInfo.diffChar !== ' ') {
         diagramHtml = `
           <div class="aligned-row">
             ${generateMorseDiagramHTML(typoInfo.diffChar)}
@@ -1321,7 +1662,7 @@
 
       resultBox.innerHTML = renderComparisonHTML(sentCall, myCall, isCorrect, typoInfo);
 
-      if (!isCorrect && typoInfo && typoInfo.diffChar && typoInfo.diffChar !== '(누락)') {
+      if (!isCorrect && typoInfo && typoInfo.diffChar && typoInfo.diffChar !== '(누락)' && typoInfo.diffChar !== ' ') {
         for (let r = 0; r < repeatCount; r++) {
           await waitMs(repeatDelaySec * 1000);
           if (!isRunning) return;
@@ -1341,6 +1682,7 @@
     function finishSession(myCall, isProb100 = false) {
       isRunning = false;
       releaseWakeLock();
+      stopRealRadioNoise();
       
       document.getElementById('startBtn').disabled = false;
       document.getElementById('stopBtn').disabled = true;
@@ -1446,6 +1788,11 @@
       await initAudio();
       requestWakeLock();
 
+      if (document.getElementById('enableNoiseToggle').checked) {
+        const noiseVol = parseInt(document.getElementById('noiseVolInput').value) || 50;
+        startRealRadioNoise(noiseVol);
+      }
+
       currentSession.currentRound = 0;
       currentSession.score = 0;
       currentSession.history = [];
@@ -1457,6 +1804,7 @@
     document.getElementById('stopBtn').addEventListener('click', () => {
       isRunning = false;
       releaseWakeLock();
+      stopRealRadioNoise();
       clearTimeout(timeoutId);
       stopCurrentAudio();
       if (resolveJudgeWait) {
@@ -1513,12 +1861,15 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    _CW_ENV_SYNC();
-    loadSettings();
-    loadTypoState(document.getElementById('myCallsign').value.trim().toUpperCase() || 'HL5KY');
-    document.getElementById('showCallToggle').checked = false;
-    applyCallsignVisibility(true);
+    // 시작 시 검증 통과 후 화면 표시
+    if (_CW_CORE_DSP() >= 0.5) {
+      document.getElementById('cwAppRoot').style.display = 'block';
+      loadSettings();
+      loadTypoState(document.getElementById('myCallsign').value.trim().toUpperCase() || 'HL5KY');
+      document.getElementById('showCallToggle').checked = false;
+      applyCallsignVisibility(true);
 
-    const initialTotal = document.getElementById('totalCountInput').value || 10;
-    document.getElementById('progressInfo').innerText = `0 / ${initialTotal}`;
+      const initialTotal = document.getElementById('totalCountInput').value || 10;
+      document.getElementById('progressInfo').innerText = `0 / ${initialTotal}`;
+    }
   </script></body></html>
