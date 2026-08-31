@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CW 연습기 - 비비드 옐로우 & 레드 버튼</title>
+  <style>
+    body {
+      background-color: #1e1e24; /* CW 연습기 어두운 바탕 */
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: #2b2b36;
+      border: 1px solid #444;
+      border-radius: 16px;
+      padding: 35px 40px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 22px;
+      letter-spacing: -0.5px;
+    }
+
+    p {
+      color: #aaa;
+      font-size: 13px;
+      margin-bottom: 30px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    /* 공통 버튼 디자인 */
+    .icon-btn {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 95px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 800;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+
+    .icon-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+    }
+
+    .icon-btn:active {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .icon-btn svg {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 8px;
+    }
+
+    .icon-btn span {
+      font-size: 14px;
+      letter-spacing: -0.3px;
+    }
+
+    /* 1. 프로그램 설명 (비비드 옐로우 + 브라이트 레드) */
+    .btn-info {
+      background-color: #ffee00;
+      color: #d00000;
+      border: 2.5px solid #d00000;
+    }
+    .btn-info svg {
+      fill: #d00000;
+    }
+
+    /* 2. 세부 설정 (골든 옐로우 + 딥 레드) */
+    .btn-config {
+      background-color: #ffd000;
+      color: #9d0208;
+      border: 2.5px solid #9d0208;
+    }
+    .btn-config svg {
+      fill: #9d0208;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>CW 호출 부호 식별 연습기</h2>
+    <p>비비드 옐로우 바탕 + 적색(Red) 텍스트 아이콘</p>
+
+    <div class="btn-group">
+      <!-- 프로그램 설명 버튼 -->
+      <button class="icon-btn btn-info" onclick="alert('프로그램 설명이 실행됩니다.')">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+        </svg>
+        <span>프로그램 설명</span>
+      </button>
+
+      <!-- 세부 설정 버튼 -->
+      <button class="icon-btn btn-config" onclick="alert('세부 설정 화면으로 이동합니다.')">
+        <svg viewBox="0 0 24 24">
+          <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+        </svg>
+        <span>세부 설정</span>
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>
