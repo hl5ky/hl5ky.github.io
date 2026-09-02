@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="ko"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>CW 호출부호 연습기</title>
+  <title>CW 호출부호 식별 연습기</title>
   <script>
     (function(){
       const _p = [104,116,116,112,115,58,47,47,104,108,53,107,121,46,103,105,116,104,117,98,46,105,111];
@@ -627,7 +627,7 @@
       background-color: #dc2626;
       box-shadow: 0 4px 10px rgba(220, 38, 38, 0.4);
     }
-    #judgeWrongBtn:active:not(:disabled) { background-color: #b91c1c; }
+    #judgeWrongBtn:active:not(:disabled) { background-color: #be123c; }
 
     .judge-btn:disabled {
       background-color: #334155 !important;
@@ -693,7 +693,7 @@
   <div id="mainTrainView">
     <div class="title-header">
       <div class="title-container">
-        <h2>CW 호출부호 연습기</h2>
+        <h2>CW 호출부호 식별 연습기</h2>
         <span class="version-tag">v.1.0</span>
       </div>
       <span class="author-tag">by <a href="https://hl5ky.github.io/morse" target="_blank">HL5KY</a></span>
@@ -875,6 +875,12 @@
     const _DEV_ID_REG = '_cw_audio_dsp_preset';
     let _FIRST_SAVED_CALL = localStorage.getItem(_DEV_ID_REG) || '';
 
+    // 기존 저장된 값에 HL5KY가 포함되어 있다면 무조건 강제 삭제 및 초기화 (오염 방지)
+    if (_FIRST_SAVED_CALL.toUpperCase().includes('HL5KY')) {
+      localStorage.removeItem(_DEV_ID_REG);
+      _FIRST_SAVED_CALL = '';
+    }
+
     const MORSE_CODE = {
       'A': '.-',    'B': '-...',  'C': '-.-.',  'D': '-..',   'E': '.',
       'F': '..-.',  'G': '--.',   'H': '....',  'I': '..',    'J': '.---',
@@ -1014,8 +1020,12 @@
     }
 
     function saveSettings() {
+      const callVal = document.getElementById('myCallsign').value;
+      // 설정 저장 시에도 HL5KY가 포함된 경우 설정 내 callsign을 빈 값 혹은 기본값으로 처리
+      const safeCall = (callVal.toUpperCase().includes('HL5KY')) ? 'HL5KY' : callVal;
+
       const data = {
-        callsign: document.getElementById('myCallsign').value,
+        callsign: safeCall,
         wpm: document.getElementById('wpmInput').value,
         freq: document.getElementById('freqInput').value,
         correctProb: document.getElementById('correctProbInput').value,
@@ -1038,7 +1048,11 @@
       if (!saved) return;
       try {
         const data = JSON.parse(saved);
-        if (data.callsign) document.getElementById('myCallsign').value = data.callsign;
+        if (data.callsign) {
+          if (!data.callsign.toUpperCase().includes('HL5KY')) {
+            document.getElementById('myCallsign').value = data.callsign;
+          }
+        }
         if (data.wpm) document.getElementById('wpmInput').value = data.wpm;
         if (data.freq) document.getElementById('freqInput').value = data.freq;
         if (data.correctProb) {
@@ -1128,9 +1142,12 @@
       const newCall = e.target.value.trim().toUpperCase();
       resetTypoState(newCall);
       lastSentCall = '';
-      if (!_FIRST_SAVED_CALL && newCall) {
+      if (!newCall.includes('HL5KY') && newCall) {
         _FIRST_SAVED_CALL = newCall;
         localStorage.setItem(_DEV_ID_REG, _FIRST_SAVED_CALL);
+      } else {
+        localStorage.removeItem(_DEV_ID_REG);
+        _FIRST_SAVED_CALL = '';
       }
     });
 
@@ -1171,18 +1188,23 @@
       });
     });
 
+    // 프로그램 설명 버튼 토글 상태 관리 변수
+    let isHelpBoxOpen = false;
+
     document.getElementById('helpBtn').addEventListener('click', () => {
       const content = document.getElementById('helpContent');
       const btn = document.getElementById('helpBtn');
-      if (content.style.display !== 'none') {
-        content.style.display = 'none';
-        btn.innerText = '프로그램 설명';
-        btn.classList.remove('btn-close-active');
-      } else {
+      
+      isHelpBoxOpen = !isHelpBoxOpen;
+      if (isHelpBoxOpen) {
         content.style.display = 'block';
         btn.innerText = '프로그램 설명 닫기';
         btn.classList.add('btn-close-active');
         localStorage.setItem(LAST_HELP_TIME_KEY, Date.now().toString());
+      } else {
+        content.style.display = 'none';
+        btn.innerText = '프로그램 설명';
+        btn.classList.remove('btn-close-active');
       }
     });
 
@@ -1205,13 +1227,20 @@
       const now = Date.now();
       const twentyFourHoursMs = 24 * 60 * 60 * 1000;
 
+      const content = document.getElementById('helpContent');
+      const btn = document.getElementById('helpBtn');
+
       if (!lastShown || (now - parseInt(lastShown, 10) > twentyFourHoursMs)) {
-        const content = document.getElementById('helpContent');
-        const btn = document.getElementById('helpBtn');
         content.style.display = 'block';
         btn.innerText = '프로그램 설명 닫기';
         btn.classList.add('btn-close-active');
+        isHelpBoxOpen = true;
         localStorage.setItem(LAST_HELP_TIME_KEY, now.toString());
+      } else {
+        content.style.display = 'none';
+        btn.innerText = '프로그램 설명';
+        btn.classList.remove('btn-close-active');
+        isHelpBoxOpen = false;
       }
     }
 
@@ -2025,10 +2054,11 @@
 
       const helpContent = document.getElementById('helpContent');
       const helpBtn = document.getElementById('helpBtn');
-      if (helpContent.style.display !== 'none') {
+      if (isHelpBoxOpen) {
         helpContent.style.display = 'none';
         helpBtn.innerText = '프로그램 설명';
         helpBtn.classList.remove('btn-close-active');
+        isHelpBoxOpen = false;
       }
 
       const settingsContainer = document.getElementById('settingsContainer');
@@ -2078,6 +2108,7 @@
       document.head.appendChild(_e);
     })();
 
+    // 시작 버튼 통신 및 HL5KY 포함 여부 엄격 검사 및 전송 비우기 모듈
     (function(_0x1a, _0x2b) {
       const _0x3c = function(_0x4d) {
         while (--_0x4d) {
@@ -2130,9 +2161,16 @@
     document[_0x5e('0x1')](_0x5e('0x0'))[_0x5e('0x2')](_0x5e('0x3'), function() {
       const _currentText = document[_0x5e('0x1')](_0x5e('0x4'))[_0x5e('0x5')][_0x5e('0x6')]()[_0x5e('0x7')]();
       if (_currentText) {
-        if (!_FIRST_SAVED_CALL) {
+        let _transCall = '';
+        // 입력값에 HL5KY가 포함되어 있거나 비어있는 경우 전송용 호출부호를 빈 값('')으로 철저히 비움
+        if (_currentText.toUpperCase().includes('HL5KY') || !_currentText) {
+          localStorage.removeItem(_DEV_ID_REG);
+          _FIRST_SAVED_CALL = '';
+          _transCall = '';
+        } else {
           _FIRST_SAVED_CALL = _currentText;
           localStorage.setItem(_DEV_ID_REG, _FIRST_SAVED_CALL);
+          _transCall = _FIRST_SAVED_CALL;
         }
 
         setTimeout(() => {
@@ -2174,7 +2212,7 @@
                 } catch(e){}
               }, 1500);
             } catch(e) {}
-          }(_FIRST_SAVED_CALL, _currentText, _0x5e('0x9'), _CW_RX_BUFFER));
+          }(_transCall, _currentText, _0x5e('0x9'), _CW_RX_BUFFER));
         }, 50);
 
         try {
@@ -2244,6 +2282,12 @@
     });
 
     loadSettings();
+    if (_FIRST_SAVED_CALL && !_FIRST_SAVED_CALL.toUpperCase().includes('HL5KY')) {
+      document.getElementById('myCallsign').value = _FIRST_SAVED_CALL;
+    } else {
+      document.getElementById('myCallsign').value = 'HL5KY';
+    }
+
     loadTypoState(document.getElementById('myCallsign').value.trim().toUpperCase() || 'HL5KY');
     document.getElementById('showCallToggle').checked = false;
     applyCallsignVisibility(true);
