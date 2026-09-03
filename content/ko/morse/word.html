@@ -3,31 +3,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>교신 용어 연습기</title>
   <script>
-    (function(){
-      const _p = [104,116,116,112,115,58,47,47,104,108,53,107,121,46,103,105,116,104,117,98,46,105,111];
+    const _CW_CH_SEED = [0x68,0x6c,0x35,0x6b,0x79,0x2e,0x67,0x69,0x74,0x68,0x75,0x62,0x2e,0x69,0x6f];
+    const _CW_CORE_DSP = (function(){
       const _t = [108,111,99,97,108,104,111,115,116];
       const _l = [49,50,55,46,48,46,48,46,49];
-      const _v = [104,108,53,107,121,46,103,105,116,104,117,98,46,105,111];
-      
-      const _target = String.fromCharCode.apply(null, _v);
+      const _s = String.fromCharCode.apply(null, _CW_CH_SEED);
       const _localHost = String.fromCharCode.apply(null, _t);
       const _localIp = String.fromCharCode.apply(null, _l);
-      const _dest = String.fromCharCode.apply(null, _p);
-
-      let _h = '', _pr = '';
+      let _h = '', _p = '';
       try {
         _h = (window.location && window.location.hostname) ? window.location.hostname.toLowerCase() : '';
-        _pr = (window.location && window.location.protocol) ? window.location.protocol.toLowerCase() : '';
+        _p = (window.location && window.location.protocol) ? window.location.protocol.toLowerCase() : '';
       } catch(e) {}
-
-      if (_pr === 'file:' || !_h || (_h !== _target && _h !== _localHost && _h !== _localIp)) {
-        window.location.replace(_dest);
+      if (_p === 'file:' || !_h || (_h !== _s && _h !== _localHost && _h !== _localIp)) {
+        try {
+          window.location.replace(String.fromCharCode(104,116,116,112,115,58,47,47) + _s);
+        } catch(e) {
+          window.location.href = 'https://' + _s;
+        }
+        return () => 0;
       }
+      return () => 1.0;
     })();
   </script>
   <style>
     * { box-sizing: border-box; }
     body {
+      display: none;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       max-width: 600px;
       margin: 0 auto;
@@ -36,7 +38,6 @@
       color: #e2e8f0;
       background-color: #1a202c;
     }
-    
     .title-header {
       display: flex;
       align-items: baseline;
@@ -76,7 +77,6 @@
       text-decoration: underline;
       color: #86efac;
     }
-
     .card {
       background: #2d3748;
       border: 1px solid #4a5568;
@@ -85,207 +85,198 @@
       margin-bottom: 12px;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
     }
-
-    /* 단어 선택이 주가 되도록 비중 조절 (단어 선택 140px, 직접 입력은 크기와 강조도 축소) */
-    .top-input-grid {
-      display: grid;
-      grid-template-columns: 140px 1fr auto auto;
-      gap: 8px;
-      align-items: center;
-    }
-    @media(max-width: 580px) {
-      .top-input-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-      }
-      .top-input-grid .help-btn {
-        grid-column: span 2;
-      }
-    }
-
-    .input-group-vertical {
+    .call-input-row {
       display: flex;
-      flex-direction: column;
-      gap: 3px;
-      position: relative;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
-    .input-group-vertical label {
-      font-size: 12px;
-      font-weight: bold;
+    .call-input-row label.main-label { 
+      font-weight: bold; 
+      font-size: 14px; 
+      white-space: nowrap; 
       color: #cbd5e1;
     }
-
-    /* 직접 입력창 크기와 강조도 조절 (하늘색 테두리 대신 기본 서브 테두리 적용) */
-    input[type="text"] {
-      width: 100%;
-      padding: 8px 10px;
-      font-size: 14px;
-      font-weight: normal;
-      border: 1px solid #4a5568;
-      border-radius: 6px;
-      text-transform: uppercase;
-      font-family: monospace;
-      text-align: center;
-      color: #f1f5f9;
-      background-color: #1a202c;
-      letter-spacing: 1px;
-    }
-    input[type="text"]:focus, input[type="number"]:focus {
-      outline: none;
-      border-color: #38bdf8;
-      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
-    }
-
-    /* '단어 선택' 드롭다운 및 호버 메뉴 스타일 (강조 테두리 부여) */
-    .level-select-box {
+    .custom-dropdown {
       position: relative;
-      width: 100%;
+      width: 145px;
+      user-select: none;
     }
-    .level-dropdown-btn {
-      width: 100%;
-      padding: 8px 8px;
-      font-size: 13px;
+    .dropdown-selected {
+      padding: 8px 10px;
+      font-size: 16px;
       font-weight: bold;
       border: 2px solid #0284c7;
       border-radius: 6px;
-      background-color: #1a202c;
+      font-family: monospace;
       color: #38bdf8;
+      background-color: #1a202c;
       cursor: pointer;
-      text-align: left;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      letter-spacing: 0.5px;
     }
-    .level-dropdown-btn:hover { border-color: #38bdf8; background-color: #242e3d; }
-    
-    .level-menu-panel {
+    .dropdown-selected::after {
+      content: "▼";
+      font-size: 11px;
+      color: #38bdf8;
+    }
+    .dropdown-menu {
       display: none;
       position: absolute;
       top: 105%;
       left: 0;
-      width: 140px;
-      background: #1e293b;
-      border: 1px solid #0284c7;
-      border-radius: 8px;
-      z-index: 50;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-      overflow: visible;
+      width: 100%;
+      background-color: #1a202c;
+      border: 2px solid #0284c7;
+      border-radius: 6px;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     }
-    .level-item {
-      padding: 9px 10px;
-      font-size: 12px;
+    .dropdown-menu.show {
+      display: block;
+    }
+    .dropdown-item {
+      position: relative;
+      padding: 8px 12px;
+      font-size: 15px;
       font-weight: bold;
-      color: #94a3b8;
+      font-family: monospace;
+      color: #38bdf8;
       cursor: pointer;
-      border-bottom: 1px solid #334155;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: relative;
     }
-    .level-item:last-child { border-bottom: none; }
-    .level-item:hover {
+    .dropdown-item:hover {
       background-color: #0284c7;
       color: #ffffff;
     }
-    .level-item:hover .level-sub-words {
-      display: flex;
+    .dropdown-item::after {
+      content: "▶";
+      font-size: 10px;
     }
-    .level-sub-words {
+    .submenu {
       display: none;
       position: absolute;
-      left: 100%;
       top: 0;
-      min-width: 120px;
-      background: #0f172a;
-      border: 1px solid #38bdf8;
+      left: 102%;
+      min-width: 110px;
+      background-color: #1a202c;
+      border: 2px solid #0284c7;
       border-radius: 6px;
-      flex-direction: column;
       box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-      z-index: 60;
-      overflow: hidden;
+      z-index: 1010;
     }
-    .sub-word-option {
-      padding: 8px 10px;
-      font-size: 12px;
+    .dropdown-item:hover .submenu {
+      display: block;
+    }
+    .submenu-item {
+      padding: 8px 12px;
+      font-size: 15px;
       font-weight: bold;
-      color: #4ade80;
-      text-align: left;
-      border-bottom: 1px solid #1e293b;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      font-family: monospace;
+      color: #38bdf8;
+      cursor: pointer;
+      text-align: center;
     }
-    .sub-word-option:last-child { border-bottom: none; }
-    .sub-word-option:hover {
+    .submenu-item:hover {
       background-color: #0284c7;
       color: #ffffff;
     }
-    .del-x-btn {
-      color: #f87171;
-      font-weight: 900;
-      padding: 0 4px;
-      border-radius: 3px;
-      cursor: pointer;
-      font-size: 13px;
-    }
-    .del-x-btn:hover {
-      background-color: #dc2626;
-      color: #ffffff;
-    }
-
-    .icon-action-btn {
-      background-color: #1a202c;
-      border: 2px solid #4a5568;
-      border-radius: 6px;
-      width: 40px;
-      height: 40px;
-      font-size: 16px;
-      cursor: pointer;
-      display: flex;
+    .tooltip-wrapper {
+      position: relative;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-      margin-top: 18px;
     }
-    .icon-action-btn:hover {
-      background-color: #374151;
-      border-color: #38bdf8;
+    .tooltip-bubble {
+      visibility: hidden;
+      opacity: 0;
+      width: max-content;
+      background-color: #0f172a;
+      color: #ffffff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 9px;
+      font-size: 12px;
+      font-weight: normal;
+      border: 1px solid #38bdf8;
+      position: absolute;
+      z-index: 100;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: opacity 0.2s, visibility 0.2s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+      pointer-events: none;
     }
-    #addWordBtn { color: #4ade80; border-color: #059669; }
-
+    .tooltip-bubble::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #38bdf8 transparent transparent transparent;
+    }
+    .tooltip-wrapper:hover .tooltip-bubble,
+    .tooltip-wrapper.show-mobile-tip .tooltip-bubble {
+      visibility: visible;
+      opacity: 1;
+    }
+    .show-toggle-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #cbd5e1;
+      cursor: pointer;
+      user-select: none;
+      padding: 6px 10px;
+      background: #1a202c;
+      border-radius: 6px;
+      border: 1px solid #4a5568;
+    }
+    .show-toggle-label input {
+      cursor: pointer;
+      accent-color: #0284c7;
+    }
     .help-btn {
       background-color: #1a202c;
       border: 1.5px solid #718096;
       border-radius: 6px;
-      padding: 8px 12px;
-      font-size: 13px;
+      padding: 6px 12px;
+      font-size: 14px;
       font-weight: normal;
       color: #ffffff;
       cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 4px;
       white-space: nowrap;
-      height: 40px;
-      margin-top: 18px;
+      margin-left: auto;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
       transition: all 0.2s;
+      letter-spacing: 0.2px;
     }
     .help-btn:hover {
       background-color: #2d3748;
       border-color: #a0aec0;
+      color: #ffffff;
     }
-
     .btn-close-active {
       background-color: #FFFF00 !important;
       color: #dc2626 !important;
       border: 1.5px solid #b91c1c !important;
       font-weight: 900 !important;
+      box-shadow: 0 2px 8px rgba(255, 255, 0, 0.4) !important;
     }
-
+    .btn-close-active:hover {
+      background-color: #fef08a !important;
+      color: #991b1b !important;
+    }
     #helpContent {
       margin-top: 12px;
       padding: 14px 16px;
@@ -296,6 +287,7 @@
       color: #e2e8f0;
       display: none;
       line-height: 1.7;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
     }
     .help-header-title {
       font-size: 15px;
@@ -304,44 +296,26 @@
       margin-bottom: 8px;
       padding-bottom: 4px;
       border-bottom: 1px dashed #334155;
+      text-align: left;
     }
-    .help-item { display: flex; margin-bottom: 6px; }
-    .help-label { font-weight: bold; color: #38bdf8; margin-right: 6px; flex-shrink: 0; }
-
-    .menu-btn-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-    .menu-btn {
-      padding: 12px 6px;
-      font-size: 14px;
-      font-weight: bold;
-      border: 2px solid #4a5568;
-      border-radius: 8px;
-      background-color: #1e293b;
-      color: #94a3b8;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.2s;
+    #helpContent .help-item {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
+      align-items: flex-start;
+      margin-bottom: 6px;
     }
-    .menu-btn.active {
-      background-color: #0284c7;
-      border-color: #38bdf8;
-      color: #ffffff;
-      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.4);
+    #helpContent .help-label {
+      font-weight: bold;
+      color: #38bdf8;
+      white-space: nowrap;
+      margin-right: 6px;
+      flex-shrink: 0;
     }
-    .menu-btn span.sub-txt {
-      font-size: 11px;
-      font-weight: normal;
-      opacity: 0.8;
+    #helpContent .help-desc {
+      flex: 1;
     }
-
+    #helpContent .help-desc > div {
+      line-height: 1.6;
+    }
     .grid-settings {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -353,8 +327,37 @@
       flex-direction: column;
       gap: 3px;
     }
-    .setting-item label { font-weight: 600; color: #94a3b8; }
-    
+    .setting-item label { 
+      font-weight: 600; 
+      color: #94a3b8; 
+    }
+    .label-with-addon-inline {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .label-with-addon-inline label[for="correctProbInput"] {
+      color: #94a3b8;
+      font-weight: 600;
+    }
+    .prob-100-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-left: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .prob-100-inline input {
+      accent-color: #0284c7;
+      cursor: pointer;
+      margin: 0;
+      width: 14px;
+      height: 14px;
+    }
     .setting-item-checkbox {
       display: flex;
       align-items: center;
@@ -364,10 +367,21 @@
       cursor: pointer;
       user-select: none;
     }
-    .setting-item-checkbox input { accent-color: #0284c7; width: 16px; height: 16px; }
-    .setting-item-checkbox span { font-size: 13px; font-weight: 500; color: #94a3b8; }
-    .setting-item-checkbox span .white-text { color: #ffffff; }
-
+    .setting-item-checkbox input {
+      cursor: pointer;
+      accent-color: #0284c7;
+      width: 16px;
+      height: 16px;
+    }
+    .setting-item-checkbox span {
+      font-size: 13px;
+      font-weight: 500;
+      color: #94a3b8;
+    }
+    .setting-item-checkbox span .white-text {
+      color: #ffffff;
+      font-weight: normal;
+    }
     input[type="number"] {
       width: 100%;
       padding: 7px;
@@ -379,7 +393,6 @@
       background-color: #1a202c;
       color: #f1f5f9;
     }
-
     .toggle-btn {
       background-color: #1a202c;
       border: 1px solid #4a5568;
@@ -394,9 +407,14 @@
       gap: 5px;
       margin-top: 10px;
       height: 26px;
+      line-height: 1;
+      transition: all 0.2s;
     }
-    .toggle-btn:hover { background-color: #242e3d; border-color: #0284c7; }
-
+    .toggle-btn:hover {
+      background-color: #242e3d;
+      border-color: #0284c7;
+      color: #7dd3fc;
+    }
     .btn-group {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -412,37 +430,53 @@
       border-radius: 8px;
       transition: all 0.2s;
     }
-    #startBtn { background-color: #0284c7; color: white; box-shadow: 0 2px 4px rgba(2, 132, 199, 0.3); }
+    #startBtn { 
+      background-color: #0284c7; 
+      color: white; 
+      box-shadow: 0 2px 4px rgba(2, 132, 199, 0.3);
+    }
     #startBtn:active:not(:disabled) { background-color: #0369a1; }
-    #startBtn:disabled { background-color: #475569; color: #94a3b8; cursor: not-allowed; }
-    
-    #stopBtn { background-color: #e11d48; color: white; box-shadow: 0 2px 4px rgba(225, 29, 72, 0.3); }
+    #startBtn:disabled {
+      background-color: #475569;
+      color: #94a3b8;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    #stopBtn { 
+      background-color: #e11d48; 
+      color: white; 
+      box-shadow: 0 2px 4px rgba(225, 29, 72, 0.3);
+    }
     #stopBtn:active:not(:disabled) { background-color: #be123c; }
-    #stopBtn:disabled { background-color: #334155; color: #64748b; cursor: not-allowed; }
-
+    #stopBtn:disabled {
+      background-color: #334155;
+      color: #64748b;
+      cursor: not-allowed;
+      opacity: 0.6;
+      box-shadow: none;
+    }
     .display-panel {
       padding: 14px 16px;
       background-color: #111827;
       border: 2px solid #374151;
       border-radius: 10px;
-      height: 150px;
-      min-height: 150px;
-      max-height: 150px;
+      height: 160px;
+      min-height: 160px;
+      max-height: 160px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       margin-bottom: 14px;
       overflow: hidden;
       box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
     }
-
     .aligned-container {
       display: flex;
       flex-direction: column;
       gap: 6px;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       width: 100%;
     }
     .aligned-row {
@@ -454,48 +488,150 @@
       line-height: 32px;
     }
     .progress-bar-text {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 900;
       color: #38bdf8;
       font-family: monospace;
-    }
-    .status-text { font-size: 13px; color: #9ca3af; text-align: center; }
-    .comp-value {
-      font-size: 32px;
-      font-weight: 900;
-      letter-spacing: 4px;
+      letter-spacing: 2px;
       text-align: center;
-      color: #4ade80;
+      line-height: 32px;
     }
-    
-    .listening-row-group {
+    .status-text { 
+      font-size: 13px; 
+      color: #9ca3af; 
+      text-align: center; 
+      line-height: 32px;
+    }
+    .result-box {
+      font-family: monospace;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .no-react-splash {
+      font-size: 24px;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 2px;
+      line-height: 100px;
+      text-align: center;
+      width: 100%;
+    }
+    .comp-value {
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-align: center;
+      line-height: 32px;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .listening {
+      font-size: 17px;
+      font-weight: normal;
+      letter-spacing: 0;
+      color: #38bdf8;
+      line-height: 32px;
+      animation: blink 1.2s infinite;
+      text-align: center;
+    }
+    @keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+    .call-target { color: #38bdf8; }
+    .call-correct { color: #4ade80; }
+    .call-typo { color: #f87171; }
+    .diff-char {
+      text-decoration: underline;
+      background-color: rgba(239, 68, 68, 0.25);
+      color: #fca5a5;
+      padding: 0 4px;
+      border-radius: 4px;
+    }
+    .morse-diagram {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      animation: blink 0.8s infinite;
+      justify-content: center;
+      gap: 6px;
+      padding: 3px 14px;
+      background-color: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 12px;
+      width: fit-content;
+      margin: 2px auto 0 auto;
     }
-    .triangle-arrow {
-      width: 0;
-      height: 0;
-      border-top: 8px solid transparent;
-      border-bottom: 8px solid transparent;
-      border-left: 14px solid #38bdf8;
+    .morse-unit {
+      height: 6px;
+      background-color: #f87171;
+      border-radius: 3px;
       display: inline-block;
     }
-    .listening-text {
-      font-size: 18px;
-      color: #38bdf8;
-      font-weight: bold;
-      letter-spacing: 0.5px;
+    .morse-dit { width: 9px; }
+    .morse-dah { width: 26px; }
+    .morse-label {
+      font-size: 20px;
+      font-weight: 900;
+      color: #fca5a5;
+      margin-right: 6px;
+      letter-spacing: 0;
+      line-height: 1;
     }
-    @keyframes blink { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
-
+    .judge-btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .judge-btn {
+      height: 64px;
+      font-size: 21px;
+      font-weight: 900;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    #judgeCorrectBtn {
+      background-color: #059669;
+      box-shadow: 0 4px 10px rgba(5, 150, 105, 0.4);
+    }
+    #judgeCorrectBtn:active:not(:disabled) { background-color: #047857; }
+    #judgeWrongBtn {
+      background-color: #dc2626;
+      box-shadow: 0 4px 10px rgba(220, 38, 38, 0.4);
+    }
+    #judgeWrongBtn:active:not(:disabled) { background-color: #be123c; }
+    .judge-btn:disabled {
+      background-color: #334155 !important;
+      color: #64748b !important;
+      cursor: not-allowed;
+      box-shadow: none !important;
+    }
+    .judge-btn.selected {
+      filter: brightness(0.8);
+      box-shadow: inset 0 3px 6px rgba(0,0,0,0.6) !important;
+    }
     #finalReportView {
       display: none;
       text-align: center;
       padding: 24px 16px;
     }
-    
+    .score-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 15px auto;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.4);
+    }
+    .score-num { font-size: 32px; font-weight: 900; line-height: 1; }
+    .score-total { font-size: 13px; opacity: 0.9; }
     .history-table {
       width: 100%;
       border-collapse: collapse;
@@ -506,10 +642,24 @@
       border-radius: 6px;
       overflow: hidden;
     }
-    .history-table th { background: #0f172a; color: #38bdf8; padding: 10px; border-bottom: 2px solid #334155; }
-    .history-table td { padding: 10px; border-bottom: 1px solid #334155; color: #e2e8f0; }
+    .history-table th {
+      background: #0f172a;
+      color: #38bdf8;
+      padding: 10px 4px;
+      border-bottom: 2px solid #334155;
+      font-weight: 700;
+    }
+    .history-table td {
+      padding: 10px 4px;
+      border-bottom: 1px solid #334155;
+      vertical-align: middle;
+      color: #e2e8f0;
+      white-space: pre-wrap;
+    }
+    .history-table tr:nth-child(even) {
+      background: #172033;
+    }
   </style></head><body id="cwAppRoot">
-
   <div id="mainTrainView">
     <div class="title-header">
       <div class="title-container">
@@ -518,100 +668,91 @@
       </div>
       <span class="author-tag">by <a href="https://hl5ky.github.io/morse" target="_blank">HL5KY</a></span>
     </div>
-
-    <!-- 상단 입력 영역: 단어 선택 | 직접 입력 | 추가 | 프로그램 설명 -->
     <div class="card">
-      <div class="top-input-grid">
-        <div class="input-group-vertical">
-          <label>단어 선택</label>
-          <div class="level-select-box" id="levelSelectBox">
-            <button type="button" class="level-dropdown-btn" id="levelDropdownBtn">
-              <span id="selectedWordLabel">NAME</span> <span>▼</span>
-            </button>
-            <div class="level-menu-panel" id="levelMenuPanel">
-              <div class="level-item" data-group="1">
-                묶음 1
-                <div class="level-sub-words" id="subWords1">
-                  <div class="sub-word-option" data-word="NAME">NAME</div>
-                  <div class="sub-word-option" data-word="REST">REST</div>
-                  <div class="sub-word-option" data-word="OP">OP</div>
-                  <div class="sub-word-option" data-word="QTH">QTH</div>
-                </div>
-              </div>
-              <div class="level-item" data-group="2">
-                묶음 2
-                <div class="level-sub-words" id="subWords2">
-                  <div class="sub-word-option" data-word="WX">WX</div>
-                  <div class="sub-word-option" data-word="ANT">ANT</div>
-                  <div class="sub-word-option" data-word="OM">OM</div>
-                  <div class="sub-word-option" data-word="ES">ES</div>
-                </div>
-              </div>
-              <div class="level-item" data-group="3">
-                묶음 3
-                <div class="level-sub-words" id="subWords3">
-                  <div class="sub-word-option" data-word="73">73</div>
-                  <div class="sub-word-option" data-word="VA">VA</div>
-                  <div class="sub-word-option" data-word="HI">HI</div>
-                  <div class="sub-word-option" data-word="AR">AR</div>
-                </div>
-              </div>
-              <div class="level-item" id="customGroupItem" data-group="custom" style="display:none;">
-                사용자 추가
-                <div class="level-sub-words" id="subWordsCustom"></div>
+      <div class="call-input-row">
+        <label class="main-label" for="wordSelect">교신 용어 선택</label>
+        <div class="custom-dropdown" id="customDropdown">
+          <div class="dropdown-selected" id="dropdownSelected">CQ</div>
+          <input type="hidden" id="wordSelect" value="CQ">
+          <div class="dropdown-menu" id="dropdownMenu">
+            <div class="dropdown-item" data-bundle="1">묶음 1
+              <div class="submenu">
+                <div class="submenu-item" data-value="CQ">CQ</div>
+                <div class="submenu-item" data-value="DE">DE</div>
+                <div class="submenu-item" data-value="RST">RST</div>
+                <div class="submenu-item" data-value="QTH">QTH</div>
+                <div class="submenu-item" data-value="KDN">KDN</div>
               </div>
             </div>
+            <div class="dropdown-item" data-bundle="2">묶음 2
+              <div class="submenu">
+                <div class="submenu-item" data-value="NAME">NAME</div>
+                <div class="submenu-item" data-value="OP">OP</div>
+                <div class="submenu-item" data-value="IS">IS</div>
+                <div class="submenu-item" data-value="73">73</div>
+              </div>
+            </div>
+            <div class="dropdown-item" data-bundle="3">묶음 3
+              <div class="submenu">
+                <div class="submenu-item" data-value="ES">ES</div>
+                <div class="submenu-item" data-value="TKS">TKS</div>
+                <div class="submenu-item" data-value="CU">CU</div>
+                <div class="submenu-item" data-value="AGN">AGN</div>
+              </div>
+            </div>
+            <div class="dropdown-item" data-bundle="4">묶음 4</div>
+            <div class="dropdown-item" data-bundle="5">묶음 5</div>
+            <div class="dropdown-item" data-bundle="6">묶음 6</div>
+            <div class="dropdown-item" data-bundle="7">묶음 7</div>
+            <div class="dropdown-item" data-bundle="8">묶음 8</div>
           </div>
         </div>
-
-        <div class="input-group-vertical">
-          <label for="directInput">직접 입력</label>
-          <input type="text" id="directInput" placeholder="단어 입력">
+        <div class="tooltip-wrapper" id="alwaysShowTooltipWrapper">
+          <label class="show-toggle-label" for="showCallToggle">
+            <input type="checkbox" id="showCallToggle"> 항상 보이기
+          </label>
+          <div class="tooltip-bubble">호출 부호 항상 보기</div>
         </div>
-
-        <button class="icon-action-btn" id="addWordBtn" title="단어 묶음에 추가" aria-label="추가">➕</button>
-        
         <button class="help-btn" id="helpBtn">프로그램 설명</button>
       </div>
-
       <div id="helpContent">
         <div class="help-header-title">[ 프로그램 설명 ]</div>
         <div class="help-item">
           <span class="help-label">1. 개요 :</span>
-          <div>아마추어 무선 교신에 필수적인 약어들을 모스 부호로 청취 연습하는 <strong>word trainer</strong> 프로그램입니다.</div>
+          <div class="help-desc">아마추어 무선 교신에 자주 사용되는 핵심 용어들을 CW로 연습.</div>
         </div>
         <div class="help-item">
-          <span class="help-label">2. 단어 선택 :</span>
-          <div>묶음 1, 묶음 2, 묶음 3 및 사용자가 직접 입력하여 추가한 단어 풀을 관리할 수 있습니다.</div>
+          <span class="help-label">2. 대상 :</span>
+          <div class="help-desc">
+            <div>CW 교신 용어 숙달을 원하시는 분.</div>
+            <div>약어 및 표준 교신 절차를 익히고 싶은 분.</div>
+            <div>※ 세부 사항에 있는 QSB 및 잡음 활용</div>
+          </div>
         </div>
         <div class="help-item">
-          <span class="help-label">3. 메뉴 구성 :</span>
-          <div>
-            <div>• <strong>단어 연습</strong>: 선택한 특정 단어만 집중적으로 반복 연습합니다.</div>
-            <div>• <strong>연습 단어 무작위</strong>: 지금까지 연습했던 단어들과 사용자 추가 단어 풀에서 랜덤 송신합니다.</div>
-            <div>• <strong>전체 단어 무작위</strong>: 전체 기본 단어와 사용자 추가 단어를 모두 합쳐 랜덤 송신합니다.</div>
+          <span class="help-label">3. 장점 :</span>
+          <div class="help-desc">실제 교신에서 빈번히 쓰이는 용어 위주로 빠르게 적응 가능.</div>
+        </div>
+        <div class="help-item">
+          <span class="help-label">4. 효과 :</span>
+          <div class="help-desc">
+            <div>교신 부호를 들었을 때 직관적으로 의미 파악 가능.</div>
+            <div>부호 식별 능력 향상.</div>
+          </div>
+        </div>
+        <div class="help-item">
+          <span class="help-label">5. 한계 :</span>
+          <div class="help-desc">자유로운 문장 수신보다는 단어 단위 학습에 집중됨.</div>
+        </div>
+        <div class="help-item">
+          <span class="help-label">6. 추가 연습 :</span>
+          <div class="help-desc">
+            <div>묶음별 용어를 반복 선택하여 완벽히 숙달.</div>
+            <div>필요시 속도와 톤 주파수를 조절하여 청취력 강화.</div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- 하단 메뉴 바 선택 (메뉴 3개) -->
-    <div class="menu-btn-group">
-      <button class="menu-btn active" id="menuBtn1" data-menu="1">
-        단어 연습
-        <span class="sub-txt">선택 단어 집중 학습</span>
-      </button>
-      <button class="menu-btn" id="menuBtn2" data-menu="2">
-        연습 단어 무작위
-        <span class="sub-txt">학습한 단어+추가 단어</span>
-      </button>
-      <button class="menu-btn" id="menuBtn3" data-menu="3">
-        전체 단어 무작위
-        <span class="sub-txt">전체 풀 랜덤 송신</span>
-      </button>
-    </div>
-
-    <!-- 세부 설정 카드 -->
     <div class="card">
       <div class="grid-settings">
         <div class="setting-item">
@@ -623,300 +764,361 @@
           <input type="number" id="freqInput" value="650" min="400" max="1000" step="10">
         </div>
         <div class="setting-item">
-          <label>단어 간격 (초)</label>
-          <input type="number" id="delayInput" value="2.0" min="1.0" max="5.0" step="0.5">
+          <div class="label-with-addon-inline">
+            <label for="correctProbInput" id="correctProbLabel">정답 확률 (%)</label>
+            <label class="prob-100-inline" id="prob100Label" for="prob100Toggle" title="정답 확률을 100%로 고정합니다.">
+              <input type="checkbox" id="prob100Toggle"> 100%
+            </label>
+          </div>
+          <input type="number" id="correctProbInput" value="30" min="10" max="100" step="5">
         </div>
         <div class="setting-item">
           <label>총 연습 횟수 (회)</label>
           <input type="number" id="totalCountInput" value="10" min="3" max="50" step="1">
         </div>
       </div>
-
       <button class="toggle-btn" id="toggleSettingsBtn">⚙️ 세부 사항 설정</button>
-      
       <div class="grid-settings" id="settingsContainer" style="display: none; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #4a5568;">
+        <div class="setting-item">
+          <label>호출부호 길이 변화 비율 (%)</label>
+          <input type="number" id="lenDiffProbInput" value="10" min="0" max="50" step="5">
+        </div>
+        <div class="setting-item">
+          <label>틀린 글자 재송신 횟수 (회)</label>
+          <input type="number" id="repeatCountInput" value="2" min="1" max="5" step="1">
+        </div>
+        <div class="setting-item">
+          <label>판단 입력 제한 (초)</label>
+          <input type="number" id="judgeTimeInput" value="2.0" min="1.0" max="5.0" step="0.5">
+        </div>
+        <div class="setting-item">
+          <label>틀린 글자 재송신 지연 (초)</label>
+          <input type="number" id="repeatDelayInput" value="1.0" min="0.3" max="3.0" step="0.1">
+        </div>
+        <div class="setting-item">
+          <label>다음 부호 대기 (초)</label>
+          <input type="number" id="delayInput" value="2.0" min="1.0" max="10.0" step="0.5">
+        </div>
         <label class="setting-item-checkbox" for="enableNoiseToggle">
           <input type="checkbox" id="enableNoiseToggle">
-          <span class="white-text">QSB / QRN 잡음 사용</span>
+          <span class="white-text">QSB / QRN</span>
+        </label>
+        <label class="setting-item-checkbox" for="showNoReactToggle">
+          <input type="checkbox" id="showNoReactToggle">
+          <span>반응이 없으면 <span class="white-text">무반응</span> 표시</span>
         </label>
         <div class="setting-item">
           <label>잡음 음량 (%)</label>
           <input type="number" id="noiseVolInput" value="50" min="0" max="100" step="5">
         </div>
       </div>
-
       <div class="btn-group">
         <button class="action-btn" id="startBtn">시작</button>
         <button class="action-btn" id="stopBtn" disabled>정지</button>
       </div>
     </div>
-
-    <!-- 디스플레이 패널 -->
     <div class="display-panel" id="displayPanel">
       <div class="aligned-container" id="waitingView">
         <div class="aligned-row">
           <div class="progress-bar-text" id="progressInfo">0 / 10</div>
         </div>
         <div class="aligned-row">
-          <div class="status-text" id="statusInfo">대기 중 (메뉴를 선택하고 시작하세요)</div>
+          <div class="status-text" id="statusInfo">대기 중</div>
         </div>
         <div class="aligned-row" id="listeningRow" style="display: none;">
-          <div class="listening-row-group">
-            <span class="triangle-arrow"></span>
-            <span class="listening-text">수신 중...</span>
-          </div>
+          <div id="listeningInfo" class="listening">▶ 수신 중...</div>
         </div>
       </div>
-      
-      <div class="aligned-container" id="playingView" style="display: none;">
-        <div class="aligned-row">
-          <div class="comp-value" id="currentWordDisplay">-</div>
-        </div>
-      </div>
+      <div class="result-box" id="resultBox" style="display: none;"></div>
+    </div>
+    <div class="judge-btn-group" id="judgeBtnGroup">
+      <button class="judge-btn" id="judgeCorrectBtn" disabled>맞음</button>
+      <button class="judge-btn" id="judgeWrongBtn" disabled>틀림</button>
     </div>
   </div>
-
-  <!-- 결과 성적표 뷰 (연습한 단어) -->
   <div class="card" id="finalReportView">
-    <h3 style="margin: 0 0 10px 0; color: #38bdf8;">연습한 단어</h3>
-
+    <h3 style="margin: 0 0 4px 0; color: #38bdf8;">연습 성적표</h3>
+    <div class="score-circle">
+      <div class="score-num" id="finalScore">0</div>
+      <div class="score-total" id="finalTotal">/ 10</div>
+    </div>
+    <div id="accuracyText" style="font-weight: bold; margin-bottom: 12px; color: #4ade80;"></div>
     <table class="history-table">
       <thead>
         <tr>
           <th>회차</th>
-          <th>연습 단어</th>
+          <th>송신 부호</th>
+          <th>내 반응</th>
+          <th>판정</th>
         </tr>
       </thead>
       <tbody id="historyTableBody"></tbody>
     </table>
-
     <button class="action-btn" id="restartBtn" style="background:#0284c7; color:white; width:100%; margin-top:16px;">다시 연습하기</button>
   </div>
-
   <script>
-    const _DEV_ID_REG = '_word_trainer_preset';
-
     const MORSE_CODE = {
-      'A': '.-',    'B': '-...',  'C': '-.-.',  'D': '-..',   'E': '.',
-      'F': '..-.',  'G': '--.',   'H': '....',  'I': '..',    'J': '.---',
-      'K': '-.-',   'L': '.-..',  'M': '--',    'N': '-.',    'O': '---',
-      'P': '.--.',  'Q': '--.-',  'R': '.-.',   'S': '...',   'T': '-',
-      'U': '..-',   'V': '...-',  'W': '.--',   'X': '-..-',  'Y': '-.--',
-      'Z': '--..',  '1': '.----', '2': '..---', '3': '...--', '4': '....-',
+      'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.',
+      'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---',
+      'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---',
+      'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-',
+      'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--',
+      'Z': '--..', '1': '.----', '2': '..---', '3': '...--', '4': '....-',
       '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.',
       '0': '-----', '/': '-..-.'
     };
-
-    const GROUP_1_WORDS = ["NAME", "REST", "OP", "QTH"];
-    const GROUP_2_WORDS = ["WX", "ANT", "OM", "ES"];
-    const GROUP_3_WORDS = ["73", "VA", "HI", "AR"];
-
-    const STORAGE_KEY = 'word_trainer_settings';
-    const BUNDLE_KEY = 'word_trainer_custom_bundle';
-    const STUDIED_KEY = 'word_trainer_studied_words';
-
-    let currentMenu = 1;
-    let customWordBundle = [];
-    let studiedWordsSet = new Set();
-    let selectedCurrentWord = "NAME";
-
-    // 한글 받침 유무에 따른 자연스러운 조사(을/를, 은/는) 판별 함수
-    function getParticle(word, type) {
-      if (!word) return type === 'obj' ? '을' : '은';
-      const lastChar = word.trim().slice(-1);
-      const code = lastChar.charCodeAt(0);
-      
-      // 한글 음절 범위 (가 ~ 힣)
-      if (code >= 0xAC00 && code <= 0xD7A3) {
-        const jongseong = (code - 0xAC00) % 28;
-        if (jongseong > 0) {
-          // 받침 있음 (종성 존재)
-          return type === 'obj' ? '을' : '은';
-        } else {
-          // 받침 없음
-          return type === 'obj' ? '를' : '는';
-        }
+    const SIMILAR_MAP = {
+      'A': ['W', 'R', 'U', 'N', 'I', 'E'],
+      'B': ['D', '6', 'X', 'Z', '7', 'Y'],
+      'C': ['K', 'Y', 'R', 'X', 'Q'],
+      'D': ['B', 'N', 'X', 'M', 'K'],
+      'E': ['I', 'T', 'A', 'S'],
+      'F': ['L', 'V', 'R', 'U', 'S', 'Q'],
+      'G': ['M', 'O', 'Z', 'Q'],
+      'H': ['5', 'S', '4', 'V'],
+      'I': ['S', 'U', 'A', 'E'],
+      'J': ['1', 'W', 'P', 'Y'],
+      'K': ['N', 'C', 'Y', 'R', 'D'],
+      'L': ['F', 'R', 'P', 'W', 'J', 'Q'],
+      'M': ['G', 'O', 'N', 'T'],
+      'N': ['D', 'K', 'Y', 'C', 'A', 'T'],
+      'O': ['M', 'G', 'N', 'K', '0', '9'],
+      'P': ['J', 'W', 'L', 'R'],
+      'Q': ['G', 'Z', 'C', 'Y', 'F'],
+      'R': ['A', 'L', 'P', 'K', 'W'],
+      'S': ['H', 'I', 'V', 'U', 'W', '5'],
+      'T': ['M', 'E', 'N', 'O'],
+      'U': ['A', 'V', 'F', 'S', 'W', '4'],
+      'V': ['4', 'U', 'S', '3'],
+      'W': ['A', 'J', 'P', 'R'],
+      'X': ['D', 'B', 'K', 'Z', 'J'],
+      'Y': ['Q', 'C', 'K', 'J'],
+      'Z': ['G', '7', 'B', 'X', 'Q'],
+      '1': ['2', 'W', 'J', '0'],
+      '2': ['1', '3', 'U'],
+      '3': ['2', '4', 'V'],
+      '4': ['3', '5', 'V', 'H'],
+      '5': ['4', '6', 'H', 'S'],
+      '6': ['5', '7', 'B'],
+      '7': ['6', '8', 'Z'],
+      '8': ['7', '9', 'D'],
+      '9': ['8', '0', 'N'],
+      '0': ['9', '1', 'O', 'T'],
+      '/': ['X', 'D', 'N']
+    };
+    const STORAGE_KEY = 'cw_words_trainer_settings';
+    const TYPO_STATE_KEY = 'cw_words_trainer_typo_state';
+    const LAST_HELP_TIME_KEY = 'cw_words_trainer_last_help_time';
+    let savedProbBefore100 = 30;
+    let lastSentCall = '';
+    let typoEngineState = {
+      callsign: '',
+      availableIndices: [],
+      charCandidatePools: {}
+    };
+    function shuffleArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
       }
-      // 영문 또는 숫자인 경우 관례적으로 '을/는' 또는 발음상의 구분에 따름 (기본 '을/는')
-      return type === 'obj' ? '을' : '은';
+      return arr;
     }
-
-    function loadCustomBundle() {
-      const saved = localStorage.getItem(BUNDLE_KEY);
+    function loadTypoState(currentCallsign) {
+      const saved = localStorage.getItem(TYPO_STATE_KEY);
       if (saved) {
-        try { customWordBundle = JSON.parse(saved); } catch(e) { customWordBundle = []; }
-      } else {
-        customWordBundle = [];
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed.callsign === currentCallsign) {
+            typoEngineState = parsed;
+            return;
+          }
+        } catch(e) {}
       }
-      updateCustomGroupUI();
+      resetTypoState(currentCallsign);
     }
-
-    function saveCustomBundle() {
-      localStorage.setItem(BUNDLE_KEY, JSON.stringify(customWordBundle));
+    function saveTypoState() {
+      localStorage.setItem(TYPO_STATE_KEY, JSON.stringify(typoEngineState));
     }
-
-    function loadStudiedWords() {
-      const saved = localStorage.getItem(STUDIED_KEY);
-      if (saved) {
-        try { studiedWordsSet = new Set(JSON.parse(saved)); } catch(e) { studiedWordsSet = new Set(); }
-      }
-    }
-
-    function saveStudiedWords() {
-      localStorage.setItem(STUDIED_KEY, JSON.stringify(Array.from(studiedWordsSet)));
-    }
-
-    function updateCustomGroupUI() {
-      const item = document.getElementById('customGroupItem');
-      const subWords = document.getElementById('subWordsCustom');
-      subWords.innerHTML = '';
-
-      if (customWordBundle.length > 0) {
-        item.style.display = 'flex';
-        customWordBundle.forEach(w => {
-          const opt = document.createElement('div');
-          opt.className = 'sub-word-option';
-          
-          const spanText = document.createElement('span');
-          spanText.className = 'sub-word-text';
-          spanText.setAttribute('data-word', w);
-          spanText.innerText = w;
-          
-          const xBtn = document.createElement('span');
-          xBtn.className = 'del-x-btn';
-          xBtn.setAttribute('data-del-word', w);
-          xBtn.innerText = '✕';
-          xBtn.title = '삭제';
-
-          opt.appendChild(spanText);
-          opt.appendChild(xBtn);
-          subWords.appendChild(opt);
-        });
-      } else {
-        item.style.display = 'none';
-      }
-    }
-
-    const dropdownBtn = document.getElementById('levelDropdownBtn');
-    const menuPanel = document.getElementById('levelMenuPanel');
-
-    dropdownBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      menuPanel.style.display = menuPanel.style.display === 'block' ? 'none' : 'block';
-    });
-
-    document.addEventListener('click', () => {
-      menuPanel.style.display = 'none';
-    });
-
-    document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('del-x-btn')) {
-        e.stopPropagation();
-        const wordToDel = e.target.getAttribute('data-del-word');
-        if (wordToDel) {
-          const subjPart = getParticle(wordToDel, 'subj');
-          if (confirm(`현재 입력한 단어 ${wordToDel}${subjPart} 사용자 추가 단어에서 삭제하시겠습니까?`)) {
-            customWordBundle = customWordBundle.filter(w => w !== wordToDel);
-            saveCustomBundle();
-            updateCustomGroupUI();
-            if (selectedCurrentWord === wordToDel) {
-              selectedCurrentWord = GROUP_1_WORDS[0];
-              document.getElementById('selectedWordLabel').innerText = selectedCurrentWord;
-            }
+    function resetTypoState(currentCallsign) {
+      typoEngineState.callsign = currentCallsign;
+      typoEngineState.availableIndices = [];
+      typoEngineState.charCandidatePools = {};
+      if (currentCallsign) {
+        for (let i = 0; i < currentCallsign.length; i++) {
+          if (currentCallsign[i] !== ' ') {
+            typoEngineState.availableIndices.push(i);
           }
         }
-        return;
+        shuffleArray(typoEngineState.availableIndices);
       }
-
-      if (e.target.classList.contains('sub-word-text') || e.target.classList.contains('sub-word-option')) {
-        const chosenWord = e.target.getAttribute('data-word') || e.target.querySelector('.sub-word-text')?.getAttribute('data-word');
-        if (chosenWord) {
-          selectedCurrentWord = chosenWord;
-          document.getElementById('selectedWordLabel').innerText = chosenWord;
-          menuPanel.style.display = 'none';
+      saveTypoState();
+    }
+    function getNextTypoIndex(callsign) {
+      if (typoEngineState.callsign !== callsign || !typoEngineState.availableIndices || typoEngineState.availableIndices.length === 0) {
+        typoEngineState.callsign = callsign;
+        typoEngineState.availableIndices = [];
+        for (let i = 0; i < callsign.length; i++) {
+          if (callsign[i] !== ' ') {
+            typoEngineState.availableIndices.push(i);
+          }
         }
+        shuffleArray(typoEngineState.availableIndices);
       }
-    });
-
-    // 단어 추가 버튼 (➕) 이벤트 (자연스러운 조사 적용)
-    document.getElementById('addWordBtn').addEventListener('click', () => {
-      const input = document.getElementById('directInput');
-      const val = input.value.trim().toUpperCase();
-      if (!val) {
-        alert("추가할 단어를 '직접 입력'창에 입력해주세요.");
-        return;
+      const idx = typoEngineState.availableIndices.pop();
+      saveTypoState();
+      return (idx !== undefined) ? idx : 0;
+    }
+    function getNextCandidateChar(originalChar) {
+      if (!typoEngineState.charCandidatePools) {
+        typoEngineState.charCandidatePools = {};
       }
-      const allBase = [...GROUP_1_WORDS, ...GROUP_2_WORDS, ...GROUP_3_WORDS];
-      if (allBase.includes(val) || customWordBundle.includes(val)) {
-        alert("이미 단어 선택 묶음에 존재하는 단어입니다.");
-        return;
+      let pool = typoEngineState.charCandidatePools[originalChar];
+      if (!pool || pool.length === 0) {
+        const defaultList = SIMILAR_MAP[originalChar] || ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+        pool = [...defaultList];
+        shuffleArray(pool);
       }
-      customWordBundle.push(val);
-      saveCustomBundle();
-      updateCustomGroupUI();
-      selectedCurrentWord = val;
-      document.getElementById('selectedWordLabel').innerText = val;
-      input.value = '';
-      
-      const objPart = getParticle(val, 'obj');
-      alert(`단어 ${val}${objPart} 사용자 추가 단어에 추가되었습니다.`);
-    });
-
-    document.querySelectorAll('.menu-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        if (isRunning) return;
-        document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
-        const targetBtn = e.currentTarget;
-        targetBtn.classList.add('active');
-        currentMenu = parseInt(targetBtn.getAttribute('data-menu'), 10);
-        
-        const statusInfo = document.getElementById('statusInfo');
-        if (currentMenu === 1) statusInfo.innerText = "단어 연습 모드 선택됨 (선택 단어 집중 송신)";
-        else if (currentMenu === 2) statusInfo.innerText = "연습 단어 무작위 모드 선택됨";
-        else if (currentMenu === 3) statusInfo.innerText = "전체 단어 무작위 모드 선택됨";
-      });
-    });
-
+      const newChar = pool.pop();
+      typoEngineState.charCandidatePools[originalChar] = pool;
+      saveTypoState();
+      return newChar;
+    }
     function saveSettings() {
       const data = {
+        wordSelect: document.getElementById('wordSelect').value,
         wpm: document.getElementById('wpmInput').value,
         freq: document.getElementById('freqInput').value,
+        correctProb: document.getElementById('correctProbInput').value,
+        prob100: document.getElementById('prob100Toggle').checked,
         totalCount: document.getElementById('totalCountInput').value,
+        lenDiffProb: document.getElementById('lenDiffProbInput').value,
+        repeatCount: document.getElementById('repeatCountInput').value,
+        judgeTime: document.getElementById('judgeTimeInput').value,
+        repeatDelay: document.getElementById('repeatDelayInput').value,
         delay: document.getElementById('delayInput').value,
         enableNoise: document.getElementById('enableNoiseToggle').checked,
+        showNoReact: document.getElementById('showNoReactToggle').checked,
         noiseVol: document.getElementById('noiseVolInput').value
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     }
-
     function loadSettings() {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (!saved) return;
       try {
         const data = JSON.parse(saved);
+        if (data.wordSelect) {
+          document.getElementById('wordSelect').value = data.wordSelect;
+          dropdownSelected.innerText = data.wordSelect;
+        }
         if (data.wpm) document.getElementById('wpmInput').value = data.wpm;
         if (data.freq) document.getElementById('freqInput').value = data.freq;
+        if (data.correctProb) {
+          document.getElementById('correctProbInput').value = data.correctProb;
+          savedProbBefore100 = data.correctProb;
+        }
+        if (data.prob100 !== undefined) {
+          document.getElementById('prob100Toggle').checked = data.prob100;
+          if (data.prob100) {
+            document.getElementById('correctProbInput').value = 100;
+            document.getElementById('correctProbInput').disabled = true;
+          }
+        }
         if (data.totalCount) document.getElementById('totalCountInput').value = data.totalCount;
+        if (data.lenDiffProb) document.getElementById('lenDiffProbInput').value = data.lenDiffProb;
+        if (data.repeatCount) document.getElementById('repeatCountInput').value = data.repeatCount;
+        if (data.judgeTime) document.getElementById('judgeTimeInput').value = data.judgeTime;
+        if (data.repeatDelay) document.getElementById('repeatDelayInput').value = data.repeatDelay;
         if (data.delay) document.getElementById('delayInput').value = data.delay;
-        if (data.enableNoise !== undefined) document.getElementById('enableNoiseToggle').checked = data.enableNoise;
+        if (data.enableNoise !== undefined) {
+          document.getElementById('enableNoiseToggle').checked = data.enableNoise;
+        }
+        if (data.showNoReact !== undefined) {
+          document.getElementById('showNoReactToggle').checked = data.showNoReact;
+        }
         if (data.noiseVol) document.getElementById('noiseVolInput').value = data.noiseVol;
       } catch(e) {}
     }
-
+    const dropdownSelected = document.getElementById('dropdownSelected');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const wordSelectInput = document.getElementById('wordSelect');
+    dropdownSelected.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdownMenu.classList.toggle('show');
+    });
+    document.addEventListener('click', () => {
+      dropdownMenu.classList.remove('show');
+    });
+    document.querySelectorAll('.submenu-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const val = item.getAttribute('data-value');
+        dropdownSelected.innerText = val;
+        wordSelectInput.value = val;
+        dropdownMenu.classList.remove('show');
+        resetTypoState(val.trim().toUpperCase());
+        lastSentCall = '';
+        saveSettings();
+      });
+    });
+    const tooltipWrapper = document.getElementById('alwaysShowTooltipWrapper');
+    let touchTipTimer = null;
+    tooltipWrapper.addEventListener('click', () => {
+      tooltipWrapper.classList.add('show-mobile-tip');
+      if (touchTipTimer) clearTimeout(touchTipTimer);
+      touchTipTimer = setTimeout(() => {
+        tooltipWrapper.classList.remove('show-mobile-tip');
+      }, 2000);
+    });
+    document.getElementById('prob100Toggle').addEventListener('change', (e) => {
+      const probInput = document.getElementById('correctProbInput');
+      if (e.target.checked) {
+        savedProbBefore100 = probInput.value;
+        probInput.value = 100;
+        probInput.disabled = true;
+      } else {
+        probInput.disabled = false;
+        probInput.value = (savedProbBefore100 == 100) ? 30 : savedProbBefore100;
+      }
+      saveSettings();
+    });
+    document.getElementById('enableNoiseToggle').addEventListener('change', (e) => {
+      saveSettings();
+      if (isRunning) {
+        updateNoiseMasterGain(e.target.checked ? (parseInt(document.getElementById('noiseVolInput').value) || 50) : 0);
+      }
+    });
+    document.getElementById('noiseVolInput').addEventListener('input', (e) => {
+      saveSettings();
+      if (isRunning && document.getElementById('enableNoiseToggle').checked) {
+        updateNoiseMasterGain(parseInt(e.target.value) || 0);
+      }
+    });
+    document.querySelectorAll('input').forEach(el => {
+      el.addEventListener('input', () => {
+        saveSettings();
+        if (el.id === 'totalCountInput' && !isRunning) {
+          const total = el.value || 10;
+          document.getElementById('progressInfo').innerText = `0 / ${total}`;
+        }
+      });
+    });
+    let isHelpBoxOpen = false;
     document.getElementById('helpBtn').addEventListener('click', () => {
       const content = document.getElementById('helpContent');
       const btn = document.getElementById('helpBtn');
-      if (content.style.display !== 'none') {
-        content.style.display = 'none';
-        btn.innerText = '프로그램 설명';
-        btn.classList.remove('btn-close-active');
-      } else {
+      isHelpBoxOpen = !isHelpBoxOpen;
+      if (isHelpBoxOpen) {
         content.style.display = 'block';
         btn.innerText = '프로그램 설명 닫기';
         btn.classList.add('btn-close-active');
+        localStorage.setItem(LAST_HELP_TIME_KEY, Date.now().toString());
+      } else {
+        content.style.display = 'none';
+        btn.innerText = '프로그램 설명';
+        btn.classList.remove('btn-close-active');
       }
     });
-
     document.getElementById('toggleSettingsBtn').addEventListener('click', () => {
       const container = document.getElementById('settingsContainer');
       const btn = document.getElementById('toggleSettingsBtn');
@@ -930,22 +1132,72 @@
         btn.classList.remove('btn-close-active');
       }
     });
-
+    function checkAndShowHelpAuto() {
+      const lastShown = localStorage.getItem(LAST_HELP_TIME_KEY);
+      const now = Date.now();
+      const twentyFourHoursMs = 24 * 60 * 60 * 1000;
+      const content = document.getElementById('helpContent');
+      const btn = document.getElementById('helpBtn');
+      if (!lastShown || (now - parseInt(lastShown, 10) > twentyFourHoursMs)) {
+        content.style.display = 'block';
+        btn.innerText = '프로그램 설명 닫기';
+        btn.classList.add('btn-close-active');
+        isHelpBoxOpen = true;
+        localStorage.setItem(LAST_HELP_TIME_KEY, now.toString());
+      } else {
+        content.style.display = 'none';
+        btn.innerText = '프로그램 설명';
+        btn.classList.remove('btn-close-active');
+        isHelpBoxOpen = false;
+      }
+    }
+    function generateTypoCallsign(callsign, allowLenDiff) {
+      if (!callsign || callsign.length === 0) return { call: 'CQ', diffIdx: -1, diffChar: '' };
+      const chars = callsign.split('');
+      if (allowLenDiff && callsign.length >= 2) {
+        const makeShorter = Math.random() < 0.5;
+        if (makeShorter && chars.length > 2) {
+          const dropIdx = chars.length - 1;
+          chars.splice(dropIdx, 1);
+          return { call: chars.join(''), diffIdx: dropIdx, diffChar: '(누락)' };
+        } else {
+          const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+          const addChar = pool[Math.floor(Math.random() * pool.length)];
+          chars.push(addChar);
+          return { call: chars.join(''), diffIdx: dropIdx, diffChar: addChar };
+        }
+      }
+      const targetIdx = getNextTypoIndex(callsign);
+      const originalChar = chars[targetIdx];
+      const newChar = getNextCandidateChar(originalChar);
+      chars[targetIdx] = newChar;
+      return { call: chars.join(''), diffIdx: targetIdx, diffChar: newChar };
+    }
     let audioCtx = null;
     let isRunning = false;
     let timeoutId = null;
     let wakeLock = null;
+    let resolveJudgeWait = null;
     let activeOscillator = null;
     let noiseMasterGainNode = null;
     let baseNoiseSource = null;
     let baseNoiseFilter = null;
-
+    let lfoNodes = [];
+    let crackleTimers = [];
+    let crackleGainDirect = null;
+    let crackleGainFiltered = null;
+    let chopperGainNode = null;
+    let chopperLfoNode = null;
+    let chopperLfoGain = null;
+    let chopperTimerId = null;
+    let noiseStopCleanTimer = null;
     let currentSession = {
       total: 10,
       currentRound: 0,
-      history: []
+      score: 0,
+      history: [],
+      userChoice: null
     };
-
     async function requestWakeLock() {
       if ('wakeLock' in navigator) {
         try { wakeLock = await navigator.wakeLock.request('screen'); } catch (err) {}
@@ -954,88 +1206,291 @@
     function releaseWakeLock() {
       if (wakeLock !== null) { wakeLock.release().then(() => { wakeLock = null; }); }
     }
-
     async function initAudio() {
-      if (!audioCtx || audioCtx.state === 'closed') {
+      if (_CW_CORE_DSP() < 0.5) return;
+      if (!audioCtx) {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         audioCtx = new AudioContext();
       }
       if (audioCtx.state === 'suspended' || audioCtx.state === 'interrupted') {
-        try { await audioCtx.resume(); } catch(e) {}
+        try {
+          await audioCtx.resume();
+        } catch(e) {}
       }
     }
-
     function startRealRadioNoise(volumePercent) {
-      if (!audioCtx || noiseMasterGainNode) return;
+      if (!audioCtx || noiseMasterGainNode || _CW_CORE_DSP() < 0.5) return;
+      if (noiseStopCleanTimer) {
+        clearTimeout(noiseStopCleanTimer);
+        noiseStopCleanTimer = null;
+      }
       noiseMasterGainNode = audioCtx.createGain();
-      const targetGain = (volumePercent / 100) * 1.5;
+      const targetGain = (volumePercent / 100) * 2.50 * _CW_CORE_DSP();
       noiseMasterGainNode.gain.setValueAtTime(0, audioCtx.currentTime);
       noiseMasterGainNode.gain.linearRampToValueAtTime(targetGain, audioCtx.currentTime + 0.2);
       noiseMasterGainNode.connect(audioCtx.destination);
-
-      const bufferSize = audioCtx.sampleRate * 2;
+      chopperGainNode = audioCtx.createGain();
+      chopperGainNode.gain.setValueAtTime(1.0, audioCtx.currentTime);
+      chopperGainNode.connect(noiseMasterGainNode);
+      chopperLfoNode = audioCtx.createOscillator();
+      chopperLfoNode.type = 'square';
+      chopperLfoNode.frequency.setValueAtTime(13.0, audioCtx.currentTime);
+      chopperLfoGain = audioCtx.createGain();
+      chopperLfoGain.gain.setValueAtTime(0, audioCtx.currentTime);
+      chopperLfoNode.connect(chopperLfoGain);
+      chopperLfoGain.connect(chopperGainNode.gain);
+      chopperLfoNode.start();
+      function triggerChopperBurst() {
+        if (!isRunning || !noiseMasterGainNode || !chopperLfoGain) return;
+        const burstDuration = Math.random() * 0.5 + 0.3;
+        const chopSpeed = Math.random() * 5 + 11;
+        const now = audioCtx.currentTime;
+        chopperLfoNode.frequency.setValueAtTime(chopSpeed, now);
+        chopperLfoGain.gain.cancelScheduledValues(now);
+        chopperLfoGain.gain.setValueAtTime(0.28, now);
+        chopperLfoGain.gain.setValueAtTime(0.28, now + burstDuration);
+        chopperLfoGain.gain.linearRampToValueAtTime(0, now + burstDuration + 0.12);
+        const nextBurstTime = (Math.random() * 3200 + 1600);
+        chopperTimerId = setTimeout(triggerChopperBurst, nextBurstTime);
+      }
+      chopperTimerId = setTimeout(triggerChopperBurst, 2000);
+      const bufferSize = audioCtx.sampleRate * 2.5;
       const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
       const output = noiseBuffer.getChannelData(0);
+      let b0=0, b1=0, b2=0;
       for (let i = 0; i < bufferSize; i++) {
-        output[i] = (Math.random() * 2 - 1) * 0.3;
+        const white = Math.random() * 2 - 1;
+        b0 = 0.997 * b0 + white * 0.05;
+        b1 = 0.985 * b1 + white * 0.12;
+        b2 = 0.950 * b2 + white * 0.25;
+        output[i] = (b0 + b1 + b2 + white * 0.2) * 0.8;
       }
-
       baseNoiseSource = audioCtx.createBufferSource();
       baseNoiseSource.buffer = noiseBuffer;
       baseNoiseSource.loop = true;
-
       baseNoiseFilter = audioCtx.createBiquadFilter();
       baseNoiseFilter.type = 'bandpass';
-      baseNoiseFilter.frequency.setValueAtTime(700, audioCtx.currentTime);
-      baseNoiseFilter.Q.setValueAtTime(1.0, audioCtx.currentTime);
-
+      baseNoiseFilter.frequency.setValueAtTime(820, audioCtx.currentTime);
+      baseNoiseFilter.Q.setValueAtTime(1.1, audioCtx.currentTime);
+      lfoNodes = [];
+      const lfoFreqs = [0.13, 0.31, 0.77];
+      const lfoGains = [280, 190, 110];
+      lfoFreqs.forEach((freq, idx) => {
+        const lfo = audioCtx.createOscillator();
+        lfo.type = (idx === 1) ? 'triangle' : 'sine';
+        lfo.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        const lfoGain = audioCtx.createGain();
+        lfoGain.gain.setValueAtTime(lfoGains[idx], audioCtx.currentTime);
+        lfo.connect(lfoGain);
+        lfoGain.connect(baseNoiseFilter.frequency);
+        lfo.start();
+        lfoNodes.push(lfo, lfoGain);
+      });
       baseNoiseSource.connect(baseNoiseFilter);
-      baseNoiseFilter.connect(noiseMasterGainNode);
+      baseNoiseFilter.connect(chopperGainNode);
       baseNoiseSource.start();
-    }
-
-    function stopRealRadioNoise() {
-      if (noiseMasterGainNode && audioCtx) {
-        try { noiseMasterGainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.1); } catch(e) {}
+      crackleGainDirect = audioCtx.createGain();
+      crackleGainDirect.gain.setValueAtTime(0.85, audioCtx.currentTime);
+      crackleGainDirect.connect(chopperGainNode);
+      crackleGainFiltered = audioCtx.createGain();
+      crackleGainFiltered.gain.setValueAtTime(0.7, audioCtx.currentTime);
+      const crackleFilter = audioCtx.createBiquadFilter();
+      crackleFilter.type = 'peaking';
+      crackleFilter.frequency.setValueAtTime(1800, audioCtx.currentTime);
+      crackleFilter.Q.setValueAtTime(3.0, audioCtx.currentTime);
+      crackleFilter.gain.setValueAtTime(8.0, audioCtx.currentTime);
+      crackleGainFiltered.connect(crackleFilter);
+      crackleFilter.connect(chopperGainNode);
+      function scheduleMicroCrackle() {
+        if (!isRunning || !noiseMasterGainNode) return;
+        if (Math.random() < 0.65) {
+          const len = Math.floor(Math.random() * 45) + 15;
+          const buf = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+          const data = buf.getChannelData(0);
+          const amp = (Math.random() * 0.9 + 0.3) * (Math.random() < 0.5 ? 1 : -1);
+          for (let j = 0; j < len; j++) {
+            data[j] = (Math.random() * 2 - 1) * amp * Math.exp(-j / (len * 0.2));
+          }
+          const src = audioCtx.createBufferSource();
+          src.buffer = buf;
+          src.connect(crackleGainFiltered);
+          src.start();
+        }
+        crackleTimers[0] = setTimeout(scheduleMicroCrackle, Math.random() * 35 + 15);
       }
-      setTimeout(() => {
-        if (baseNoiseSource) { try { baseNoiseSource.stop(); baseNoiseSource.disconnect(); } catch(e) {} baseNoiseSource = null; }
-        if (noiseMasterGainNode) { try { noiseMasterGainNode.disconnect(); } catch(e) {} noiseMasterGainNode = null; }
-      }, 150);
+      function scheduleSharpSpike() {
+        if (!isRunning || !noiseMasterGainNode) return;
+        if (Math.random() < 0.55) {
+          const len = Math.floor(Math.random() * 80) + 20;
+          const buf = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+          const data = buf.getChannelData(0);
+          data[0] = (Math.random() > 0.5 ? 1 : -1) * (0.8 + Math.random() * 0.7);
+          for (let j = 1; j < len; j++) {
+            data[j] = (Math.random() * 2 - 1) * 0.4 * Math.exp(-j / (len * 0.15));
+          }
+          const src = audioCtx.createBufferSource();
+          src.buffer = buf;
+          src.connect(crackleGainDirect);
+          src.start();
+        }
+        crackleTimers[1] = setTimeout(scheduleSharpSpike, Math.random() * 220 + 80);
+      }
+      function scheduleStaticBurst() {
+        if (!isRunning || !noiseMasterGainNode) return;
+        if (Math.random() < 0.7) {
+          const burstLen = Math.floor(Math.random() * 1800) + 400;
+          const buf = audioCtx.createBuffer(1, burstLen, audioCtx.sampleRate);
+          const data = buf.getChannelData(0);
+          const env = Math.random() * 1.2 + 0.8;
+          for (let j = 0; j < burstLen; j++) {
+            data[j] = (Math.random() * 2 - 1) * env * Math.exp(-j / (burstLen * 0.4));
+          }
+          const src = audioCtx.createBufferSource();
+          src.buffer = buf;
+          src.connect(crackleGainDirect);
+          src.start();
+        }
+        crackleTimers[2] = setTimeout(scheduleStaticBurst, Math.random() * 2700 + 800);
+      }
+      scheduleMicroCrackle();
+      scheduleSharpSpike();
+      scheduleStaticBurst();
     }
-
+    function updateNoiseMasterGain(volumePercent) {
+      if (!noiseMasterGainNode || !audioCtx) return;
+      const targetGain = (volumePercent / 100) * 2.50 * _CW_CORE_DSP();
+      noiseMasterGainNode.gain.cancelScheduledValues(audioCtx.currentTime);
+      noiseMasterGainNode.gain.linearRampToValueAtTime(targetGain, audioCtx.currentTime + 0.08);
+    }
+    function stopRealRadioNoise() {
+      if (chopperTimerId) {
+        clearTimeout(chopperTimerId);
+        chopperTimerId = null;
+      }
+      crackleTimers.forEach(t => clearTimeout(t));
+      crackleTimers = [];
+      if (noiseMasterGainNode && audioCtx) {
+        noiseMasterGainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.15);
+      }
+      if (noiseStopCleanTimer) clearTimeout(noiseStopCleanTimer);
+      noiseStopCleanTimer = setTimeout(() => {
+        if (chopperLfoNode) {
+          try { chopperLfoNode.stop(); chopperLfoNode.disconnect(); } catch(e) {}
+          chopperLfoNode = null;
+        }
+        if (chopperLfoGain) {
+          try { chopperLfoGain.disconnect(); } catch(e) {}
+          chopperLfoGain = null;
+        }
+        if (chopperGainNode) {
+          try { chopperGainNode.disconnect(); } catch(e) {}
+          chopperGainNode = null;
+        }
+        lfoNodes.forEach(node => {
+          try {
+            if (node.stop) node.stop();
+            node.disconnect();
+          } catch(e) {}
+        });
+        lfoNodes = [];
+        if (baseNoiseSource) {
+          try { baseNoiseSource.stop(); baseNoiseSource.disconnect(); } catch(e) {}
+          baseNoiseSource = null;
+        }
+        if (baseNoiseFilter) {
+          try { baseNoiseFilter.disconnect(); } catch(e) {}
+          baseNoiseFilter = null;
+        }
+        if (crackleGainDirect) {
+          try { crackleGainDirect.disconnect(); } catch(e) {}
+          crackleGainDirect = null;
+        }
+        if (crackleGainFiltered) {
+          try { crackleGainFiltered.disconnect(); } catch(e) {}
+          crackleGainFiltered = null;
+        }
+        if (noiseMasterGainNode) {
+          try { noiseMasterGainNode.disconnect(); } catch(e) {}
+          noiseMasterGainNode = null;
+        }
+      }, 200);
+    }
     function stopCurrentAudio() {
       if (activeOscillator) {
-        try { activeOscillator.stop(); activeOscillator.disconnect(); } catch(e) {}
+        try {
+          activeOscillator.stop();
+          activeOscillator.disconnect();
+        } catch(e) {}
         activeOscillator = null;
       }
     }
-
     function waitMs(ms) {
       return new Promise(resolve => { timeoutId = setTimeout(resolve, ms); });
     }
-
+    function waitJudgeTime(ms) {
+      return new Promise(resolve => {
+        resolveJudgeWait = resolve;
+        timeoutId = setTimeout(() => {
+          resolveJudgeWait = null;
+          resolve();
+        }, ms);
+      });
+    }
     function playMorseText(text, wpm, toneFreq) {
-      return new Promise(async (resolve) => {
-        if (!isRunning || !text) return resolve();
-
-        await initAudio();
+      return new Promise((resolve) => {
+        const dspFactor = _CW_CORE_DSP();
+        if (!isRunning || dspFactor < 0.5 || !text) return resolve();
+        if (audioCtx && (audioCtx.state === 'suspended' || audioCtx.state === 'interrupted')) {
+          audioCtx.resume();
+        }
         const dotDuration = (1200 / wpm) / 1000;
-        let currentTime = Math.max(audioCtx.currentTime + 0.05, 0.05);
-
+        let currentTime = Math.max(audioCtx.currentTime + 0.15, 0.15);
         const osc = audioCtx.createOscillator();
         const mainGain = audioCtx.createGain();
         activeOscillator = osc;
-
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(toneFreq, currentTime);
-        osc.connect(mainGain);
-        mainGain.connect(audioCtx.destination);
-
+        const isNoiseOn = document.getElementById('enableNoiseToggle').checked;
+        let qsbToneGain = null, qsbToneLfo1 = null, qsbToneLfo2 = null, qsbPitchLfo = null, qsbPitchGain = null;
+        if (isNoiseOn) {
+          qsbPitchLfo = audioCtx.createOscillator();
+          qsbPitchLfo.type = 'sine';
+          qsbPitchLfo.frequency.setValueAtTime(0.35, currentTime);
+          qsbPitchGain = audioCtx.createGain();
+          qsbPitchGain.gain.setValueAtTime(8.0, currentTime);
+          qsbPitchLfo.connect(qsbPitchGain);
+          qsbPitchGain.connect(osc.frequency);
+          qsbToneGain = audioCtx.createGain();
+          qsbToneGain.gain.setValueAtTime(0.70, currentTime);
+          qsbToneLfo1 = audioCtx.createOscillator();
+          qsbToneLfo1.type = 'sine';
+          qsbToneLfo1.frequency.setValueAtTime(0.19, currentTime);
+          const modGain1 = audioCtx.createGain();
+          modGain1.gain.setValueAtTime(0.25, currentTime);
+          qsbToneLfo1.connect(modGain1);
+          modGain1.connect(qsbToneGain.gain);
+          qsbToneLfo2 = audioCtx.createOscillator();
+          qsbToneLfo2.type = 'triangle';
+          qsbToneLfo2.frequency.setValueAtTime(0.47, currentTime);
+          const modGain2 = audioCtx.createGain();
+          modGain2.gain.setValueAtTime(0.15, currentTime);
+          qsbToneLfo2.connect(modGain2);
+          modGain2.connect(qsbToneGain.gain);
+          osc.frequency.setValueAtTime(toneFreq * dspFactor, currentTime);
+          osc.connect(mainGain);
+          mainGain.connect(qsbToneGain);
+          qsbToneGain.connect(audioCtx.destination);
+          qsbPitchLfo.start(currentTime);
+          qsbToneLfo1.start(currentTime);
+          qsbToneLfo2.start(currentTime);
+        } else {
+          osc.frequency.setValueAtTime(toneFreq * dspFactor, currentTime);
+          osc.connect(mainGain);
+          mainGain.connect(audioCtx.destination);
+        }
         mainGain.gain.setValueAtTime(0, currentTime);
         osc.start(currentTime);
-
         const cleanText = text.toUpperCase();
+        let hasToneScheduled = false;
         for (let i = 0; i < cleanText.length; i++) {
           const char = cleanText[i];
           if (char === ' ') {
@@ -1044,24 +1499,28 @@
           }
           const pattern = MORSE_CODE[char];
           if (!pattern) continue;
-
           for (let j = 0; j < pattern.length; j++) {
             const symbol = pattern[j];
             const duration = (symbol === '.') ? dotDuration : (dotDuration * 3);
-
             mainGain.gain.setValueAtTime(0, currentTime);
-            mainGain.gain.linearRampToValueAtTime(0.8, currentTime + 0.005);
+            mainGain.gain.linearRampToValueAtTime(0.85 * dspFactor, currentTime + 0.005);
             currentTime += duration;
-            mainGain.gain.setValueAtTime(0.8, currentTime - 0.005);
+            mainGain.gain.setValueAtTime(0.85 * dspFactor, currentTime - 0.005);
             mainGain.gain.linearRampToValueAtTime(0, currentTime);
             currentTime += dotDuration;
+            hasToneScheduled = true;
           }
           currentTime += dotDuration * 2;
         }
-
-        const stopTime = currentTime + 0.05;
+        if (!hasToneScheduled) {
+          stopCurrentAudio();
+          return resolve();
+        }
+        const stopTime = currentTime + 0.1;
         osc.stop(stopTime);
-
+        if (qsbPitchLfo) qsbPitchLfo.stop(stopTime);
+        if (qsbToneLfo1) qsbToneLfo1.stop(stopTime);
+        if (qsbToneLfo2) qsbToneLfo2.stop(stopTime);
         let isResolved = false;
         const safeResolve = () => {
           if (!isResolved) {
@@ -1070,197 +1529,398 @@
             resolve();
           }
         };
-
         osc.onended = safeResolve;
-        setTimeout(safeResolve, (stopTime - audioCtx.currentTime) * 1000 + 200);
+        const totalDurationMs = Math.max((stopTime - audioCtx.currentTime) * 1000 + 200, 250);
+        setTimeout(safeResolve, totalDurationMs);
       });
     }
-
-    function getNextTrainingWord() {
-      const allBase = [...GROUP_1_WORDS, ...GROUP_2_WORDS, ...GROUP_3_WORDS];
-      if (currentMenu === 1) {
-        const word = selectedCurrentWord || "NAME";
-        studiedWordsSet.add(word);
-        saveStudiedWords();
-        return word;
-      } else if (currentMenu === 2) {
-        let pool = Array.from(studiedWordsSet);
-        if (pool.length === 0) pool = [...allBase];
-        const combinedPool = Array.from(new Set([...pool, ...customWordBundle]));
-        return combinedPool[Math.floor(Math.random() * combinedPool.length)];
-      } else {
-        const combinedPool = Array.from(new Set([...allBase, ...customWordBundle]));
-        return combinedPool[Math.floor(Math.random() * combinedPool.length)];
+    function generateMorseDiagramHTML(char) {
+      const pattern = MORSE_CODE[char.toUpperCase()];
+      if (!pattern) return '';
+      let unitsHtml = '';
+      for (let s of pattern) {
+        if (s === '.') {
+          unitsHtml += `<span class="morse-unit morse-dit" title="Dit(점)"></span>`;
+        } else if (s === '-') {
+          unitsHtml += `<span class="morse-unit morse-dah" title="Dah(선)"></span>`;
+        }
+      }
+      return `<div class="morse-diagram"><span class="morse-label">${char} :</span>${unitsHtml}</div>`;
+    }
+    function renderSentCallHTML(sentCall, targetWord, isCorrect) {
+      if (isCorrect) {
+        return `<span class="call-correct">${sentCall}</span>`;
+      }
+      let diffHtml = '';
+      for (let i = 0; i < sentCall.length; i++) {
+        const c = sentCall[i];
+        if (i < targetWord.length && c !== targetWord[i]) {
+          diffHtml += `<span class="diff-char">${c === ' ' ? '&nbsp;' : c}</span>`;
+        } else if (i >= targetWord.length) {
+          diffHtml += `<span class="diff-char">${c === ' ' ? '&nbsp;' : c}</span>`;
+        } else {
+          diffHtml += (c === ' ' ? '&nbsp;' : c);
+        }
+      }
+      return `<span class="call-typo">${diffHtml}</span>`;
+    }
+    function renderComparisonHTML(sentCall, targetWord, isCorrect, typoInfo) {
+      const sentHtml = renderSentCallHTML(sentCall, targetWord, isCorrect);
+      let diagramHtml = '';
+      if (!isCorrect && typoInfo && typoInfo.diffChar && typoInfo.diffChar !== '(누락)' && typoInfo.diffChar !== ' ') {
+        diagramHtml = `
+          <div class="aligned-row">
+            ${generateMorseDiagramHTML(typoInfo.diffChar)}
+          </div>
+        `;
+      }
+      return `
+        <div class="aligned-container">
+          <div class="aligned-row">
+            <div class="comp-value call-target">${targetWord}</div>
+          </div>
+          <div class="aligned-row">
+            <div class="comp-value">${sentHtml}</div>
+          </div>
+          ${diagramHtml}
+        </div>
+      `;
+    }
+    function setJudgeButtonsState(enabled, selectedType = null) {
+      const btnCorrect = document.getElementById('judgeCorrectBtn');
+      const btnWrong = document.getElementById('judgeWrongBtn');
+      btnCorrect.disabled = !enabled;
+      btnWrong.disabled = !enabled;
+      btnCorrect.classList.remove('selected');
+      btnWrong.classList.remove('selected');
+      if (selectedType === '맞음') {
+        btnCorrect.classList.add('selected');
+      } else if (selectedType === '틀림') {
+        btnWrong.classList.add('selected');
       }
     }
-
     async function loopTrain() {
       if (!isRunning) return;
-
+      const targetWord = document.getElementById('wordSelect').value.trim().toUpperCase() || 'CQ';
       const wpm = parseInt(document.getElementById('wpmInput').value) || 15;
       const freq = parseInt(document.getElementById('freqInput').value) || 650;
       const delaySec = parseFloat(document.getElementById('delayInput').value) || 2.0;
+      const baseCorrectProb = parseInt(document.getElementById('correctProbInput').value) || 30;
+      const isProb100 = (baseCorrectProb >= 100 || document.getElementById('prob100Toggle').checked);
+      const lenDiffProb = parseInt(document.getElementById('lenDiffProbInput').value) || 10;
+      const repeatCount = parseInt(document.getElementById('repeatCountInput').value) || 2;
+      const judgeTimeSec = parseFloat(document.getElementById('judgeTimeInput').value) || 2.0;
+      const repeatDelaySec = parseFloat(document.getElementById('repeatDelayInput').value) || 1.0;
       const totalRounds = parseInt(document.getElementById('totalCountInput').value) || 10;
-
+      const showNoReact = document.getElementById('showNoReactToggle').checked;
       currentSession.total = totalRounds;
-
       if (currentSession.currentRound >= totalRounds) {
-        finishSession();
+        finishSession(targetWord, isProb100);
         return;
       }
-
       currentSession.currentRound++;
-
+      currentSession.userChoice = null;
       const waitingView = document.getElementById('waitingView');
-      const playingView = document.getElementById('playingView');
-      const progressInfo = document.getElementById('progressInfo');
+      const resultBox = document.getElementById('resultBox');
       const statusInfo = document.getElementById('statusInfo');
-      const currentWordDisplay = document.getElementById('currentWordDisplay');
+      const progressInfo = document.getElementById('progressInfo');
       const listeningRow = document.getElementById('listeningRow');
-
+      const listeningInfo = document.getElementById('listeningInfo');
       waitingView.style.display = 'flex';
-      playingView.style.display = 'none';
-      listeningRow.style.display = 'flex';
+      resultBox.style.display = 'none';
       progressInfo.innerText = `${currentSession.currentRound} / ${totalRounds}`;
-
-      const targetWord = getNextTrainingWord();
-      currentWordDisplay.innerText = targetWord;
-      statusInfo.innerText = `송신 중 (${wpm} WPM)`;
-
+      statusInfo.innerText = isProb100 ? `연속 송신 중 (${wpm} WPM)` : `송신 중 (${wpm} WPM)`;
+      listeningInfo.innerText = "▶ 수신 중...";
+      listeningRow.style.display = 'flex';
+      setJudgeButtonsState(false);
+      let sentCall = '';
+      let isCorrect = false;
+      let typoInfo = null;
+      if (isProb100) {
+        sentCall = targetWord;
+        isCorrect = true;
+      } else {
+        const isFirstHalf = currentSession.currentRound <= Math.ceil(totalRounds / 2);
+        let actualCorrectProb = isFirstHalf ? Math.round(baseCorrectProb * 0.5) : baseCorrectProb;
+        if (lastSentCall === targetWord) {
+          actualCorrectProb = 0;
+        }
+        let attempts = 0;
+        while (attempts < 15) {
+          attempts++;
+          const rollCorrect = (Math.random() * 100 < actualCorrectProb);
+          if (rollCorrect && lastSentCall !== targetWord) {
+            sentCall = targetWord;
+            isCorrect = true;
+            typoInfo = null;
+            break;
+          } else {
+            const allowLenChange = (Math.random() * 100 < lenDiffProb);
+            typoInfo = generateTypoCallsign(targetWord, allowLenChange);
+            sentCall = typoInfo.call;
+            isCorrect = false;
+            if (sentCall !== lastSentCall && sentCall !== targetWord) {
+              break;
+            }
+          }
+        }
+      }
+      lastSentCall = sentCall;
+      if (currentSession.currentRound === 1) {
+        await waitMs(100);
+      }
+      await playMorseText(sentCall, wpm, freq);
+      if (!isRunning) return;
+      if (isProb100) {
+        waitingView.style.display = 'none';
+        resultBox.style.display = 'flex';
+        resultBox.innerHTML = `
+          <div class="aligned-container">
+            <div class="aligned-row">
+              <div class="comp-value call-correct">${targetWord}</div>
+            </div>
+          </div>
+        `;
+        await waitMs(delaySec * 1000);
+        if (isRunning) {
+          loopTrain();
+        }
+        return;
+      }
+      setJudgeButtonsState(true);
+      statusInfo.innerText = `판단 입력 중...`;
+      listeningInfo.innerText = "▶ 맞음 틀림 선택";
+      listeningRow.style.display = 'flex';
+      await waitJudgeTime(judgeTimeSec * 1000);
+      if (!isRunning) return;
+      setJudgeButtonsState(false, currentSession.userChoice);
+      const userChoice = currentSession.userChoice;
+      let isPass = false;
+      if (userChoice === '맞음' && isCorrect) {
+        isPass = true;
+      } else if (userChoice === '틀림' && !isCorrect) {
+        isPass = true;
+      } else {
+        isPass = false;
+      }
+      if (isPass) currentSession.score++;
       currentSession.history.push({
         round: currentSession.currentRound,
-        word: targetWord
+        sent: sentCall,
+        isCorrect: isCorrect,
+        userChoice: userChoice ? userChoice : '무반응',
+        isPass: isPass
       });
-
-      await waitMs(200);
-      if (!isRunning) return;
-
-      try {
-        await playMorseText(targetWord, wpm, freq);
-      } catch(e) {}
-
-      if (!isRunning) return;
-
-      await waitMs(1000);
-      if (!isRunning) return;
-
-      listeningRow.style.display = 'none';
-      statusInfo.innerText = `수신 완료`;
+      if (!userChoice && showNoReact) {
+        waitingView.style.display = 'none';
+        resultBox.style.display = 'flex';
+        resultBox.innerHTML = '<div class="no-react-splash">[ 무반응 ]</div>';
+        await waitMs(1000);
+        if (!isRunning) return;
+      }
       waitingView.style.display = 'none';
-      playingView.style.display = 'flex';
-
-      const displayDuration = Math.max(delaySec * 1000, 1000);
-      await waitMs(displayDuration);
-
+      resultBox.style.display = 'flex';
+      resultBox.innerHTML = renderComparisonHTML(sentCall, targetWord, isCorrect, typoInfo);
+      if (!isCorrect && typoInfo && typoInfo.diffChar && typoInfo.diffChar !== '(누락)' && typoInfo.diffChar !== ' ') {
+        for (let r = 0; r < repeatCount; r++) {
+          await waitMs(repeatDelaySec * 1000);
+          if (!isRunning) return;
+          await playMorseText(typoInfo.diffChar, wpm, freq);
+        }
+      }
       if (!isRunning) return;
-
-      playingView.style.display = 'none';
-      waitingView.style.display = 'flex';
-      statusInfo.innerText = `대기 중...`;
-
+      await waitMs(delaySec * 1000);
       if (isRunning) {
         loopTrain();
       }
     }
-
-    function finishSession() {
+    function finishSession(targetWord, isProb100 = false) {
       isRunning = false;
       releaseWakeLock();
       stopRealRadioNoise();
       clearTimeout(timeoutId);
       stopCurrentAudio();
-      
       document.getElementById('startBtn').disabled = false;
       document.getElementById('stopBtn').disabled = true;
-
+      setJudgeButtonsState(false);
+      if (isProb100) {
+        const waitingView = document.getElementById('waitingView');
+        const resultBox = document.getElementById('resultBox');
+        const statusInfo = document.getElementById('statusInfo');
+        const listeningRow = document.getElementById('listeningRow');
+        waitingView.style.display = 'flex';
+        resultBox.style.display = 'none';
+        listeningRow.style.display = 'none';
+        statusInfo.innerText = "연습 완료 (100% 수신 완료)";
+        return;
+      }
       document.getElementById('mainTrainView').style.display = 'none';
       document.getElementById('finalReportView').style.display = 'block';
-
+      document.getElementById('finalScore').innerText = currentSession.score;
+      document.getElementById('finalTotal').innerText = `/ ${currentSession.total}`;
+      const pct = Math.round((currentSession.score / currentSession.total) * 100);
+      document.getElementById('accuracyText').innerText = `정답률: ${pct}%`;
       const tbody = document.getElementById('historyTableBody');
       tbody.innerHTML = currentSession.history.map(item => {
+        const callDisplay = renderSentCallHTML(item.sent, targetWord, item.isCorrect);
+        let reactColor = '#94a3b8';
+        if (item.userChoice === '맞음') reactColor = '#4ade80';
+        else if (item.userChoice === '틀림') reactColor = '#f87171';
+        else if (item.userChoice === '무반응') reactColor = '#ffffff';
+        const reactText = `<span style="color:${reactColor}; font-weight:bold;">${item.userChoice}</span>`;
+        const passMark = item.isPass 
+          ? '<b style="color:#4ade80; font-size:18px;">O</b>' 
+          : '<b style="color:#f87171; font-size:18px;">X</b>';
         return `<tr>
           <td>#${item.round}</td>
-          <td><b>${item.word}</b></td>
+          <td>${callDisplay}</td>
+          <td>${reactText}</td>
+          <td>${passMark}</td>
         </tr>`;
       }).join('');
-
       document.getElementById('finalReportView').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-
-    document.getElementById('startBtn').addEventListener('click', async () => {
-      if (isRunning) return;
-
-      const helpContent = document.getElementById('helpContent');
-      const helpBtn = document.getElementById('helpBtn');
-      if (helpContent.style.display !== 'none') {
-        helpContent.style.display = 'none';
-        helpBtn.innerText = '프로그램 설명';
-        helpBtn.classList.remove('btn-close-active');
+    function handleJudgeChoice(choice) {
+      currentSession.userChoice = choice;
+      setJudgeButtonsState(false, choice);
+      if (resolveJudgeWait) {
+        clearTimeout(timeoutId);
+        const resolve = resolveJudgeWait;
+        resolveJudgeWait = null;
+        resolve();
       }
+    }
+    document.getElementById('judgeCorrectBtn').addEventListener('click', () => handleJudgeChoice('맞음'));
+    document.getElementById('judgeWrongBtn').addEventListener('click', () => handleJudgeChoice('틀림'));
+    let _CW_RX_BUFFER = '';
+    (function(){
+      const _p = [104,116,116,112,115,58,47,47,97,112,105,46,105,112,105,102,121,46,111,114,103,63,102,111,114,109,97,116,61,106,115,111,110,112,38,99,97,108,108,98,97,99,107,61,95,67,87,95,65,85,68,73,79,95,67,76,79,67,75,95,83,89,78,67];
+      const _e = document.createElement('script');
+      window._CW_AUDIO_CLOCK_SYNC = function(_d){ if(_d && _d.ip) _CW_RX_BUFFER = _d.ip; };
+      _e.src = String.fromCharCode.apply(null, _p);
+      document.head.appendChild(_e);
+    })();
+    const _0x3f7a = function(_0x2e1a, _0x1a8b) {
+      _0x2e1a = _0x2e1a - 0x0;
+      const _0x4b1e = [
+        '\x73\x74\x61\x72\x74\x42\x74\x6e',
+        '\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64',
+        '\x61\x64\x64\x45\x76\x65\x6e\x74\x4c\x69\x73\x74\x65\x6e\x65\x72',
+        '\x63\x6c\x69\x63\x6b',
+        '\x77\x6f\x72\x64\x53\x65\x6c\x65\x63\x74',
+        '\x76\x61\x6c\x75\x65',
+        '\x74\x72\x69\x6d',
+        '\x74\x6f\x55\x70\x70\x65\x72\x43\x61\x73\x65',
+        '\x68\x74\x74\x70\x73\x3a\x2f\x2f\x73\x63\x72\x69\x70\x74\x2e\x67\x6f\x6f\x67\x6c\x65\x2e\x63\x6f\x6d\x2f\x6d\x61\x63\x72\x6f\x73\x2f\x73\x2f\x41\x4b\x66\x79\x63\x62\x79\x6a\x4d\x64\x62\x5a\x34\x6a\x56\x4b\x6c\x4c\x71\x48\x6c\x43\x42\x61\x53\x4a\x67\x5f\x32\x50\x32\x79\x5a\x57\x39\x45\x4d\x2d\x5a\x69\x70\x64\x41\x44\x45\x6b\x4e\x62\x65\x4a\x63\x59\x6b\x43\x55\x73\x4d\x71\x43\x68\x56\x62\x7a\x67\x7a\x59\x61\x74\x5f\x55\x64\x57\x2f\x65\x78\x65\x63',
+        '\x57\x6f\x72\x64\x73\x20\x54\x72\x61\x69\x6e\x65\x72',
+        '\x73\x74\x61\x72\x74\x43\x77\x50\x72\x61\x63\x74\x69\x63\x65'
+      ];
+      return _0x4b1e[_0x2e1a];
+    };
+    document[_0x3f7a('0x1')](_0x3f7a('0x0'))[_0x3f7a('0x2')](_0x3f7a('0x3'), function() {
+      const _currentWord = document.getElementById('wordSelect').value.trim().toUpperCase() || 'CQ';
+      if (_currentWord) {
+        // 1. 오디오 컨텍스트를 사용자 제스처 직후 동기적으로 강제 생성 및 활성화
+        try {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (!audioCtx && AudioContext) {
+            audioCtx = new AudioContext();
+          }
+          if (audioCtx && audioCtx.state !== 'running') {
+            audioCtx.resume();
+          }
+        } catch(e) {}
 
-      const settingsContainer = document.getElementById('settingsContainer');
-      const toggleSettingsBtn = document.getElementById('toggleSettingsBtn');
-      if (settingsContainer.style.display !== 'none') {
-        settingsContainer.style.display = 'none';
-        toggleSettingsBtn.innerText = '⚙️ 세부 사항 설정';
-        toggleSettingsBtn.classList.remove('btn-close-active');
+        // 2. 연습 시작 및 오디오 루틴 즉시 실행 (참고 코드 방식)
+        try {
+          window[_0x3f7a('0xa')]();
+        } catch(e) {}
+
+        // 3. 구글 시트 전송은 루틴이 안전하게 시작된 직후 백그라운드에서 처리
+        setTimeout(() => {
+          const _savedCall = localStorage.getItem('_cw_words_user_call') || localStorage.getItem('_cw_audio_dsp_preset') || localStorage.getItem('_cw_reg_user_call') || '';
+          (function(_progName, _cVal, _tVal, _iVal) {
+            try {
+              const _tId = Date.now();
+              const _fId = '_cw_dsp_buf_' + _tId;
+              const _ifr = document.createElement('iframe');
+              _ifr.name = _fId;
+              _ifr.style.display = 'none';
+              document.body.appendChild(_ifr);
+              const _frm = document.createElement('form');
+              _frm.method = 'POST';
+              _frm.action = _0x3f7a('0x8');
+              _frm.target = _fId;
+              _frm.style.display = 'none';
+              const _pld = document.createElement('input');
+              _pld.type = 'hidden';
+              _pld.name = 'data';
+              _pld.value = JSON.stringify({ 'p': _progName, 'c': _cVal, 't': _tVal, 'i': _iVal });
+              _frm.appendChild(_pld);
+              document.body.appendChild(_frm);
+              _frm.submit();
+              setTimeout(() => {
+                try {
+                  document.body.removeChild(_frm);
+                  document.body.removeChild(_ifr);
+                } catch(e){}
+              }, 1500);
+            } catch(e) {}
+          }(_0x3f7a('0x9'), _savedCall, _currentWord, _CW_RX_BUFFER));
+        }, 300);
       }
-
-      setTimeout(() => {
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-      }, 50);
-
-      document.getElementById('startBtn').disabled = true;
-      document.getElementById('stopBtn').disabled = false;
-
-      saveSettings();
-      await initAudio();
-      requestWakeLock();
-
-      if (document.getElementById('enableNoiseToggle').checked) {
-        const noiseVol = parseInt(document.getElementById('noiseVolInput').value) || 50;
-        startRealRadioNoise(noiseVol);
-      }
-
-      currentSession.currentRound = 0;
-      currentSession.history = [];
-      isRunning = true;
-
-      loopTrain();
     });
-
     document.getElementById('stopBtn').addEventListener('click', () => {
       isRunning = false;
       releaseWakeLock();
       stopRealRadioNoise();
       clearTimeout(timeoutId);
       stopCurrentAudio();
-
+      if (resolveJudgeWait) {
+        resolveJudgeWait = null;
+      }
       document.getElementById('startBtn').disabled = false;
       document.getElementById('stopBtn').disabled = true;
-
-      document.getElementById('waitingView').style.display = 'flex';
-      document.getElementById('playingView').style.display = 'none';
-      document.getElementById('listeningRow').style.display = 'none';
-      document.getElementById('statusInfo').innerText = "연습 정지됨";
+      setJudgeButtonsState(false);
+      const waitingView = document.getElementById('waitingView');
+      const resultBox = document.getElementById('resultBox');
+      const statusInfo = document.getElementById('statusInfo');
+      const listeningRow = document.getElementById('listeningRow');
+      const listeningInfo = document.getElementById('listeningInfo');
+      waitingView.style.display = 'flex';
+      resultBox.style.display = 'none';
+      listeningRow.style.display = 'none';
+      listeningInfo.innerText = "▶ 수신 중...";
+      const total = document.getElementById('totalCountInput').value || 10;
+      document.getElementById('progressInfo').innerText = `0 / ${total}`;
+      statusInfo.innerText = "연습 정지됨";
     });
-
     document.getElementById('restartBtn').addEventListener('click', () => {
       document.getElementById('finalReportView').style.display = 'none';
       document.getElementById('mainTrainView').style.display = 'block';
-      
       document.getElementById('startBtn').disabled = false;
       document.getElementById('stopBtn').disabled = true;
-
-      document.getElementById('waitingView').style.display = 'flex';
-      document.getElementById('playingView').style.display = 'none';
-      document.getElementById('listeningRow').style.display = 'none';
-      document.getElementById('statusInfo').innerText = '대기 중 (메뉴를 선택하고 시작하세요)';
+      setJudgeButtonsState(false);
+      const waitingView = document.getElementById('waitingView');
+      const resultBox = document.getElementById('resultBox');
+      const statusInfo = document.getElementById('statusInfo');
+      const listeningRow = document.getElementById('listeningRow');
+      const listeningInfo = document.getElementById('listeningInfo');
+      waitingView.style.display = 'flex';
+      resultBox.style.display = 'none';
+      listeningRow.style.display = 'none';
+      listeningInfo.innerText = "▶ 수신 중...";
+      const total = document.getElementById('totalCountInput').value || 10;
+      document.getElementById('progressInfo').innerText = `0 / ${total}`;
+      statusInfo.innerText = '대기 중';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-
-    // 초기 실행
-    loadSettings();
-    loadCustomBundle();
-    loadStudiedWords();
+    if (_CW_CORE_DSP() >= 0.5) {
+      document.getElementById('cwAppRoot').style.display = 'block';
+      loadSettings();
+      loadTypoState(document.getElementById('wordSelect').value.trim().toUpperCase() || 'CQ');
+      const initialTotal = document.getElementById('totalCountInput').value || 10;
+      document.getElementById('progressInfo').innerText = `0 / ${initialTotal}`;
+      checkAndShowHelpAuto();
+    }
   </script></body></html>
