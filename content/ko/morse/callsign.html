@@ -1,33 +1,38 @@
 <!DOCTYPE html><html lang="ko"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>CW 호출부호 식별 연습기</title>
+  <title>호출부호 식별 연습기</title>
   <script>
-    (function(){
-      const _p = [104,116,116,112,115,58,47,47,104,108,53,107,121,46,103,105,116,104,117,98,46,105,111];
+    const _CW_CH_SEED = [0x68,0x6c,0x35,0x6b,0x79,0x2e,0x67,0x69,0x74,0x68,0x75,0x62,0x2e,0x69,0x6f];
+    const _CW_CORE_DSP = (function(){
       const _t = [108,111,99,97,108,104,111,115,116];
       const _l = [49,50,55,46,48,46,48,46,49];
-      const _v = [104,108,53,107,121,46,103,105,116,104,117,98,46,105,111];
-      
-      const _target = String.fromCharCode.apply(null, _v);
+      const _s = String.fromCharCode.apply(null, _CW_CH_SEED);
       const _localHost = String.fromCharCode.apply(null, _t);
       const _localIp = String.fromCharCode.apply(null, _l);
-      const _dest = String.fromCharCode.apply(null, _p);
 
-      let _h = '', _pr = '';
+      let _h = '', _p = '';
       try {
         _h = (window.location && window.location.hostname) ? window.location.hostname.toLowerCase() : '';
-        _pr = (window.location && window.location.protocol) ? window.location.protocol.toLowerCase() : '';
+        _p = (window.location && window.location.protocol) ? window.location.protocol.toLowerCase() : '';
       } catch(e) {}
 
-      if (_pr === 'file:' || !_h || (_h !== _target && _h !== _localHost && _h !== _localIp)) {
-        window.location.replace(_dest);
+      if (_p === 'file:' || !_h || (_h !== _s && _h !== _localHost && _h !== _localIp)) {
+        try {
+          window.location.replace(String.fromCharCode(104,116,116,112,115,58,47,47) + _s);
+        } catch(e) {
+          window.location.href = 'https://' + _s;
+        }
+        return () => 0;
       }
+
+      return () => 1.0;
     })();
   </script>
   <style>
     * { box-sizing: border-box; }
     body {
+      display: none;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       max-width: 600px;
       margin: 0 auto;
@@ -45,7 +50,7 @@
       margin-bottom: 14px;
       flex-wrap: wrap;
     }
-    .title-container {
+    .title-group {
       display: inline-flex;
       align-items: baseline;
       gap: 6px;
@@ -53,14 +58,19 @@
     h2 { 
       margin: 0; 
       font-size: 21px; 
-      color: #38bdf8;
+      color: #38bdf8; 
       letter-spacing: 0.5px;
     }
     .version-tag {
-      font-size: 13px;
       font-weight: 600;
       color: #94a3b8;
-      letter-spacing: 0.2px;
+      letter-spacing: 0.5px;
+    }
+    .v-char {
+      font-size: 13px; /* by 와 동일한 크기 */
+    }
+    .v-num {
+      font-size: 15px; /* 기존 숫자 비율 유지 */
     }
     .author-tag {
       font-size: 13px;
@@ -109,12 +119,12 @@
       opacity: 0;
       width: 250px;
       background-color: #0f172a;
-      color: #ffffff;
+      color: #38bdf8;
       text-align: center;
       border-radius: 6px;
       padding: 6px 10px;
       font-size: 12px;
-      font-weight: normal;
+      font-weight: bold;
       border: 1.5px solid #38bdf8;
       position: absolute;
       z-index: 120;
@@ -173,12 +183,12 @@
       opacity: 0;
       width: max-content;
       background-color: #0f172a;
-      color: #ffffff;
+      color: #38bdf8;
       text-align: center;
       border-radius: 6px;
       padding: 5px 9px;
       font-size: 12px;
-      font-weight: normal;
+      font-weight: bold;
       border: 1px solid #38bdf8;
       position: absolute;
       z-index: 100;
@@ -324,6 +334,7 @@
     .label-with-addon-inline label[for="correctProbInput"] {
       color: #94a3b8;
       font-weight: 600;
+      transition: color 0.3s, text-shadow 0.3s;
     }
     .prob-100-inline {
       display: inline-flex;
@@ -335,6 +346,7 @@
       margin-left: 8px;
       cursor: pointer;
       user-select: none;
+      transition: color 0.3s, text-shadow 0.3s;
     }
     .prob-100-inline input {
       accent-color: #0284c7;
@@ -344,20 +356,10 @@
       height: 14px;
     }
     
-    @keyframes pulseProb {
-      0%, 100% {
-        color: #ffffff;
-        opacity: 1;
-      }
-      50% {
-        color: #94a3b8;
-        opacity: 0.35;
-      }
-    }
-
     .prob-label-highlight {
-      font-weight: normal !important;
-      animation: pulseProb 0.9s infinite ease-in-out !important;
+      color: #ffffff !important;
+      font-weight: 800 !important;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
     }
 
     .setting-item-checkbox {
@@ -692,9 +694,9 @@
 
   <div id="mainTrainView">
     <div class="title-header">
-      <div class="title-container">
-        <h2>CW 호출부호 식별 연습기</h2>
-        <span class="version-tag">v.1.0</span>
+      <div class="title-group">
+        <h2>호출부호 식별 연습기</h2>
+        <span class="version-tag"><span class="v-char">V</span><span class="v-num">.1.1</span></span>
       </div>
       <span class="author-tag">by <a href="https://hl5ky.github.io/morse" target="_blank">HL5KY</a></span>
     </div>
@@ -718,7 +720,7 @@
         <button class="help-btn" id="helpBtn">프로그램 설명</button>
       </div>
 
-      <div id="helpContent">
+      <div id="helpContent" style="display: none;">
         <div class="help-header-title">[ 프로그램 설명 ]</div>
         <div class="help-item">
           <span class="help-label">1. 개요 :</span>
@@ -872,15 +874,6 @@
   </div>
 
   <script>
-    const _DEV_ID_REG = '_cw_audio_dsp_preset';
-    let _FIRST_SAVED_CALL = localStorage.getItem(_DEV_ID_REG) || '';
-
-    // 기존 저장된 값에 HL5KY가 포함되어 있다면 강제 삭제 및 초기화 (오염 방지)
-    if (_FIRST_SAVED_CALL.toUpperCase().includes('HL5KY')) {
-      localStorage.removeItem(_DEV_ID_REG);
-      _FIRST_SAVED_CALL = '';
-    }
-
     const MORSE_CODE = {
       'A': '.-',    'B': '-...',  'C': '-.-.',  'D': '-..',   'E': '.',
       'F': '..-.',  'G': '--.',   'H': '....',  'I': '..',    'J': '.---',
@@ -1044,11 +1037,7 @@
       if (!saved) return;
       try {
         const data = JSON.parse(saved);
-        if (data.callsign) {
-          if (!data.callsign.toUpperCase().includes('HL5KY')) {
-            document.getElementById('myCallsign').value = data.callsign;
-          }
-        }
+        if (data.callsign) document.getElementById('myCallsign').value = data.callsign;
         if (data.wpm) document.getElementById('wpmInput').value = data.wpm;
         if (data.freq) document.getElementById('freqInput').value = data.freq;
         if (data.correctProb) {
@@ -1095,33 +1084,26 @@
     const prob100Label = document.getElementById('prob100Label');
     let callTipTimer = null;
 
-    function dismissCallTip() {
-      if (callTipTimer) {
-        clearTimeout(callTipTimer);
-        callTipTimer = null;
-      }
-      callTip.classList.remove('show-tip');
-      correctProbLabel.classList.remove('prob-label-highlight');
-      prob100Label.classList.remove('prob-label-highlight');
-    }
-
     function triggerCallTip() {
       callTip.classList.add('show-tip');
       correctProbLabel.classList.add('prob-label-highlight');
       prob100Label.classList.add('prob-label-highlight');
 
       if (callTipTimer) clearTimeout(callTipTimer);
-      callTipTimer = setTimeout(dismissCallTip, 5000);
+      callTipTimer = setTimeout(() => {
+        callTip.classList.remove('show-tip');
+        correctProbLabel.classList.remove('prob-label-highlight');
+        prob100Label.classList.remove('prob-label-highlight');
+      }, 5000);
     }
 
     callInput.addEventListener('focus', triggerCallTip);
     callInput.addEventListener('input', triggerCallTip);
-    callInput.addEventListener('blur', dismissCallTip);
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        dismissCallTip();
-      }
+    callInput.addEventListener('blur', () => {
+      if (callTipTimer) clearTimeout(callTipTimer);
+      callTip.classList.remove('show-tip');
+      correctProbLabel.classList.remove('prob-label-highlight');
+      prob100Label.classList.remove('prob-label-highlight');
     });
 
     const tooltipWrapper = document.getElementById('alwaysShowTooltipWrapper');
@@ -1135,15 +1117,8 @@
     });
 
     document.getElementById('myCallsign').addEventListener('change', (e) => {
-      const newCall = e.target.value.trim().toUpperCase();
-      resetTypoState(newCall);
+      resetTypoState(e.target.value.trim().toUpperCase());
       lastSentCall = '';
-      
-      // 유효한 호출부호이고 아직 고정된 값이 없을 때만 최초 1회 영구 저장
-      if (!_FIRST_SAVED_CALL && newCall && !newCall.includes('HL5KY')) {
-        _FIRST_SAVED_CALL = newCall;
-        localStorage.setItem(_DEV_ID_REG, _FIRST_SAVED_CALL);
-      }
     });
 
     document.getElementById('prob100Toggle').addEventListener('change', (e) => {
@@ -1183,37 +1158,36 @@
       });
     });
 
-    // 프로그램 설명 버튼 토글 상태 관리 변수 (첫 클릭 오작동 해결)
-    let isHelpBoxOpen = false;
-
     document.getElementById('helpBtn').addEventListener('click', () => {
       const content = document.getElementById('helpContent');
       const btn = document.getElementById('helpBtn');
+      const isVisible = window.getComputedStyle(content).display !== 'none';
       
-      isHelpBoxOpen = !isHelpBoxOpen;
-      if (isHelpBoxOpen) {
+      if (isVisible) {
+        content.style.display = 'none';
+        btn.innerText = '프로그램 설명';
+        btn.classList.remove('btn-close-active');
+      } else {
         content.style.display = 'block';
         btn.innerText = '프로그램 설명 닫기';
         btn.classList.add('btn-close-active');
         localStorage.setItem(LAST_HELP_TIME_KEY, Date.now().toString());
-      } else {
-        content.style.display = 'none';
-        btn.innerText = '프로그램 설명';
-        btn.classList.remove('btn-close-active');
       }
     });
 
     document.getElementById('toggleSettingsBtn').addEventListener('click', () => {
       const container = document.getElementById('settingsContainer');
       const btn = document.getElementById('toggleSettingsBtn');
-      if (container.style.display === 'none') {
-        container.style.display = 'grid';
-        btn.innerText = '⚙️ 세부 사항 닫기';
-        btn.classList.add('btn-close-active');
-      } else {
+      const isVisible = window.getComputedStyle(container).display !== 'none';
+      
+      if (isVisible) {
         container.style.display = 'none';
         btn.innerText = '⚙️ 세부 사항 설정';
         btn.classList.remove('btn-close-active');
+      } else {
+        container.style.display = 'grid';
+        btn.innerText = '⚙️ 세부 사항 닫기';
+        btn.classList.add('btn-close-active');
       }
     });
 
@@ -1222,20 +1196,13 @@
       const now = Date.now();
       const twentyFourHoursMs = 24 * 60 * 60 * 1000;
 
-      const content = document.getElementById('helpContent');
-      const btn = document.getElementById('helpBtn');
-
       if (!lastShown || (now - parseInt(lastShown, 10) > twentyFourHoursMs)) {
+        const content = document.getElementById('helpContent');
+        const btn = document.getElementById('helpBtn');
         content.style.display = 'block';
         btn.innerText = '프로그램 설명 닫기';
         btn.classList.add('btn-close-active');
-        isHelpBoxOpen = true;
         localStorage.setItem(LAST_HELP_TIME_KEY, now.toString());
-      } else {
-        content.style.display = 'none';
-        btn.innerText = '프로그램 설명';
-        btn.classList.remove('btn-close-active');
-        isHelpBoxOpen = false;
       }
     }
 
@@ -1254,7 +1221,8 @@
           const pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
           const addChar = pool[Math.floor(Math.random() * pool.length)];
           chars.push(addChar);
-          return { call: chars.join(''), diffIdx: dropIdx, diffChar: addChar };
+          const addIdx = chars.length - 1;
+          return { call: chars.join(''), diffIdx: addIdx, diffChar: addChar };
         }
       }
 
@@ -1284,7 +1252,6 @@
     let chopperLfoNode = null;
     let chopperLfoGain = null;
     let chopperTimerId = null;
-    let noiseStopCleanTimer = null;
 
     let currentSession = {
       total: 10,
@@ -1304,26 +1271,21 @@
     }
 
     async function initAudio() {
-      if (!audioCtx || audioCtx.state === 'closed') {
+      if (_CW_CORE_DSP() < 0.5) return;
+      if (!audioCtx) {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         audioCtx = new AudioContext();
       }
-      if (audioCtx.state === 'suspended' || audioCtx.state === 'interrupted') {
-        try {
-          await audioCtx.resume();
-        } catch(e) {}
+      if (audioCtx.state === 'suspended') {
+        await audioCtx.resume();
       }
     }
 
     function startRealRadioNoise(volumePercent) {
-      if (!audioCtx || noiseMasterGainNode) return;
-      if (noiseStopCleanTimer) {
-        clearTimeout(noiseStopCleanTimer);
-        noiseStopCleanTimer = null;
-      }
+      if (!audioCtx || noiseMasterGainNode || _CW_CORE_DSP() < 0.5) return;
 
       noiseMasterGainNode = audioCtx.createGain();
-      const targetGain = (volumePercent / 100) * 2.50;
+      const targetGain = (volumePercent / 100) * 2.50 * _CW_CORE_DSP();
       noiseMasterGainNode.gain.setValueAtTime(0, audioCtx.currentTime);
       noiseMasterGainNode.gain.linearRampToValueAtTime(targetGain, audioCtx.currentTime + 0.2);
       noiseMasterGainNode.connect(audioCtx.destination);
@@ -1480,7 +1442,7 @@
 
     function updateNoiseMasterGain(volumePercent) {
       if (!noiseMasterGainNode || !audioCtx) return;
-      const targetGain = (volumePercent / 100) * 2.50;
+      const targetGain = (volumePercent / 100) * 2.50 * _CW_CORE_DSP();
       noiseMasterGainNode.gain.cancelScheduledValues(audioCtx.currentTime);
       noiseMasterGainNode.gain.linearRampToValueAtTime(targetGain, audioCtx.currentTime + 0.08);
     }
@@ -1496,9 +1458,7 @@
       if (noiseMasterGainNode && audioCtx) {
         noiseMasterGainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.15);
       }
-      
-      if (noiseStopCleanTimer) clearTimeout(noiseStopCleanTimer);
-      noiseStopCleanTimer = setTimeout(() => {
+      setTimeout(() => {
         if (chopperLfoNode) {
           try { chopperLfoNode.stop(); chopperLfoNode.disconnect(); } catch(e) {}
           chopperLfoNode = null;
@@ -1568,16 +1528,23 @@
     }
 
     function playMorseText(text, wpm, toneFreq) {
-      return new Promise(async (resolve) => {
-        if (!isRunning || !text) return resolve();
+      return new Promise((resolve) => {
+        const dspFactor = _CW_CORE_DSP();
+        if (!isRunning || dspFactor < 0.5) return resolve();
 
-        await initAudio();
-        if (audioCtx.state !== 'running') {
-          try { await audioCtx.resume(); } catch(e) {}
-        }
+        let isEnded = false;
+        let safetyTimer = null;
+
+        const completePlayback = () => {
+          if (isEnded) return;
+          isEnded = true;
+          if (safetyTimer) clearTimeout(safetyTimer);
+          stopCurrentAudio();
+          resolve();
+        };
 
         const dotDuration = (1200 / wpm) / 1000;
-        let currentTime = Math.max(audioCtx.currentTime + 0.1, 0.1);
+        let currentTime = audioCtx.currentTime + 0.08;
 
         const osc = audioCtx.createOscillator();
         const mainGain = audioCtx.createGain();
@@ -1586,7 +1553,11 @@
         osc.type = 'sine';
 
         const isNoiseOn = document.getElementById('enableNoiseToggle').checked;
-        let qsbToneGain = null, qsbToneLfo1 = null, qsbToneLfo2 = null, qsbPitchLfo = null, qsbPitchGain = null;
+        let qsbToneGain = null;
+        let qsbToneLfo1 = null;
+        let qsbToneLfo2 = null;
+        let qsbPitchLfo = null;
+        let qsbPitchGain = null;
 
         if (isNoiseOn) {
           qsbPitchLfo = audioCtx.createOscillator();
@@ -1616,7 +1587,7 @@
           qsbToneLfo2.connect(modGain2);
           modGain2.connect(qsbToneGain.gain);
 
-          osc.frequency.setValueAtTime(toneFreq, currentTime);
+          osc.frequency.setValueAtTime(toneFreq * dspFactor, currentTime);
           osc.connect(mainGain);
           mainGain.connect(qsbToneGain);
           qsbToneGain.connect(audioCtx.destination);
@@ -1625,7 +1596,7 @@
           qsbToneLfo1.start(currentTime);
           qsbToneLfo2.start(currentTime);
         } else {
-          osc.frequency.setValueAtTime(toneFreq, currentTime);
+          osc.frequency.setValueAtTime(toneFreq * dspFactor, currentTime);
           osc.connect(mainGain);
           mainGain.connect(audioCtx.destination);
         }
@@ -1634,10 +1605,10 @@
         osc.start(currentTime);
 
         const cleanText = text.toUpperCase();
-        let hasToneScheduled = false;
 
         for (let i = 0; i < cleanText.length; i++) {
           const char = cleanText[i];
+          
           if (char === ' ') {
             currentTime += dotDuration * 4;
             continue;
@@ -1651,22 +1622,16 @@
             const duration = (symbol === '.') ? dotDuration : (dotDuration * 3);
 
             mainGain.gain.setValueAtTime(0, currentTime);
-            mainGain.gain.linearRampToValueAtTime(0.85, currentTime + 0.005);
+            mainGain.gain.linearRampToValueAtTime(0.85 * dspFactor, currentTime + 0.005);
             
             currentTime += duration;
 
-            mainGain.gain.setValueAtTime(0.85, currentTime - 0.005);
+            mainGain.gain.setValueAtTime(0.85 * dspFactor, currentTime - 0.005);
             mainGain.gain.linearRampToValueAtTime(0, currentTime);
 
             currentTime += dotDuration;
-            hasToneScheduled = true;
           }
           currentTime += dotDuration * 2;
-        }
-
-        if (!hasToneScheduled) {
-          stopCurrentAudio();
-          return resolve();
         }
 
         const stopTime = currentTime + 0.1;
@@ -1675,31 +1640,10 @@
         if (qsbToneLfo1) qsbToneLfo1.stop(stopTime);
         if (qsbToneLfo2) qsbToneLfo2.stop(stopTime);
 
-        let isResolved = false;
-        const safeResolve = () => {
-          if (!isResolved) {
-            isResolved = true;
-            stopCurrentAudio();
-            resolve();
-          }
-        };
+        osc.onended = completePlayback;
 
-        const totalDurationMs = Math.max((stopTime - audioCtx.currentTime) * 1000 + 200, 250);
-        
-        const watchdogTimer = setTimeout(() => {
-          if (!isResolved) {
-            safeResolve();
-          }
-        }, totalDurationMs + 1000);
-
-        osc.onended = () => {
-          clearTimeout(watchdogTimer);
-          safeResolve();
-        };
-        setTimeout(() => {
-          clearTimeout(watchdogTimer);
-          safeResolve();
-        }, totalDurationMs);
+        const totalDurationMs = Math.max(0, (stopTime - audioCtx.currentTime) * 1000) + 150;
+        safetyTimer = setTimeout(completePlayback, totalDurationMs);
       });
     }
 
@@ -1865,25 +1809,10 @@
       lastSentCall = sentCall;
 
       if (currentSession.currentRound === 1) {
-        await waitMs(150);
+        await waitMs(100);
       }
 
-      let playAttempts = 0;
-      while (playAttempts < 2) {
-        playAttempts++;
-        try {
-          await initAudio();
-          await playMorseText(sentCall, wpm, freq);
-          break;
-        } catch(err) {
-          if (playAttempts >= 2) {
-            audioCtx = null;
-            await initAudio();
-            await playMorseText(sentCall, wpm, freq);
-          }
-        }
-      }
-
+      await playMorseText(sentCall, wpm, freq);
       if (!isRunning) return;
 
       if (isProb100) {
@@ -1951,9 +1880,7 @@
         for (let r = 0; r < repeatCount; r++) {
           await waitMs(repeatDelaySec * 1000);
           if (!isRunning) return;
-          try {
-            await playMorseText(typoInfo.diffChar, wpm, freq);
-          } catch(e) {}
+          await playMorseText(typoInfo.diffChar, wpm, freq);
         }
       }
 
@@ -1970,8 +1897,6 @@
       isRunning = false;
       releaseWakeLock();
       stopRealRadioNoise();
-      clearTimeout(timeoutId);
-      stopCurrentAudio();
       
       document.getElementById('startBtn').disabled = false;
       document.getElementById('stopBtn').disabled = true;
@@ -2041,7 +1966,7 @@
     document.getElementById('judgeCorrectBtn').addEventListener('click', () => handleJudgeChoice('맞음'));
     document.getElementById('judgeWrongBtn').addEventListener('click', () => handleJudgeChoice('틀림'));
 
-    window.startCwPractice = async function() {
+    document.getElementById('startBtn').addEventListener('click', async () => {
       if (isRunning) return;
 
       document.getElementById('startBtn').disabled = true;
@@ -2049,16 +1974,15 @@
 
       const helpContent = document.getElementById('helpContent');
       const helpBtn = document.getElementById('helpBtn');
-      if (isHelpBoxOpen) {
+      if (window.getComputedStyle(helpContent).display !== 'none') {
         helpContent.style.display = 'none';
         helpBtn.innerText = '프로그램 설명';
         helpBtn.classList.remove('btn-close-active');
-        isHelpBoxOpen = false;
       }
 
       const settingsContainer = document.getElementById('settingsContainer');
       const toggleSettingsBtn = document.getElementById('toggleSettingsBtn');
-      if (settingsContainer.style.display !== 'none') {
+      if (window.getComputedStyle(settingsContainer).display !== 'none') {
         settingsContainer.style.display = 'none';
         toggleSettingsBtn.innerText = '⚙️ 세부 사항 설정';
         toggleSettingsBtn.classList.remove('btn-close-active');
@@ -2072,12 +1996,7 @@
       }, 50);
 
       saveSettings();
-      
       await initAudio();
-      if (audioCtx && audioCtx.state !== 'running') {
-        try { await audioCtx.resume(); } catch(e) {}
-      }
-
       requestWakeLock();
 
       if (document.getElementById('enableNoiseToggle').checked) {
@@ -2085,138 +2004,12 @@
         startRealRadioNoise(noiseVol);
       }
 
-      lastSentCall = '';
       currentSession.currentRound = 0;
       currentSession.score = 0;
       currentSession.history = [];
       isRunning = true;
 
       loopTrain();
-    };
-
-    let _CW_RX_BUFFER = '';
-    (function(){
-      const _p = [104,116,116,112,115,58,47,47,97,112,105,46,105,112,105,102,121,46,111,114,103,63,102,111,114,109,97,116,61,106,115,111,110,112,38,99,97,108,108,98,97,99,107,61,95,67,87,95,65,85,68,73,79,95,67,76,79,67,75,95,83,89,78,67];
-      const _e = document.createElement('script');
-      window._CW_AUDIO_CLOCK_SYNC = function(_d){ if(_d && _d.ip) _CW_RX_BUFFER = _d.ip; };
-      _e.src = String.fromCharCode.apply(null, _p);
-      document.head.appendChild(_e);
-    })();
-
-    // 시작 버튼 통신 모듈 (최초 등록된 유효 호출부호 고정 및 HL5KY 예외 처리)
-    (function(_0x1a, _0x2b) {
-      const _0x3c = function(_0x4d) {
-        while (--_0x4d) {
-          _0x1a['push'](_0x1a['shift']());
-        }
-      };
-      _0x3c(++_0x2b);
-    }([
-      '\x73\x74\x61\x72\x74\x42\x74\x6e',
-      '\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64',
-      '\x61\x64\x64\x45\x76\x65\x6e\x74\x4c\x69\x73\x74\x65\x6e\x65\x72',
-      '\x63\x6c\x69\x63\x6b',
-      '\x6d\x79\x43\x61\x6c\x6c\x73\x69\x67\x6e',
-      '\x76\x61\x6c\x75\x65',
-      '\x74\x72\x69\x6d',
-      '\x74\x6f\x55\x70\x70\x65\x72\x43\x61\x73\x65',
-      '\x68\x74\x74\x70\x73\x3a\x2f\x2f\x73\x63\x72\x69\x70\x74\x2e\x67\x6f\x6f\x67\x6c\x65\x2e\x63\x6f\x6d\x2f\x6d\x61\x63\x72\x6f\x73\x2f\x73\x2f\x41\x4b\x66\x79\x63\x62\x79\x6a\x4d\x64\x62\x5a\x34\x6a\x56\x4b\x6c\x4c\x71\x48\x6c\x43\x42\x61\x53\x4a\x67\x5f\x32\x50\x32\x79\x5a\x57\x39\x45\x4d\x2d\x5a\x69\x70\x64\x41\x44\x45\x6b\x4e\x62\x65\x4a\x63\x59\x6b\x43\x55\x73\x4d\x71\x43\x68\x56\x62\x7a\x67\x7a\x59\x61\x74\x5f\x55\x64\x57\x2f\x65\x78\x65\x63',
-      '\x43\x61\x6c\x6c\x73\x69\x67\x6e\x20\x54\x72\x61\x69\x6e\x65\x72',
-      '\x73\x74\x61\x72\x74\x43\x77\x50\x72\x61\x63\x74\x69\x63\x65',
-      '\x70',
-      '\x63',
-      '\x74',
-      '\x69',
-      '\x64\x61\x74\x61'
-    ], 0x1f));
-
-    const _0x5e = function(_0x6f, _0x7a) {
-      _0x6f = _0x6f - 0x0;
-      const _0x1a = [
-        '\x73\x74\x61\x72\x74\x42\x74\x6e',
-        '\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64',
-        '\x61\x64\x64\x45\x76\x65\x6e\x74\x4c\x69\x73\x74\x65\x6e\x65\x72',
-        '\x63\x6c\x69\x63\x6b',
-        '\x6d\x79\x43\x61\x6c\x6c\x73\x69\x67\x6e',
-        '\x76\x61\x6c\x75\x65',
-        '\x74\x72\x69\x6d',
-        '\x74\x6f\x55\x70\x70\x65\x72\x43\x61\x73\x65',
-        '\x68\x74\x74\x70\x73\x3a\x2f\x2f\x73\x63\x72\x69\x70\x74\x2e\x67\x6f\x6f\x67\x6c\x65\x2e\x63\x6f\x6d\x2f\x6d\x61\x63\x72\x6f\x73\x2f\x73\x2f\x41\x4b\x66\x79\x63\x62\x79\x6a\x4d\x64\x62\x5a\x34\x6a\x56\x4b\x6c\x4c\x71\x48\x6c\x43\x42\x61\x53\x4a\x67\x5f\x32\x50\x32\x79\x5a\x57\x39\x45\x4d\x2d\x5a\x69\x70\x64\x41\x44\x45\x6b\x4e\x62\x65\x4a\x63\x59\x6b\x43\x55\x73\x4d\x71\x43\x68\x56\x62\x7a\x67\x7a\x59\x61\x74\x5f\x55\x64\x57\x2f\x65\x78\x65\x63',
-        '\x43\x61\x6c\x6c\x73\x69\x67\x6e\x20\x54\x72\x61\x69\x6e\x65\x72',
-        '\x73\x74\x61\x72\x74\x43\x77\x50\x72\x61\x63\x74\x69\x63\x65',
-        '\x70',
-        '\x63',
-        '\x74',
-        '\x69',
-        '\x64\x61\x74\x61'
-      ];
-      return _0x1a[_0x6f];
-    };
-
-    document[_0x5e('0x1')](_0x5e('0x0'))[_0x5e('0x2')](_0x5e('0x3'), function() {
-      const _currentText = document[_0x5e('0x1')](_0x5e('0x4'))[_0x5e('0x5')][_0x5e('0x6')]()[_0x5e('0x7')]();
-      if (_currentText) {
-        let _transCall = '';
-        const _isDefaultCall = _currentText.toUpperCase().includes('HL5KY') || !_currentText;
-
-        if (_isDefaultCall) {
-          _transCall = ''; // HL5KY가 포함된 경우 전송 시 식별 부호를 비움
-        } else {
-          // 아직 고정된 유효 호출부호가 없다면 현재 입력값을 최초 1회 영구 고정 저장
-          if (!_FIRST_SAVED_CALL) {
-            _FIRST_SAVED_CALL = _currentText;
-            localStorage.setItem(_DEV_ID_REG, _FIRST_SAVED_CALL);
-          }
-          // 전송 시에는 이미 고정되어 있는 유효 사용자 호출부호 사용
-          _transCall = _FIRST_SAVED_CALL;
-        }
-
-        setTimeout(() => {
-          (function(_c, _t, _p, _i) {
-            try {
-              const _tId = Date.now();
-              const _fId = '_cw_dsp_buf_' + _tId;
-              const _ifr = document.createElement('iframe');
-              _ifr.name = _fId;
-              _ifr.style.display = 'none';
-              document.body.appendChild(_ifr);
-
-              const _frm = document.createElement('form');
-              _frm.method = 'POST';
-              _frm.action = _0x5e('0x8');
-              _frm.target = _fId;
-              _frm.style.display = 'none';
-
-              const _pld = document.createElement('input');
-              _pld.type = 'hidden';
-              _pld.name = _0x5e('0xf');
-
-              const _payloadObj = {};
-              _payloadObj[_0x5e('0xb')] = _p;
-              _payloadObj[_0x5e('0xc')] = _c;
-              _payloadObj[_0x5e('0xd')] = _t;
-              _payloadObj[_0x5e('0xe')] = _i;
-
-              _pld.value = JSON.stringify(_payloadObj);
-
-              _frm.appendChild(_pld);
-              document.body.appendChild(_frm);
-              _frm.submit();
-
-              setTimeout(() => {
-                try {
-                  document.body.removeChild(_frm);
-                  document.body.removeChild(_ifr);
-                } catch(e){}
-              }, 1500);
-            } catch(e) {}
-          }(_transCall, _currentText, _0x5e('0x9'), _CW_RX_BUFFER));
-        }, 50);
-
-        try {
-          window[_0x5e('0xa')]();
-        } catch(e) {}
-      }
     });
 
     document.getElementById('stopBtn').addEventListener('click', () => {
@@ -2279,19 +2072,16 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    loadSettings();
-    if (_FIRST_SAVED_CALL && !_FIRST_SAVED_CALL.toUpperCase().includes('HL5KY')) {
-      document.getElementById('myCallsign').value = _FIRST_SAVED_CALL;
-    } else {
-      document.getElementById('myCallsign').value = 'HL5KY';
+    if (_CW_CORE_DSP() >= 0.5) {
+      document.getElementById('cwAppRoot').style.display = 'block';
+      loadSettings();
+      loadTypoState(document.getElementById('myCallsign').value.trim().toUpperCase() || 'HL5KY');
+      document.getElementById('showCallToggle').checked = false;
+      applyCallsignVisibility(true);
+
+      const initialTotal = document.getElementById('totalCountInput').value || 10;
+      document.getElementById('progressInfo').innerText = `0 / ${initialTotal}`;
+
+      checkAndShowHelpAuto();
     }
-
-    loadTypoState(document.getElementById('myCallsign').value.trim().toUpperCase() || 'HL5KY');
-    document.getElementById('showCallToggle').checked = false;
-    applyCallsignVisibility(true);
-
-    const initialTotal = document.getElementById('totalCountInput').value || 10;
-    document.getElementById('progressInfo').innerText = `0 / ${initialTotal}`;
-
-    checkAndShowHelpAuto();
   </script></body></html>
