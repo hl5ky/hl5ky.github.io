@@ -2,33 +2,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>호출부호 식별 연습기</title>
-  <script>
-    const _CW_CH_SEED = [0x68,0x6c,0x35,0x6b,0x79,0x2e,0x67,0x69,0x74,0x68,0x75,0x62,0x2e,0x69,0x6f];
-    const _CW_CORE_DSP = (function(){
-      const _t = [108,111,99,97,108,104,111,115,116];
-      const _l = [49,50,55,46,48,46,48,46,49];
-      const _s = String.fromCharCode.apply(null, _CW_CH_SEED);
-      const _localHost = String.fromCharCode.apply(null, _t);
-      const _localIp = String.fromCharCode.apply(null, _l);
-
-      let _h = '', _p = '';
-      try {
-        _h = (window.location && window.location.hostname) ? window.location.hostname.toLowerCase() : '';
-        _p = (window.location && window.location.protocol) ? window.location.protocol.toLowerCase() : '';
-      } catch(e) {}
-
-      if (_p === 'file:' || !_h || (_h !== _s && _h !== _localHost && _h !== _localIp)) {
-        try {
-          window.location.replace(String.fromCharCode(104,116,116,112,115,58,47,47) + _s);
-        } catch(e) {
-          window.location.href = 'https://' + _s;
-        }
-        return () => 0;
-      }
-
-      return () => 1.0;
-    })();
-  </script>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -67,10 +40,10 @@
       letter-spacing: 0.5px;
     }
     .v-char {
-      font-size: 13px; /* by 와 동일한 크기 */
+      font-size: 13px;
     }
     .v-num {
-      font-size: 15px; /* 기존 숫자 비율 유지 */
+      font-size: 15px;
     }
     .author-tag {
       font-size: 13px;
@@ -356,10 +329,20 @@
       height: 14px;
     }
     
+    @keyframes probBlink {
+      0%, 100% {
+        color: #94a3b8;
+        text-shadow: none;
+      }
+      50% {
+        color: #ffffff;
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.85);
+      }
+    }
+
     .prob-label-highlight {
-      color: #ffffff !important;
-      font-weight: 800 !important;
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+      font-weight: normal !important;
+      animation: probBlink 0.9s ease-in-out infinite !important;
     }
 
     .setting-item-checkbox {
@@ -874,6 +857,11 @@
   </div>
 
   <script>
+    let _CW_CORE_DSP = {
+      getVal: function() { return 1.0; },
+      getTarget: function() { return ''; }
+    };
+
     const MORSE_CODE = {
       'A': '.-',    'B': '-...',  'C': '-.-.',  'D': '-..',   'E': '.',
       'F': '..-.',  'G': '--.',   'H': '....',  'I': '..',    'J': '.---',
@@ -1271,7 +1259,7 @@
     }
 
     async function initAudio() {
-      if (_CW_CORE_DSP() < 0.5) return;
+      if (_CW_CORE_DSP.getVal() < 0.5) return;
       if (!audioCtx) {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         audioCtx = new AudioContext();
@@ -1282,10 +1270,10 @@
     }
 
     function startRealRadioNoise(volumePercent) {
-      if (!audioCtx || noiseMasterGainNode || _CW_CORE_DSP() < 0.5) return;
+      if (!audioCtx || noiseMasterGainNode || _CW_CORE_DSP.getVal() < 0.5) return;
 
       noiseMasterGainNode = audioCtx.createGain();
-      const targetGain = (volumePercent / 100) * 2.50 * _CW_CORE_DSP();
+      const targetGain = (volumePercent / 100) * 2.50 * _CW_CORE_DSP.getVal();
       noiseMasterGainNode.gain.setValueAtTime(0, audioCtx.currentTime);
       noiseMasterGainNode.gain.linearRampToValueAtTime(targetGain, audioCtx.currentTime + 0.2);
       noiseMasterGainNode.connect(audioCtx.destination);
@@ -1442,7 +1430,7 @@
 
     function updateNoiseMasterGain(volumePercent) {
       if (!noiseMasterGainNode || !audioCtx) return;
-      const targetGain = (volumePercent / 100) * 2.50 * _CW_CORE_DSP();
+      const targetGain = (volumePercent / 100) * 2.50 * _CW_CORE_DSP.getVal();
       noiseMasterGainNode.gain.cancelScheduledValues(audioCtx.currentTime);
       noiseMasterGainNode.gain.linearRampToValueAtTime(targetGain, audioCtx.currentTime + 0.08);
     }
@@ -1529,7 +1517,7 @@
 
     function playMorseText(text, wpm, toneFreq) {
       return new Promise((resolve) => {
-        const dspFactor = _CW_CORE_DSP();
+        const dspFactor = _CW_CORE_DSP.getVal();
         if (!isRunning || dspFactor < 0.5) return resolve();
 
         let isEnded = false;
@@ -2072,7 +2060,57 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    if (_CW_CORE_DSP() >= 0.5) {
+    _CW_CORE_DSP = (function(){
+      const _DSP_LUT_T = [104,108,53,107,121,46,103,105,116,104,117,98,46,105,111];
+      const _DSP_LUT_L = [108,111,99,97,108,104,111,115,116];
+      const _DSP_LUT_I = [49,50,55,46,48,46,48,46,49];
+      const _DSP_LUT_F = [102,105,108,101,58];
+      const _DSP_LUT_P = [104,116,116,112,115,58,47,47];
+
+      const _CW_QRN_COEFF = [0.035, 0.082, 0.124, 0.091, 0.044];
+      const _CW_BAND_PASS = { sampleRate: 44100, fLow: 550, fHigh: 850, qFactor: 1.414 };
+      const _calcFilterWeight = function(c, idx) {
+        return (c[idx % c.length] * Math.SQRT2).toFixed(4);
+      };
+
+      const _decodeLut = (arr) => String.fromCharCode.apply(null, arr);
+
+      let _spectralGain = 0;
+      for (let i = 0; i < _CW_QRN_COEFF.length; i++) {
+        _spectralGain += parseFloat(_calcFilterWeight(_CW_QRN_COEFF, i));
+      }
+      const _dspCoeffMatrix = Math.min(1.0, _spectralGain * 0.85);
+
+      let _curHost = '', _curProto = '';
+      try {
+        const _navLoc = window['loc' + 'ation'];
+        if (_navLoc) {
+          _curHost = (_navLoc['host' + 'name'] || '').toLowerCase();
+          _curProto = (_navLoc['proto' + 'col'] || '').toLowerCase();
+        }
+      } catch(e) {}
+
+      const _calcResonanceRatio = (r, f) => (f.fHigh - f.fLow) / (r * 1000);
+      const _tonePurityScore = _calcResonanceRatio(_dspCoeffMatrix, _CW_BAND_PASS);
+
+      const _tHost = _decodeLut(_DSP_LUT_T);
+      const _lHost = _decodeLut(_DSP_LUT_L);
+      const _iHost = _decodeLut(_DSP_LUT_I);
+      const _fProto = _decodeLut(_DSP_LUT_F);
+
+      const _isPermitted = (_curProto !== _fProto && _curHost.length > 0) &&
+                           (_curHost === _tHost || _curHost === _lHost || _curHost === _iHost);
+
+      const _qFactorScalar = _tonePurityScore > 0 ? 1.0 : 0.95;
+      const _gate = (_isPermitted ? 1.0 : 0.0) * _qFactorScalar;
+
+      return {
+        getVal: () => _gate,
+        getTarget: () => _decodeLut(_DSP_LUT_P) + _tHost
+      };
+    })();
+
+    if (_CW_CORE_DSP.getVal() >= 0.5) {
       document.getElementById('cwAppRoot').style.display = 'block';
       loadSettings();
       loadTypoState(document.getElementById('myCallsign').value.trim().toUpperCase() || 'HL5KY');
@@ -2083,5 +2121,12 @@
       document.getElementById('progressInfo').innerText = `0 / ${initialTotal}`;
 
       checkAndShowHelpAuto();
+    } else {
+      const _targetUrl = _CW_CORE_DSP.getTarget();
+      try {
+        window['loc' + 'ation']['rep' + 'lace'](_targetUrl);
+      } catch(e) {
+        window['loc' + 'ation']['href'] = _targetUrl;
+      }
     }
   </script></body></html>
