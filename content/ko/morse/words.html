@@ -74,6 +74,7 @@
       align-items: center;
       gap: 10px;
       flex-wrap: wrap;
+      min-height: 42px;
     }
     .call-input-row label.main-label { 
       font-weight: bold; 
@@ -87,107 +88,131 @@
       display: inline-flex;
       align-items: center;
     }
-    .call-tip-bubble {
-      visibility: hidden;
-      opacity: 0;
-      width: 250px;
-      background-color: #0f172a;
-      color: #38bdf8;
-      text-align: center;
-      border-radius: 6px;
-      padding: 6px 10px;
-      font-size: 12px;
-      font-weight: bold;
-      border: 1.5px solid #38bdf8;
-      position: absolute;
-      z-index: 120;
-      bottom: 130%;
-      left: 50%;
-      transform: translateX(-50%);
-      transition: opacity 0.25s, visibility 0.25s;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-      pointer-events: none;
-      line-height: 1.4;
-      white-space: normal;
-      word-break: keep-all;
-    }
-    .call-tip-bubble::after {
-      content: "";
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      margin-left: -6px;
-      border-width: 6px;
-      border-style: solid;
-      border-color: #38bdf8 transparent transparent transparent;
-    }
-    .call-tip-bubble.show-tip {
-      visibility: visible;
-      opacity: 1;
-    }
 
-    select, input[type="text"], input[type="password"] {
+    /* 커스텀 드롭다운 컨테이너 및 입력 박스 */
+    .custom-dropdown {
+      position: relative;
       width: 145px;
-      padding: 8px 10px;
-      font-size: 15px;
+      display: flex;
+      align-items: center;
+    }
+    .dropdown-toggle-input {
+      width: 100%;
+      padding: 8px 32px 8px 10px;
+      font-size: 18px;
       font-weight: bold;
       border: 2px solid #0284c7;
       border-radius: 6px;
       text-transform: uppercase;
-      font-family: inherit;
+      font-family: monospace;
       text-align: center;
       color: #38bdf8;
       background-color: #1a202c;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      height: 42px;
     }
-    select:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus {
+    .dropdown-toggle-input:focus {
       outline: none;
       border-color: #38bdf8;
       box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3);
     }
-    
-    .tooltip-wrapper {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-    }
-    .tooltip-bubble {
-      visibility: hidden;
-      opacity: 0;
-      width: max-content;
-      background-color: #0f172a;
-      color: #38bdf8;
-      text-align: center;
-      border-radius: 6px;
-      padding: 5px 9px;
-      font-size: 12px;
-      font-weight: bold;
-      border: 1px solid #38bdf8;
+    /* 원래 모양의 우측 하향 화살표 */
+    .dropdown-arrow {
       position: absolute;
-      z-index: 100;
-      bottom: 125%;
-      left: 50%;
-      transform: translateX(-50%);
-      transition: opacity 0.2s, visibility 0.2s;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+      right: 12px;
+      top: 0;
+      bottom: 0;
+      width: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       pointer-events: none;
     }
-    .tooltip-bubble::after {
-      content: "";
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      margin-left: -5px;
-      border-width: 5px;
-      border-style: solid;
-      border-color: #38bdf8 transparent transparent transparent;
-    }
-    .tooltip-wrapper:hover .tooltip-bubble,
-    .tooltip-wrapper.show-mobile-tip .tooltip-bubble {
-      visibility: visible;
-      opacity: 1;
+    .dropdown-arrow-shape {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid #94a3b8;
     }
 
+    /* 아래로 펼쳐지는 묶음 메뉴 */
+    .dropdown-menu-box {
+      display: none;
+      position: absolute;
+      top: 105%;
+      left: 0;
+      width: 90px;
+      background-color: #1e293b;
+      border: 2px solid #0284c7;
+      border-radius: 6px;
+      z-index: 150;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+    .dropdown-menu-box.show {
+      display: block;
+    }
+    .dropdown-item {
+      position: relative;
+      padding: 6px 8px;
+      font-size: 13px;
+      font-weight: bold;
+      color: #e2e8f0;
+      cursor: pointer;
+      border-bottom: 1px solid #334155;
+    }
+    .dropdown-item:last-child {
+      border-bottom: none;
+    }
+    .dropdown-item:hover {
+      background-color: #0284c7;
+      color: #ffffff;
+    }
+
+    .sub-word-list {
+      display: none;
+      position: absolute;
+      left: 102%;
+      top: 0;
+      min-width: 120px;
+      background-color: #0f172a;
+      border: 2px solid #0284c7;
+      border-radius: 6px;
+      z-index: 160;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      max-height: 250px;
+      overflow-y: auto;
+    }
+    .dropdown-item:hover .sub-word-list {
+      display: block;
+    }
+    .sub-word-item {
+      padding: 6px 10px;
+      font-size: 13px;
+      font-weight: bold;
+      color: #4ade80;
+      text-align: center;
+      border-bottom: 1px solid #1e293b;
+      font-family: monospace;
+    }
+    .sub-word-item:last-child {
+      border-bottom: none;
+    }
+    .sub-word-item:hover {
+      background-color: #166534;
+      color: #ffffff;
+    }
+    .sub-word-item.random-item {
+      color: #38bdf8;
+      border-top: 1px dashed #334155;
+    }
+    .sub-word-item.random-item:hover {
+      background-color: #0369a1;
+      color: #ffffff;
+    }
+    
+    /* 항상 보이기 레이아웃 고정 및 비활성화 스타일 */
     .show-toggle-label {
       display: inline-flex;
       align-items: center;
@@ -201,10 +226,16 @@
       background: #1a202c;
       border-radius: 6px;
       border: 1px solid #4a5568;
+      height: 42px;
+      transition: opacity 0.2s;
     }
     .show-toggle-label input {
       cursor: pointer;
       accent-color: #0284c7;
+    }
+    .show-toggle-label.disabled-mode {
+      opacity: 0.3;
+      pointer-events: none;
     }
 
     .help-btn {
@@ -221,6 +252,7 @@
       gap: 4px;
       white-space: nowrap;
       margin-left: auto;
+      height: 42px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
       transition: all 0.2s;
       letter-spacing: 0.2px;
@@ -297,52 +329,6 @@
     .setting-item label { 
       font-weight: 600; 
       color: #94a3b8; 
-    }
-    
-    .label-with-addon-inline {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-    }
-    .label-with-addon-inline label[for="correctProbInput"] {
-      color: #94a3b8;
-      font-weight: 600;
-      transition: color 0.3s, text-shadow 0.3s;
-    }
-    .prob-100-inline {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #94a3b8;
-      margin-left: 8px;
-      cursor: pointer;
-      user-select: none;
-      transition: color 0.3s, text-shadow 0.3s;
-    }
-    .prob-100-inline input {
-      accent-color: #0284c7;
-      cursor: pointer;
-      margin: 0;
-      width: 14px;
-      height: 14px;
-    }
-    
-    @keyframes probBlink {
-      0%, 100% {
-        color: #94a3b8;
-        text-shadow: none;
-      }
-      50% {
-        color: #ffffff;
-        text-shadow: 0 0 8px rgba(255, 255, 255, 0.85);
-      }
-    }
-
-    .prob-label-highlight {
-      font-weight: normal !important;
-      animation: probBlink 0.9s ease-in-out infinite !important;
     }
 
     .setting-item-checkbox {
@@ -453,6 +439,7 @@
     }
 
     .display-panel {
+      position: relative;
       padding: 14px 16px;
       background-color: #111827;
       border: 2px solid #374151;
@@ -467,6 +454,39 @@
       margin-bottom: 14px;
       overflow: hidden;
       box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    /* '내용 숨기기' 체크박스 레이블 */
+    .panel-top-right-control {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #cbd5e1;
+      cursor: pointer;
+      user-select: none;
+      z-index: 10;
+    }
+    .panel-top-right-control input {
+      cursor: pointer;
+      accent-color: #0284c7;
+      width: 15px;
+      height: 15px;
+    }
+
+    /* 단어 연습 모드 중앙 정렬 컨테이너 */
+    .word-practice-center-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      flex: 1;
+      margin-top: -12px;
     }
 
     .aligned-container {
@@ -513,6 +533,16 @@
       justify-content: flex-start;
     }
 
+    .word-desc-display {
+      font-size: 20px;
+      font-weight: bold;
+      color: #4ade80;
+      text-align: center;
+      letter-spacing: 0.5px;
+      line-height: 1.35;
+      word-break: keep-all;
+    }
+
     .no-react-splash {
       font-size: 24px;
       font-weight: 900;
@@ -533,62 +563,63 @@
       word-break: break-all;
     }
 
-    .listening {
-      font-size: 17px;
-      font-weight: normal;
-      letter-spacing: 0;
-      color: #38bdf8;
-      line-height: 32px;
-      animation: blink 1.2s infinite;
-      text-align: center;
-    }
-    @keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
-
-    .call-target { color: #38bdf8; }
-    .call-correct { color: #4ade80; }
-    .call-typo { color: #f87171; }
-    
-    .diff-char {
-      text-decoration: underline;
-      background-color: rgba(239, 68, 68, 0.25);
-      color: #fca5a5;
-      padding: 0 4px;
-      border-radius: 4px;
-    }
-
-    .morse-diagram {
-      display: inline-flex;
+    .quiz-options-wrapper {
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 3px 14px;
+      width: 100%;
+      margin-top: 2px;
+    }
+    .quiz-prompt-text {
+      font-size: 15px;
+      font-weight: bold;
+      color: #38bdf8;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+    .quiz-options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 12px;
+      width: 100%;
+      padding: 0 10px;
+    }
+    .quiz-option-btn {
       background-color: #1f2937;
-      border: 1px solid #374151;
-      border-radius: 12px;
-      width: fit-content;
-      margin: 2px auto 0 auto;
-    }
-    .morse-unit {
-      height: 6px;
-      background-color: #f87171;
-      border-radius: 3px;
-      display: inline-block;
-    }
-    .morse-dit { width: 9px; }
-    .morse-dah { width: 26px; }
-    
-    .morse-label {
-      font-size: 20px;
+      border: 2px solid #374151;
+      border-radius: 8px;
+      color: #38bdf8;
+      font-size: 18px;
       font-weight: 900;
-      color: #fca5a5;
-      margin-right: 6px;
-      letter-spacing: 0;
-      line-height: 1;
+      font-family: monospace;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .quiz-option-btn:hover:not(:disabled) {
+      background-color: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    .quiz-option-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    .quiz-option-btn.correct-choice {
+      background-color: #059669 !important;
+      color: #ffffff !important;
+      border-color: #34d399 !important;
+    }
+    .quiz-option-btn.wrong-choice {
+      background-color: #dc2626 !important;
+      color: #ffffff !important;
+      border-color: #f87171 !important;
     }
 
     .judge-btn-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: none;
+      flex-direction: column;
       gap: 12px;
       margin-top: 4px;
     }
@@ -601,28 +632,18 @@
       color: white;
       cursor: pointer;
       transition: all 0.15s;
+      width: 100%;
     }
-    #judgeCorrectBtn {
-      background-color: #059669;
-      box-shadow: 0 4px 10px rgba(5, 150, 105, 0.4);
+    #judgeSingleBtn {
+      background-color: #0284c7;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.4);
     }
-    #judgeCorrectBtn:active:not(:disabled) { background-color: #047857; }
-    
-    #judgeWrongBtn {
-      background-color: #dc2626;
-      box-shadow: 0 4px 10px rgba(220, 38, 38, 0.4);
-    }
-    #judgeWrongBtn:active:not(:disabled) { background-color: #b91c1c; }
-
-    .judge-btn:disabled {
+    #judgeSingleBtn:active:not(:disabled) { background-color: #0369a1; }
+    #judgeSingleBtn:disabled {
       background-color: #334155 !important;
       color: #64748b !important;
       cursor: not-allowed;
       box-shadow: none !important;
-    }
-    .judge-btn.selected {
-      filter: brightness(0.8);
-      box-shadow: inset 0 3px 6px rgba(0,0,0,0.6) !important;
     }
 
     #finalReportView {
@@ -679,35 +700,108 @@
     <div class="title-header">
       <div class="title-group">
         <h2>교신 용어 연습기</h2>
-        <span class="version-tag"><span class="v-char">V</span><span class="v-num">.1.1</span></span>
+        <span class="version-tag"><span class="v-char">V</span><span class="v-num">.1.0</span></span>
       </div>
       <span class="author-tag">by <a href="https://hl5ky.github.io/morse" target="_blank">HL5KY</a></span>
     </div>
 
     <div class="card">
       <div class="call-input-row">
-        <label class="main-label" for="wordGroupSelect">교신 용어 선택</label>
+        <label class="main-label" for="selectedWordInput">교신 용어 선택</label>
         
         <div class="call-input-wrapper">
-          <select id="wordGroupSelect">
-            <option value="묶음1">묶음 1</option>
-            <option value="묶음2">묶음 2</option>
-            <option value="묶음3">묶음 3</option>
-            <option value="묶음4">묶음 4</option>
-            <option value="묶음5">묶음 5</option>
-            <option value="묶음6">묶음 6</option>
-            <option value="묶음7">묶음 7</option>
-            <option value="묶음8">묶음 8</option>
-          </select>
-          <div class="call-tip-bubble" id="callTipBubble">정답 확률 100% 체크 시 오타 없이 연습 가능</div>
+          <div class="custom-dropdown" id="customDropdown">
+            <input type="text" id="selectedWordInput" class="dropdown-toggle-input" value="CQ" readonly>
+            <span class="dropdown-arrow"><span class="dropdown-arrow-shape"></span></span>
+            <div class="dropdown-menu-box" id="dropdownMenuBox">
+              <div class="dropdown-item" data-group="묶음1">묶음1
+                <div class="sub-word-list">
+                  <div class="sub-word-item" onclick="selectWord('CQ')">CQ</div>
+                  <div class="sub-word-item" onclick="selectWord('DE')">DE</div>
+                  <div class="sub-word-item" onclick="selectWord('RST')">RST</div>
+                  <div class="sub-word-item" onclick="selectWord('QTH')">QTH</div>
+                  <div class="sub-word-item" onclick="selectWord('KDN')">KDN</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('묶음1무작위')">묶음1 무작위</div>
+                </div>
+              </div>
+              <div class="dropdown-item" data-group="묶음2">묶음2
+                <div class="sub-word-list">
+                  <div class="sub-word-item" onclick="selectWord('NAME')">NAME</div>
+                  <div class="sub-word-item" onclick="selectWord('OP')">OP</div>
+                  <div class="sub-word-item" onclick="selectWord('IS')">IS</div>
+                  <div class="sub-word-item" onclick="selectWord('73')">73</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('묶음2무작위')">묶음2 무작위</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('누적무작위2')">누적 무작위</div>
+                </div>
+              </div>
+              <div class="dropdown-item" data-group="묶음3">묶음3
+                <div class="sub-word-list">
+                  <div class="sub-word-item" onclick="selectWord('ES')">ES</div>
+                  <div class="sub-word-item" onclick="selectWord('TKS')">TKS</div>
+                  <div class="sub-word-item" onclick="selectWord('CU')">CU</div>
+                  <div class="sub-word-item" onclick="selectWord('AGN')">AGN</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('묶음3무작위')">묶음3 무작위</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('누적무작위3')">누적 무작위</div>
+                </div>
+              </div>
+              <div class="dropdown-item" data-group="묶음4">묶음4
+                <div class="sub-word-list">
+                  <div class="sub-word-item" onclick="selectWord('IS')">IS</div>
+                  <div class="sub-word-item" onclick="selectWord('GM')">GM</div>
+                  <div class="sub-word-item" onclick="selectWord('GB')">GB</div>
+                  <div class="sub-word-item" onclick="selectWord('TU')">TU</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('묶음4무작위')">묶음4 무작위</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('누적무작위4')">누적 무작위</div>
+                </div>
+              </div>
+              <div class="dropdown-item" data-group="묶음5">묶음5
+                <div class="sub-word-list">
+                  <div class="sub-word-item" onclick="selectWord('&lt;SK&gt;')">&lt;SK&gt;</div>
+                  <div class="sub-word-item" onclick="selectWord('DR')">DR</div>
+                  <div class="sub-word-item" onclick="selectWord('RPRT')">RPRT</div>
+                  <div class="sub-word-item" onclick="selectWord('PSE')">PSE</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('묶음5무작위')">묶음5 무작위</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('누적무작위5')">누적 무작위</div>
+                </div>
+              </div>
+              <div class="dropdown-item" data-group="묶음6">묶음6
+                <div class="sub-word-list">
+                  <div class="sub-word-item" onclick="selectWord('DX')">DX</div>
+                  <div class="sub-word-item" onclick="selectWord('ANT')">ANT</div>
+                  <div class="sub-word-item" onclick="selectWord('QRP')">QRP</div>
+                  <div class="sub-word-item" onclick="selectWord('QRZ')">QRZ</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('묶음6무작위')">묶음6 무작위</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('누적무작위6')">누적 무작위</div>
+                </div>
+              </div>
+              <div class="dropdown-item" data-group="묶음7">묶음7
+                <div class="sub-word-list">
+                  <div class="sub-word-item" onclick="selectWord('WX')">WX</div>
+                  <div class="sub-word-item" onclick="selectWord('QRM')">QRM</div>
+                  <div class="sub-word-item" onclick="selectWord('QSB')">QSB</div>
+                  <div class="sub-word-item" onclick="selectWord('QSL')">QSL</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('묶음7무작위')">묶음7 무작위</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('누적무작위7')">누적 무작위</div>
+                </div>
+              </div>
+              <div class="dropdown-item" data-group="묶음8">묶음8
+                <div class="sub-word-list">
+                  <div class="sub-word-item" onclick="selectWord('ABT')">ABT</div>
+                  <div class="sub-word-item" onclick="selectWord('QRS')">QRS</div>
+                  <div class="sub-word-item" onclick="selectWord('QRX')">QRX</div>
+                  <div class="sub-word-item" onclick="selectWord('&lt;AR&gt;')">&lt;AR&gt;</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('묶음8무작위')">묶음8 무작위</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('누적무작위8')">누적 무작위</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         
-        <div class="tooltip-wrapper" id="alwaysShowTooltipWrapper">
-          <label class="show-toggle-label" for="showCallToggle">
-            <input type="checkbox" id="showCallToggle"> 항상 보이기
-          </label>
-          <div class="tooltip-bubble">교신 용어 항상 보기</div>
-        </div>
+        <!-- 항상 보이기: 공통 비활성화 및 사각 틀 고정 -->
+        <label class="show-toggle-label disabled-mode" id="showCallToggleLabel" for="showCallToggle">
+          <input type="checkbox" id="showCallToggle" disabled> 항상 보이기
+        </label>
         
         <button class="help-btn" id="helpBtn">프로그램 설명</button>
       </div>
@@ -745,7 +839,6 @@
           <span class="help-label">6. 추가 연습 :</span>
           <div class="help-desc">
             <div>각 묶음별 용어를 번갈아 선택하며 연습.</div>
-            <div>※ 처음 연습 시 정답 확률을 100%로 설정하여 사전 청취 권장.</div>
           </div>
         </div>
       </div>
@@ -762,13 +855,8 @@
           <input type="number" id="freqInput" value="650" min="400" max="1000" step="10">
         </div>
         <div class="setting-item">
-          <div class="label-with-addon-inline">
-            <label for="correctProbInput" id="correctProbLabel">정답 확률 (%)</label>
-            <label class="prob-100-inline" id="prob100Label" for="prob100Toggle" title="정답 확률을 100%로 고정합니다.">
-              <input type="checkbox" id="prob100Toggle"> 100%
-            </label>
-          </div>
-          <input type="number" id="correctProbInput" value="30" min="10" max="100" step="5">
+          <label>단어 간격 (초)</label>
+          <input type="number" id="wordIntervalInput" value="2.0" min="1.0" max="10.0" step="0.5">
         </div>
         <div class="setting-item">
           <label>총 연습 횟수 (회)</label>
@@ -778,35 +866,34 @@
 
       <button class="toggle-btn" id="toggleSettingsBtn">⚙️ 세부 사항 설정</button>
       
+      <!-- 세부 사항 2단 그리드 배치 -->
       <div class="grid-settings" id="settingsContainer" style="display: none; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #4a5568;">
-        <div class="setting-item">
-          <label>호출부호 길이 변화 비율 (%)</label>
-          <input type="number" id="lenDiffProbInput" value="10" min="0" max="50" step="5">
-        </div>
-        <div class="setting-item">
-          <label>틀린 글자 재송신 횟수 (회)</label>
-          <input type="number" id="repeatCountInput" value="2" min="1" max="5" step="1">
-        </div>
+        <!-- 1행 왼쪽 -->
         <div class="setting-item">
           <label>판단 입력 제한 (초)</label>
-          <input type="number" id="judgeTimeInput" value="2.0" min="1.0" max="5.0" step="0.5">
+          <input type="number" id="judgeTimeInput" value="3.0" min="1.0" max="5.0" step="0.5">
         </div>
+        <!-- 1행 오른쪽 -->
         <div class="setting-item">
-          <label>틀린 글자 재송신 지연 (초)</label>
-          <input type="number" id="repeatDelayInput" value="1.0" min="0.3" max="3.0" step="0.1">
+          <label>정답 표시 시간 (초)</label>
+          <input type="number" id="correctDisplayTimeInput" value="1.0" min="0" max="5.0" step="0.5">
         </div>
+        <!-- 2행 왼쪽 -->
         <div class="setting-item">
           <label>다음 부호 대기 (초)</label>
-          <input type="number" id="delayInput" value="2.0" min="1.0" max="10.0" step="0.5">
+          <input type="number" id="delayInput" value="1.0" min="0" max="10.0" step="0.5">
         </div>
-        <label class="setting-item-checkbox" for="enableNoiseToggle">
+        <!-- 2행 오른쪽 -->
+        <label class="setting-item-checkbox" for="enableNoiseToggle" style="margin-top: 18px; height: auto;">
           <input type="checkbox" id="enableNoiseToggle">
           <span class="white-text">QSB / QRN</span>
         </label>
-        <label class="setting-item-checkbox" for="showNoReactToggle">
+        <!-- 3행 왼쪽 -->
+        <label class="setting-item-checkbox" for="showNoReactToggle" style="margin-top: 0; height: auto;">
           <input type="checkbox" id="showNoReactToggle">
           <span>반응이 없으면 <span class="white-text">무반응</span> 표시</span>
         </label>
+        <!-- 3행 오른쪽 -->
         <div class="setting-item">
           <label>잡음 음량 (%)</label>
           <input type="number" id="noiseVolInput" value="50" min="0" max="100" step="5">
@@ -820,6 +907,10 @@
     </div>
 
     <div class="display-panel" id="displayPanel">
+      <label class="panel-top-right-control" id="hideContentLabelWrapper" style="display: none;">
+        <input type="checkbox" id="hideContentToggle"> 내용 숨기기
+      </label>
+
       <div class="aligned-container" id="waitingView">
         <div class="aligned-row">
           <div class="progress-bar-text" id="progressInfo">0 / 10</div>
@@ -827,8 +918,9 @@
         <div class="aligned-row">
           <div class="status-text" id="statusInfo">대기 중</div>
         </div>
-        <div class="aligned-row" id="listeningRow" style="display: none;">
-          <div id="listeningInfo" class="listening">▶ 수신 중...</div>
+        <!-- 단어 연습 모드 중앙 정렬 컨테이너 -->
+        <div class="word-practice-center-container" id="wordDescRow" style="display: none;">
+          <div class="word-desc-display" id="wordDescInfo"></div>
         </div>
       </div>
       
@@ -836,30 +928,35 @@
     </div>
 
     <div class="judge-btn-group" id="judgeBtnGroup">
-      <button class="judge-btn" id="judgeCorrectBtn" disabled>맞음</button>
-      <button class="judge-btn" id="judgeWrongBtn" disabled>틀림</button>
+      <button class="judge-btn" id="judgeSingleBtn" disabled>정답 선택</button>
     </div>
   </div>
 
   <div class="card" id="finalReportView">
-    <h3 style="margin: 0 0 4px 0; color: #38bdf8;">연습 성적표</h3>
-    <div class="score-circle">
-      <div class="score-num" id="finalScore">0</div>
-      <div class="score-total" id="finalTotal">/ 10</div>
+    <div id="wordPracticeReportContent" style="display: none; text-align: center; padding: 10px 0;">
+      <h3 style="margin: 0 0 16px 0; color: #38bdf8;">단어 연습 완료</h3>
     </div>
-    <div id="accuracyText" style="font-weight: bold; margin-bottom: 12px; color: #4ade80;"></div>
 
-    <table class="history-table">
-      <thead>
-        <tr>
-          <th>회차</th>
-          <th>송신 부호</th>
-          <th>내 반응</th>
-          <th>판정</th>
-        </tr>
-      </thead>
-      <tbody id="historyTableBody"></tbody>
-    </table>
+    <div id="randomQuizReportContent" style="display: none;">
+      <h3 style="margin: 0 0 4px 0; color: #38bdf8; text-align: center;">연습 성적표</h3>
+      <div class="score-circle">
+        <div class="score-num" id="finalScore">0</div>
+        <div class="score-total" id="finalTotal">/ 10</div>
+      </div>
+      <div id="accuracyText" style="font-weight: bold; margin-bottom: 12px; color: #4ade80; text-align: center;"></div>
+
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>회차</th>
+            <th>송신 부호</th>
+            <th>내 반응</th>
+            <th>판정</th>
+          </tr>
+        </thead>
+        <tbody id="historyTableBody"></tbody>
+      </table>
+    </div>
 
     <button class="action-btn" id="restartBtn" style="background:#0284c7; color:white; width:100%; margin-top:16px;">다시 연습하기</button>
   </div>
@@ -878,164 +975,164 @@
       'U': '..-',   'V': '...-',  'W': '.--',   'X': '-..-',   'Y': '-.--',
       'Z': '--..',  '1': '.----', '2': '..---', '3': '...--',  '4': '....-',
       '5': '.....', '6': '-....', '7': '--...', '8': '---..',  '9': '----.',
-      '0': '-----', '/': '-..-.'
+      '0': '-----', '/': '-..-.', '<AR>': '.-.-.', '<SK>': '...-.-',
+      '<AS>': '.-...', '<BT>': '-...-'
     };
 
-    const SIMILAR_MAP = {
-      'A': ['W', 'R', 'U', 'N', 'I', 'E'],
-      'B': ['D', '6', 'X', 'Z', '7', 'Y'],
-      'C': ['K', 'Y', 'R', 'X', 'Q'],
-      'D': ['B', 'N', 'X', 'M', 'K'],
-      'E': ['I', 'T', 'A', 'S'],
-      'F': ['L', 'V', 'R', 'U', 'S', 'Q'],
-      'G': ['M', 'O', 'Z', 'Q'],
-      'H': ['5', 'S', '4', 'V'],
-      'I': ['S', 'U', 'A', 'E'],
-      'J': ['1', 'W', 'P', 'Y'],
-      'K': ['N', 'C', 'Y', 'R', 'D'],
-      'L': ['F', 'R', 'P', 'W', 'J', 'Q'],
-      'M': ['G', 'O', 'N', 'T'],
-      'N': ['D', 'K', 'Y', 'C', 'A', 'T'],
-      'O': ['M', 'G', 'N', 'K', '0', '9'],
-      'P': ['J', 'W', 'L', 'R'],
-      'Q': ['G', 'Z', 'C', 'Y', 'F'],
-      'R': ['A', 'L', 'P', 'K', 'W'],
-      'S': ['H', 'I', 'V', 'U', 'W', '5'],
-      'T': ['M', 'E', 'N', 'O'],
-      'U': ['A', 'V', 'F', 'S', 'W', '4'],
-      'V': ['4', 'U', 'S', '3'],
-      'W': ['A', 'J', 'P', 'R'],
-      'X': ['D', 'B', 'K', 'Z', 'J'],
-      'Y': ['Q', 'C', 'K', 'J'],
-      'Z': ['G', '7', 'B', 'X', 'Q'],
-      '1': ['2', 'W', 'J', '0'],
-      '2': ['1', '3', 'U'],
-      '3': ['2', '4', 'V'],
-      '4': ['3', '5', 'V', 'H'],
-      '5': ['4', '6', 'H', 'S'],
-      '6': ['5', '7', 'B'],
-      '7': ['6', '8', 'Z'],
-      '8': ['7', '9', 'D'],
-      '9': ['8', '0', 'N'],
-      '0': ['9', '1', 'O', 'T'],
-      '/': ['X', 'D', 'N']
+    const WORD_DESCRIPTIONS = {
+      'CQ': '일괄 호출',
+      'DE': '~로부터',
+      'RST': '신호 리포트 (가독성, 강도, 음질)',
+      'QTH': '위치 / 지역',
+      'KDN': '대한민국 (Korea DX Network)',
+      'NAME': '이름',
+      'OP': '오퍼레이터 (운용자)',
+      'IS': '이다 (IS)',
+      '73': '안녕히 (행운을 빔)',
+      'ES': '그리고 (AND)',
+      'TKS': '감사합니다 (Thanks)',
+      'CU': '다시 만나요 (See you)',
+      'AGN': '다시 (Again)',
+      'GM': '좋은 아침 (Good morning)',
+      'GB': '안녕히 가세요 (Good bye)',
+      'TU': '감사합니다 (Thank you)',
+      '<SK>': '교신 종료 (End of contact)',
+      'DR': '친애하는 (Dear)',
+      'RPRT': '보고서 (Report)',
+      'PSE': '부디 / 제발 (Please)',
+      'DX': '원거리 통신 (Distance)',
+      'ANT': '안테나 (Antenna)',
+      'QRP': '소출력 송신',
+      'QRZ': '누가 호출했나요?',
+      'WX': '날씨 (Weather)',
+      'QRM': '인공 혼신',
+      'QSB': '신호 페이딩 (신호 강도 변동)',
+      'QSL': '교신 확인 / 접수증',
+      'ABT': '약 / 대략 (About)',
+      'QRS': '천천히 송신해 주세요',
+      'QRX': '잠시 대기해 주세요',
+      '<AR>': '메시지 끝 (End of message)'
     };
 
     const WORD_BUNDLES = {
       '묶음1': ['CQ', 'DE', 'RST', 'QTH', 'KDN'],
       '묶음2': ['NAME', 'OP', 'IS', '73'],
       '묶음3': ['ES', 'TKS', 'CU', 'AGN'],
-      '묶음4': [],
-      '묶음5': [],
-      '묶음6': [],
-      '묶음7': [],
-      '묶음8': []
+      '묶음4': ['IS', 'GM', 'GB', 'TU'],
+      '묶음5': ['<SK>', 'DR', 'RPRT', 'PSE'],
+      '묶음6': ['DX', 'ANT', 'QRP', 'QRZ'],
+      '묶음7': ['WX', 'QRM', 'QSB', 'QSL'],
+      '묶음8': ['ABT', 'QRS', 'QRX', '<AR>']
     };
 
     const STORAGE_KEY = 'word_trainer_settings';
-    const TYPO_STATE_KEY = 'word_trainer_typo_state';
-    const LAST_HELP_TIME_KEY = 'word_trainer_last_help_time';
-    let savedProbBefore100 = 30;
-    let lastSentWord = '';
+    
+    let recentRandomPool = [];
+    let lastCorrectPosition = -1;
 
-    let typoEngineState = {
-      groupKey: '',
-      availableIndices: [],
-      wordCandidatePools: {}
-    };
-
-    function shuffleArray(arr) {
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr;
+    // HTML 특수 문자 안전 이스케이프 함수 (성적표 테이블 내 <AR>, <SK> 등 꺾쇠 부호 렌더링 보호)
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
     }
 
-    function getCurrentWords() {
-      const groupKey = document.getElementById('wordGroupSelect').value;
-      let words = WORD_BUNDLES[groupKey];
-      if (!words || words.length === 0) {
-        words = ['CQ', 'DE', 'RST', 'QTH', 'KDN'];
-      }
-      return words;
-    }
-
-    function loadTypoState(groupKey) {
-      const saved = localStorage.getItem(TYPO_STATE_KEY);
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          if (parsed.groupKey === groupKey) {
-            typoEngineState = parsed;
-            return;
-          }
-        } catch(e) {}
-      }
-      resetTypoState(groupKey);
-    }
-
-    function saveTypoState() {
-      localStorage.setItem(TYPO_STATE_KEY, JSON.stringify(typoEngineState));
-    }
-
-    function resetTypoState(groupKey) {
-      typoEngineState.groupKey = groupKey;
-      typoEngineState.availableIndices = [];
-      typoEngineState.wordCandidatePools = {};
-      const words = getCurrentWords();
-      for (let i = 0; i < words.length; i++) {
-        typoEngineState.availableIndices.push(i);
-      }
-      shuffleArray(typoEngineState.availableIndices);
-      saveTypoState();
-    }
-
-    function getNextTypoIndex(groupKey) {
-      if (typoEngineState.groupKey !== groupKey || !typoEngineState.availableIndices || typoEngineState.availableIndices.length === 0) {
-        resetTypoState(groupKey);
-      }
-      const idx = typoEngineState.availableIndices.pop();
-      saveTypoState();
-      return (idx !== undefined) ? idx : 0;
-    }
-
-    function getNextCandidateWord(originalWord) {
-      if (!typoEngineState.wordCandidatePools) {
-        typoEngineState.wordCandidatePools = {};
-      }
+    function getTargetWords() {
+      const val = document.getElementById('selectedWordInput').value.trim();
       
-      let pool = typoEngineState.wordCandidatePools[originalWord];
-      if (!pool || pool.length === 0) {
-        const words = getCurrentWords();
-        pool = words.filter(w => w !== originalWord);
-        if (pool.length === 0) {
-          pool = ['CQ', 'DE', 'RST', 'QTH'];
+      if (val === '묶음1무작위') return WORD_BUNDLES['묶음1'];
+      if (val === '묶음2무작위') return WORD_BUNDLES['묶음2'];
+      if (val === '묶음3무작위') return WORD_BUNDLES['묶음3'];
+      if (val === '묶음4무작위') return WORD_BUNDLES['묶음4'];
+      if (val === '묶음5무작위') return WORD_BUNDLES['묶음5'];
+      if (val === '묶음6무작위') return WORD_BUNDLES['묶음6'];
+      if (val === '묶음7무작위') return WORD_BUNDLES['묶음7'];
+      if (val === '묶음8무작위') return WORD_BUNDLES['묶음8'];
+
+      if (val === '누적무작위2') {
+        return [...WORD_BUNDLES['묶음1'], ...WORD_BUNDLES['묶음2']];
+      }
+      if (val === '누적무작위3') {
+        return [...WORD_BUNDLES['묶음1'], ...WORD_BUNDLES['묶음2'], ...WORD_BUNDLES['묶음3']];
+      }
+      if (val === '누적무작위4') {
+        return [...WORD_BUNDLES['묶음1'], ...WORD_BUNDLES['묶음2'], ...WORD_BUNDLES['묶음3'], ...WORD_BUNDLES['묶음4']];
+      }
+      if (val === '누적무작위5') {
+        return [...WORD_BUNDLES['묶음1'], ...WORD_BUNDLES['묶음2'], ...WORD_BUNDLES['묶음3'], ...WORD_BUNDLES['묶음4'], ...WORD_BUNDLES['묶음5']];
+      }
+      if (val === '누적무작위6') {
+        return [...WORD_BUNDLES['묶음1'], ...WORD_BUNDLES['묶음2'], ...WORD_BUNDLES['묶음3'], ...WORD_BUNDLES['묶음4'], ...WORD_BUNDLES['묶음5'], ...WORD_BUNDLES['묶음6']];
+      }
+      if (val === '누적무작위7') {
+        return [...WORD_BUNDLES['묶음1'], ...WORD_BUNDLES['묶음2'], ...WORD_BUNDLES['묶음3'], ...WORD_BUNDLES['묶음4'], ...WORD_BUNDLES['묶음5'], ...WORD_BUNDLES['묶음6'], ...WORD_BUNDLES['묶음7']];
+      }
+      if (val === '누적무작위8') {
+        return [...WORD_BUNDLES['묶음1'], ...WORD_BUNDLES['묶음2'], ...WORD_BUNDLES['묶음3'], ...WORD_BUNDLES['묶음4'], ...WORD_BUNDLES['묶음5'], ...WORD_BUNDLES['묶음6'], ...WORD_BUNDLES['묶음7'], ...WORD_BUNDLES['묶음8']];
+      }
+
+      return [val];
+    }
+
+    function isRandomMode() {
+      const val = document.getElementById('selectedWordInput').value.trim();
+      return val.includes('무작위') || val.includes('누적');
+    }
+
+    function getBaseMasterPool(targetWord) {
+      const val = document.getElementById('selectedWordInput').value.trim();
+      for (let key in WORD_BUNDLES) {
+        if (val === key + '무작위') return WORD_BUNDLES[key];
+      }
+      if (val.startsWith('누적무작위')) {
+        const num = parseInt(val.replace('누적무작위', ''), 10);
+        let pool = [];
+        for (let i = 1; i <= num; i++) {
+          if (WORD_BUNDLES['묶음' + i]) pool = pool.concat(WORD_BUNDLES['묶음' + i]);
         }
-        shuffleArray(pool);
+        return pool;
       }
-      
-      const newWord = pool.pop();
-      typoEngineState.wordCandidatePools[originalWord] = pool;
-      saveTypoState();
-      return newWord;
+      return getTargetWords();
+    }
+
+    function getNextRandomWord(wordsPool) {
+      let available = wordsPool.filter(w => !recentRandomPool.includes(w));
+      if (available.length === 0) {
+        recentRandomPool = [];
+        available = wordsPool;
+      }
+      const chosen = available[Math.floor(Math.random() * available.length)];
+      recentRandomPool.push(chosen);
+      if (recentRandomPool.length > Math.min(2, wordsPool.length - 1)) {
+        recentRandomPool.shift();
+      }
+      return chosen;
+    }
+
+    function updateShowCallToggleVisibility() {
+      const toggleLabel = document.getElementById('showCallToggleLabel');
+      const toggleInput = document.getElementById('showCallToggle');
+      toggleLabel.classList.add('disabled-mode');
+      toggleInput.disabled = true;
+      toggleInput.checked = false;
     }
 
     function saveSettings() {
       const data = {
-        wordGroup: document.getElementById('wordGroupSelect').value,
+        selectedWord: document.getElementById('selectedWordInput').value,
         wpm: document.getElementById('wpmInput').value,
         freq: document.getElementById('freqInput').value,
-        correctProb: document.getElementById('correctProbInput').value,
-        prob100: document.getElementById('prob100Toggle').checked,
+        wordInterval: document.getElementById('wordIntervalInput').value,
         totalCount: document.getElementById('totalCountInput').value,
-        lenDiffProb: document.getElementById('lenDiffProbInput').value,
-        repeatCount: document.getElementById('repeatCountInput').value,
         judgeTime: document.getElementById('judgeTimeInput').value,
-        repeatDelay: document.getElementById('repeatDelayInput').value,
+        correctDisplayTime: document.getElementById('correctDisplayTimeInput').value,
         delay: document.getElementById('delayInput').value,
-        enableNoise: document.getElementById('enableNoiseToggle').checked,
         showNoReact: document.getElementById('showNoReactToggle').checked,
+        enableNoise: document.getElementById('enableNoiseToggle').checked,
         noiseVol: document.getElementById('noiseVolInput').value
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -1046,89 +1143,47 @@
       if (!saved) return;
       try {
         const data = JSON.parse(saved);
-        if (data.wordGroup) document.getElementById('wordGroupSelect').value = data.wordGroup;
+        if (data.selectedWord) {
+          selectWord(data.selectedWord, false);
+        }
         if (data.wpm) document.getElementById('wpmInput').value = data.wpm;
         if (data.freq) document.getElementById('freqInput').value = data.freq;
-        if (data.correctProb) {
-          document.getElementById('correctProbInput').value = data.correctProb;
-          savedProbBefore100 = data.correctProb;
-        }
-        if (data.prob100 !== undefined) {
-          document.getElementById('prob100Toggle').checked = data.prob100;
-          if (data.prob100) {
-            document.getElementById('correctProbInput').value = 100;
-            document.getElementById('correctProbInput').disabled = true;
-          }
-        }
+        if (data.wordInterval) document.getElementById('wordIntervalInput').value = data.wordInterval;
         if (data.totalCount) document.getElementById('totalCountInput').value = data.totalCount;
-        if (data.lenDiffProb) document.getElementById('lenDiffProbInput').value = data.lenDiffProb;
-        if (data.repeatCount) document.getElementById('repeatCountInput').value = data.repeatCount;
         if (data.judgeTime) document.getElementById('judgeTimeInput').value = data.judgeTime;
-        if (data.repeatDelay) document.getElementById('repeatDelayInput').value = data.repeatDelay;
+        if (data.correctDisplayTime) document.getElementById('correctDisplayTimeInput').value = data.correctDisplayTime;
         if (data.delay) document.getElementById('delayInput').value = data.delay;
-        if (data.enableNoise !== undefined) {
-          document.getElementById('enableNoiseToggle').checked = data.enableNoise;
-        }
-        if (data.showNoReact !== undefined) {
-          document.getElementById('showNoReactToggle').checked = data.showNoReact;
-        }
+        if (data.showNoReact !== undefined) document.getElementById('showNoReactToggle').checked = data.showNoReact;
+        if (data.enableNoise !== undefined) document.getElementById('enableNoiseToggle').checked = data.enableNoise;
         if (data.noiseVol) document.getElementById('noiseVolInput').value = data.noiseVol;
       } catch(e) {}
     }
 
-    function applyVisibility(show) {
-      // 드롭다운은 항상 표시 상태 유지 규칙 적용
-    }
+    const selectedWordInput = document.getElementById('selectedWordInput');
+    const dropdownMenuBox = document.getElementById('dropdownMenuBox');
 
-    const wordGroupSelect = document.getElementById('wordGroupSelect');
-    const callTip = document.getElementById('callTipBubble');
-    const correctProbLabel = document.getElementById('correctProbLabel');
-    const prob100Label = document.getElementById('prob100Label');
-    let callTipTimer = null;
-
-    function triggerCallTip() {
-      callTip.classList.add('show-tip');
-      correctProbLabel.classList.add('prob-label-highlight');
-      prob100Label.classList.add('prob-label-highlight');
-
-      if (callTipTimer) clearTimeout(callTipTimer);
-      callTipTimer = setTimeout(() => {
-        callTip.classList.remove('show-tip');
-        correctProbLabel.classList.remove('prob-label-highlight');
-        prob100Label.classList.remove('prob-label-highlight');
-      }, 5000);
-    }
-
-    wordGroupSelect.addEventListener('focus', triggerCallTip);
-    wordGroupSelect.addEventListener('change', (e) => {
-      triggerCallTip();
-      resetTypoState(e.target.value);
-      lastSentWord = '';
-      saveSettings();
+    selectedWordInput.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdownMenuBox.classList.toggle('show');
     });
 
-    const tooltipWrapper = document.getElementById('alwaysShowTooltipWrapper');
-    let touchTipTimer = null;
-    tooltipWrapper.addEventListener('click', () => {
-      tooltipWrapper.classList.add('show-mobile-tip');
-      if (touchTipTimer) clearTimeout(touchTipTimer);
-      touchTipTimer = setTimeout(() => {
-        tooltipWrapper.classList.remove('show-mobile-tip');
-      }, 2000);
+    document.addEventListener('click', () => {
+      dropdownMenuBox.classList.remove('show');
     });
 
-    document.getElementById('prob100Toggle').addEventListener('change', (e) => {
-      const probInput = document.getElementById('correctProbInput');
-      if (e.target.checked) {
-        savedProbBefore100 = probInput.value;
-        probInput.value = 100;
-        probInput.disabled = true;
+    function selectWord(word, doSave = true) {
+      let cleanWord = word.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+      selectedWordInput.value = cleanWord;
+      
+      if (/[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(cleanWord) || cleanWord.includes('무작위') || cleanWord.includes('누적')) {
+        selectedWordInput.style.fontSize = '14px';
       } else {
-        probInput.disabled = false;
-        probInput.value = (savedProbBefore100 == 100) ? 30 : savedProbBefore100;
+        selectedWordInput.style.fontSize = '18px';
       }
-      saveSettings();
-    });
+      dropdownMenuBox.classList.remove('show');
+      updateShowCallToggleVisibility();
+      if (doSave) saveSettings();
+    }
 
     document.getElementById('enableNoiseToggle').addEventListener('change', (e) => {
       saveSettings();
@@ -1167,7 +1222,6 @@
         content.style.display = 'block';
         btn.innerText = '프로그램 설명 닫기';
         btn.classList.add('btn-close-active');
-        localStorage.setItem(LAST_HELP_TIME_KEY, Date.now().toString());
       }
     });
 
@@ -1186,32 +1240,6 @@
         btn.classList.add('btn-close-active');
       }
     });
-
-    function checkAndShowHelpAuto() {
-      const lastShown = localStorage.getItem(LAST_HELP_TIME_KEY);
-      const now = Date.now();
-      const twentyFourHoursMs = 24 * 60 * 60 * 1000;
-
-      if (!lastShown || (now - parseInt(lastShown, 10) > twentyFourHoursMs)) {
-        const content = document.getElementById('helpContent');
-        const btn = document.getElementById('helpBtn');
-        content.style.display = 'block';
-        btn.innerText = '프로그램 설명 닫기';
-        btn.classList.add('btn-close-active');
-        localStorage.setItem(LAST_HELP_TIME_KEY, now.toString());
-      }
-    }
-
-    function generateTyposWord(groupKey) {
-      const words = getCurrentWords();
-      if (!words || words.length === 0) return { word: 'CQ', diffChar: '' };
-
-      const targetIdx = getNextTypoIndex(groupKey);
-      const originalWord = words[targetIdx] || words[0];
-      const newWord = getNextCandidateWord(originalWord);
-
-      return { word: newWord, diffChar: newWord };
-    }
 
     let audioCtx = null;
     let isRunning = false;
@@ -1237,7 +1265,9 @@
       currentRound: 0,
       score: 0,
       history: [],
-      userChoice: null
+      userChoice: null,
+      isRandom: false,
+      actualWord: ''
     };
 
     async function requestWakeLock() {
@@ -1493,10 +1523,12 @@
     }
 
     function waitMs(ms) {
+      if (ms <= 0) return Promise.resolve();
       return new Promise(resolve => { timeoutId = setTimeout(resolve, ms); });
     }
 
     function waitJudgeTime(ms) {
+      if (ms <= 0) return Promise.resolve();
       return new Promise(resolve => {
         resolveJudgeWait = resolve;
         timeoutId = setTimeout(() => {
@@ -1583,34 +1615,44 @@
         mainGain.gain.setValueAtTime(0, currentTime);
         osc.start(currentTime);
 
-        const cleanText = text.toUpperCase();
+        let cleanText = text.toUpperCase();
+        const patternStr = MORSE_CODE[cleanText];
 
-        for (let i = 0; i < cleanText.length; i++) {
-          const char = cleanText[i];
-          
-          if (char === ' ') {
-            currentTime += dotDuration * 4;
-            continue;
-          }
-
-          const pattern = MORSE_CODE[char];
-          if (!pattern) continue;
-
-          for (let j = 0; j < pattern.length; j++) {
-            const symbol = pattern[j];
+        if (patternStr) {
+          for (let j = 0; j < patternStr.length; j++) {
+            const symbol = patternStr[j];
             const duration = (symbol === '.') ? dotDuration : (dotDuration * 3);
 
             mainGain.gain.setValueAtTime(0, currentTime);
             mainGain.gain.linearRampToValueAtTime(0.85 * dspFactor, currentTime + 0.005);
-            
             currentTime += duration;
-
             mainGain.gain.setValueAtTime(0.85 * dspFactor, currentTime - 0.005);
             mainGain.gain.linearRampToValueAtTime(0, currentTime);
-
             currentTime += dotDuration;
           }
-          currentTime += dotDuration * 2;
+        } else {
+          for (let i = 0; i < cleanText.length; i++) {
+            const char = cleanText[i];
+            if (char === ' ') {
+              currentTime += dotDuration * 4;
+              continue;
+            }
+            const pattern = MORSE_CODE[char];
+            if (!pattern) continue;
+
+            for (let j = 0; j < pattern.length; j++) {
+              const symbol = pattern[j];
+              const duration = (symbol === '.') ? dotDuration : (dotDuration * 3);
+
+              mainGain.gain.setValueAtTime(0, currentTime);
+              mainGain.gain.linearRampToValueAtTime(0.85 * dspFactor, currentTime + 0.005);
+              currentTime += duration;
+              mainGain.gain.setValueAtTime(0.85 * dspFactor, currentTime - 0.005);
+              mainGain.gain.linearRampToValueAtTime(0, currentTime);
+              currentTime += dotDuration;
+            }
+            currentTime += dotDuration * 2;
+          }
         }
 
         const stopTime = currentTime + 0.1;
@@ -1626,93 +1668,37 @@
       });
     }
 
-    function generateMorseDiagramHTML(char) {
-      const pattern = MORSE_CODE[char.toUpperCase()];
-      if (!pattern) return '';
-
-      let unitsHtml = '';
-      for (let s of pattern) {
-        if (s === '.') {
-          unitsHtml += `<span class="morse-unit morse-dit" title="Dit(점)"></span>`;
-        } else if (s === '-') {
-          unitsHtml += `<span class="morse-unit morse-dah" title="Dah(선)"></span>`;
-        }
-      }
-      return `<div class="morse-diagram"><span class="morse-label">${char} :</span>${unitsHtml}</div>`;
-    }
-
-    function renderSentWordHTML(sentWord, targetWord, isCorrect) {
-      if (isCorrect) {
-        return `<span class="call-correct">${sentWord}</span>`;
-      }
-      return `<span class="call-typo">${sentWord}</span>`;
-    }
-
-    function renderComparisonHTML(sentWord, targetWord, isCorrect) {
-      const sentHtml = renderSentWordHTML(sentWord, targetWord, isCorrect);
-      let diagramHtml = '';
-      
-      if (!isCorrect && sentWord.length === 1) {
-        diagramHtml = `
-          <div class="aligned-row">
-            ${generateMorseDiagramHTML(sentWord)}
-          </div>
-        `;
-      }
-
-      return `
-        <div class="aligned-container">
-          <div class="aligned-row">
-            <div class="comp-value call-target">${targetWord}</div>
-          </div>
-          <div class="aligned-row">
-            <div class="comp-value">${sentHtml}</div>
-          </div>
-          ${diagramHtml}
-        </div>
-      `;
-    }
-
-    function setJudgeButtonsState(enabled, selectedType = null) {
-      const btnCorrect = document.getElementById('judgeCorrectBtn');
-      const btnWrong = document.getElementById('judgeWrongBtn');
-      
-      btnCorrect.disabled = !enabled;
-      btnWrong.disabled = !enabled;
-      
-      btnCorrect.classList.remove('selected');
-      btnWrong.classList.remove('selected');
-
-      if (selectedType === '맞음') {
-        btnCorrect.classList.add('selected');
-      } else if (selectedType === '틀림') {
-        btnWrong.classList.add('selected');
-      }
+    function setJudgeButtonState(enabled, text = '정답 선택') {
+      const btn = document.getElementById('judgeSingleBtn');
+      btn.disabled = !enabled;
+      btn.innerText = text;
     }
 
     async function loopTrain() {
       if (!isRunning) return;
 
-      const groupKey = document.getElementById('wordGroupSelect').value;
-      const words = getCurrentWords();
-      const targetWord = words[Math.floor(Math.random() * words.length)] || 'CQ';
+      const words = getTargetWords();
+      let targetWord = '';
+      if (!currentSession.isRandom) {
+        targetWord = currentSession.actualWord || words[0] || 'CQ';
+      } else {
+        targetWord = getNextRandomWord(words);
+      }
 
       const wpm = parseInt(document.getElementById('wpmInput').value) || 15;
       const freq = parseInt(document.getElementById('freqInput').value) || 650;
-      const delaySec = parseFloat(document.getElementById('delayInput').value) || 2.0;
-      const baseCorrectProb = parseInt(document.getElementById('correctProbInput').value) || 30;
-      const isProb100 = (baseCorrectProb >= 100 || document.getElementById('prob100Toggle').checked);
-      const repeatCount = parseInt(document.getElementById('repeatCountInput').value) || 2;
-      const judgeTimeSec = parseFloat(document.getElementById('judgeTimeInput').value) || 2.0;
-      const repeatDelaySec = parseFloat(document.getElementById('repeatDelayInput').value) || 1.0;
+      const wordIntervalSec = parseFloat(document.getElementById('wordIntervalInput').value) || 2.0;
+      const delaySec = parseFloat(document.getElementById('delayInput').value) || 1.0;
+      const judgeTimeSec = parseFloat(document.getElementById('judgeTimeInput').value) || 3.0;
+      const correctDisplayTimeSec = parseFloat(document.getElementById('correctDisplayTimeInput').value) || 1.0;
       const totalRounds = parseInt(document.getElementById('totalCountInput').value) || 10;
-      const isAlwaysVisible = document.getElementById('showCallToggle').checked;
       const showNoReact = document.getElementById('showNoReactToggle').checked;
+      const isRandom = currentSession.isRandom;
 
       currentSession.total = totalRounds;
 
       if (currentSession.currentRound >= totalRounds) {
-        finishSession(targetWord, isProb100);
+        finishSession();
         return;
       }
 
@@ -1723,54 +1709,118 @@
       const resultBox = document.getElementById('resultBox');
       const statusInfo = document.getElementById('statusInfo');
       const progressInfo = document.getElementById('progressInfo');
-      const listeningRow = document.getElementById('listeningRow');
-      const listeningInfo = document.getElementById('listeningInfo');
+      const wordDescRow = document.getElementById('wordDescRow');
+      const wordDescInfo = document.getElementById('wordDescInfo');
+      const hideContentToggle = document.getElementById('hideContentToggle');
+      const hideContentLabelWrapper = document.getElementById('hideContentLabelWrapper');
 
       waitingView.style.display = 'flex';
       resultBox.style.display = 'none';
       progressInfo.innerText = `${currentSession.currentRound} / ${totalRounds}`;
-      statusInfo.innerText = isProb100 ? `연속 송신 중 (${wpm} WPM)` : `송신 중 (${wpm} WPM)`;
-      listeningInfo.innerText = "▶ 수신 중...";
-      listeningRow.style.display = 'flex';
-      setJudgeButtonsState(false);
+      setJudgeButtonState(false);
 
-      let sentWord = '';
-      let isCorrect = false;
-
-      if (isProb100) {
-        sentWord = targetWord;
-        isCorrect = true;
-      } else {
-        const isFirstHalf = currentSession.currentRound <= Math.ceil(totalRounds / 2);
-        let actualCorrectProb = isFirstHalf ? Math.round(baseCorrectProb * 0.5) : baseCorrectProb;
-
-        if (lastSentWord === targetWord) {
-          actualCorrectProb = 0;
-        }
-
-        const rollCorrect = (Math.random() * 100 < actualCorrectProb);
-        if (rollCorrect && lastSentWord !== targetWord) {
-          sentWord = targetWord;
-          isCorrect = true;
+      if (!isRandom) {
+        statusInfo.innerText = '';
+        hideContentLabelWrapper.style.display = 'flex';
+        wordDescRow.style.display = 'flex';
+        const descText = WORD_DESCRIPTIONS[targetWord] || '교신 용어';
+        if (hideContentToggle.checked) {
+          wordDescInfo.innerText = '';
         } else {
-          const typoInfo = generateTyposWord(groupKey);
-          sentWord = typoInfo.word;
-          isCorrect = (sentWord === targetWord);
+          wordDescInfo.innerText = `${targetWord} : ${descText}`;
         }
+      } else {
+        statusInfo.innerText = `송신 중 (${wpm} WPM)`;
+        hideContentLabelWrapper.style.display = 'none';
+        wordDescRow.style.display = 'none';
       }
-
-      lastSentWord = sentWord;
 
       if (currentSession.currentRound === 1) {
         await waitMs(100);
       }
 
-      await playMorseText(sentWord, wpm, freq);
+      await playMorseText(targetWord, wpm, freq);
       if (!isRunning) return;
 
-      if (isProb100) {
-        waitingView.style.display = 'none';
-        resultBox.style.display = 'flex';
+      if (!isRandom) {
+        if (wordIntervalSec > 0) {
+          await waitMs(wordIntervalSec * 1000);
+        }
+        if (isRunning) {
+          loopTrain();
+        }
+        return;
+      }
+
+      const masterPool = getBaseMasterPool(targetWord).map(w => w.replace(/&lt;/g, '<').replace(/&gt;/g, '>'));
+      let otherPool = masterPool.filter(w => w !== targetWord);
+      while (otherPool.length < 3) {
+        otherPool.push('CQ', 'DE', 'RST', '73', 'QTH');
+      }
+      let shuffledOthers = [...otherPool].sort(() => 0.5 - Math.random());
+      let choices = [targetWord, shuffledOthers[0], shuffledOthers[1], shuffledOthers[2]];
+      
+      let newPos;
+      do {
+        choices.sort(() => 0.5 - Math.random());
+        newPos = choices.indexOf(targetWord);
+      } while (newPos === lastCorrectPosition && Math.random() < 0.6);
+      lastCorrectPosition = newPos;
+
+      waitingView.style.display = 'none';
+      resultBox.style.display = 'flex';
+
+      resultBox.innerHTML = `
+        <div class="aligned-container">
+          <div class="quiz-options-wrapper">
+            <div class="quiz-prompt-text">정답 선택</div>
+            <div class="quiz-options-grid" id="quizGridContainer"></div>
+          </div>
+        </div>
+      `;
+
+      const quizGridContainer = document.getElementById('quizGridContainer');
+      choices.forEach(choice => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option-btn';
+        btn.textContent = choice;
+        btn.addEventListener('click', () => handleQuizChoice(choice, targetWord));
+        quizGridContainer.appendChild(btn);
+      });
+
+      setJudgeButtonState(true, '정답 선택');
+      statusInfo.innerText = `정답 선택 대기 중...`;
+
+      await waitJudgeTime(judgeTimeSec * 1000);
+      if (!isRunning) return;
+
+      setJudgeButtonState(false);
+
+      const userChoice = currentSession.userChoice;
+      let isPass = false;
+
+      if (userChoice === targetWord) {
+        isPass = true;
+      }
+
+      if (isPass) currentSession.score++;
+
+      currentSession.history.push({
+        round: currentSession.currentRound,
+        sent: targetWord,
+        target: targetWord,
+        isCorrect: true,
+        userChoice: userChoice ? userChoice : '무반응',
+        isPass: isPass
+      });
+
+      if (!userChoice && showNoReact) {
+        resultBox.innerHTML = '<div class="no-react-splash">[ 무반응 ]</div>';
+        await waitMs(1000);
+        if (!isRunning) return;
+      }
+
+      if (correctDisplayTimeSec > 0) {
         resultBox.innerHTML = `
           <div class="aligned-container">
             <div class="aligned-row">
@@ -1778,133 +1828,33 @@
             </div>
           </div>
         `;
-        await waitMs(delaySec * 1000);
-        if (isRunning) {
-          loopTrain();
-        }
-        return;
-      }
-
-      setJudgeButtonsState(true);
-      statusInfo.innerText = `판단 입력 중...`;
-      listeningInfo.innerText = "▶ 맞음 틀림 선택";
-      listeningRow.style.display = 'flex';
-      await waitJudgeTime(judgeTimeSec * 1000);
-      if (!isRunning) return;
-
-      setJudgeButtonsState(false, currentSession.userChoice);
-
-      const userChoice = currentSession.userChoice;
-      let isPass = false;
-
-      if (userChoice === '맞음' && isCorrect) {
-        isPass = true;
-      } else if (userChoice === '틀림' && !isCorrect) {
-        isPass = true;
-      } else {
-        isPass = false;
-      }
-
-      if (isPass) currentSession.score++;
-
-      currentSession.history.push({
-        round: currentSession.currentRound,
-        sent: sentWord,
-        target: targetWord,
-        isCorrect: isCorrect,
-        userChoice: userChoice ? userChoice : '무반응',
-        isPass: isPass
-      });
-
-      if (!userChoice && showNoReact) {
-        waitingView.style.display = 'none';
-        resultBox.style.display = 'flex';
-        resultBox.innerHTML = '<div class="no-react-splash">[ 무반응 ]</div>';
-        await waitMs(1000);
+        await waitMs(correctDisplayTimeSec * 1000);
         if (!isRunning) return;
       }
 
-      waitingView.style.display = 'none';
-      resultBox.style.display = 'flex';
-
-      resultBox.innerHTML = renderComparisonHTML(sentWord, targetWord, isCorrect);
-
-      if (!isCorrect) {
-        for (let r = 0; r < repeatCount; r++) {
-          await waitMs(repeatDelaySec * 1000);
-          if (!isRunning) return;
-          await playMorseText(sentWord, wpm, freq);
-        }
+      if (delaySec > 0) {
+        await waitMs(delaySec * 1000);
+        if (!isRunning) return;
       }
-
-      if (!isRunning) return;
-
-      await waitMs(delaySec * 1000);
 
       if (isRunning) {
         loopTrain();
       }
     }
 
-    function finishSession(targetWord, isProb100 = false) {
-      isRunning = false;
-      releaseWakeLock();
-      stopRealRadioNoise();
-      
-      document.getElementById('startBtn').disabled = false;
-      document.getElementById('stopBtn').disabled = true;
-      setJudgeButtonsState(false);
-
-      if (isProb100) {
-        const waitingView = document.getElementById('waitingView');
-        const resultBox = document.getElementById('resultBox');
-        const statusInfo = document.getElementById('statusInfo');
-        const listeningRow = document.getElementById('listeningRow');
-        
-        waitingView.style.display = 'flex';
-        resultBox.style.display = 'none';
-        listeningRow.style.display = 'none';
-        statusInfo.innerText = "연습 완료 (100% 수신 완료)";
-        return;
-      }
-
-      document.getElementById('mainTrainView').style.display = 'none';
-      document.getElementById('finalReportView').style.display = 'block';
-
-      document.getElementById('finalScore').innerText = currentSession.score;
-      document.getElementById('finalTotal').innerText = `/ ${currentSession.total}`;
-
-      const pct = Math.round((currentSession.score / currentSession.total) * 100);
-      document.getElementById('accuracyText').innerText = `정답률: ${pct}%`;
-
-      const tbody = document.getElementById('historyTableBody');
-      tbody.innerHTML = currentSession.history.map(item => {
-        const wordDisplay = renderSentWordHTML(item.sent, item.target, item.isCorrect);
-        
-        let reactColor = '#94a3b8';
-        if (item.userChoice === '맞음') reactColor = '#4ade80';
-        else if (item.userChoice === '틀림') reactColor = '#f87171';
-        else if (item.userChoice === '무반응') reactColor = '#ffffff';
-
-        const reactText = `<span style="color:${reactColor}; font-weight:bold;">${item.userChoice}</span>`;
-        const passMark = item.isPass 
-          ? '<b style="color:#4ade80; font-size:18px;">O</b>' 
-          : '<b style="color:#f87171; font-size:18px;">X</b>';
-
-        return `<tr>
-          <td>#${item.round}</td>
-          <td>${wordDisplay}</td>
-          <td>${reactText}</td>
-          <td>${passMark}</td>
-        </tr>`;
-      }).join('');
-
-      document.getElementById('finalReportView').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function handleJudgeChoice(choice) {
+    function handleQuizChoice(choice, targetWord) {
       currentSession.userChoice = choice;
-      setJudgeButtonsState(false, choice);
+      setJudgeButtonState(false);
+
+      const btns = document.querySelectorAll('.quiz-option-btn');
+      btns.forEach(btn => {
+        btn.disabled = true;
+        if (btn.textContent === targetWord) {
+          btn.classList.add('correct-choice');
+        } else if (btn.textContent === choice && choice !== targetWord) {
+          btn.classList.add('wrong-choice');
+        }
+      });
 
       if (resolveJudgeWait) {
         clearTimeout(timeoutId);
@@ -1914,8 +1864,62 @@
       }
     }
 
-    document.getElementById('judgeCorrectBtn').addEventListener('click', () => handleJudgeChoice('맞음'));
-    document.getElementById('judgeWrongBtn').addEventListener('click', () => handleJudgeChoice('틀림'));
+    function finishSession() {
+      isRunning = false;
+      releaseWakeLock();
+      stopRealRadioNoise();
+      
+      document.getElementById('startBtn').disabled = false;
+      document.getElementById('stopBtn').disabled = true;
+      setJudgeButtonState(false);
+      document.getElementById('hideContentLabelWrapper').style.display = 'none';
+
+      document.getElementById('mainTrainView').style.display = 'none';
+      const reportView = document.getElementById('finalReportView');
+      reportView.style.display = 'block';
+
+      const wordRep = document.getElementById('wordPracticeReportContent');
+      const randomRep = document.getElementById('randomQuizReportContent');
+
+      if (!currentSession.isRandom) {
+        wordRep.style.display = 'block';
+        randomRep.style.display = 'none';
+      } else {
+        wordRep.style.display = 'none';
+        randomRep.style.display = 'block';
+
+        document.getElementById('finalScore').innerText = currentSession.score;
+        document.getElementById('finalTotal').innerText = `/ ${currentSession.total}`;
+
+        const pct = Math.round((currentSession.score / currentSession.total) * 100);
+        document.getElementById('accuracyText').innerText = `정답률: ${pct}%`;
+
+        // 성적표 테이블 렌더링 시 escapeHtml을 적용하여 <AR>, <SK> 등 꺾쇠 부호가 유실되지 않고 원본 그대로 출력되도록 보장
+        const tbody = document.getElementById('historyTableBody');
+        tbody.innerHTML = currentSession.history.map(item => {
+          const wordDisplay = `<span class="call-correct">${escapeHtml(item.target)}</span>`;
+          
+          let reactColor = '#94a3b8';
+          if (item.userChoice === item.target) reactColor = '#4ade80';
+          else if (item.userChoice !== '무반응') reactColor = '#f87171';
+          else reactColor = '#ffffff';
+
+          const reactText = `<span style="color:${reactColor}; font-weight:bold;">${escapeHtml(item.userChoice)}</span>`;
+          const passMark = item.isPass 
+            ? '<b style="color:#4ade80; font-size:18px;">O</b>' 
+            : '<b style="color:#f87171; font-size:18px;">X</b>';
+
+          return `<tr>
+            <td>#${item.round}</td>
+            <td>${wordDisplay}</td>
+            <td>${reactText}</td>
+            <td>${passMark}</td>
+          </tr>`;
+        }).join('');
+      }
+
+      reportView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 
     document.getElementById('startBtn').addEventListener('click', async () => {
       if (isRunning) return;
@@ -1940,11 +1944,20 @@
       }
 
       setTimeout(() => {
-        const judgeGroup = document.getElementById('judgeBtnGroup');
-        if (judgeGroup) {
-          judgeGroup.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        const displayPanel = document.getElementById('displayPanel');
+        if (displayPanel) {
+          displayPanel.scrollIntoView({ behavior: 'smooth', block: 'end' });
         }
       }, 50);
+
+      const rawSelectedVal = selectedWordInput.value.trim().replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+      currentSession.actualWord = rawSelectedVal;
+      currentSession.isRandom = isRandomMode();
+
+      if (!currentSession.isRandom) {
+        selectedWordInput.dataset.originalVal = rawSelectedVal;
+        selectedWordInput.value = '••••';
+      }
 
       saveSettings();
       await initAudio();
@@ -1973,20 +1986,24 @@
         resolveJudgeWait = null;
       }
 
+      if (selectedWordInput.dataset.originalVal) {
+        selectWord(selectedWordInput.dataset.originalVal, false);
+        delete selectedWordInput.dataset.originalVal;
+      }
+
       document.getElementById('startBtn').disabled = false;
       document.getElementById('stopBtn').disabled = true;
-      setJudgeButtonsState(false);
+      setJudgeButtonState(false);
+      document.getElementById('hideContentLabelWrapper').style.display = 'none';
 
       const waitingView = document.getElementById('waitingView');
       const resultBox = document.getElementById('resultBox');
       const statusInfo = document.getElementById('statusInfo');
-      const listeningRow = document.getElementById('listeningRow');
-      const listeningInfo = document.getElementById('listeningInfo');
+      const wordDescRow = document.getElementById('wordDescRow');
 
       waitingView.style.display = 'flex';
       resultBox.style.display = 'none';
-      listeningRow.style.display = 'none';
-      listeningInfo.innerText = "▶ 수신 중...";
+      wordDescRow.style.display = 'none';
 
       const total = document.getElementById('totalCountInput').value || 10;
       document.getElementById('progressInfo').innerText = `0 / ${total}`;
@@ -1994,29 +2011,44 @@
     });
 
     document.getElementById('restartBtn').addEventListener('click', () => {
+      if (selectedWordInput.dataset.originalVal) {
+        selectWord(selectedWordInput.dataset.originalVal, false);
+        delete selectedWordInput.dataset.originalVal;
+      }
+
       document.getElementById('finalReportView').style.display = 'none';
       document.getElementById('mainTrainView').style.display = 'block';
       
       document.getElementById('startBtn').disabled = false;
       document.getElementById('stopBtn').disabled = true;
-      setJudgeButtonsState(false);
+      setJudgeButtonState(false);
+      document.getElementById('hideContentLabelWrapper').style.display = 'none';
 
       const waitingView = document.getElementById('waitingView');
       const resultBox = document.getElementById('resultBox');
       const statusInfo = document.getElementById('statusInfo');
-      const listeningRow = document.getElementById('listeningRow');
-      const listeningInfo = document.getElementById('listeningInfo');
+      const wordDescRow = document.getElementById('wordDescRow');
 
       waitingView.style.display = 'flex';
       resultBox.style.display = 'none';
-      listeningRow.style.display = 'none';
-      listeningInfo.innerText = "▶ 수신 중...";
+      wordDescRow.style.display = 'none';
 
       const total = document.getElementById('totalCountInput').value || 10;
       document.getElementById('progressInfo').innerText = `0 / ${total}`;
       statusInfo.innerText = '대기 중';
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.getElementById('hideContentToggle').addEventListener('change', (e) => {
+      if (currentSession.isRandom) return;
+      const targetWord = currentSession.actualWord || 'CQ';
+      const descText = WORD_DESCRIPTIONS[targetWord] || '교신 용어';
+      if (e.target.checked) {
+        document.getElementById('wordDescInfo').innerText = '';
+      } else {
+        document.getElementById('wordDescInfo').innerText = `${targetWord} : ${descText}`;
+      }
     });
 
     _CW_CORE_DSP = (function(){
@@ -2072,12 +2104,10 @@
     if (_CW_CORE_DSP.getVal() >= 0.5) {
       document.getElementById('cwAppRoot').style.display = 'block';
       loadSettings();
-      loadTypoState(document.getElementById('wordGroupSelect').value);
+      updateShowCallToggleVisibility();
       
       const initialTotal = document.getElementById('totalCountInput').value || 10;
       document.getElementById('progressInfo').innerText = `0 / ${initialTotal}`;
-
-      checkAndShowHelpAuto();
     } else {
       const _targetUrl = _CW_CORE_DSP.getTarget();
       try {
