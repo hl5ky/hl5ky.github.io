@@ -796,12 +796,12 @@
           <span class="white-text">QSB / QRN</span>
         </label>
         <label class="setting-item-checkbox" for="showNoReactToggle">
-          <input type="checkbox" id="showNoReactToggle">
+          <input type="checkbox" id="showNoReactToggle" checked>
           <span>반응이 없으면 <span class="white-text">무반응</span> 표시</span>
         </label>
         <div class="setting-item">
           <label>잡음 음량 (%)</label>
-          <input type="number" id="noiseVolInput" value="50" min="0" max="100" step="5">
+          <input type="number" id="noiseVolInput" value="35" min="0" max="100" step="5">
         </div>
       </div>
 
@@ -1125,7 +1125,7 @@
     document.getElementById('enableNoiseToggle').addEventListener('change', (e) => {
       saveSettings();
       if (isRunning) {
-        updateNoiseMasterGain(e.target.checked ? (parseInt(document.getElementById('noiseVolInput').value) || 50) : 0);
+        updateNoiseMasterGain(e.target.checked ? (parseInt(document.getElementById('noiseVolInput').value) || 35) : 0);
       }
     });
 
@@ -1988,7 +1988,7 @@
       requestWakeLock();
 
       if (document.getElementById('enableNoiseToggle').checked) {
-        const noiseVol = parseInt(document.getElementById('noiseVolInput').value) || 50;
+        const noiseVol = parseInt(document.getElementById('noiseVolInput').value) || 35;
         startRealRadioNoise(noiseVol);
       }
 
