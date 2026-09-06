@@ -38,6 +38,13 @@
       font-weight: 600;
       color: #94a3b8;
       letter-spacing: 0.5px;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.2s, text-shadow 0.2s;
+    }
+    .version-tag:hover {
+      color: #4ade80;
+      text-shadow: 0 0 6px rgba(74, 222, 128, 0.6);
     }
     .v-char {
       font-size: 13px;
@@ -243,7 +250,7 @@
       color: #991b1b !important;
     }
 
-    #helpContent {
+    .info-pane {
       margin-top: 12px;
       padding: 14px 16px;
       background-color: #1e293b;
@@ -264,22 +271,22 @@
       border-bottom: 1px dashed #334155;
       text-align: left;
     }
-    #helpContent .help-item {
+    .help-item {
       display: flex;
       align-items: flex-start;
       margin-bottom: 6px;
     }
-    #helpContent .help-label {
+    .help-label {
       font-weight: bold;
       color: #38bdf8;
       white-space: nowrap;
       margin-right: 6px;
       flex-shrink: 0;
     }
-    #helpContent .help-desc {
+    .help-desc {
       flex: 1;
     }
-    #helpContent .help-desc > div {
+    .help-desc > div {
       line-height: 1.6;
     }
 
@@ -679,7 +686,7 @@
     <div class="title-header">
       <div class="title-group">
         <h2>호출부호 식별 연습기</h2>
-        <span class="version-tag"><span class="v-char">V</span><span class="v-num">.1.1</span></span>
+        <span class="version-tag" id="versionTagBtn" title="개발 히스토리 보기"><span class="v-char">V</span><span class="v-num">.1.2</span></span>
       </div>
       <span class="author-tag">by <a href="https://hl5ky.github.io/morse" target="_blank">HL5KY</a></span>
     </div>
@@ -703,7 +710,7 @@
         <button class="help-btn" id="helpBtn">프로그램 설명</button>
       </div>
 
-      <div id="helpContent" style="display: none;">
+      <div id="helpContent" class="info-pane" style="display: none;">
         <div class="help-header-title">[ 프로그램 설명 ]</div>
         <div class="help-item">
           <span class="help-label">1. 개요 :</span>
@@ -739,6 +746,22 @@
             <div>간단한 문장으로 연습 가능. 예) HL5KY DE HL5BTF</div>
             <div>※ 이때는 정답 확률을 100%로 해서 사전 연습이 필요.</div>
           </div>
+        </div>
+      </div>
+
+      <div id="historyContent" class="info-pane" style="display: none;">
+        <div class="help-header-title">[ 프로그램 히스토리 ]</div>
+        <div class="help-item">
+          <span class="help-label">v.1.2 (260906) :</span>
+          <div class="help-desc">시작 시 초기 오디오 에러 해결</div>
+        </div>
+        <div class="help-item">
+          <span class="help-label">v.1.1 (260904) :</span>
+          <div class="help-desc">UI 변경</div>
+        </div>
+        <div class="help-item">
+          <span class="help-label">v.1.0 (260829) :</span>
+          <div class="help-desc">프로그램 개발</div>
         </div>
       </div>
     </div>
@@ -1146,20 +1169,44 @@
       });
     });
 
-    document.getElementById('helpBtn').addEventListener('click', () => {
-      const content = document.getElementById('helpContent');
-      const btn = document.getElementById('helpBtn');
-      const isVisible = window.getComputedStyle(content).display !== 'none';
-      
-      if (isVisible) {
-        content.style.display = 'none';
-        btn.innerText = '프로그램 설명';
-        btn.classList.remove('btn-close-active');
+    const helpContent = document.getElementById('helpContent');
+    const historyContent = document.getElementById('historyContent');
+    const helpBtn = document.getElementById('helpBtn');
+    const versionTagBtn = document.getElementById('versionTagBtn');
+
+    helpBtn.addEventListener('click', () => {
+      const isHistoryOpen = window.getComputedStyle(historyContent).display !== 'none';
+      const isHelpOpen = window.getComputedStyle(helpContent).display !== 'none';
+
+      if (isHistoryOpen) {
+        historyContent.style.display = 'none';
+        helpBtn.innerText = '프로그램 설명';
+        helpBtn.classList.remove('btn-close-active');
+      } else if (isHelpOpen) {
+        helpContent.style.display = 'none';
+        helpBtn.innerText = '프로그램 설명';
+        helpBtn.classList.remove('btn-close-active');
       } else {
-        content.style.display = 'block';
-        btn.innerText = '프로그램 설명 닫기';
-        btn.classList.add('btn-close-active');
+        historyContent.style.display = 'none';
+        helpContent.style.display = 'block';
+        helpBtn.innerText = '프로그램 설명 닫기';
+        helpBtn.classList.add('btn-close-active');
         localStorage.setItem(LAST_HELP_TIME_KEY, Date.now().toString());
+      }
+    });
+
+    versionTagBtn.addEventListener('click', () => {
+      const isHistoryOpen = window.getComputedStyle(historyContent).display !== 'none';
+
+      if (isHistoryOpen) {
+        historyContent.style.display = 'none';
+        helpBtn.innerText = '프로그램 설명';
+        helpBtn.classList.remove('btn-close-active');
+      } else {
+        helpContent.style.display = 'none';
+        historyContent.style.display = 'block';
+        helpBtn.innerText = '히스토리 닫기';
+        helpBtn.classList.add('btn-close-active');
       }
     });
 
@@ -1185,11 +1232,10 @@
       const twentyFourHoursMs = 24 * 60 * 60 * 1000;
 
       if (!lastShown || (now - parseInt(lastShown, 10) > twentyFourHoursMs)) {
-        const content = document.getElementById('helpContent');
-        const btn = document.getElementById('helpBtn');
-        content.style.display = 'block';
-        btn.innerText = '프로그램 설명 닫기';
-        btn.classList.add('btn-close-active');
+        helpContent.style.display = 'block';
+        historyContent.style.display = 'none';
+        helpBtn.innerText = '프로그램 설명 닫기';
+        helpBtn.classList.add('btn-close-active');
         localStorage.setItem(LAST_HELP_TIME_KEY, now.toString());
       }
     }
@@ -1630,7 +1676,7 @@
 
         osc.onended = completePlayback;
 
-        const totalDurationMs = Math.max(0, (stopTime - audioCtx.currentTime) * 1000) + 150;
+        const totalDurationMs = Math.max(0, (stopTime - audioCtx.currentTime) * 1000) + 600;
         safetyTimer = setTimeout(completePlayback, totalDurationMs);
       });
     }
@@ -1797,7 +1843,7 @@
       lastSentCall = sentCall;
 
       if (currentSession.currentRound === 1) {
-        await waitMs(100);
+        await waitMs(300);
       }
 
       await playMorseText(sentCall, wpm, freq);
@@ -1960,10 +2006,9 @@
       document.getElementById('startBtn').disabled = true;
       document.getElementById('stopBtn').disabled = false;
 
-      const helpContent = document.getElementById('helpContent');
-      const helpBtn = document.getElementById('helpBtn');
-      if (window.getComputedStyle(helpContent).display !== 'none') {
+      if (window.getComputedStyle(helpContent).display !== 'none' || window.getComputedStyle(historyContent).display !== 'none') {
         helpContent.style.display = 'none';
+        historyContent.style.display = 'none';
         helpBtn.innerText = '프로그램 설명';
         helpBtn.classList.remove('btn-close-active');
       }
@@ -1985,6 +2030,7 @@
 
       saveSettings();
       await initAudio();
+      await waitMs(300);
       requestWakeLock();
 
       if (document.getElementById('enableNoiseToggle').checked) {

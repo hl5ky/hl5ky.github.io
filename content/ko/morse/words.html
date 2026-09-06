@@ -38,6 +38,12 @@
       font-weight: 600;
       color: #94a3b8;
       letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .version-tag:hover {
+      color: #4ade80;
+      text-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
     }
     .v-char {
       font-size: 13px;
@@ -88,7 +94,7 @@
       align-items: center;
     }
 
-    /* 호출부호 식별 연습기와 동일한 입력창 규격 및 패딩 적용 */
+    /* 입력창 높이를 정확히 40px로 고정하여 호출 부호 식별 연습기와 완전 일치 */
     .custom-dropdown {
       position: relative;
       width: 145px;
@@ -97,7 +103,8 @@
     }
     .dropdown-toggle-input {
       width: 100%;
-      padding: 8px 32px 8px 10px;
+      height: 40px;
+      padding: 0 32px 0 10px;
       font-size: 18px;
       font-weight: bold;
       border: 2px solid #0284c7;
@@ -109,6 +116,9 @@
       background-color: #1a202c;
       letter-spacing: 1px;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .dropdown-toggle-input:focus {
       outline: none;
@@ -163,7 +173,17 @@
     .dropdown-item:last-child {
       border-bottom: none;
     }
-    .dropdown-item:hover {
+    /* 마우스 호버 영역을 오른쪽으로 넓혀서 서브메뉴 이동 시 쉽게 사라지지 않도록 브릿지 제공 */
+    .dropdown-item::after {
+      content: '';
+      position: absolute;
+      right: -15px;
+      top: 0;
+      width: 15px;
+      height: 100%;
+    }
+    .dropdown-item:hover,
+    .dropdown-item.force-hover {
       background-color: #0284c7;
       color: #ffffff;
     }
@@ -171,7 +191,7 @@
     .sub-word-list {
       display: none;
       position: absolute;
-      left: 102%;
+      left: calc(100% + 2px);
       top: 0;
       min-width: 120px;
       background-color: #0f172a;
@@ -182,7 +202,8 @@
       max-height: 250px;
       overflow-y: auto;
     }
-    .dropdown-item:hover .sub-word-list {
+    .dropdown-item:hover .sub-word-list,
+    .dropdown-item.force-hover .sub-word-list {
       display: block;
     }
     .sub-word-item {
@@ -210,7 +231,7 @@
       color: #ffffff;
     }
     
-    /* 호출부호 식별 연습기와 동일한 '항상 보이기' 규격 적용 */
+    /* 항상 보이기 레이아웃 고정 및 비활성화 스타일 */
     .show-toggle-label {
       display: inline-flex;
       align-items: center;
@@ -271,7 +292,7 @@
       color: #991b1b !important;
     }
 
-    #helpContent {
+    #helpContent, #historyContent {
       margin-top: 12px;
       padding: 14px 16px;
       background-color: #1e293b;
@@ -292,22 +313,22 @@
       border-bottom: 1px dashed #334155;
       text-align: left;
     }
-    #helpContent .help-item {
+    #helpContent .help-item, #historyContent .help-item {
       display: flex;
       align-items: flex-start;
       margin-bottom: 6px;
     }
-    #helpContent .help-label {
+    #helpContent .help-label, #historyContent .help-label {
       font-weight: bold;
       color: #38bdf8;
       white-space: nowrap;
       margin-right: 6px;
       flex-shrink: 0;
     }
-    #helpContent .help-desc {
+    #helpContent .help-desc, #historyContent .help-desc {
       flex: 1;
     }
-    #helpContent .help-desc > div {
+    #helpContent .help-desc > div, #historyContent .help-desc > div {
       line-height: 1.6;
     }
 
@@ -435,6 +456,7 @@
     }
 
     .display-panel {
+      position: relative;
       padding: 14px 16px;
       background-color: #111827;
       border: 2px solid #374151;
@@ -563,15 +585,21 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
-      margin-top: 2px;
+      margin-top: -4px;
     }
     .quiz-prompt-text {
-      font-size: 15px;
-      font-weight: bold;
-      color: #38bdf8;
+      font-size: 21px;
+      font-weight: 900;
+      color: #facc15;
       text-align: center;
       margin-bottom: 6px;
+      animation: blinkPrompt 1.2s infinite ease-in-out;
     }
+    @keyframes blinkPrompt {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
     .quiz-options-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -685,7 +713,7 @@
     <div class="title-header">
       <div class="title-group">
         <h2>교신 용어 연습기</h2>
-        <span class="version-tag"><span class="v-char">V</span><span class="v-num">.1.0</span></span>
+        <span class="version-tag" id="versionTag" title="클릭하여 히스토리 보기"><span class="v-char">V</span><span class="v-num">.1.0</span></span>
       </div>
       <span class="author-tag">by <a href="https://hl5ky.github.io/morse" target="_blank">HL5KY</a></span>
     </div>
@@ -706,7 +734,7 @@
                   <div class="sub-word-item" onclick="selectWord('RST')">RST</div>
                   <div class="sub-word-item" onclick="selectWord('QTH')">QTH</div>
                   <div class="sub-word-item" onclick="selectWord('KDN')">KDN</div>
-                  <div class="sub-word-item random-item" onclick="selectWord('묶음1무작위')">묶음1 무작위</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('묶음1랜덤')">묶음1 랜덤</div>
                 </div>
               </div>
               <div class="dropdown-item" data-group="묶음2">묶음2
@@ -715,18 +743,18 @@
                   <div class="sub-word-item" onclick="selectWord('OP')">OP</div>
                   <div class="sub-word-item" onclick="selectWord('IS')">IS</div>
                   <div class="sub-word-item" onclick="selectWord('73')">73</div>
-                  <div class="sub-word-item random-item" onclick="selectWord('묶음2무작위')">묶음2 무작위</div>
-                  <div class="sub-word-item random-item" onclick="selectWord('누적무작위2')">누적 무작위</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('묶음2랜덤')">묶음2 랜덤</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('누적랜덤2')">누적 랜덤</div>
                 </div>
               </div>
               <div class="dropdown-item" data-group="묶음3">묶음3
                 <div class="sub-word-list">
                   <div class="sub-word-item" onclick="selectWord('ES')">ES</div>
-                  <div class="sub-word-item" onclick="selectWord('TKS')">TKS</div>
+                  <div class="sub-word-item" onclick="selectWord('TNX')">TNX</div>
                   <div class="sub-word-item" onclick="selectWord('CU')">CU</div>
                   <div class="sub-word-item" onclick="selectWord('AGN')">AGN</div>
-                  <div class="sub-word-item random-item" onclick="selectWord('묶음3무작위')">묶음3 무작위</div>
-                  <div class="sub-word-item random-item" onclick="selectWord('누적무작위3')">누적 무작위</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('묶음3랜덤')">묶음3 랜덤</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('누적랜덤3')">누적 랜덤</div>
                 </div>
               </div>
               <div class="dropdown-item" data-group="묶음4">묶음4
@@ -735,8 +763,8 @@
                   <div class="sub-word-item" onclick="selectWord('GM')">GM</div>
                   <div class="sub-word-item" onclick="selectWord('GB')">GB</div>
                   <div class="sub-word-item" onclick="selectWord('TU')">TU</div>
-                  <div class="sub-word-item random-item" onclick="selectWord('묶음4무작위')">묶음4 무작위</div>
-                  <div class="sub-word-item random-item" onclick="selectWord('누적무작위4')">누적 무작위</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('묶음4랜덤')">묶음4 랜덤</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('누적랜덤4')">누적 랜덤</div>
                 </div>
               </div>
               <div class="dropdown-item" data-group="묶음5">묶음5
@@ -745,18 +773,18 @@
                   <div class="sub-word-item" onclick="selectWord('DR')">DR</div>
                   <div class="sub-word-item" onclick="selectWord('RPRT')">RPRT</div>
                   <div class="sub-word-item" onclick="selectWord('PSE')">PSE</div>
-                  <div class="sub-word-item random-item" onclick="selectWord('묶음5무작위')">묶음5 무작위</div>
-                  <div class="sub-word-item random-item" onclick="selectWord('누적무작위5')">누적 무작위</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('묶음5랜덤')">묶음5 랜덤</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('누적랜덤5')">누적 랜덤</div>
                 </div>
               </div>
               <div class="dropdown-item" data-group="묶음6">묶음6
                 <div class="sub-word-list">
                   <div class="sub-word-item" onclick="selectWord('DX')">DX</div>
-                  <div class="sub-word-item" onclick="selectWord('ANT')">ANT</div>
+                  <div class="sub-word-item" onclick="selectWord('5NN')">5NN</div>
                   <div class="sub-word-item" onclick="selectWord('QRP')">QRP</div>
                   <div class="sub-word-item" onclick="selectWord('QRZ')">QRZ</div>
-                  <div class="sub-word-item random-item" onclick="selectWord('묶음6무작위')">묶음6 무작위</div>
-                  <div class="sub-word-item random-item" onclick="selectWord('누적무작위6')">누적 무작위</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('묶음6랜덤')">묶음6 랜덤</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('누적랜덤6')">누적 랜덤</div>
                 </div>
               </div>
               <div class="dropdown-item" data-group="묶음7">묶음7
@@ -765,8 +793,8 @@
                   <div class="sub-word-item" onclick="selectWord('QRM')">QRM</div>
                   <div class="sub-word-item" onclick="selectWord('QSB')">QSB</div>
                   <div class="sub-word-item" onclick="selectWord('QSL')">QSL</div>
-                  <div class="sub-word-item random-item" onclick="selectWord('묶음7무작위')">묶음7 무작위</div>
-                  <div class="sub-word-item random-item" onclick="selectWord('누적무작위7')">누적 무작위</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('묶음7랜덤')">묶음7 랜덤</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('누적랜덤7')">누적 랜덤</div>
                 </div>
               </div>
               <div class="dropdown-item" data-group="묶음8">묶음8
@@ -775,8 +803,18 @@
                   <div class="sub-word-item" onclick="selectWord('QRS')">QRS</div>
                   <div class="sub-word-item" onclick="selectWord('QRX')">QRX</div>
                   <div class="sub-word-item" onclick="selectWord('&lt;AR&gt;')">&lt;AR&gt;</div>
-                  <div class="sub-word-item random-item" onclick="selectWord('묶음8무작위')">묶음8 무작위</div>
-                  <div class="sub-word-item random-item" onclick="selectWord('누적무작위8')">누적 무작위</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('묶음8랜덤')">묶음8 랜덤</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('누적랜덤8')">누적 랜덤</div>
+                </div>
+              </div>
+              <div class="dropdown-item" data-group="묶음9">묶음9
+                <div class="sub-word-list">
+                  <div class="sub-word-item" onclick="selectWord('&lt;BT&gt;')">&lt;BT&gt;</div>
+                  <div class="sub-word-item" onclick="selectWord('.')">마침표(.)</div>
+                  <div class="sub-word-item" onclick="selectWord(',')">쉼표(,)</div>
+                  <div class="sub-word-item" onclick="selectWord('ANT')">ANT</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('묶음9랜덤')">묶음9 랜덤</div>
+                  <div class="sub-word-item random-item" onclick="selectWord('누적랜덤9')">누적 랜덤</div>
                 </div>
               </div>
             </div>
@@ -795,36 +833,19 @@
         <div class="help-header-title">[ 프로그램 설명 ]</div>
         <div class="help-item">
           <span class="help-label">1. 개요 :</span>
-          <div class="help-desc">아마추어 무선 교신 시 자주 사용되는 핵심 용어들을 게임처럼 CW로 연습.</div>
+          <div class="help-desc">자주 사용되는 용어 연습.</div>
         </div>
         <div class="help-item">
-          <span class="help-label">2. 대상 :</span>
-          <div class="help-desc">
-            <div>기본적인 CW 부호 수신이 가능한 분.</div>
-            <div>실제 교신 중 사용되는 약어 및 용어 식별 능력을 높이고 싶은 분.</div>
-            <div>※ 세부 사항에 있는 QSB 및 잡음 활용</div>
-          </div>
+          <span class="help-label">2. 효과 :</span>
+          <div class="help-desc">용어만 어느 정도 수신해도 기본적인 QSO 가능.</div>
         </div>
+      </div>
+
+      <div id="historyContent" style="display: none;">
+        <div class="help-header-title">[ 프로그램 히스토리 ]</div>
         <div class="help-item">
-          <span class="help-label">3. 장점 :</span>
-          <div class="help-desc">실전 교신에 빈출되는 용어들을 집중적으로 익혀 반응 속도를 향상시킴.</div>
-        </div>
-        <div class="help-item">
-          <span class="help-label">4. 효과 :</span>
-          <div class="help-desc">
-            <div>교신 용어만 정확히 수신해도 원활한 QSO 진행 가능.</div>
-            <div>반복 청취를 통한 자연스러운 부호 습득.</div>
-          </div>
-        </div>
-        <div class="help-item">
-          <span class="help-label">5. 한계 :</span>
-          <div class="help-desc">전체 부호의 체계적인 기초 학습용은 아님.</div>
-        </div>
-        <div class="help-item">
-          <span class="help-label">6. 추가 연습 :</span>
-          <div class="help-desc">
-            <div>각 묶음별 용어를 번갈아 선택하며 연습.</div>
-          </div>
+          <span class="help-label">v.1.0 (260906) :</span>
+          <div class="help-desc">프로그램 개발</div>
         </div>
       </div>
     </div>
@@ -851,24 +872,30 @@
 
       <button class="toggle-btn" id="toggleSettingsBtn">⚙️ 세부 사항 설정</button>
       
-      <!-- 세부 사항 2단 그리드 배치 -->
+      <!-- 세부 사항 2단 그리드 배치 (요청하신 순서 반영) -->
       <div class="grid-settings" id="settingsContainer" style="display: none; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #4a5568;">
-        <!-- 1행 왼쪽 -->
+        <!-- 1행 좌측: 판단 입력 제한 (초) -->
         <div class="setting-item">
           <label>판단 입력 제한 (초)</label>
           <input type="number" id="judgeTimeInput" value="3.0" min="1.0" max="5.0" step="0.5">
         </div>
-        <!-- 1행 오른쪽 -->
-        <label class="setting-item-checkbox" for="enableNoiseToggle" style="margin-top: 18px; height: auto;">
-          <input type="checkbox" id="enableNoiseToggle">
-          <span class="white-text">QSB / QRN</span>
-        </label>
-        <!-- 2행 왼쪽 -->
+        <!-- 1행 우측: 누적 랜덤 / 현재 묶음 비율 (%) (기본값 50, 10% 간격) -->
+        <div class="setting-item">
+          <label>누적 랜덤 / 현재 묶음 비율 (%)</label>
+          <input type="number" id="ratioInput" value="50" min="10" max="90" step="10">
+        </div>
+        <!-- 2행 좌측: 반응이 없으면 무반응 표시 -->
         <label class="setting-item-checkbox" for="showNoReactToggle" style="margin-top: 18px; height: auto;">
           <input type="checkbox" id="showNoReactToggle" checked>
           <span>반응이 없으면 <span class="white-text">무반응</span> 표시</span>
         </label>
-        <!-- 2행 오른쪽 -->
+        <!-- 2행 우측: QSB / QRN -->
+        <label class="setting-item-checkbox" for="enableNoiseToggle" style="margin-top: 18px; height: auto;">
+          <input type="checkbox" id="enableNoiseToggle">
+          <span class="white-text">QSB / QRN</span>
+        </label>
+        <!-- 3행 우측: 잡음 음량 (%) -->
+        <div></div>
         <div class="setting-item">
           <label>잡음 음량 (%)</label>
           <input type="number" id="noiseVolInput" value="35" min="0" max="100" step="5">
@@ -909,7 +936,7 @@
 
   <div class="card" id="finalReportView">
     <div id="wordPracticeReportContent" style="display: none; text-align: center; padding: 10px 0;">
-      <h3 style="margin: 0 0 16px 0; color: #38bdf8;">단어 연습 완료</h3>
+      <h3 style="margin: 0 0 16px 0; color: #38bdf8;" id="wordPracticeReportTitle">단어 연습 완료</h3>
     </div>
 
     <div id="randomQuizReportContent" style="display: none;">
@@ -951,21 +978,21 @@
       'Z': '--..',  '1': '.----', '2': '..---', '3': '...--',  '4': '....-',
       '5': '.....', '6': '-....', '7': '--...', '8': '---..',  '9': '----.',
       '0': '-----', '/': '-..-.', '<AR>': '.-.-.', '<SK>': '...-.-',
-      '<AS>': '.-...', '<BT>': '-...-'
+      '<AS>': '.-...', '<BT>': '-...-', '.': '.-.-.-', ',': '--..--'
     };
 
     const WORD_DESCRIPTIONS = {
       'CQ': '일괄 호출',
-      'DE': '~로부터',
-      'RST': '신호 리포트 (가독성, 강도, 음질)',
+      'DE': '여기는 또는 ~로부터',
+      'RST': '신호 리포트',
       'QTH': '위치 / 지역',
-      'KDN': '대한민국 (Korea DX Network)',
+      'KDN': '햄용 지역 번호 (Korean district number)',
       'NAME': '이름',
-      'OP': '오퍼레이터 (운용자)',
+      'OP': '운영자 (OPERATOR)',
       'IS': '이다 (IS)',
       '73': '안녕히 (행운을 빔)',
       'ES': '그리고 (AND)',
-      'TKS': '감사합니다 (Thanks)',
+      'TNX': '감사합니다 (Thanks)',
       'CU': '다시 만나요 (See you)',
       'AGN': '다시 (Again)',
       'GM': '좋은 아침 (Good morning)',
@@ -973,37 +1000,60 @@
       'TU': '감사합니다 (Thank you)',
       '<SK>': '교신 종료 (End of contact)',
       'DR': '친애하는 (Dear)',
-      'RPRT': '보고서 (Report)',
+      'RPRT': '신호 리포트 (REPORT)',
       'PSE': '부디 / 제발 (Please)',
       'DX': '원거리 통신 (Distance)',
       'ANT': '안테나 (Antenna)',
+      '5NN': '599 (N은 9의 약자)',
       'QRP': '소출력 송신',
       'QRZ': '누가 호출했나요?',
       'WX': '날씨 (Weather)',
-      'QRM': '인공 혼신',
-      'QSB': '신호 페이딩 (신호 강도 변동)',
-      'QSL': '교신 확인 / 접수증',
+      'QRM': '혼신',
+      'QSB': '신호 페이딩',
+      'QSL': '교신확인증',
       'ABT': '약 / 대략 (About)',
       'QRS': '천천히 송신해 주세요',
       'QRX': '잠시 대기해 주세요',
-      '<AR>': '메시지 끝 (End of message)'
+      '<AR>': '메시지 끝 (End of message)',
+      '<BT>': '송신 전치 부호 또는 문장의 구분',
+      '.': '마침표',
+      ',': '쉼표'
     };
 
     const WORD_BUNDLES = {
       '묶음1': ['CQ', 'DE', 'RST', 'QTH', 'KDN'],
       '묶음2': ['NAME', 'OP', 'IS', '73'],
-      '묶음3': ['ES', 'TKS', 'CU', 'AGN'],
+      '묶음3': ['ES', 'TNX', 'CU', 'AGN'],
       '묶음4': ['IS', 'GM', 'GB', 'TU'],
       '묶음5': ['<SK>', 'DR', 'RPRT', 'PSE'],
-      '묶음6': ['DX', 'ANT', 'QRP', 'QRZ'],
+      '묶음6': ['DX', '5NN', 'QRP', 'QRZ'],
       '묶음7': ['WX', 'QRM', 'QSB', 'QSL'],
-      '묶음8': ['ABT', 'QRS', 'QRX', '<AR>']
+      '묶음8': ['ABT', 'QRS', 'QRX', '<AR>'],
+      '묶음9': ['<BT>', '.', ',', 'ANT']
     };
 
+    function getWordDescription(word) {
+      if (!word) return '교신 용어';
+      let clean = String(word).trim().replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+      if (clean === '.' || clean === '마침표(.)' || clean === '마침표') return '마침표';
+      if (clean === ',' || clean === '쉼표(,)' || clean === '쉼표') return '쉼표';
+      return WORD_DESCRIPTIONS[clean] || WORD_DESCRIPTIONS[word] || '교신 용어';
+    }
+
     const STORAGE_KEY = 'word_trainer_settings';
+    const HELP_TIME_KEY = 'word_trainer_help_time';
     
     let recentRandomPool = [];
     let lastCorrectPosition = -1;
+    let cumulativeQueue = [];
+
+    function formatDisplayWord(word) {
+      if (!word) return '';
+      let clean = word.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+      if (clean === '.') return '마침표(.)';
+      if (clean === ',') return '쉼표(,)';
+      return clean;
+    }
 
     function escapeHtml(str) {
       if (!str) return '';
@@ -1018,35 +1068,17 @@
     function getTargetWords() {
       const val = document.getElementById('selectedWordInput').value.trim();
       
-      if (val === '묶음1무작위') return WORD_BUNDLES['묶음1'];
-      if (val === '묶음2무작위') return WORD_BUNDLES['묶음2'];
-      if (val === '묶음3무작위') return WORD_BUNDLES['묶음3'];
-      if (val === '묶음4무작위') return WORD_BUNDLES['묶음4'];
-      if (val === '묶음5무작위') return WORD_BUNDLES['묶음5'];
-      if (val === '묶음6무작위') return WORD_BUNDLES['묶음6'];
-      if (val === '묶음7무작위') return WORD_BUNDLES['묶음7'];
-      if (val === '묶음8무작위') return WORD_BUNDLES['묶음8'];
+      for (let i = 1; i <= 9; i++) {
+        if (val === `묶음${i}랜덤`) return WORD_BUNDLES[`묶음${i}`];
+      }
 
-      if (val === '누적무작위2') {
-        return [...WORD_BUNDLES['묶음1'], ...WORD_BUNDLES['묶음2']];
-      }
-      if (val === '누적무작위3') {
-        return [...WORD_BUNDLES['묶음1'], ...WORD_BUNDLES['묶음2'], ...WORD_BUNDLES['묶음3']];
-      }
-      if (val === '누적무작위4') {
-        return [...WORD_BUNDLES['묶음1'], ...WORD_BUNDLES['묶음2'], ...WORD_BUNDLES['묶음3'], ...WORD_BUNDLES['묶음4']];
-      }
-      if (val === '누적무작위5') {
-        return [...WORD_BUNDLES['묶음1'], ...WORD_BUNDLES['묶음2'], ...WORD_BUNDLES['묶음3'], ...WORD_BUNDLES['묶음4'], ...WORD_BUNDLES['묶음5']];
-      }
-      if (val === '누적무작위6') {
-        return [...WORD_BUNDLES['묶음1'], ...WORD_BUNDLES['묶음2'], ...WORD_BUNDLES['묶음3'], ...WORD_BUNDLES['묶음4'], ...WORD_BUNDLES['묶음5'], ...WORD_BUNDLES['묶음6']];
-      }
-      if (val === '누적무작위7') {
-        return [...WORD_BUNDLES['묶음1'], ...WORD_BUNDLES['묶음2'], ...WORD_BUNDLES['묶음3'], ...WORD_BUNDLES['묶음4'], ...WORD_BUNDLES['묶음5'], ...WORD_BUNDLES['묶음6'], ...WORD_BUNDLES['묶음7']];
-      }
-      if (val === '누적무작위8') {
-        return [...WORD_BUNDLES['묶음1'], ...WORD_BUNDLES['묶음2'], ...WORD_BUNDLES['묶음3'], ...WORD_BUNDLES['묶음4'], ...WORD_BUNDLES['묶음5'], ...WORD_BUNDLES['묶음6'], ...WORD_BUNDLES['묶음7'], ...WORD_BUNDLES['묶음8']];
+      if (val.startsWith('누적랜덤')) {
+        const num = parseInt(val.replace('누적랜덤', ''), 10);
+        let pool = [];
+        for (let i = 1; i <= num; i++) {
+          if (WORD_BUNDLES['묶음' + i]) pool = pool.concat(WORD_BUNDLES['묶음' + i]);
+        }
+        return pool;
       }
 
       return [val];
@@ -1054,16 +1086,16 @@
 
     function isRandomMode() {
       const val = document.getElementById('selectedWordInput').value.trim();
-      return val.includes('무작위') || val.includes('누적');
+      return val.includes('랜덤') || val.includes('누적');
     }
 
     function getBaseMasterPool(targetWord) {
       const val = document.getElementById('selectedWordInput').value.trim();
-      for (let key in WORD_BUNDLES) {
-        if (val === key + '무작위') return WORD_BUNDLES[key];
+      for (let i = 1; i <= 9; i++) {
+        if (val === `묶음${i}랜덤`) return WORD_BUNDLES[`묶음${i}`];
       }
-      if (val.startsWith('누적무작위')) {
-        const num = parseInt(val.replace('누적무작위', ''), 10);
+      if (val.startsWith('누적랜덤')) {
+        const num = parseInt(val.replace('누적랜덤', ''), 10);
         let pool = [];
         for (let i = 1; i <= num; i++) {
           if (WORD_BUNDLES['묶음' + i]) pool = pool.concat(WORD_BUNDLES['묶음' + i]);
@@ -1073,7 +1105,72 @@
       return getTargetWords();
     }
 
+    function buildCumulativeQueue(totalRounds, val, wordsPool) {
+      cumulativeQueue = [];
+      if (!val.startsWith('누적랜덤')) return;
+
+      const num = parseInt(val.replace('누적랜덤', ''), 10);
+      const latestWords = WORD_BUNDLES['묶음' + num] || [];
+      if (latestWords.length === 0) return;
+
+      const ratioInputVal = parseInt(document.getElementById('ratioInput').value);
+      const targetPercent = isNaN(ratioInputVal) ? 50 : Math.min(90, Math.max(10, ratioInputVal));
+
+      const latestCount = Math.max(1, Math.round(totalRounds * (targetPercent / 100)));
+      const olderCount = Math.max(0, totalRounds - latestCount);
+
+      let latestSlotPool = [];
+      let tempLatest = [...latestWords];
+      while (latestSlotPool.length < latestCount) {
+        if (tempLatest.length === 0) tempLatest = [...latestWords];
+        const idx = Math.floor(Math.random() * tempLatest.length);
+        latestSlotPool.push(tempLatest.splice(idx, 1)[0]);
+      }
+
+      let olderSlotPool = [];
+      const olderWords = wordsPool.filter(w => !latestWords.includes(w));
+      if (olderWords.length > 0) {
+        while (olderSlotPool.length < olderCount) {
+          const w = olderWords[Math.floor(Math.random() * olderWords.length)];
+          olderSlotPool.push(w);
+        }
+      } else {
+        while (olderSlotPool.length < olderCount) {
+          const w = wordsPool[Math.floor(Math.random() * wordsPool.length)];
+          olderSlotPool.push(w);
+        }
+      }
+
+      let combined = latestSlotPool.concat(olderSlotPool);
+
+      let shuffled = [];
+      let safetyCounter = 0;
+      while (combined.length > 0 && safetyCounter < 100) {
+        safetyCounter++;
+        combined.sort(() => Math.random() - 0.5);
+        
+        let isValid = true;
+        for (let i = 0; i < combined.length - 1; i++) {
+          if (combined[i] === combined[i + 1]) {
+            isValid = false;
+            break;
+          }
+        }
+        if (isValid || safetyCounter >= 95) {
+          shuffled = combined;
+          break;
+        }
+      }
+      cumulativeQueue = shuffled;
+    }
+
     function getNextRandomWord(wordsPool) {
+      const val = document.getElementById('selectedWordInput').value.trim();
+
+      if (val.startsWith('누적랜덤') && cumulativeQueue.length > 0) {
+        return cumulativeQueue.shift();
+      }
+
       let available = wordsPool.filter(w => !recentRandomPool.includes(w));
       if (available.length === 0) {
         recentRandomPool = [];
@@ -1097,12 +1194,13 @@
 
     function saveSettings() {
       const data = {
-        selectedWord: document.getElementById('selectedWordInput').value,
+        selectedWord: currentSession.actualWord || document.getElementById('selectedWordInput').value,
         wpm: document.getElementById('wpmInput').value,
         freq: document.getElementById('freqInput').value,
         wordInterval: document.getElementById('wordIntervalInput').value,
         totalCount: document.getElementById('totalCountInput').value,
         judgeTime: document.getElementById('judgeTimeInput').value,
+        ratio: document.getElementById('ratioInput').value,
         showNoReact: document.getElementById('showNoReactToggle').checked,
         enableNoise: document.getElementById('enableNoiseToggle').checked,
         noiseVol: document.getElementById('noiseVolInput').value
@@ -1113,20 +1211,32 @@
     function loadSettings() {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (!saved) {
+        selectWord('CQ', false);
+        currentSession.actualWord = 'CQ';
         document.getElementById('showNoReactToggle').checked = true;
         document.getElementById('noiseVolInput').value = 35;
+        document.getElementById('ratioInput').value = 50;
         return;
       }
       try {
         const data = JSON.parse(saved);
         if (data.selectedWord) {
           selectWord(data.selectedWord, false);
+          currentSession.actualWord = data.selectedWord;
+        } else {
+          selectWord('CQ', false);
+          currentSession.actualWord = 'CQ';
         }
         if (data.wpm) document.getElementById('wpmInput').value = data.wpm;
         if (data.freq) document.getElementById('freqInput').value = data.freq;
         if (data.wordInterval) document.getElementById('wordIntervalInput').value = data.wordInterval;
         if (data.totalCount) document.getElementById('totalCountInput').value = data.totalCount;
         if (data.judgeTime) document.getElementById('judgeTimeInput').value = data.judgeTime;
+        if (data.ratio) {
+          document.getElementById('ratioInput').value = data.ratio;
+        } else {
+          document.getElementById('ratioInput').value = 50;
+        }
         if (data.showNoReact !== undefined) {
           document.getElementById('showNoReactToggle').checked = data.showNoReact;
         } else {
@@ -1139,8 +1249,11 @@
           document.getElementById('noiseVolInput').value = 35;
         }
       } catch(e) {
+        selectWord('CQ', false);
+        currentSession.actualWord = 'CQ';
         document.getElementById('showNoReactToggle').checked = true;
         document.getElementById('noiseVolInput').value = 35;
+        document.getElementById('ratioInput').value = 50;
       }
     }
 
@@ -1156,15 +1269,56 @@
       dropdownMenuBox.classList.remove('show');
     });
 
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+      let hideTimer = null;
+      const subList = item.querySelector('.sub-word-list');
+      if (!subList) return;
+
+      item.addEventListener('mouseenter', () => {
+        if (hideTimer) clearTimeout(hideTimer);
+        document.querySelectorAll('.dropdown-item').forEach(other => {
+          if (other !== item) other.classList.remove('force-hover');
+        });
+        item.classList.add('force-hover');
+      });
+
+      item.addEventListener('mouseleave', () => {
+        hideTimer = setTimeout(() => {
+          item.classList.remove('force-hover');
+        }, 150);
+      });
+
+      subList.addEventListener('mouseenter', () => {
+        if (hideTimer) clearTimeout(hideTimer);
+        item.classList.add('force-hover');
+      });
+
+      subList.addEventListener('mouseleave', () => {
+        hideTimer = setTimeout(() => {
+          item.classList.remove('force-hover');
+        }, 150);
+      });
+    });
+
     function selectWord(word, doSave = true) {
       let cleanWord = word.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-      selectedWordInput.value = cleanWord;
       
-      if (/[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(cleanWord) || cleanWord.includes('무작위') || cleanWord.includes('누적')) {
-        selectedWordInput.style.fontSize = '14px';
+      let displayVal = cleanWord;
+      if (cleanWord === '.') displayVal = '마침표(.)';
+      else if (cleanWord === ',') displayVal = '쉼표(,)';
+
+      selectedWordInput.value = displayVal;
+      currentSession.actualWord = cleanWord;
+      
+      const displayStr = formatDisplayWord(cleanWord);
+      if (cleanWord === '.' || cleanWord === ',' || displayVal.includes('마침표') || displayVal.includes('쉼표')) {
+        selectedWordInput.style.fontSize = '15.5px';
+      } else if (/[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(displayStr) || cleanWord.includes('랜덤') || cleanWord.includes('누적')) {
+        selectedWordInput.style.fontSize = '15.5px';
       } else {
         selectedWordInput.style.fontSize = '18px';
       }
+      
       dropdownMenuBox.classList.remove('show');
       updateShowCallToggleVisibility();
       if (doSave) saveSettings();
@@ -1194,19 +1348,63 @@
       });
     });
 
-    document.getElementById('helpBtn').addEventListener('click', () => {
-      const content = document.getElementById('helpContent');
-      const btn = document.getElementById('helpBtn');
-      const isVisible = window.getComputedStyle(content).display !== 'none';
-      
-      if (isVisible) {
-        content.style.display = 'none';
-        btn.innerText = '프로그램 설명';
-        btn.classList.remove('btn-close-active');
+    const helpContent = document.getElementById('helpContent');
+    const historyContent = document.getElementById('historyContent');
+    const helpBtn = document.getElementById('helpBtn');
+    const versionTag = document.getElementById('versionTag');
+
+    function checkAndHandleHelpStartup() {
+      const now = Date.now();
+      const lastHelpTime = localStorage.getItem(HELP_TIME_KEY);
+      const TWENTY_FOUR_HOURS = 24 * 60 * 60 * 1000;
+
+      if (!lastHelpTime || (now - parseInt(lastHelpTime, 10)) > TWENTY_FOUR_HOURS) {
+        helpContent.style.display = 'block';
+        historyContent.style.display = 'none';
+        helpBtn.innerText = '프로그램 설명 닫기';
+        helpBtn.classList.add('btn-close-active');
+        localStorage.setItem(HELP_TIME_KEY, now.toString());
       } else {
-        content.style.display = 'block';
-        btn.innerText = '프로그램 설명 닫기';
-        btn.classList.add('btn-close-active');
+        helpContent.style.display = 'none';
+        historyContent.style.display = 'none';
+        helpBtn.innerText = '프로그램 설명';
+        helpBtn.classList.remove('btn-close-active');
+      }
+    }
+
+    helpBtn.addEventListener('click', () => {
+      const isHelpVisible = window.getComputedStyle(helpContent).display !== 'none';
+      const isHistoryVisible = window.getComputedStyle(historyContent).display !== 'none';
+      
+      if (isHelpVisible || isHistoryVisible) {
+        helpContent.style.display = 'none';
+        historyContent.style.display = 'none';
+        helpBtn.innerText = '프로그램 설명';
+        helpBtn.classList.remove('btn-close-active');
+      } else {
+        helpContent.style.display = 'block';
+        historyContent.style.display = 'none';
+        helpBtn.innerText = '프로그램 설명 닫기';
+        helpBtn.classList.add('btn-close-active');
+        localStorage.setItem(HELP_TIME_KEY, Date.now().toString());
+      }
+    });
+
+    versionTag.addEventListener('click', () => {
+      const isHelpVisible = window.getComputedStyle(helpContent).display !== 'none';
+      const isHistoryVisible = window.getComputedStyle(historyContent).display !== 'none';
+
+      if (isHistoryVisible) {
+        historyContent.style.display = 'none';
+        helpBtn.innerText = '프로그램 설명';
+        helpBtn.classList.remove('btn-close-active');
+      } else {
+        if (isHelpVisible) {
+          helpContent.style.display = 'none';
+        }
+        historyContent.style.display = 'block';
+        helpBtn.innerText = '히스토리 닫기';
+        helpBtn.classList.add('btn-close-active');
       }
     });
 
@@ -1252,7 +1450,7 @@
       history: [],
       userChoice: null,
       isRandom: false,
-      actualWord: ''
+      actualWord: 'CQ'
     };
 
     async function requestWakeLock() {
@@ -1714,11 +1912,14 @@
         statusInfo.innerText = '';
         hideContentLabelWrapper.style.display = 'flex';
         wordDescRow.style.display = 'flex';
-        const descText = WORD_DESCRIPTIONS[targetWord] || '교신 용어';
+        
+        const descText = getWordDescription(targetWord);
+
         if (hideContentToggle.checked) {
           wordDescInfo.innerText = '';
         } else {
-          wordDescInfo.innerText = `${targetWord} : ${descText}`;
+          const displayTarget = formatDisplayWord(targetWord);
+          wordDescInfo.innerText = `${displayTarget} : ${descText}`;
         }
       } else {
         statusInfo.innerText = `송신 중 (${wpm} WPM)`;
@@ -1739,11 +1940,33 @@
         return;
       }
 
-      const masterPool = getBaseMasterPool(targetWord).map(w => w.replace(/&lt;/g, '<').replace(/&gt;/g, '>'));
-      let otherPool = masterPool.filter(w => w !== targetWord);
-      while (otherPool.length < 3) {
-        otherPool.push('CQ', 'DE', 'RST', '73', 'QTH');
+      // 묶음 9의 경우 오직 묶음 9 내의 단어들로만 보기 구성
+      const val = document.getElementById('selectedWordInput').value.trim();
+      let masterPool = [];
+      if (val === '묶음9랜덤') {
+        masterPool = [...WORD_BUNDLES['묶음9']];
+      } else {
+        for (let i = 1; i <= 9; i++) {
+          if (val === `묶음${i}랜덤`) {
+            masterPool = [...WORD_BUNDLES[`묶음${i}`]];
+            break;
+          }
+        }
       }
+      if (masterPool.length === 0) {
+        masterPool = getBaseMasterPool(targetWord).map(w => w.replace(/&lt;/g, '<').replace(/&gt;/g, '>'));
+      }
+
+      let otherPool = masterPool.filter(w => w !== targetWord);
+      if (val !== '묶음9랜덤' && otherPool.length < 3) {
+        const generalPool = ['CQ', 'DE', 'RST', '73', 'QTH', 'NAME', 'OP'];
+        for (let g of generalPool) {
+          if (g !== targetWord && !otherPool.includes(g)) {
+            otherPool.push(g);
+          }
+        }
+      }
+
       let shuffledOthers = [...otherPool].sort(() => 0.5 - Math.random());
       let choices = [targetWord, shuffledOthers[0], shuffledOthers[1], shuffledOthers[2]];
       
@@ -1770,7 +1993,15 @@
       choices.forEach(choice => {
         const btn = document.createElement('button');
         btn.className = 'quiz-option-btn';
-        btn.textContent = choice;
+        let displayChoice = formatDisplayWord(choice);
+        btn.textContent = displayChoice;
+        
+        if (choice === '.' || choice === ',') {
+          btn.style.fontSize = '22px';
+        } else if (/[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(displayChoice)) {
+          btn.style.fontSize = '15.5px';
+        }
+        
         btn.addEventListener('click', () => handleQuizChoice(choice, targetWord));
         quizGridContainer.appendChild(btn);
       });
@@ -1808,10 +2039,12 @@
       }
 
       if (correctDisplayTimeSec > 0) {
+        const isHidden = document.getElementById('hideContentToggle').checked;
+        const displayCorrectWord = formatDisplayWord(targetWord);
         resultBox.innerHTML = `
           <div class="aligned-container">
             <div class="aligned-row">
-              <div class="comp-value call-correct">${escapeHtml(targetWord)}</div>
+              <div class="comp-value call-correct">${isHidden ? '' : escapeHtml(displayCorrectWord)}</div>
             </div>
           </div>
         `;
@@ -1851,6 +2084,8 @@
       setJudgeButtonState(false);
       document.getElementById('hideContentLabelWrapper').style.display = 'none';
 
+      selectWord(currentSession.actualWord, false);
+
       document.getElementById('mainTrainView').style.display = 'none';
       const reportView = document.getElementById('finalReportView');
       reportView.style.display = 'block';
@@ -1861,6 +2096,11 @@
       if (!currentSession.isRandom) {
         wordRep.style.display = 'block';
         randomRep.style.display = 'none';
+
+        const displayReportWord = formatDisplayWord(currentSession.actualWord);
+        const safeWord = escapeHtml(displayReportWord);
+        const totalCountVal = document.getElementById('totalCountInput').value || 10;
+        document.getElementById('wordPracticeReportTitle').innerHTML = `${safeWord} ${totalCountVal}회 연습`;
       } else {
         wordRep.style.display = 'none';
         randomRep.style.display = 'block';
@@ -1873,14 +2113,16 @@
 
         const tbody = document.getElementById('historyTableBody');
         tbody.innerHTML = currentSession.history.map(item => {
-          const wordDisplay = `<span class="call-correct">${escapeHtml(item.target)}</span>`;
+          const displayTargetWord = formatDisplayWord(item.target);
+          const wordDisplay = `<span class="call-correct">${escapeHtml(displayTargetWord)}</span>`;
           
           let reactColor = '#94a3b8';
           if (item.userChoice === item.target) reactColor = '#4ade80';
           else if (item.userChoice !== '무반응') reactColor = '#f87171';
           else reactColor = '#ffffff';
 
-          const reactText = `<span style="color:${reactColor}; font-weight:bold;">${escapeHtml(item.userChoice)}</span>`;
+          const displayUserChoice = formatDisplayWord(item.userChoice);
+          const reactText = `<span style="color:${reactColor}; font-weight:bold;">${escapeHtml(displayUserChoice)}</span>`;
           const passMark = item.isPass 
             ? '<b style="color:#4ade80; font-size:18px;">O</b>' 
             : '<b style="color:#f87171; font-size:18px;">X</b>';
@@ -1904,9 +2146,15 @@
       document.getElementById('stopBtn').disabled = false;
 
       const helpContent = document.getElementById('helpContent');
+      const historyContent = document.getElementById('historyContent');
       const helpBtn = document.getElementById('helpBtn');
       if (window.getComputedStyle(helpContent).display !== 'none') {
         helpContent.style.display = 'none';
+        helpBtn.innerText = '프로그램 설명';
+        helpBtn.classList.remove('btn-close-active');
+      }
+      if (window.getComputedStyle(historyContent).display !== 'none') {
+        historyContent.style.display = 'none';
         helpBtn.innerText = '프로그램 설명';
         helpBtn.classList.remove('btn-close-active');
       }
@@ -1930,12 +2178,16 @@
       currentSession.actualWord = rawSelectedVal;
       currentSession.isRandom = isRandomMode();
 
+      // 시작 시 입력창 값 백업 후 저장하여 localStorage에 단어 정보가 공백으로 지워지지 않도록 보호
+      saveSettings();
+
       if (!currentSession.isRandom) {
-        selectedWordInput.dataset.originalVal = rawSelectedVal;
-        selectedWordInput.value = '••••';
+        selectedWordInput.value = '';
       }
 
-      saveSettings();
+      const totalRoundsVal = parseInt(document.getElementById('totalCountInput').value) || 10;
+      buildCumulativeQueue(totalRoundsVal, rawSelectedVal, getTargetWords());
+
       await initAudio();
       requestWakeLock();
 
@@ -1962,15 +2214,14 @@
         resolveJudgeWait = null;
       }
 
-      if (selectedWordInput.dataset.originalVal) {
-        selectWord(selectedWordInput.dataset.originalVal, false);
-        delete selectedWordInput.dataset.originalVal;
-      }
-
       document.getElementById('startBtn').disabled = false;
       document.getElementById('stopBtn').disabled = true;
       setJudgeButtonState(false);
       document.getElementById('hideContentLabelWrapper').style.display = 'none';
+
+      if (currentSession.actualWord) {
+        selectWord(currentSession.actualWord, false);
+      }
 
       const waitingView = document.getElementById('waitingView');
       const resultBox = document.getElementById('resultBox');
@@ -1987,11 +2238,6 @@
     });
 
     document.getElementById('restartBtn').addEventListener('click', () => {
-      if (selectedWordInput.dataset.originalVal) {
-        selectWord(selectedWordInput.dataset.originalVal, false);
-        delete selectedWordInput.dataset.originalVal;
-      }
-
       document.getElementById('finalReportView').style.display = 'none';
       document.getElementById('mainTrainView').style.display = 'block';
       
@@ -1999,6 +2245,10 @@
       document.getElementById('stopBtn').disabled = true;
       setJudgeButtonState(false);
       document.getElementById('hideContentLabelWrapper').style.display = 'none';
+
+      if (currentSession.actualWord) {
+        selectWord(currentSession.actualWord, false);
+      }
 
       const waitingView = document.getElementById('waitingView');
       const resultBox = document.getElementById('resultBox');
@@ -2019,11 +2269,14 @@
     document.getElementById('hideContentToggle').addEventListener('change', (e) => {
       if (currentSession.isRandom) return;
       const targetWord = currentSession.actualWord || 'CQ';
-      const descText = WORD_DESCRIPTIONS[targetWord] || '교신 용어';
+      
+      const descText = getWordDescription(targetWord);
+
       if (e.target.checked) {
         document.getElementById('wordDescInfo').innerText = '';
       } else {
-        document.getElementById('wordDescInfo').innerText = `${targetWord} : ${descText}`;
+        const displayTarget = formatDisplayWord(targetWord);
+        document.getElementById('wordDescInfo').innerText = `${displayTarget} : ${descText}`;
       }
     });
 
@@ -2080,6 +2333,7 @@
     if (_CW_CORE_DSP.getVal() >= 0.5) {
       document.getElementById('cwAppRoot').style.display = 'block';
       loadSettings();
+      checkAndHandleHelpStartup();
       updateShowCallToggleVisibility();
       
       const initialTotal = document.getElementById('totalCountInput').value || 10;
