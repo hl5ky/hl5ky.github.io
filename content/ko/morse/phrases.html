@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>교신 문장 연습기</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      display: none;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 16px 16px 30px 16px;
+      line-height: 1.5;
+      color: #e2e8f0;
+      background-color: #1a202c;
+    }
+    
+    .title-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .title-group {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    h2 { 
+      margin: 0; 
+      font-size: 21px; 
+      color: #38bdf8; 
+      letter-spacing: 0.5px;
+    }
+    .version-tag {
+      font-weight: 600;
+      color: #94a3b8;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .version-tag:hover {
+      color: #4ade80;
+      text-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+    }
+    .v-char { font-size: 13px; }
+    .v-num { font-size: 15px; }
+    .author-tag {
+      font-size: 13px;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+    .author-tag a {
+      color: #4ade80;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .author-tag a:hover {
+      text-decoration: underline;
+      color: #86efac;
+    }
+
+    .card {
+      background: #2d3748;
+      border: 1px solid #4a5568;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    }
+
+    .call-input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: nowrap;
+    }
+    .call-input-row label.main-label { 
+      font-weight: bold; 
+      font-size: 14px; 
+      white-space: nowrap; 
+      color: #cbd5e1;
+    }
+
+    .mode-select-group {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .mode-btn {
+      height: 40px;
+      padding: 0 10px;
+      font-size: 14px;
+      font-weight: bold;
+      font-family: monospace;
+      border: 2px solid #0284c7;
+      border-radius: 6px;
+      background-color: #1a202c;
+      color: #38bdf8;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .mode-btn:hover:not(:disabled) {
+      background-color: #0369a1;
+      color: #ffffff;
+    }
+    .mode-btn.active {
+      background-color: #0284c7;
+      color: #ffffff;
+      box-shadow: 0 0 8px rgba(2, 132, 199, 0.6);
+    }
+    /* 송신 중(disabled)일 때도 현재 선택된(active) 버튼은 선명하게 강조 유지 */
+    .mode-btn:disabled.active {
+      background-color: #0284c7 !important;
+      border-color: #38bdf8 !important;
+      color: #ffffff !important;
+      opacity: 1 !important;
+      box-shadow: 0 0 8px rgba(2, 132, 199, 0.6);
+    }
+    .mode-btn:disabled:not(.active) {
+      background-color: #1e293b;
+      border-color: #334155;
+      color: #64748b;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .help-btn {
+      background-color: #1a202c;
+      border: 1.5px solid #718096;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 14px;
+      font-weight: normal;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+      margin-left: auto;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      transition: all 0.2s;
+    }
+    .help-btn:hover:not(:disabled) {
+      background-color: #2d3748;
+      border-color: #a0aec0;
+    }
+    .help-btn:disabled {
+      background-color: #151922;
+      border-color: #2a3441;
+      color: #475569;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .btn-close-active {
+      background-color: #FFFF00 !important;
+      color: #dc2626 !important;
+      border: 1.5px solid #b91c1c !important;
+      font-weight: 900 !important;
+    }
+
+    #helpContent, #historyContent {
+      margin-top: 12px;
+      padding: 14px 16px;
+      background-color: #1e293b;
+      border: 1px solid #0284c7;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #e2e8f0;
+      display: none;
+      line-height: 1.7;
+    }
+    .help-header-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #38bdf8;
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px dashed #334155;
+    }
+    .help-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+    .help-label {
+      font-weight: bold;
+      color: #38bdf8;
+      white-space: nowrap;
+      margin-right: 6px;
+      flex-shrink: 0;
+    }
+
+    .grid-settings {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      font-size: 13px;
+    }
+    .setting-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .setting-item label { 
+      font-weight: 600; 
+      color: #94a3b8; 
+    }
+    .setting-item label.blink-label {
+      animation: blinkLabel 0.8s infinite ease-in-out;
+      color: #f87171 !important;
+    }
+    @keyframes blinkLabel {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .setting-item-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 38px;
+      margin-top: 22px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .setting-item-checkbox input {
+      cursor: pointer;
+      accent-color: #0284c7;
+      width: 16px;
+      height: 16px;
+    }
+    .setting-item-checkbox span {
+      font-size: 13px;
+      font-weight: 500;
+      color: #94a3b8;
+    }
+    .setting-item-checkbox span .white-text {
+      color: #ffffff;
+      font-weight: normal;
+    }
+
+    input[type="number"], input[type="text"] {
+      width: 100%;
+      padding: 7px;
+      font-size: 15px;
+      font-weight: bold;
+      border: 1px solid #4a5568;
+      border-radius: 6px;
+      text-align: center;
+      background-color: #1a202c;
+      color: #f1f5f9;
+    }
+    input:disabled {
+      background-color: #151922 !important;
+      color: #475569 !important;
+      border-color: #2a3441 !important;
+      cursor: not-allowed;
+    }
+
+    .toggle-btn {
+      background-color: #1a202c;
+      border: 1px solid #4a5568;
+      border-radius: 6px;
+      color: #38bdf8;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 4px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 10px;
+      height: 26px;
+    }
+    .toggle-btn:hover:not(:disabled) {
+      background-color: #242e3d;
+      border-color: #0284c7;
+    }
+    .toggle-btn:disabled {
+      background-color: #151922;
+      border-color: #2a3441;
+      color: #475569;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    button.action-btn {
+      height: 46px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    #startBtn { 
+      background-color: #0284c7; 
+      color: white; 
+      box-shadow: 0 2px 4px rgba(2, 132, 199, 0.3);
+    }
+    #startBtn:active:not(:disabled) { background-color: #0369a1; }
+    #startBtn:disabled {
+      background-color: #475569;
+      color: #94a3b8;
+      cursor: not-allowed;
+    }
+    
+    #stopBtn { 
+      background-color: #e11d48; 
+      color: white; 
+      box-shadow: 0 2px 4px rgba(225, 29, 72, 0.3);
+    }
+    #stopBtn:active:not(:disabled) { background-color: #be123c; }
+    #stopBtn:disabled {
+      background-color: #334155;
+      color: #64748b;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    /* 디스플레이 패널 3단 구역 레이아웃 (240px 고정) */
+    .display-panel {
+      position: relative;
+      padding: 10px 16px;
+      background-color: #111827;
+      border: 2px solid #374151;
+      border-radius: 10px;
+      height: 240px;
+      min-height: 240px;
+      max-height: 240px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    /* 우상단 제어 컨트롤 */
+    .panel-top-right-control {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #cbd5e1;
+      user-select: none;
+      z-index: 10;
+    }
+    .panel-toggle-label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .panel-toggle-label input {
+      cursor: pointer;
+      accent-color: #0284c7;
+      width: 15px;
+      height: 15px;
+    }
+
+    /* 3단 구역 정의 */
+    .panel-zone-top {
+      height: 40px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .panel-zone-center {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .panel-zone-bottom {
+      height: 40px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .aligned-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 초기 대기 안내 텍스트 시인성 개선 (밝은 은색/크림 톤) */
+    .status-text { 
+      font-size: 15px; 
+      color: #e2e8f0; 
+      text-align: center; 
+      line-height: 1.8;
+    }
+
+    .sentence-display-box {
+      font-family: monospace;
+      font-size: 16px;
+      font-weight: bold;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .sentence-line {
+      text-align: center;
+      word-break: break-all;
+      color: #94a3b8;
+    }
+    .char-active {
+      color: #facc15 !important;
+      animation: blinkChar 0.3s infinite alternate;
+    }
+    @keyframes blinkChar {
+      0% { opacity: 1; text-shadow: 0 0 8px rgba(250, 204, 21, 0.8); }
+      100% { opacity: 0.3; text-shadow: none; }
+    }
+    .char-sent {
+      color: #4ade80;
+    }
+
+    /* 예문 갱신 시 단발성 깜빡임 애니메이션 (Single Flash) */
+    .single-blink-text {
+      animation: singleBlink 0.5s ease-in-out 1;
+    }
+    @keyframes singleBlink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.2; transform: scale(0.96); }
+    }
+
+    /* 상단 '새로운 문장 준비' 문구 (보통체 및 시안 블루 톤) */
+    .ready-msg-text {
+      font-size: 16px;
+      font-weight: normal;
+      color: #38bdf8;
+      text-align: center;
+      margin: 0;
+    }
+    .quiz-prompt-text {
+      font-size: 17px;
+      font-weight: normal;
+      color: #facc15;
+      text-align: center;
+      width: 100%;
+      margin: 0;
+    }
+
+    /* 숨김 모드 활성화 안내 문구 (시인성 좋은 오렌지/호박색 톤) */
+    .hide-active-notice {
+      color: #fbbf24;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .quiz-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+    .quiz-options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 12px;
+      width: 100%;
+      padding: 0 10px;
+    }
+    .quiz-option-btn {
+      background-color: #1f2937;
+      border: 2px solid #374151;
+      border-radius: 8px;
+      color: #38bdf8;
+      font-size: 16px;
+      font-weight: bold;
+      font-family: monospace;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .quiz-option-btn:hover:not(:disabled) {
+      background-color: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    .quiz-option-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    #finalReportView, #myReportView {
+      display: none;
+      text-align: center;
+      padding: 24px 16px;
+    }
+    .score-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 15px auto;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.4);
+    }
+    .score-num { font-size: 32px; font-weight: 900; line-height: 1; }
+    .score-total { font-size: 13px; opacity: 0.9; }
+    
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 13px;
+      font-family: monospace;
+      background: #1e293b;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .history-table th {
+      background: #0f172a;
+      color: #38bdf8;
+      padding: 10px 4px;
+      border-bottom: 2px solid #334155;
+      font-weight: 700;
+    }
+    .history-table td {
+      padding: 10px 2px;
+      border-bottom: 1px solid #334155;
+      vertical-align: middle;
+      color: #e2e8f0;
+      white-space: pre-wrap;
+    }
+    .history-table tr:nth-child(even) { background: #172033; }
+  </style>
+</head>
+<body id="cwAppRoot">
+
+  <div id="mainTrainView">
+    <div class="title-header">
+      <div class="title-group">
+        <h2>교신 문장 연습기</h2>
+        <span class="version-tag" id="versionTag" title="클릭하여 히스토리 보기"><span class="v-char">V</span><span class="v-num">.1.0</span></span>
+      </div>
+      <span class="author-tag">by <a href="https://hl5ky.github.io/morse" target="_blank">HL5KY</a></span>
+    </div>
+
+    <div class="card">
+      <div class="call-input-row">
+        <label class="main-label">교신 문장 선택</label>
+        
+        <div class="mode-select-group">
+          <button class="mode-btn active" id="btnRandomMode" onclick="selectType('랜덤예문')">랜덤예문</button>
+          <button class="mode-btn" id="btnMyMode" onclick="selectType('나의송신예문')">나의송신예문</button>
+        </div>
+        
+        <button class="help-btn" id="helpBtn">프로그램 설명</button>
+      </div>
+
+      <div id="helpContent" style="display: none;">
+        <div class="help-header-title">[ 프로그램 설명 ]</div>
+        <div class="help-item">
+          <span class="help-label">1. 개요 :</span>
+          <div class="help-desc">자주 사용되는 교신 문장 연습.</div>
+        </div>
+        <div class="help-item">
+          <span class="help-label">2. 효과 :</span>
+          <div class="help-desc">문장 전체를 수신하며 실전 교신 능력 향상.</div>
+        </div>
+      </div>
+
+      <div id="historyContent" style="display: none;">
+        <div class="help-header-title">[ 프로그램 히스토리 ]</div>
+        <div class="help-item">
+          <span class="help-label">v.1.0 (260906) :</span>
+          <div class="help-desc">프로그램 개발</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="grid-settings">
+        <div class="setting-item">
+          <label>속도 (WPM)</label>
+          <input type="number" id="wpmInput" value="15" min="5" max="45" step="1">
+        </div>
+        <div class="setting-item">
+          <label>톤 주파수 (Hz)</label>
+          <input type="number" id="freqInput" value="650" min="400" max="1000" step="10">
+        </div>
+      </div>
+
+      <button class="toggle-btn" id="toggleSettingsBtn">⚙️ 세부 사항 설정</button>
+      
+      <!-- 세부 사항 설정 패널 -->
+      <div class="grid-settings" id="settingsContainer" style="display: none; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #4a5568;">
+        <!-- 1라인: 호출부호 / 이름 -->
+        <div class="setting-item">
+          <label id="lblMyCall">나의 호출부호</label>
+          <input type="text" id="myCallInput" value="" placeholder="예: HL5KY" style="text-transform:uppercase;">
+        </div>
+        <div class="setting-item">
+          <label id="lblMyName">나의 이름</label>
+          <input type="text" id="myNameInput" value="" placeholder="예: KIM" style="text-transform:uppercase;">
+        </div>
+
+        <!-- 2라인: 위치 / KDN -->
+        <div class="setting-item">
+          <label id="lblMyQth">나의 위치</label>
+          <input type="text" id="myQthInput" value="" placeholder="예: BUSAN" style="text-transform:uppercase;">
+        </div>
+        <div class="setting-item">
+          <label id="lblMyKdn">나의 KDN</label>
+          <input type="text" id="myKdnInput" value="" placeholder="예: B11" style="text-transform:uppercase;">
+        </div>
+
+        <!-- 3라인: 좌측 문장 간격 / 우측 QSB QRN -->
+        <div class="setting-item">
+          <label>문장 간격 (초)</label>
+          <input type="number" id="intervalInput" value="0.3" min="0" max="3.0" step="0.1">
+        </div>
+        <div class="setting-item" style="justify-content: flex-end;">
+          <label class="setting-item-checkbox" id="noiseLabelWrapper" for="enableNoiseToggle">
+            <input type="checkbox" id="enableNoiseToggle">
+            <span class="white-text">QSB / QRN</span>
+          </label>
+        </div>
+
+        <!-- 4라인: 좌측 빈 공간 / 우측 잡음 음량 -->
+        <div class="setting-item"></div>
+        <div class="setting-item">
+          <label id="lblNoiseVol">잡음 음량 (%)</label>
+          <input type="number" id="noiseVolInput" value="35" min="0" max="100" step="5" disabled>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button class="action-btn" id="startBtn" disabled>송신</button>
+        <button class="action-btn" id="stopBtn" disabled>종료</button>
+      </div>
+    </div>
+
+    <!-- 3단 구역 구조가 적용된 디스플레이 패널 -->
+    <div class="display-panel" id="displayPanel">
+      <div class="panel-top-right-control" id="hideContentLabelWrapper" style="display: none;">
+        <label class="panel-toggle-label" for="allHideToggle">
+          <input type="checkbox" id="allHideToggle"> 전부 숨기기
+        </label>
+        <label class="panel-toggle-label" for="partialShowToggle">
+          <input type="checkbox" id="partialShowToggle"> 일부 보이기
+        </label>
+      </div>
+
+      <!-- 1. 상단 구역 (Top Zone) -->
+      <div class="panel-zone-top" id="panelZoneTop"></div>
+
+      <!-- 2. 중앙 구역 (Center Zone) -->
+      <div class="panel-zone-center" id="panelZoneCenter">
+        <div class="aligned-container" id="waitingView">
+          <div class="status-text">
+            랜덤 예문 또는 나의 송신 예문을 누를 때마다<br>
+            새로운 문장이 만들어집니다.
+          </div>
+        </div>
+        <div class="sentence-display-box" id="sentenceDisplayBox" style="display: none;"></div>
+        <div class="quiz-wrapper" id="quizWrapper" style="display: none;"></div>
+      </div>
+
+      <!-- 3. 하단 구역 (Bottom Zone) -->
+      <div class="panel-zone-bottom" id="panelZoneBottom"></div>
+    </div>
+  </div>
+
+  <!-- 랜덤 예문 성적표 뷰 -->
+  <div class="card" id="finalReportView">
+    <h3 style="margin: 0 0 4px 0; color: #38bdf8; text-align: center;">연습 성적표</h3>
+    <div class="score-circle">
+      <div class="score-num" id="finalScore">0</div>
+      <div class="score-total" id="finalTotal">/ 4</div>
+    </div>
+    <div id="accuracyText" style="font-weight: bold; margin-bottom: 12px; color: #4ade80; text-align: center;"></div>
+
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>항목</th>
+          <th>송신 내용</th>
+          <th>내 선택</th>
+          <th>판정</th>
+        </tr>
+      </thead>
+      <tbody id="historyTableBody"></tbody>
+    </table>
+
+    <button class="action-btn" id="restartBtn" style="background:#0284c7; color:white; width:100%; margin-top:16px;">다시 연습하기</button>
+  </div>
+
+  <!-- 나의 송신 예문 완료 뷰 -->
+  <div class="card" id="myReportView">
+    <h3 style="margin: 0 0 10px 0; color: #38bdf8; text-align: center;">연습 완료</h3>
+    <div style="font-size: 16px; font-weight: bold; color: #4ade80; text-align: center; margin: 24px 0;">
+      나의 송신 예문 송신이 완료되었습니다.
+    </div>
+    <button class="action-btn" id="myRestartBtn" style="background:#0284c7; color:white; width:100%; margin-top:16px;">다시 연습하기</button>
+  </div>
+
+  <script>
+    let _CW_CORE_DSP = {
+      getVal: function() { return 1.0; },
+      getTarget: function() { return ''; }
+    };
+
+    const MORSE_CODE = {
+      'A': '.-',    'B': '-...',  'C': '-.-.',  'D': '-..',    'E': '.',
+      'F': '..-.',  'G': '--.',   'H': '....',  'I': '..',     'J': '.---',
+      'K': '-.-',   'L': '.-..',  'M': '--',    'N': '-.',     'O': '---',
+      'P': '.--.',  'Q': '--.-',  'R': '.-.',   'S': '...',    'T': '-',
+      'U': '..-',   'V': '...-',  'W': '.--',   'X': '-..-',   'Y': '-.--',
+      'Z': '--..',  '1': '.----', '2': '..---', '3': '...--',  '4': '....-',
+      '5': '.....', '6': '-....', '7': '--...', '8': '---..',  '9': '----.',
+      '0': '-----', '/': '-..-.', '?': '..--..', '<AR>': '.-.-.', '<SK>': '...-.-',
+      '<AS>': '.-...', '<BT>': '-...-', '.': '.-.-.-', ',': '--..--'
+    };
+
+    const RST_DATA = {
+      '559': '55N', '569': '56N', '579': '57N', '589': '58N', '599': '5NN'
+    };
+
+    const NAME_GROUP = [
+      'KIM', 'LEE', 'PARK', 'CHOI', 'CHUNG', 'JUNG', 'KANG', 'YUN', 'JANG', 'LIM',
+      'HAN', 'SHIN', 'SONG', 'HONG', 'YOO', 'KO', 'AHN', 'KWON', 'HWANG', 'SEO',
+      'OH', 'JEON', 'MOON', 'SON', 'BAE', 'YANG', 'BACK', 'HEO', 'NAM', 'SIM',
+      'NOH', 'HA', 'JUNG', 'SUNG', 'CHA', 'GOO', 'WOO', 'JU', 'NA', 'MIN',
+      'JI', 'CHAE', 'HYUN', 'BANG', 'GIL', 'BAN', 'CHO', 'PYO', 'WANG'
+    ];
+    
+    const QTH_KDN_MAP = {
+      'SEOUL': ['A11', 'A12', 'A21', 'A35'],
+      'BUSAN': ['B11', 'B15', 'B20', 'B26'],
+      'DAEGU': ['P01', 'P03', 'P09'],
+      'JEJU': ['M01', 'M02'],
+      'GUMI': ['K06'],
+      'YEOSU': ['H03'],
+      'JINJU': ['L02'],
+      'WONJU': ['D02'],
+      'SUWON': ['C01'],
+      'ANYANG': ['C06'],
+      'GIMPO': ['C025'],
+      'GURI': ['C010'],
+      'OSAN': ['C014'],
+      'HANAM': ['C015'],
+      'GUNPO': ['C016'],
+      'YEOJU': ['C031'],
+      'INJE': ['D21'],
+      'BOEUN': ['E12'],
+      'ASAN': ['F07'],
+      'YESAN': ['F19'],
+      'BUYEO': ['F24'],
+      'TAEAN': ['F16'],
+      'GIMJE': ['G07'],
+      'IKSAN': ['G09'],
+      'WANJU': ['G19'],
+      'BUAN': ['G15'],
+      'IMSIL': ['G19'],
+      'JINAN': ['G22'],
+      'MUJU': ['G23'],
+      'NAJU': ['H05'],
+      'MOKPO': ['H02'],
+      'GURYE': ['H15'],
+      'MUAN': ['H25'],
+      'WANDO': ['H30'],
+      'JINDO': ['H31'],
+      'SINAN': ['H32'],
+      'ULJIN': ['K33'],
+      'GEOJE': ['L012'],
+      'DOKDO': ['IS01']
+    };
+    const QTH_GROUP = Object.keys(QTH_KDN_MAP);
+
+    const STORAGE_KEY = 'cw_sentence_trainer_settings';
+
+    let currentSession = {
+      selectedType: '랜덤예문',
+      lines: [],
+      isRunning: false,
+      currentStep: 0,
+      score: 0,
+      history: []
+    };
+
+    let globalSessionToken = 0;
+    let lastGeneratedValues = { rst: '', name: '', qth: '', kdn: '' };
+    
+    let activeTimeouts = [];
+
+    function trackTimeout(fn, delay) {
+      let id = setTimeout(() => {
+        activeTimeouts = activeTimeouts.filter(tId => tId !== id);
+        fn();
+      }, delay);
+      activeTimeouts.push(id);
+      return id;
+    }
+
+    function clearAllTimeouts() {
+      activeTimeouts.forEach(id => clearTimeout(id));
+      activeTimeouts = [];
+    }
+
+    function setUIState(state) {
+      const startBtn = document.getElementById('startBtn');
+      const stopBtn = document.getElementById('stopBtn');
+      const btnRandom = document.getElementById('btnRandomMode');
+      const btnMy = document.getElementById('btnMyMode');
+
+      if (state === 'waiting') {
+        startBtn.disabled = true;
+        stopBtn.disabled = true;
+        btnRandom.disabled = false;
+        btnMy.disabled = false;
+      } else if (state === 'ready') {
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+        btnRandom.disabled = false;
+        btnMy.disabled = false;
+      } else if (state === 'running') {
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+        // 송신 중에는 비활성화되지만 active 클래스가 붙은 버튼은 CSS를 통해 선명하게 강조됨
+        btnRandom.disabled = true;
+        btnMy.disabled = true;
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
+    function saveSettings() {
+      const data = {
+        selectedType: currentSession.selectedType,
+        wpm: document.getElementById('wpmInput').value,
+        freq: document.getElementById('freqInput').value,
+        interval: document.getElementById('intervalInput').value,
+        myCall: document.getElementById('myCallInput').value,
+        myName: document.getElementById('myNameInput').value,
+        myQth: document.getElementById('myQthInput').value,
+        myKdn: document.getElementById('myKdnInput').value,
+        enableNoise: document.getElementById('enableNoiseToggle').checked,
+        noiseVol: document.getElementById('noiseVolInput').value,
+        allHide: document.getElementById('allHideToggle').checked,
+        partialShow: document.getElementById('partialShowToggle').checked
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function updateNoiseInputState() {
+      const isChecked = document.getElementById('enableNoiseToggle').checked;
+      const noiseInput = document.getElementById('noiseVolInput');
+      noiseInput.disabled = !isChecked;
+    }
+
+    function loadSettings() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (!saved) {
+        checkAndOpenSettingsIfEmpty();
+        showWaitingView();
+        updateNoiseInputState();
+        return;
+      }
+      try {
+        const data = JSON.parse(saved);
+        if (data.selectedType) {
+          const btnRandom = document.getElementById('btnRandomMode');
+          const btnMy = document.getElementById('btnMyMode');
+          if (data.selectedType.includes('랜덤') || data.selectedType === '랜덤예문') {
+            currentSession.selectedType = '랜덤예문';
+            btnRandom.classList.add('active');
+            btnMy.classList.remove('active');
+          } else {
+            currentSession.selectedType = '나의송신예문';
+            btnMy.classList.add('active');
+            btnRandom.classList.remove('active');
+          }
+        }
+
+        if (data.wpm) document.getElementById('wpmInput').value = data.wpm;
+        if (data.freq) document.getElementById('freqInput').value = data.freq;
+        if (data.interval !== undefined) document.getElementById('intervalInput').value = data.interval;
+        if (data.myCall) document.getElementById('myCallInput').value = data.myCall;
+        if (data.myName) document.getElementById('myNameInput').value = data.myName;
+        if (data.myQth) document.getElementById('myQthInput').value = data.myQth;
+        if (data.myKdn) document.getElementById('myKdnInput').value = data.myKdn;
+        if (data.enableNoise !== undefined) document.getElementById('enableNoiseToggle').checked = data.enableNoise;
+        if (data.noiseVol) document.getElementById('noiseVolInput').value = data.noiseVol;
+        if (data.allHide !== undefined) document.getElementById('allHideToggle').checked = data.allHide;
+        if (data.partialShow !== undefined) document.getElementById('partialShowToggle').checked = data.partialShow;
+
+        updateNoiseInputState();
+
+        const call = document.getElementById('myCallInput').value.trim();
+        const name = document.getElementById('myNameInput').value.trim();
+        const qth = document.getElementById('myQthInput').value.trim();
+        const kdn = document.getElementById('myKdnInput').value.trim();
+        if (!call || !name || !qth || !kdn) {
+          if (currentSession.selectedType === '나의송신예문') {
+            checkAndOpenSettingsIfEmpty();
+          }
+        }
+        showWaitingView();
+      } catch(e) {
+        checkAndOpenSettingsIfEmpty();
+        showWaitingView();
+        updateNoiseInputState();
+      }
+    }
+
+    function showWaitingView() {
+      currentSession.lines = [];
+      panelZoneTop.innerHTML = '';
+      sentenceDisplayBox.style.display = 'none';
+      quizWrapper.style.display = 'none';
+      waitingView.style.display = 'flex';
+      hideContentLabelWrapper.style.display = 'none';
+      setUIState('waiting');
+    }
+
+    function selectType(typeVal, doSave = true) {
+      globalSessionToken++;
+      currentSession.isRunning = false;
+      clearAllTimeouts();
+      stopCurrentAudio();
+      stopRealRadioNoise();
+
+      const btnRandom = document.getElementById('btnRandomMode');
+      const btnMy = document.getElementById('btnMyMode');
+
+      if (typeVal.includes('랜덤') || typeVal === '랜덤예문') {
+        currentSession.selectedType = '랜덤예문';
+        btnRandom.classList.add('active');
+        btnMy.classList.remove('active');
+      } else {
+        currentSession.selectedType = '나의송신예문';
+        btnMy.classList.add('active');
+        btnRandom.classList.remove('active');
+        checkAndOpenSettingsIfEmpty();
+      }
+
+      generateAndPreviewLines();
+      if (doSave) saveSettings();
+    }
+
+    function generateAndPreviewLines() {
+      if (currentSession.isRunning) return;
+      currentSession.lines = generateSentences();
+      waitingView.style.display = 'none';
+      quizWrapper.style.display = 'none';
+      sentenceDisplayBox.style.display = 'flex';
+      hideContentLabelWrapper.style.display = 'flex';
+      
+      // 단축된 문구 적용: "새로운 문장 준비" (단발성 깜빡임 적용)
+      panelZoneTop.innerHTML = '<div id="readyMsgEl" class="ready-msg-text single-blink-text">새로운 문장 준비</div>';
+
+      renderSentenceBox(-1);
+      setUIState('ready');
+    }
+
+    const allHideToggle = document.getElementById('allHideToggle');
+    const partialShowToggle = document.getElementById('partialShowToggle');
+
+    allHideToggle.addEventListener('change', () => {
+      if (allHideToggle.checked) {
+        partialShowToggle.checked = false;
+      }
+      saveSettings();
+      if (currentSession.isRunning || (currentSession.lines && currentSession.lines.length > 0)) {
+        renderSentenceBox(-1);
+      }
+    });
+
+    partialShowToggle.addEventListener('change', () => {
+      if (partialShowToggle.checked) {
+        allHideToggle.checked = false;
+      }
+      saveSettings();
+      if (currentSession.isRunning || (currentSession.lines && currentSession.lines.length > 0)) {
+        renderSentenceBox(-1);
+      }
+    });
+
+    function checkAndOpenSettingsIfEmpty() {
+      const call = document.getElementById('myCallInput').value.trim();
+      const name = document.getElementById('myNameInput').value.trim();
+      const qth = document.getElementById('myQthInput').value.trim();
+      const kdn = document.getElementById('myKdnInput').value.trim();
+
+      const lblCall = document.getElementById('lblMyCall');
+      const lblName = document.getElementById('lblMyName');
+      const lblQth = document.getElementById('lblMyQth');
+      const lblKdn = document.getElementById('lblMyKdn');
+
+      lblCall.classList.remove('blink-label');
+      lblName.classList.remove('blink-label');
+      lblQth.classList.remove('blink-label');
+      lblKdn.classList.remove('blink-label');
+
+      if (!call || !name || !qth || !kdn) {
+        const container = document.getElementById('settingsContainer');
+        const btn = document.getElementById('toggleSettingsBtn');
+        container.style.display = 'grid';
+        btn.innerText = '⚙️ 세부 사항 닫기';
+        btn.classList.add('btn-close-active');
+
+        if (!call) lblCall.classList.add('blink-label');
+        if (!name) lblName.classList.add('blink-label');
+        if (!qth) lblQth.classList.add('blink-label');
+        if (!kdn) lblKdn.classList.add('blink-label');
+      }
+    }
+
+    ['myCallInput', 'myNameInput', 'myQthInput', 'myKdnInput'].forEach((id, idx) => {
+      const inputEl = document.getElementById(id);
+      const lblEl = [document.getElementById('lblMyCall'), document.getElementById('lblMyName'), document.getElementById('lblMyQth'), document.getElementById('lblMyKdn')][idx];
+
+      inputEl.addEventListener('input', (e) => {
+        const upperVal = e.target.value.toUpperCase();
+        e.target.value = upperVal;
+
+        if (upperVal.length > 0) {
+          lblEl.classList.remove('blink-label');
+        } else {
+          if (currentSession.selectedType === '나의송신예문') {
+            checkAndOpenSettingsIfEmpty();
+          }
+        }
+        saveSettings();
+        if (currentSession.selectedType === '나의송신예문') {
+          generateAndPreviewLines();
+        }
+      });
+    });
+
+    document.getElementById('enableNoiseToggle').addEventListener('change', () => {
+      updateNoiseInputState();
+      saveSettings();
+    });
+
+    document.getElementById('toggleSettingsBtn').addEventListener('click', () => {
+      const container = document.getElementById('settingsContainer');
+      const btn = document.getElementById('toggleSettingsBtn');
+      const isVisible = window.getComputedStyle(container).display !== 'none';
+      if (isVisible) {
+        container.style.display = 'none';
+        btn.innerText = '⚙️ 세부 사항 설정';
+        btn.classList.remove('btn-close-active');
+        document.getElementById('lblMyCall').classList.remove('blink-label');
+        document.getElementById('lblMyName').classList.remove('blink-label');
+        document.getElementById('lblMyQth').classList.remove('blink-label');
+        document.getElementById('lblMyKdn').classList.remove('blink-label');
+      } else {
+        container.style.display = 'grid';
+        btn.innerText = '⚙️ 세부 사항 닫기';
+        btn.classList.add('btn-close-active');
+      }
+    });
+
+    document.querySelectorAll('input[type="number"]').forEach(el => {
+      el.addEventListener('input', () => saveSettings());
+    });
+
+    const helpContent = document.getElementById('helpContent');
+    const historyContent = document.getElementById('historyContent');
+    const helpBtn = document.getElementById('helpBtn');
+    const versionTag = document.getElementById('versionTag');
+
+    helpBtn.addEventListener('click', () => {
+      const isHelpVis = window.getComputedStyle(helpContent).display !== 'none';
+      const isHistVis = window.getComputedStyle(historyContent).display !== 'none';
+
+      if (isHelpVis || isHistVis) {
+        helpContent.style.display = 'none';
+        historyContent.style.display = 'none';
+        helpBtn.innerText = '프로그램 설명';
+        helpBtn.classList.remove('btn-close-active');
+      } else {
+        helpContent.style.display = 'block';
+        historyContent.style.display = 'none';
+        helpBtn.innerText = '프로그램 설명 닫기';
+        helpBtn.classList.add('btn-close-active');
+      }
+    });
+
+    versionTag.addEventListener('click', () => {
+      const isHistVis = window.getComputedStyle(historyContent).display !== 'none';
+      if (isHistVis) {
+        historyContent.style.display = 'none';
+        helpBtn.innerText = '프로그램 설명';
+        helpBtn.classList.remove('btn-close-active');
+      } else {
+        historyContent.style.display = 'none';
+        historyContent.style.display = 'block';
+        helpBtn.innerText = '히스토리 닫기';
+        helpBtn.classList.add('btn-close-active');
+      }
+    });
+
+    function getRandomChoice(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function getFilteredRandomChoice(arr, lastVal) {
+      if (!arr || arr.length === 0) return '';
+      if (arr.length === 1) return arr[0];
+      let filtered = arr.filter(item => item !== lastVal);
+      let pool = filtered.length > 0 ? filtered : arr;
+      return getRandomChoice(pool);
+    }
+
+    function generateSentences() {
+      const isRandomMode = (currentSession.selectedType === '랜덤예문');
+
+      const connPool = ['<BT>', '<BT>', '<BT>', '', '', '', '.', ','];
+      const connSymbol = getRandomChoice(connPool);
+      const qPool = ['', '', '', '?'];
+
+      const isIsRst = Math.random() < 0.5 ? 'IS' : '';
+      const isIsName = Math.random() < 0.5 ? 'IS' : '';
+      const isIsQth = Math.random() < 0.5 ? 'IS' : '';
+      const isIsKdn = Math.random() < 0.5 ? 'IS' : '';
+
+      // 1. RST
+      const rstKeys = Object.keys(RST_DATA);
+      const chosenRstNum = getFilteredRandomChoice(rstKeys, lastGeneratedValues.rst);
+      lastGeneratedValues.rst = chosenRstNum;
+      const chosenRstAbbr = RST_DATA[chosenRstNum];
+      const rstPronoun = Math.random() < 0.5 ? 'UR RST' : 'RST';
+      let rstParts = [rstPronoun, isIsRst, chosenRstNum, chosenRstAbbr].filter(Boolean);
+      let rstText = rstParts.join(' ') + (connSymbol ? ' ' + connSymbol : '');
+
+      // 2. NAME
+      let nameVal = '';
+      if (isRandomMode) {
+        nameVal = getFilteredRandomChoice(NAME_GROUP, lastGeneratedValues.name);
+        lastGeneratedValues.name = nameVal;
+      } else {
+        nameVal = document.getElementById('myNameInput').value.trim().toUpperCase() || 'KIM';
+      }
+      const namePronoun = getRandomChoice(['MY NAME', 'NAME', 'OP']);
+      let nameParts = [namePronoun, isIsName, nameVal, getRandomChoice(qPool), nameVal].filter(Boolean);
+      let nameText = nameParts.join(' ') + (connSymbol ? ' ' + connSymbol : '');
+
+      // 3. QTH
+      let qthVal = '';
+      if (isRandomMode) {
+        qthVal = getFilteredRandomChoice(QTH_GROUP, lastGeneratedValues.qth);
+        lastGeneratedValues.qth = qthVal;
+      } else {
+        qthVal = document.getElementById('myQthInput').value.trim().toUpperCase() || 'BUSAN';
+      }
+      const qthPronoun = Math.random() < 0.5 ? 'MY QTH' : 'QTH';
+      let qthParts = [qthPronoun, isIsQth, qthVal, getRandomChoice(qPool), qthVal].filter(Boolean);
+      let qthText = qthParts.join(' ') + (connSymbol ? ' ' + connSymbol : '');
+
+      // 4. KDN
+      let kdnVal = '';
+      if (isRandomMode) {
+        const matchingKdns = QTH_KDN_MAP[qthVal] || ['B11'];
+        kdnVal = getFilteredRandomChoice(matchingKdns, lastGeneratedValues.kdn);
+        lastGeneratedValues.kdn = kdnVal;
+      } else {
+        kdnVal = document.getElementById('myKdnInput').value.trim().toUpperCase() || 'B11';
+      }
+      const kdnPronoun = Math.random() < 0.5 ? 'MY KDN' : 'KDN';
+      let kdnParts = [kdnPronoun, isIsKdn, kdnVal, getRandomChoice(qPool), kdnVal].filter(Boolean);
+      let kdnText = kdnParts.join(' ');
+
+      return [
+        { label: 'RST', fullText: rstText, targetValue: chosenRstNum },
+        { label: 'NAME', fullText: nameText, targetValue: nameVal },
+        { label: 'QTH', fullText: qthText, targetValue: qthVal },
+        { label: 'KDN', fullText: kdnText, targetValue: kdnVal }
+      ];
+    }
+
+    let audioCtx = null;
+    let activeOscillators = [];
+    let noiseMasterGainNode = null;
+    let baseNoiseSource = null;
+    let baseNoiseFilter = null;
+
+    async function initAudio() {
+      if (!audioCtx || audioCtx.state === 'closed') {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        await audioCtx.resume();
+      }
+      await new Promise(r => trackTimeout(r, 40));
+    }
+
+    function startRealRadioNoise(volumePercent) {
+      if (!audioCtx || audioCtx.state === 'closed' || noiseMasterGainNode) return;
+      noiseMasterGainNode = audioCtx.createGain();
+      const targetGain = (volumePercent / 100) * 2.50;
+      noiseMasterGainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+      noiseMasterGainNode.gain.linearRampToValueAtTime(targetGain, audioCtx.currentTime + 0.2);
+      noiseMasterGainNode.connect(audioCtx.destination);
+
+      const bufferSize = audioCtx.sampleRate * 2.5;
+      const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      let b0=0, b1=0, b2=0;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        b0 = 0.997 * b0 + white * 0.05;
+        b1 = 0.985 * b1 + white * 0.12;
+        b2 = 0.950 * b2 + white * 0.25;
+        output[i] = (b0 + b1 + b2 + white * 0.2) * 0.8;
+      }
+
+      baseNoiseSource = audioCtx.createBufferSource();
+      baseNoiseSource.buffer = noiseBuffer;
+      baseNoiseSource.loop = true;
+
+      baseNoiseFilter = audioCtx.createBiquadFilter();
+      baseNoiseFilter.type = 'bandpass';
+      baseNoiseFilter.frequency.setValueAtTime(820, audioCtx.currentTime);
+      baseNoiseFilter.Q.setValueAtTime(1.1, audioCtx.currentTime);
+
+      baseNoiseSource.connect(baseNoiseFilter);
+      baseNoiseFilter.connect(noiseMasterGainNode);
+      baseNoiseSource.start();
+    }
+
+    function stopRealRadioNoise() {
+      if (noiseMasterGainNode && audioCtx && audioCtx.state !== 'closed') {
+        try { noiseMasterGainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.1); } catch(e){}
+      }
+      trackTimeout(() => {
+        if (baseNoiseSource) { try { baseNoiseSource.stop(); baseNoiseSource.disconnect(); } catch(e){} baseNoiseSource = null; }
+        if (baseNoiseFilter) { try { baseNoiseFilter.disconnect(); } catch(e){} baseNoiseFilter = null; }
+        if (noiseMasterGainNode) { try { noiseMasterGainNode.disconnect(); } catch(e){} noiseMasterGainNode = null; }
+      }, 120);
+    }
+
+    function stopCurrentAudio() {
+      activeOscillators.forEach(item => {
+        try {
+          if (audioCtx && audioCtx.state !== 'closed') {
+            item.gain.gain.setValueAtTime(item.gain.gain.value, audioCtx.currentTime);
+            item.gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.02);
+            item.osc.stop(audioCtx.currentTime + 0.03);
+          }
+          item.osc.disconnect();
+          item.gain.disconnect();
+        } catch(e){}
+      });
+      activeOscillators = [];
+    }
+
+    async function hardResetAudioContext() {
+      stopCurrentAudio();
+      stopRealRadioNoise();
+      if (audioCtx) {
+        try {
+          await audioCtx.close();
+        } catch(e){}
+        audioCtx = null;
+      }
+    }
+
+    function parseTextIntoTokens(text) {
+      let clean = text.toUpperCase();
+      let tokens = [];
+      let i = 0;
+      while (i < clean.length) {
+        if (clean[i] === '<') {
+          let endIdx = clean.indexOf('>', i);
+          if (endIdx !== -1) {
+            let prosign = clean.substring(i, endIdx + 1);
+            tokens.push(prosign);
+            i = endIdx + 1;
+            continue;
+          }
+        }
+        tokens.push(clean[i]);
+        i++;
+      }
+      return tokens;
+    }
+
+    function playMorseTextWithCallback(text, wpm, toneFreq, sessionToken, onCharProgress) {
+      return new Promise((resolve) => {
+        if (!currentSession.isRunning || sessionToken !== globalSessionToken || !audioCtx || audioCtx.state === 'closed') return resolve();
+
+        const dotDuration = (1200 / wpm) / 1000;
+        let currentTime = audioCtx.currentTime + 0.08;
+
+        const osc = audioCtx.createOscillator();
+        const mainGain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(toneFreq, currentTime);
+        osc.connect(mainGain);
+        mainGain.connect(audioCtx.destination);
+        mainGain.gain.setValueAtTime(0, currentTime);
+        osc.start(currentTime);
+
+        const oscObj = { osc: osc, gain: mainGain };
+        activeOscillatorListPush(oscObj);
+
+        let tokens = parseTextIntoTokens(text);
+        let charIndexTracker = 0;
+
+        for (let t = 0; t < tokens.length; t++) {
+          if (!currentSession.isRunning || sessionToken !== globalSessionToken || !audioCtx || audioCtx.state === 'closed') {
+            stopCurrentAudio();
+            return resolve();
+          }
+
+          const token = tokens[t];
+          const tokenStartIndexInText = charIndexTracker;
+          charIndexTracker += token.length;
+
+          if (token === ' ') {
+            currentTime += dotDuration * 4;
+            continue;
+          }
+
+          const pattern = MORSE_CODE[token];
+          if (!pattern) continue;
+
+          let triggerTime = startTimeOffsetCalc(currentTime, audioCtx.currentTime);
+          trackTimeout(() => {
+            if (currentSession.isRunning && sessionToken === globalSessionToken && onCharProgress) {
+              onCharProgress(tokenStartIndexInText);
+            }
+          }, triggerTime);
+
+          for (let j = 0; j < pattern.length; j++) {
+            const symbol = pattern[j];
+            const duration = (symbol === '.') ? dotDuration : (dotDuration * 3);
+
+            mainGain.gain.setValueAtTime(0, currentTime);
+            mainGain.gain.linearRampToValueAtTime(0.85, currentTime + 0.005);
+            currentTime += duration;
+            mainGain.gain.setValueAtTime(0.85, currentTime - 0.005);
+            mainGain.gain.linearRampToValueAtTime(0, currentTime);
+            currentTime += dotDuration;
+          }
+          currentTime += dotDuration * 2;
+        }
+
+        const stopTime = currentTime + 0.12;
+        if (audioCtx && audioCtx.state !== 'closed') {
+          mainGain.gain.setValueAtTime(0, stopTime - 0.03);
+          mainGain.gain.linearRampToValueAtTime(0, stopTime);
+          osc.stop(stopTime);
+        }
+
+        osc.onended = () => {
+          activeOscillators = activeOscillators.filter(item => item !== oscObj);
+          resolve();
+        };
+
+        trackTimeout(() => {
+          stopCurrentAudio();
+          resolve();
+        }, Math.max(0, (stopTime - audioCtx.currentTime) * 1000) + 80);
+      });
+    }
+
+    function activeOscillatorListPush(obj) {
+      activeOscillators.push(obj);
+      if (activeOscillators.length > 3) {
+        let old = activeOscillators.shift();
+        try { old.osc.stop(); old.osc.disconnect(); old.gain.disconnect(); } catch(e){}
+      }
+    }
+
+    function startTimeOffsetCalc(targetTime, nowTime) {
+      return Math.max(0, (targetTime - nowTime) * 1000);
+    }
+
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const waitingView = document.getElementById('waitingView');
+    const sentenceDisplayBox = document.getElementById('sentenceDisplayBox');
+    const quizWrapper = document.getElementById('quizWrapper');
+    const hideContentLabelWrapper = document.getElementById('hideContentLabelWrapper');
+    const panelZoneTop = document.getElementById('panelZoneTop');
+
+    startBtn.addEventListener('click', async () => {
+      if (currentSession.isRunning || !currentSession.lines || currentSession.lines.length === 0) return;
+
+      helpContent.style.display = 'none';
+      historyContent.style.display = 'none';
+      helpBtn.innerText = '프로그램 설명';
+      helpBtn.classList.remove('btn-close-active');
+
+      const settingsContainer = document.getElementById('settingsContainer');
+      const toggleSettingsBtn = document.getElementById('toggleSettingsBtn');
+      settingsContainer.style.display = 'none';
+      toggleSettingsBtn.innerText = '⚙️ 세부 사항 설정';
+      toggleSettingsBtn.classList.remove('btn-close-active');
+
+      const thisSessionToken = ++globalSessionToken;
+
+      if (currentSession.selectedType === '나의송신예문') {
+        const call = document.getElementById('myCallInput').value.trim();
+        const name = document.getElementById('myNameInput').value.trim();
+        const qth = document.getElementById('myQthInput').value.trim();
+        const kdn = document.getElementById('myKdnInput').value.trim();
+        if (!call || !name || !qth || !kdn) {
+          alert('나의 송신 예문에 필요한 세부 정보가 모두 입력되지 않았습니다. 빈칸으로 처리되어 진행됩니다.');
+        }
+      }
+
+      setUIState('running');
+      panelZoneTop.innerHTML = ''; // 송신 시작 시 상단 구역의 안내 문구 제거
+
+      await initAudio();
+      if (document.getElementById('enableNoiseToggle').checked) {
+        startRealRadioNoise(parseInt(document.getElementById('noiseVolInput').value) || 35);
+      }
+
+      currentSession.isRunning = true;
+      currentSession.score = 0;
+      currentSession.history = [];
+
+      waitingView.style.display = 'none';
+      quizWrapper.style.display = 'none';
+      sentenceDisplayBox.style.display = 'flex';
+
+      renderSentenceBox(-1);
+
+      const wpm = parseInt(document.getElementById('wpmInput').value) || 15;
+      const freq = parseInt(document.getElementById('freqInput').value) || 650;
+      const intervalSec = parseFloat(document.getElementById('intervalInput').value);
+      const delayMs = isNaN(intervalSec) ? 300 : intervalSec * 1000;
+
+      for (let idx = 0; idx < currentSession.lines.length; idx++) {
+        if (!currentSession.isRunning || thisSessionToken !== globalSessionToken) break;
+        currentSession.currentStep = idx;
+
+        const lineObj = currentSession.lines[idx];
+        await playMorseTextWithCallback(lineObj.fullText, wpm, freq, thisSessionToken, (charIdx) => {
+          if (currentSession.isRunning && thisSessionToken === globalSessionToken) {
+            renderSentenceBox(idx, charIdx);
+          }
+        });
+
+        if (!currentSession.isRunning || thisSessionToken !== globalSessionToken) break;
+        if (delayMs > 0) {
+          await new Promise(r => trackTimeout(r, delayMs));
+        }
+      }
+
+      if (!currentSession.isRunning || thisSessionToken !== globalSessionToken) return;
+
+      if (currentSession.selectedType === '랜덤예문') {
+        startQuizSession();
+      } else {
+        finishSessionDirectly();
+      }
+    });
+
+    stopBtn.addEventListener('click', async () => {
+      globalSessionToken++;
+      currentSession.isRunning = false;
+      
+      clearAllTimeouts();
+      await hardResetAudioContext();
+
+      showWaitingView();
+    });
+
+    function renderSentenceBox(activeLineIdx, activeCharIdx = -1) {
+      // 1. [전부 숨기기] 모드인 경우 (호박색 계통 포인트 적용)
+      if (allHideToggle.checked) {
+        sentenceDisplayBox.innerHTML = '<div class="hide-active-notice">[ 전부 숨기기 활성화됨 ]</div>';
+        return;
+      }
+
+      // 2. [일부 보이기] 모드인 경우 (송신 전 대기 시)
+      if (partialShowToggle.checked) {
+        if (!currentSession.isRunning && activeLineIdx === -1) {
+          sentenceDisplayBox.innerHTML = '<div class="hide-active-notice">[ 일부 보이기 활성화됨 ]</div>';
+          return;
+        }
+      }
+
+      // 3. 일반 대기 상태 (숨김 없음)
+      if (!currentSession.isRunning && activeLineIdx === -1) {
+        sentenceDisplayBox.innerHTML = '';
+        currentSession.lines.forEach(line => {
+          sentenceDisplayBox.innerHTML += `<div class="sentence-line" style="color: #94a3b8;">${escapeHtml(line.fullText)}</div>`;
+        });
+        return;
+      }
+
+      // 4. 송신 중 렌더링
+      let html = '';
+      currentSession.lines.forEach((line, lIdx) => {
+        let lineHtml = '';
+        let tokens = parseTextIntoTokens(line.fullText);
+        let currentPos = 0;
+
+        tokens.forEach(token => {
+          let tokenStart = currentPos;
+          let tokenEnd = currentPos + token.length;
+          currentPos = tokenEnd;
+
+          let isCurrentToken = (lIdx === activeLineIdx && activeCharIdx >= tokenStart && activeCharIdx < tokenEnd);
+          let isSentToken = (lIdx < activeLineIdx || (lIdx === activeLineIdx && activeCharIdx >= tokenEnd));
+
+          let formattedToken = escapeHtml(token);
+
+          if (partialShowToggle.checked) {
+            if (lIdx < activeLineIdx || (lIdx === activeLineIdx && activeCharIdx >= tokenEnd)) {
+              lineHtml += `<span class="char-sent">${formattedToken}</span>`;
+            } else {
+              lineHtml += `<span style="opacity: 0; user-select: none;">${formattedToken}</span>`;
+            }
+          } else {
+            if (isCurrentToken) {
+              lineHtml += `<span class="char-active">${formattedToken}</span>`;
+            } else if (isSentToken) {
+              lineHtml += `<span class="char-sent">${formattedToken}</span>`;
+            } else {
+              lineHtml += `<span>${formattedToken}</span>`;
+            }
+          }
+        });
+
+        html += `<div class="sentence-line">${lineHtml}</div>`;
+      });
+      sentenceDisplayBox.innerHTML = html;
+    }
+
+    let quizRound = 0;
+    const quizItemsToTest = ['RST', 'NAME', 'QTH', 'KDN'];
+
+    function startQuizSession() {
+      quizRound = 0;
+      hideContentLabelWrapper.style.display = 'none'; // 퀴즈 시작 시 제어 컨트롤 감춤
+      sentenceDisplayBox.style.display = 'none';
+      quizWrapper.style.display = 'flex';
+      nextQuizQuestion();
+    }
+
+    function nextQuizQuestion() {
+      if (quizRound >= quizItemsToTest.length || !currentSession.isRunning) {
+        finishSessionWithReport();
+        return;
+      }
+
+      const testKey = quizItemsToTest[quizRound];
+      const targetLine = currentSession.lines.find(l => l.label === testKey);
+      const correctAnswer = targetLine.targetValue;
+
+      let pool = [];
+      if (testKey === 'RST') {
+        pool = Object.keys(RST_DATA).filter(k => k !== correctAnswer);
+      } else if (testKey === 'NAME') {
+        pool = NAME_GROUP.filter(n => n !== correctAnswer);
+      } else if (testKey === 'QTH') {
+        pool = QTH_GROUP.filter(q => q !== correctAnswer);
+      } else if (testKey === 'KDN') {
+        let allKdns = [];
+        Object.values(QTH_KDN_MAP).forEach(arr => allKdns = allKdns.concat(arr));
+        pool = Array.from(new Set(allKdns)).filter(k => k !== correctAnswer);
+      }
+
+      let shuffledPool = [...pool].sort(() => 0.5 - Math.random());
+      let choices = [correctAnswer, shuffledPool[0], shuffledPool[1], shuffledPool[2]].sort(() => 0.5 - Math.random());
+
+      panelZoneTop.innerHTML = `<div class="quiz-prompt-text">${testKey}의 내용은?</div>`;
+
+      quizWrapper.innerHTML = `
+        <div class="quiz-options-grid" id="quizGrid"></div>
+      `;
+
+      const grid = document.getElementById('quizGrid');
+      choices.forEach(choice => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option-btn';
+        btn.textContent = choice;
+        btn.addEventListener('click', () => handleQuizAnswer(testKey, correctAnswer, choice, correctAnswer));
+        grid.appendChild(btn);
+      });
+    }
+
+    function handleQuizAnswer(testKey, correctValOnly, userChoice, correctAnswer) {
+      const isCorrect = (userChoice === correctAnswer);
+      if (isCorrect) currentSession.score++;
+
+      currentSession.history.push({
+        label: testKey,
+        sent: correctValOnly,
+        correct: correctAnswer,
+        userChoice: userChoice,
+        isCorrect: isCorrect
+      });
+
+      quizRound++;
+      nextQuizQuestion();
+    }
+
+    function finishSessionDirectly() {
+      globalSessionToken++;
+      currentSession.isRunning = false;
+      stopRealRadioNoise();
+      hideContentLabelWrapper.style.display = 'none';
+      panelZoneTop.innerHTML = '';
+
+      document.getElementById('mainTrainView').style.display = 'none';
+      const myReportView = document.getElementById('myReportView');
+      myReportView.style.display = 'block';
+      myReportView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function finishSessionWithReport() {
+      globalSessionToken++;
+      currentSession.isRunning = false;
+      stopRealRadioNoise();
+      hideContentLabelWrapper.style.display = 'none';
+      panelZoneTop.innerHTML = '';
+
+      document.getElementById('mainTrainView').style.display = 'none';
+      const reportView = document.getElementById('finalReportView');
+      reportView.style.display = 'block';
+
+      document.getElementById('finalScore').innerText = currentSession.score;
+      document.getElementById('finalTotal').innerText = `/ ${quizItemsToTest.length}`;
+      const pct = Math.round((currentSession.score / quizItemsToTest.length) * 100);
+      document.getElementById('accuracyText').innerText = `정답률: ${pct}%`;
+
+      const tbody = document.getElementById('historyTableBody');
+      tbody.innerHTML = currentSession.history.map(item => {
+        const mark = item.isCorrect ? '<b style="color:#4ade80;">O</b>' : '<b style="color:#f87171;">X</b>';
+        return `<tr>
+          <td>${item.label}</td>
+          <td style="font-weight:bold; color:#4ade80;">${escapeHtml(item.sent)}</td>
+          <td>${escapeHtml(item.userChoice)}</td>
+          <td>${mark}</td>
+        </tr>`;
+      }).join('');
+
+      reportView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    document.getElementById('restartBtn').addEventListener('click', () => {
+      document.getElementById('finalReportView').style.display = 'none';
+      document.getElementById('mainTrainView').style.display = 'block';
+      generateAndPreviewLines();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.getElementById('myRestartBtn').addEventListener('click', () => {
+      document.getElementById('myReportView').style.display = 'none';
+      document.getElementById('mainTrainView').style.display = 'block';
+      generateAndPreviewLines();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.getElementById('cwAppRoot').style.display = 'block';
+    loadSettings();
+  </script>
+</body>
+</html>
