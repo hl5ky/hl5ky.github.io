@@ -73,7 +73,6 @@
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
     }
 
-    /* 모바일 화면 폭 초과 시 '프로그램 설명' 버튼이 자연스럽게 아래로 내려오도록 flex-wrap 허용 */
     .call-input-row {
       display: flex;
       align-items: center;
@@ -119,7 +118,7 @@
       box-shadow: 0 0 8px rgba(2, 132, 199, 0.6);
     }
     
-    /* 송신 중(disabled)일 때: 선택된 버튼은 톤이 다운된 은은한 네이비/하늘색 톤 유지 + 클릭 차단 */
+    /* 송신 중(disabled)일 때: 선택된 버튼은 톤 다운된 은은한 네이비/하늘색 톤 유지 + 클릭 차단 */
     .mode-btn:disabled.active {
       background-color: #172554 !important;
       border-color: #1d4ed8 !important;
@@ -385,7 +384,7 @@
       height: 15px;
     }
 
-    /* 3단 구역 정의 (상단 구역 텍스트는 하부 정렬로 배치하여 우상단 토글과의 겹치마 방지) */
+    /* 3단 구역 정의 ('새로운 문장 준비' 문구 미세 하향: padding-bottom 4px) */
     .panel-zone-top {
       height: 40px;
       width: 100%;
@@ -393,7 +392,7 @@
       align-items: flex-end;
       justify-content: center;
       flex-shrink: 0;
-      padding-bottom: 2px;
+      padding-bottom: 4px;
     }
     .panel-zone-center {
       flex: 1;
@@ -422,11 +421,16 @@
       height: 100%;
     }
 
+    /* 대기 안내 텍스트 내 강조될 예문 명칭 스타일 */
     .status-text { 
       font-size: 15px; 
       color: #e2e8f0; 
       text-align: center; 
       line-height: 1.8;
+    }
+    .status-highlight {
+      color: #38bdf8;
+      font-weight: bold;
     }
 
     .sentence-display-box {
@@ -457,6 +461,20 @@
       color: #4ade80;
     }
 
+    /* '일부 보이기' 시 현재 및 직전 글자를 가려주는 옅은 사각 박스 블록 스타일 */
+    .partial-mask-block {
+      display: inline-block;
+      background-color: #334155;
+      border: 1px solid #475569;
+      border-radius: 3px;
+      color: transparent;
+      user-select: none;
+      min-width: 12px;
+      height: 18px;
+      margin: 0 1px;
+      vertical-align: middle;
+    }
+
     /* 예문 갱신 시 단발성 깜빡임 애니메이션 (Single Flash) */
     .single-blink-text {
       animation: singleBlink 0.5s ease-in-out 1;
@@ -474,7 +492,6 @@
       margin: 0;
     }
 
-    /* 퀴즈 질문 문구 부드러운 깜빡임(Blink) 효과 */
     .quiz-prompt-text {
       font-size: 17px;
       font-weight: normal;
@@ -699,14 +716,14 @@
         </label>
       </div>
 
-      <!-- 1. 상단 구역 (Top Zone: 하부 정렬로 토글과의 겹침 방지) -->
+      <!-- 1. 상단 구역 (Top Zone) -->
       <div class="panel-zone-top" id="panelZoneTop"></div>
 
       <!-- 2. 중앙 구역 (Center Zone) -->
       <div class="panel-zone-center" id="panelZoneCenter">
         <div class="aligned-container" id="waitingView">
           <div class="status-text">
-            랜덤 예문 또는 나의 송신 예문을 누를 때마다<br>
+            <span class="status-highlight">[랜덤예문]</span> 또는 <span class="status-highlight">[나의송신예문]</span>을 누를 때마다<br>
             새로운 문장이 만들어집니다.
           </div>
         </div>
@@ -874,7 +891,6 @@
       } else if (state === 'running') {
         startBtn.disabled = true;
         stopBtn.disabled = false;
-        // 송신 중 비활성화 처리 (클릭은 차단하되, 선택된 버튼은 톤 다운된 뚜렷한 색상 유지)
         btnRandom.disabled = true;
         btnMy.disabled = true;
       }
@@ -1441,6 +1457,9 @@
     startBtn.addEventListener('click', async () => {
       if (currentSession.isRunning || !currentSession.lines || currentSession.lines.length === 0) return;
 
+      // 송신 버튼 클릭 시 화면 최상단으로 스무스하게 스크롤 이동
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
       helpContent.style.display = 'none';
       historyContent.style.display = 'none';
       helpBtn.innerText = '프로그램 설명';
@@ -1480,7 +1499,7 @@
       quizWrapper.style.display = 'none';
       sentenceDisplayBox.style.display = 'flex';
 
-      renderSentenceBox(-1);
+      renderSentenceBox(-1, -1);
 
       const wpm = parseInt(document.getElementById('wpmInput').value) || 15;
       const freq = parseInt(document.getElementById('freqInput').value) || 650;
@@ -1560,11 +1579,41 @@
 
           let formattedToken = escapeHtml(token);
 
+          // '일부 보이기' 모드: 현재 및 직전 토큰은 옅은 사각 박스 블록으로 마스크 처리
           if (partialShowToggle.checked) {
-            if (lIdx < activeLineIdx || (lIdx === activeLineIdx && activeCharIdx >= tokenEnd)) {
+            let isPastToken = (lIdx < activeLineIdx) || (lIdx === activeLineIdx && activeCharIdx >= tokenEnd);
+            let isCurrentOrJustFinished = false;
+
+            if (currentSession.isRunning && activeLineIdx !== -1) {
+              if (lIdx === activeLineIdx) {
+                if (isCurrentToken) isCurrentOrJustFinished = true;
+                let activeTokenIdx = tokens.findIndex((tk, idx) => {
+                  let sPos = 0;
+                  for(let k=0; k<idx; k++) sPos += tokens[k].length;
+                  return activeCharIdx >= sPos && activeCharIdx < sPos + tokens[k].length;
+                });
+                let tokenIdxs = tokens.indexOf(token);
+                if (activeTokenIdx !== -1 && tokenIdxs === activeTokenIdx - 1) {
+                  isCurrentOrJustFinished = true;
+                }
+              } else if (lIdx === activeLineIdx - 1) {
+                let activeTokenIdx = parseTextIntoTokens(currentSession.lines[activeLineIdx].fullText).findIndex((tk, idx, arr) => {
+                  let sPos = 0;
+                  for(let k=0; k<idx; k++) sPos += arr[k].length;
+                  return activeCharIdx >= sPos && activeCharIdx < sPos + arr[k].length;
+                });
+                if (activeTokenIdx === 0 && token === tokens.slice(-1)[0]) {
+                  isCurrentOrJustFinished = true;
+                }
+              }
+            }
+
+            if (isPastToken && !isCurrentOrJustFinished) {
               lineHtml += `<span class="char-sent">${formattedToken}</span>`;
             } else {
-              lineHtml += `<span style="opacity: 0; user-select: none;">${formattedToken}</span>`;
+              for (let c = 0; c < token.length; c++) {
+                lineHtml += `<span class="partial-mask-block">&nbsp;</span>`;
+              }
             }
           } else {
             if (isCurrentToken) {
@@ -1619,7 +1668,6 @@
       let shuffledPool = [...pool].sort(() => 0.5 - Math.random());
       let choices = [correctAnswer, shuffledPool[0], shuffledPool[1], shuffledPool[2]].sort(() => 0.5 - Math.random());
 
-      // 퀴즈 질문 문구에 깜빡임(Blink) 효과 적용
       panelZoneTop.innerHTML = `<div class="quiz-prompt-text">${testKey}의 내용은?</div>`;
 
       quizWrapper.innerHTML = `
