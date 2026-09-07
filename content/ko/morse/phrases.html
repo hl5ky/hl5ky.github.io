@@ -73,11 +73,12 @@
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
     }
 
+    /* 모바일 화면 폭 초과 시 '프로그램 설명' 버튼이 자연스럽게 아래로 내려오도록 flex-wrap 허용 */
     .call-input-row {
       display: flex;
       align-items: center;
       gap: 8px;
-      flex-wrap: nowrap;
+      flex-wrap: wrap;
     }
     .call-input-row label.main-label { 
       font-weight: bold; 
@@ -117,20 +118,23 @@
       color: #ffffff;
       box-shadow: 0 0 8px rgba(2, 132, 199, 0.6);
     }
-    /* 송신 중(disabled)일 때도 현재 선택된(active) 버튼은 선명하게 강조 유지 */
+    
+    /* 송신 중(disabled)일 때: 선택된 버튼은 톤이 다운된 은은한 네이비/하늘색 톤 유지 + 클릭 차단 */
     .mode-btn:disabled.active {
-      background-color: #0284c7 !important;
-      border-color: #38bdf8 !important;
-      color: #ffffff !important;
-      opacity: 1 !important;
-      box-shadow: 0 0 8px rgba(2, 132, 199, 0.6);
+      background-color: #172554 !important;
+      border-color: #1d4ed8 !important;
+      color: #93c5fd !important;
+      opacity: 0.9 !important;
+      box-shadow: none !important;
+      pointer-events: none !important;
     }
     .mode-btn:disabled:not(.active) {
       background-color: #1e293b;
       border-color: #334155;
       color: #64748b;
       cursor: not-allowed;
-      opacity: 0.6;
+      opacity: 0.5;
+      pointer-events: none !important;
     }
 
     .help-btn {
@@ -381,14 +385,15 @@
       height: 15px;
     }
 
-    /* 3단 구역 정의 */
+    /* 3단 구역 정의 (상단 구역 텍스트는 하부 정렬로 배치하여 우상단 토글과의 겹치마 방지) */
     .panel-zone-top {
       height: 40px;
       width: 100%;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
       flex-shrink: 0;
+      padding-bottom: 2px;
     }
     .panel-zone-center {
       flex: 1;
@@ -417,7 +422,6 @@
       height: 100%;
     }
 
-    /* 초기 대기 안내 텍스트 시인성 개선 (밝은 은색/크림 톤) */
     .status-text { 
       font-size: 15px; 
       color: #e2e8f0; 
@@ -462,7 +466,6 @@
       50% { opacity: 0.2; transform: scale(0.96); }
     }
 
-    /* 상단 '새로운 문장 준비' 문구 (보통체 및 시안 블루 톤) */
     .ready-msg-text {
       font-size: 16px;
       font-weight: normal;
@@ -470,6 +473,8 @@
       text-align: center;
       margin: 0;
     }
+
+    /* 퀴즈 질문 문구 부드러운 깜빡임(Blink) 효과 */
     .quiz-prompt-text {
       font-size: 17px;
       font-weight: normal;
@@ -477,9 +482,13 @@
       text-align: center;
       width: 100%;
       margin: 0;
+      animation: blinkQuizPrompt 1s infinite ease-in-out;
+    }
+    @keyframes blinkQuizPrompt {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
     }
 
-    /* 숨김 모드 활성화 안내 문구 (시인성 좋은 오렌지/호박색 톤) */
     .hide-active-notice {
       color: #fbbf24;
       font-size: 15px;
@@ -690,7 +699,7 @@
         </label>
       </div>
 
-      <!-- 1. 상단 구역 (Top Zone) -->
+      <!-- 1. 상단 구역 (Top Zone: 하부 정렬로 토글과의 겹침 방지) -->
       <div class="panel-zone-top" id="panelZoneTop"></div>
 
       <!-- 2. 중앙 구역 (Center Zone) -->
@@ -865,7 +874,7 @@
       } else if (state === 'running') {
         startBtn.disabled = true;
         stopBtn.disabled = false;
-        // 송신 중에는 비활성화되지만 active 클래스가 붙은 버튼은 CSS를 통해 선명하게 강조됨
+        // 송신 중 비활성화 처리 (클릭은 차단하되, 선택된 버튼은 톤 다운된 뚜렷한 색상 유지)
         btnRandom.disabled = true;
         btnMy.disabled = true;
       }
@@ -998,7 +1007,6 @@
       sentenceDisplayBox.style.display = 'flex';
       hideContentLabelWrapper.style.display = 'flex';
       
-      // 단축된 문구 적용: "새로운 문장 준비" (단발성 깜빡임 적용)
       panelZoneTop.innerHTML = '<div id="readyMsgEl" class="ready-msg-text single-blink-text">새로운 문장 준비</div>';
 
       renderSentenceBox(-1);
@@ -1457,7 +1465,7 @@
       }
 
       setUIState('running');
-      panelZoneTop.innerHTML = ''; // 송신 시작 시 상단 구역의 안내 문구 제거
+      panelZoneTop.innerHTML = ''; // 송신 시작 시 상단 구역 안내 문구 제거
 
       await initAudio();
       if (document.getElementById('enableNoiseToggle').checked) {
@@ -1516,13 +1524,11 @@
     });
 
     function renderSentenceBox(activeLineIdx, activeCharIdx = -1) {
-      // 1. [전부 숨기기] 모드인 경우 (호박색 계통 포인트 적용)
       if (allHideToggle.checked) {
         sentenceDisplayBox.innerHTML = '<div class="hide-active-notice">[ 전부 숨기기 활성화됨 ]</div>';
         return;
       }
 
-      // 2. [일부 보이기] 모드인 경우 (송신 전 대기 시)
       if (partialShowToggle.checked) {
         if (!currentSession.isRunning && activeLineIdx === -1) {
           sentenceDisplayBox.innerHTML = '<div class="hide-active-notice">[ 일부 보이기 활성화됨 ]</div>';
@@ -1530,7 +1536,6 @@
         }
       }
 
-      // 3. 일반 대기 상태 (숨김 없음)
       if (!currentSession.isRunning && activeLineIdx === -1) {
         sentenceDisplayBox.innerHTML = '';
         currentSession.lines.forEach(line => {
@@ -1539,7 +1544,6 @@
         return;
       }
 
-      // 4. 송신 중 렌더링
       let html = '';
       currentSession.lines.forEach((line, lIdx) => {
         let lineHtml = '';
@@ -1583,7 +1587,7 @@
 
     function startQuizSession() {
       quizRound = 0;
-      hideContentLabelWrapper.style.display = 'none'; // 퀴즈 시작 시 제어 컨트롤 감춤
+      hideContentLabelWrapper.style.display = 'none';
       sentenceDisplayBox.style.display = 'none';
       quizWrapper.style.display = 'flex';
       nextQuizQuestion();
@@ -1615,6 +1619,7 @@
       let shuffledPool = [...pool].sort(() => 0.5 - Math.random());
       let choices = [correctAnswer, shuffledPool[0], shuffledPool[1], shuffledPool[2]].sort(() => 0.5 - Math.random());
 
+      // 퀴즈 질문 문구에 깜빡임(Blink) 효과 적용
       panelZoneTop.innerHTML = `<div class="quiz-prompt-text">${testKey}의 내용은?</div>`;
 
       quizWrapper.innerHTML = `
