@@ -118,7 +118,6 @@
       box-shadow: 0 0 8px rgba(2, 132, 199, 0.6);
     }
     
-    /* 송신 중(disabled)일 때: 선택된 버튼은 톤 다운된 은은한 네이비/하늘색 톤 유지 + 클릭 차단 */
     .mode-btn:disabled.active {
       background-color: #172554 !important;
       border-color: #1d4ed8 !important;
@@ -338,38 +337,70 @@
       opacity: 0.6;
     }
 
-    /* 디스플레이 패널 3단 구역 레이아웃 (240px 고정) */
+    /* 디스플레이 패널 4단 분리 구조 (총 높이 230px 고정: 20 + 30 + 130 + 50) */
     .display-panel {
       position: relative;
-      padding: 10px 16px;
+      padding: 4px 12px;
       background-color: #111827;
       border: 2px solid #374151;
       border-radius: 10px;
-      height: 240px;
-      min-height: 240px;
-      max-height: 240px;
+      height: 230px;
+      min-height: 230px;
+      max-height: 230px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
       margin-bottom: 14px;
       overflow: hidden;
       box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
     }
 
-    /* 우상단 제어 컨트롤 */
+    /* 4단 구역 세부 높이 배분 (합계 230px) */
+    .panel-row-1 {
+      height: 20px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-shrink: 0;
+    }
+    .panel-row-2 {
+      height: 30px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .panel-row-3 {
+      height: 130px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .panel-row-4 {
+      height: 50px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-shrink: 0;
+      padding: 0 4px;
+    }
+
+    /* 제1단 우상단 제어 컨트롤 */
     .panel-top-right-control {
-      position: absolute;
-      top: 10px;
-      right: 14px;
       display: none;
       align-items: center;
       gap: 12px;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 600;
       color: #cbd5e1;
       user-select: none;
-      z-index: 10;
     }
     .panel-toggle-label {
       display: flex;
@@ -380,35 +411,8 @@
     .panel-toggle-label input {
       cursor: pointer;
       accent-color: #0284c7;
-      width: 15px;
-      height: 15px;
-    }
-
-    /* 3단 구역 정의 ('새로운 문장 준비' 문구 미세 하향: padding-bottom 4px) */
-    .panel-zone-top {
-      height: 40px;
-      width: 100%;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      flex-shrink: 0;
-      padding-bottom: 4px;
-    }
-    .panel-zone-center {
-      flex: 1;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .panel-zone-bottom {
-      height: 40px;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      width: 14px;
+      height: 14px;
     }
 
     .aligned-container {
@@ -421,12 +425,11 @@
       height: 100%;
     }
 
-    /* 대기 안내 텍스트 내 강조될 예문 명칭 스타일 */
     .status-text { 
-      font-size: 15px; 
+      font-size: 14.5px; 
       color: #e2e8f0; 
       text-align: center; 
-      line-height: 1.8;
+      line-height: 1.6;
     }
     .status-highlight {
       color: #38bdf8;
@@ -442,7 +445,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
     }
     .sentence-line {
       text-align: center;
@@ -461,20 +464,6 @@
       color: #4ade80;
     }
 
-    /* '일부 보이기' 시 현재 및 직전 글자를 가려주는 옅은 사각 박스 블록 스타일 */
-    .partial-mask-block {
-      display: inline-block;
-      background-color: #334155;
-      border: 1px solid #475569;
-      border-radius: 3px;
-      color: transparent;
-      user-select: none;
-      min-width: 12px;
-      height: 18px;
-      margin: 0 1px;
-      vertical-align: middle;
-    }
-
     /* 예문 갱신 시 단발성 깜빡임 애니메이션 (Single Flash) */
     .single-blink-text {
       animation: singleBlink 0.5s ease-in-out 1;
@@ -485,7 +474,7 @@
     }
 
     .ready-msg-text {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: normal;
       color: #38bdf8;
       text-align: center;
@@ -493,7 +482,7 @@
     }
 
     .quiz-prompt-text {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: normal;
       color: #facc15;
       text-align: center;
@@ -691,8 +680,11 @@
           </label>
         </div>
 
-        <!-- 4라인: 좌측 빈 공간 / 우측 잡음 음량 -->
-        <div class="setting-item"></div>
+        <!-- 4라인: 좌측 일부 보이기 지연 (최대 3초 확장) / 우측 잡음 음량 -->
+        <div class="setting-item">
+          <label>일부 보이기 지연 (초)</label>
+          <input type="number" id="partialDelayInput" value="0.3" min="0" max="3.0" step="0.1">
+        </div>
         <div class="setting-item">
           <label id="lblNoiseVol">잡음 음량 (%)</label>
           <input type="number" id="noiseVolInput" value="35" min="0" max="100" step="5" disabled>
@@ -705,22 +697,25 @@
       </div>
     </div>
 
-    <!-- 3단 구역 구조가 적용된 디스플레이 패널 -->
+    <!-- 4단 분리 구조가 적용된 디스플레이 패널 (총 230px) -->
     <div class="display-panel" id="displayPanel">
-      <div class="panel-top-right-control" id="hideContentLabelWrapper" style="display: none;">
-        <label class="panel-toggle-label" for="allHideToggle">
-          <input type="checkbox" id="allHideToggle"> 전부 숨기기
-        </label>
-        <label class="panel-toggle-label" for="partialShowToggle">
-          <input type="checkbox" id="partialShowToggle"> 일부 보이기
-        </label>
+      <!-- 1단 (20px): 전부 숨기기 / 일부 보이기 토글 영역 -->
+      <div class="panel-row-1">
+        <div class="panel-top-right-control" id="hideContentLabelWrapper" style="display: none;">
+          <label class="panel-toggle-label" for="allHideToggle">
+            <input type="checkbox" id="allHideToggle"> 전부 숨기기
+          </label>
+          <label class="panel-toggle-label" for="partialShowToggle">
+            <input type="checkbox" id="partialShowToggle"> 일부 보이기
+          </label>
+        </div>
       </div>
 
-      <!-- 1. 상단 구역 (Top Zone) -->
-      <div class="panel-zone-top" id="panelZoneTop"></div>
+      <!-- 2단 (30px): '새로운 문장 준비' 또는 퀴즈 질문 안내 영역 -->
+      <div class="panel-row-2" id="panelRow2"></div>
 
-      <!-- 2. 중앙 구역 (Center Zone) -->
-      <div class="panel-zone-center" id="panelZoneCenter">
+      <!-- 3단 (130px): 메인 교신 문장 및 퀴즈 선택지 영역 -->
+      <div class="panel-row-3" id="panelRow3">
         <div class="aligned-container" id="waitingView">
           <div class="status-text">
             <span class="status-highlight">[랜덤예문]</span> 또는 <span class="status-highlight">[나의송신예문]</span>을 누를 때마다<br>
@@ -731,8 +726,8 @@
         <div class="quiz-wrapper" id="quizWrapper" style="display: none;"></div>
       </div>
 
-      <!-- 3. 하단 구역 (Bottom Zone) -->
-      <div class="panel-zone-bottom" id="panelZoneBottom"></div>
+      <!-- 4단 (50px): 예비 여백 영역 -->
+      <div class="panel-row-4" id="panelRow4"></div>
     </div>
   </div>
 
@@ -913,6 +908,7 @@
         myKdn: document.getElementById('myKdnInput').value,
         enableNoise: document.getElementById('enableNoiseToggle').checked,
         noiseVol: document.getElementById('noiseVolInput').value,
+        partialDelay: document.getElementById('partialDelayInput').value,
         allHide: document.getElementById('allHideToggle').checked,
         partialShow: document.getElementById('partialShowToggle').checked
       };
@@ -958,6 +954,7 @@
         if (data.myKdn) document.getElementById('myKdnInput').value = data.myKdn;
         if (data.enableNoise !== undefined) document.getElementById('enableNoiseToggle').checked = data.enableNoise;
         if (data.noiseVol) document.getElementById('noiseVolInput').value = data.noiseVol;
+        if (data.partialDelay !== undefined) document.getElementById('partialDelayInput').value = data.partialDelay;
         if (data.allHide !== undefined) document.getElementById('allHideToggle').checked = data.allHide;
         if (data.partialShow !== undefined) document.getElementById('partialShowToggle').checked = data.partialShow;
 
@@ -982,7 +979,7 @@
 
     function showWaitingView() {
       currentSession.lines = [];
-      panelZoneTop.innerHTML = '';
+      panelRow2.innerHTML = '';
       sentenceDisplayBox.style.display = 'none';
       quizWrapper.style.display = 'none';
       waitingView.style.display = 'flex';
@@ -1023,9 +1020,9 @@
       sentenceDisplayBox.style.display = 'flex';
       hideContentLabelWrapper.style.display = 'flex';
       
-      panelZoneTop.innerHTML = '<div id="readyMsgEl" class="ready-msg-text single-blink-text">새로운 문장 준비</div>';
+      panelRow2.innerHTML = '<div id="readyMsgEl" class="ready-msg-text single-blink-text">새로운 문장 준비</div>';
 
-      renderSentenceBox(-1);
+      renderSentenceBox(-1, -1);
       setUIState('ready');
     }
 
@@ -1038,7 +1035,7 @@
       }
       saveSettings();
       if (currentSession.isRunning || (currentSession.lines && currentSession.lines.length > 0)) {
-        renderSentenceBox(-1);
+        renderSentenceBox(-1, -1);
       }
     });
 
@@ -1048,7 +1045,7 @@
       }
       saveSettings();
       if (currentSession.isRunning || (currentSession.lines && currentSession.lines.length > 0)) {
-        renderSentenceBox(-1);
+        renderSentenceBox(-1, -1);
       }
     });
 
@@ -1452,13 +1449,18 @@
     const sentenceDisplayBox = document.getElementById('sentenceDisplayBox');
     const quizWrapper = document.getElementById('quizWrapper');
     const hideContentLabelWrapper = document.getElementById('hideContentLabelWrapper');
-    const panelZoneTop = document.getElementById('panelZoneTop');
+    const panelRow2 = document.getElementById('panelRow2');
 
     startBtn.addEventListener('click', async () => {
       if (currentSession.isRunning || !currentSession.lines || currentSession.lines.length === 0) return;
 
-      // 송신 버튼 클릭 시 화면 최상단으로 스무스하게 스크롤 이동
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // 스무스 스크롤 동작 (하단 정렬 방향)
+      try {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        document.documentElement.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+      } catch(e) {
+        window.scrollTo(0, document.body.scrollHeight);
+      }
 
       helpContent.style.display = 'none';
       historyContent.style.display = 'none';
@@ -1484,7 +1486,7 @@
       }
 
       setUIState('running');
-      panelZoneTop.innerHTML = ''; // 송신 시작 시 상단 구역 안내 문구 제거
+      panelRow2.innerHTML = ''; // 송신 시작 시 2단 안내 문구 제거
 
       await initAudio();
       if (document.getElementById('enableNoiseToggle').checked) {
@@ -1563,6 +1565,14 @@
         return;
       }
 
+      // '일부 보이기 지연' 설정값(초)을 기반으로 글자 마진 오프셋 계산 (WPM 반영 보정)
+      const partialDelaySec = parseFloat(document.getElementById('partialDelayInput').value);
+      const delaySec = isNaN(partialDelaySec) ? 0.3 : partialDelaySec;
+      const wpmVal = parseInt(document.getElementById('wpmInput').value) || 15;
+      // WPM 속도에 따른 초당 글자 수(CPS)를 활용하여 지연 초를 글자 수 마진으로 정확히 환산
+      const charsPerSec = wpmVal / 2.4; 
+      const delayCharOffset = Math.round(delaySec * charsPerSec * 1.5);
+
       let html = '';
       currentSession.lines.forEach((line, lIdx) => {
         let lineHtml = '';
@@ -1579,41 +1589,15 @@
 
           let formattedToken = escapeHtml(token);
 
-          // '일부 보이기' 모드: 현재 및 직전 토큰은 옅은 사각 박스 블록으로 마스크 처리
+          // '일부 보이기' 모드: 설정된 지연 시간(오프셋)만큼 마진을 두어 소리보다 뒤늦게 초록색으로 노출
           if (partialShowToggle.checked) {
-            let isPastToken = (lIdx < activeLineIdx) || (lIdx === activeLineIdx && activeCharIdx >= tokenEnd);
-            let isCurrentOrJustFinished = false;
+            let effectiveCharIdx = Math.max(0, activeCharIdx - delayCharOffset);
+            let isPastWithDelay = (lIdx < activeLineIdx) || (lIdx === activeLineIdx && effectiveCharIdx >= tokenEnd);
 
-            if (currentSession.isRunning && activeLineIdx !== -1) {
-              if (lIdx === activeLineIdx) {
-                if (isCurrentToken) isCurrentOrJustFinished = true;
-                let activeTokenIdx = tokens.findIndex((tk, idx) => {
-                  let sPos = 0;
-                  for(let k=0; k<idx; k++) sPos += tokens[k].length;
-                  return activeCharIdx >= sPos && activeCharIdx < sPos + tokens[k].length;
-                });
-                let tokenIdxs = tokens.indexOf(token);
-                if (activeTokenIdx !== -1 && tokenIdxs === activeTokenIdx - 1) {
-                  isCurrentOrJustFinished = true;
-                }
-              } else if (lIdx === activeLineIdx - 1) {
-                let activeTokenIdx = parseTextIntoTokens(currentSession.lines[activeLineIdx].fullText).findIndex((tk, idx, arr) => {
-                  let sPos = 0;
-                  for(let k=0; k<idx; k++) sPos += arr[k].length;
-                  return activeCharIdx >= sPos && activeCharIdx < sPos + arr[k].length;
-                });
-                if (activeTokenIdx === 0 && token === tokens.slice(-1)[0]) {
-                  isCurrentOrJustFinished = true;
-                }
-              }
-            }
-
-            if (isPastToken && !isCurrentOrJustFinished) {
+            if (isPastWithDelay) {
               lineHtml += `<span class="char-sent">${formattedToken}</span>`;
             } else {
-              for (let c = 0; c < token.length; c++) {
-                lineHtml += `<span class="partial-mask-block">&nbsp;</span>`;
-              }
+              lineHtml += `<span style="opacity: 0; user-select: none;">${formattedToken}</span>`;
             }
           } else {
             if (isCurrentToken) {
@@ -1668,7 +1652,7 @@
       let shuffledPool = [...pool].sort(() => 0.5 - Math.random());
       let choices = [correctAnswer, shuffledPool[0], shuffledPool[1], shuffledPool[2]].sort(() => 0.5 - Math.random());
 
-      panelZoneTop.innerHTML = `<div class="quiz-prompt-text">${testKey}의 내용은?</div>`;
+      panelRow2.innerHTML = `<div class="quiz-prompt-text">${testKey}의 내용은?</div>`;
 
       quizWrapper.innerHTML = `
         <div class="quiz-options-grid" id="quizGrid"></div>
@@ -1705,7 +1689,7 @@
       currentSession.isRunning = false;
       stopRealRadioNoise();
       hideContentLabelWrapper.style.display = 'none';
-      panelZoneTop.innerHTML = '';
+      panelRow2.innerHTML = '';
 
       document.getElementById('mainTrainView').style.display = 'none';
       const myReportView = document.getElementById('myReportView');
@@ -1718,7 +1702,7 @@
       currentSession.isRunning = false;
       stopRealRadioNoise();
       hideContentLabelWrapper.style.display = 'none';
-      panelZoneTop.innerHTML = '';
+      panelRow2.innerHTML = '';
 
       document.getElementById('mainTrainView').style.display = 'none';
       const reportView = document.getElementById('finalReportView');
