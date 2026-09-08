@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>문장 연습기</title>
+  <title>CW 문장 연습</title>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -23,7 +23,7 @@
       justify-content: space-between;
       margin-bottom: 14px;
       position: relative;
-      height: 32px; /* 기존 h2(21px) 라인과 동일한 기준 높이 유지 */
+      height: 32px;
     }
     .title-left-group {
       display: flex;
@@ -45,19 +45,6 @@
       letter-spacing: 0.5px;
       line-height: 1;
     }
-    .version-tag {
-      font-weight: 600;
-      color: #94a3b8;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .version-tag:hover {
-      color: #4ade80;
-      text-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
-    }
-    .v-char { font-size: 13px; }
-    .v-num { font-size: 15px; }
     .author-tag {
       font-size: 13px;
       font-weight: 600;
@@ -73,7 +60,7 @@
       color: #86efac;
     }
 
-    /* 햄버거 메뉴 버튼 스타일 (기존 헤더 높이에 맞춤) */
+    /* 햄버거 메뉴 버튼 스타일 */
     .hamburger-btn {
       background-color: #2d3748;
       border: 1.5px solid #4a5568;
@@ -96,7 +83,7 @@
       color: #ffffff;
     }
 
-    /* 드롭다운 네비게이션 메뉴 스타일 (폭을 200px에서 약 133px로 2/3 수준으로 축소) */
+    /* 드롭다운 네비게이션 메뉴 스타일 */
     .dropdown-menu {
       position: absolute;
       top: 38px;
@@ -158,12 +145,6 @@
       gap: 8px;
       flex-wrap: wrap;
     }
-    .call-input-row label.main-label { 
-      font-weight: bold; 
-      font-size: 14px; 
-      white-space: nowrap; 
-      color: #cbd5e1;
-    }
 
     .mode-select-group {
       display: flex;
@@ -219,12 +200,14 @@
       border: 1.5px solid #718096;
       border-radius: 6px;
       padding: 6px 12px;
+      height: 40px; /* 모드 버튼들과 높이 맞춤 */
       font-size: 14px;
       font-weight: normal;
       color: #ffffff;
       cursor: pointer;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 4px;
       white-space: nowrap;
       margin-left: auto;
@@ -250,7 +233,7 @@
       font-weight: 900 !important;
     }
 
-    #helpContent, #historyContent {
+    #helpContent {
       margin-top: 12px;
       padding: 14px 16px;
       background-color: #1e293b;
@@ -702,8 +685,7 @@
       <!-- 중앙 정렬된 타이틀 및 정보 영역 -->
       <div class="title-left-group">
         <div class="title-group">
-          <h2>문장 연습기</h2>
-          <span class="version-tag" id="versionTag" title="클릭하여 히스토리 보기"><span class="v-char">V</span><span class="v-num">.1.0</span></span>
+          <h2>CW 문장 연습</h2>
         </div>
         <span class="author-tag">by <a href="https://hl5ky.github.io/morse" target="_blank">HL5KY</a></span>
       </div>
@@ -724,14 +706,12 @@
 
     <div class="card">
       <div class="call-input-row">
-        <label class="main-label">교신 문장 선택</label>
-        
         <div class="mode-select-group">
           <button class="mode-btn active" id="btnRandomMode" onclick="selectType('랜덤예문연습')">랜덤예문연습</button>
           <button class="mode-btn" id="btnMyMode" onclick="selectType('나의송신예문')">나의송신예문</button>
         </div>
         
-        <button class="help-btn" id="helpBtn">프로그램 설명</button>
+        <button class="help-btn" id="helpBtn">설명</button>
       </div>
 
       <div id="helpContent" style="display: none;">
@@ -743,14 +723,6 @@
         <div class="help-item">
           <span class="help-label">2. 효과 :</span>
           <div class="help-desc">문장 전체를 수신하며 실전 교신 능력 향상.</div>
-        </div>
-      </div>
-
-      <div id="historyContent" style="display: none;">
-        <div class="help-header-title">[ 프로그램 히스토리 ]</div>
-        <div class="help-item">
-          <span class="help-label">v.1.0 (260906) :</span>
-          <div class="help-desc">프로그램 개발</div>
         </div>
       </div>
     </div>
@@ -1365,37 +1337,18 @@
     });
 
     const helpContent = document.getElementById('helpContent');
-    const historyContent = document.getElementById('historyContent');
     const helpBtn = document.getElementById('helpBtn');
-    const versionTag = document.getElementById('versionTag');
 
     helpBtn.addEventListener('click', () => {
       const isHelpVis = window.getComputedStyle(helpContent).display !== 'none';
-      const isHistVis = window.getComputedStyle(historyContent).display !== 'none';
 
-      if (isHelpVis || isHistVis) {
+      if (isHelpVis) {
         helpContent.style.display = 'none';
-        historyContent.style.display = 'none';
-        helpBtn.innerText = '프로그램 설명';
+        helpBtn.innerText = '설명';
         helpBtn.classList.remove('btn-close-active');
       } else {
         helpContent.style.display = 'block';
-        historyContent.style.display = 'none';
-        helpBtn.innerText = '프로그램 설명 닫기';
-        helpBtn.classList.add('btn-close-active');
-      }
-    });
-
-    versionTag.addEventListener('click', () => {
-      const isHistVis = window.getComputedStyle(historyContent).display !== 'none';
-      if (isHistVis) {
-        historyContent.style.display = 'none';
-        helpBtn.innerText = '프로그램 설명';
-        helpBtn.classList.remove('btn-close-active');
-      } else {
-        historyContent.style.display = 'none';
-        historyContent.style.display = 'block';
-        helpBtn.innerText = '히스토리 닫기';
+        helpBtn.innerText = '닫기';
         helpBtn.classList.add('btn-close-active');
       }
     });
@@ -1945,8 +1898,7 @@
       }
 
       helpContent.style.display = 'none';
-      historyContent.style.display = 'none';
-      helpBtn.innerText = '프로그램 설명';
+      helpBtn.innerText = '설명';
       helpBtn.classList.remove('btn-close-active');
 
       const settingsContainer = document.getElementById('settingsContainer');
