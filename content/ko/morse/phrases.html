@@ -232,7 +232,7 @@
       align-items: center;
       gap: 8px;
       height: 38px;
-      margin-top: 22px;
+      margin-top: 4px;
       cursor: pointer;
       user-select: none;
     }
@@ -250,6 +250,16 @@
     .setting-item-checkbox span .white-text {
       color: #ffffff;
       font-weight: normal;
+    }
+
+    .farnsworth-desc {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: -6px;
+      margin-bottom: 4px;
+      margin-left: 24px;
+      font-style: italic;
+      letter-spacing: -0.2px;
     }
 
     input[type="number"], input[type="text"] {
@@ -356,7 +366,6 @@
       box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
     }
 
-    /* 4단 구역 세부 높이 배분 (합계 240px) */
     .panel-row-1 {
       height: 20px;
       width: 100%;
@@ -391,7 +400,6 @@
       flex-shrink: 0;
     }
 
-    /* 제1단 우상단 제어 컨트롤 */
     .panel-top-right-control {
       display: none;
       align-items: center;
@@ -463,7 +471,6 @@
       color: #4ade80;
     }
 
-    /* 예문 갱신 시 세 번 깜빡이는 애니메이션 (Triple Flash) */
     .triple-blink-text {
       animation: tripleBlink 0.35s ease-in-out 3;
     }
@@ -679,8 +686,14 @@
           </label>
         </div>
 
-        <!-- 4라인: 좌측 빈 공간 / 우측 잡음 음량 -->
-        <div class="setting-item"></div>
+        <!-- 4라인: 좌측 판스워스 적용 + 설명 문구(괄호 포함, '판'자 라인 정렬) / 우측 잡음 음량 -->
+        <div class="setting-item" style="justify-content: flex-end;">
+          <label class="setting-item-checkbox" for="enableFarnsworthToggle">
+            <input type="checkbox" id="enableFarnsworthToggle" checked>
+            <span class="white-text">판스워스 적용</span>
+          </label>
+          <div class="farnsworth-desc">(부호는 빠르게, 간격은 넓게)</div>
+        </div>
         <div class="setting-item">
           <label id="lblNoiseVol">잡음 음량 (%)</label>
           <input type="number" id="noiseVolInput" value="35" min="0" max="100" step="5" disabled>
@@ -693,9 +706,8 @@
       </div>
     </div>
 
-    <!-- 4단 구분 레이아웃이 적용된 디스플레이 패널 (총 240px) -->
+    <!-- 디스플레이 패널 4단 레이아웃 (총 240px) -->
     <div class="display-panel" id="displayPanel">
-      <!-- 제1단 (20px): 전부 숨기기 / 일부 보이기 토글 영역 -->
       <div class="panel-row-1">
         <div class="panel-top-right-control" id="hideContentLabelWrapper" style="display: none;">
           <label class="panel-toggle-label" for="allHideToggle">
@@ -707,10 +719,8 @@
         </div>
       </div>
 
-      <!-- 제2단 (30px): '새로운 문장 준비' 또는 퀴즈 질문 안내 영역 -->
       <div class="panel-row-2" id="panelRow2"></div>
 
-      <!-- 제3단 (130px): 메인 교신 문장 및 퀴즈 선택지 영역 -->
       <div class="panel-row-3" id="panelRow3">
         <div class="aligned-container" id="waitingView">
           <div class="status-text">
@@ -722,7 +732,6 @@
         <div class="quiz-wrapper" id="quizWrapper" style="display: none;"></div>
       </div>
 
-      <!-- 제4단 (50px): 하부 예비 메시지 영역 -->
       <div class="panel-row-4" id="panelRow4"></div>
     </div>
   </div>
@@ -833,6 +842,33 @@
     };
     const QTH_GROUP = Object.keys(QTH_KDN_MAP);
 
+    /* 
+      [판스워스(Farnsworth) 룩업 테이블 (5~24 WPM 가동, 25 WPM 이상 정상화)]
+      - 5 WPM: 부호 속도 13 WPM, 장단 비율 3.3배
+      - 5~24 WPM: 부호 속도 및 장단 비율(3.3배 → 3.0배) 점진적 비례 변화
+      - 간격 재분배: 단어 간격 비중 25% 축소 후 부호 간격으로 추가 반영
+    */
+    const FARNSWORTH_TABLE = {};
+    for (let w = 5; w <= 45; w++) {
+      let c, s, dahRatio;
+      if (w < 25) {
+        c = Math.round((13 + (w - 5) * (12 / 20)) * 10) / 10;
+        if (c < w) c = w;
+        
+        dahRatio = Math.round((3.3 - (3.3 - 3.0) * ((w - 5) / 20)) * 100) / 100;
+        
+        let unitInflation = (50 + 4 * (dahRatio - 3.0)) / 50;
+        let adjustedSpace = w * (w / c) * 0.90 / unitInflation;
+        s = Math.max(Math.min(adjustedSpace, w - 1), 3);
+        s = Math.round(s * 10) / 10;
+      } else {
+        c = w;
+        s = w;
+        dahRatio = 3.0;
+      }
+      FARNSWORTH_TABLE[w] = { charWpm: c, spaceWpm: s, dahRatio: dahRatio };
+    }
+
     const STORAGE_KEY = 'cw_sentence_trainer_settings';
 
     let currentSession = {
@@ -904,6 +940,7 @@
         myKdn: document.getElementById('myKdnInput').value,
         enableNoise: document.getElementById('enableNoiseToggle').checked,
         noiseVol: document.getElementById('noiseVolInput').value,
+        enableFarnsworth: document.getElementById('enableFarnsworthToggle').checked,
         allHide: document.getElementById('allHideToggle').checked,
         partialShow: document.getElementById('partialShowToggle').checked
       };
@@ -949,6 +986,11 @@
         if (data.myKdn) document.getElementById('myKdnInput').value = data.myKdn;
         if (data.enableNoise !== undefined) document.getElementById('enableNoiseToggle').checked = data.enableNoise;
         if (data.noiseVol) document.getElementById('noiseVolInput').value = data.noiseVol;
+        if (data.enableFarnsworth !== undefined) {
+          document.getElementById('enableFarnsworthToggle').checked = data.enableFarnsworth;
+        } else {
+          document.getElementById('enableFarnsworthToggle').checked = true;
+        }
         if (data.allHide !== undefined) document.getElementById('allHideToggle').checked = data.allHide;
         if (data.partialShow !== undefined) document.getElementById('partialShowToggle').checked = data.partialShow;
 
@@ -1014,7 +1056,6 @@
       sentenceDisplayBox.style.display = 'flex';
       hideContentLabelWrapper.style.display = 'flex';
       
-      // '새로운 문장 준비' 텍스트에 세 번 깜빡이는 애니메이션 클래스 적용
       panelRow2.innerHTML = '<div id="readyMsgEl" class="ready-msg-text triple-blink-text">새로운 문장 준비</div>';
 
       renderSentenceBox(-1, -1);
@@ -1098,6 +1139,10 @@
 
     document.getElementById('enableNoiseToggle').addEventListener('change', () => {
       updateNoiseInputState();
+      saveSettings();
+    });
+
+    document.getElementById('enableFarnsworthToggle').addEventListener('change', () => {
       saveSettings();
     });
 
@@ -1263,7 +1308,6 @@
       await new Promise(r => trackTimeout(r, 40));
     }
 
-    /* 교신 용어 연습기에서 가져온 정교한 QSB/QRN 잡음 엔진 완벽 이식 */
     function startRealRadioNoise(volumePercent) {
       if (!audioCtx || audioCtx.state === 'closed' || noiseMasterGainNode) return;
 
@@ -1498,13 +1542,29 @@
       return tokens;
     }
 
-    /* 끝 부호 잘림 현상 원천 해결을 위한 오디오 스케줄링 및 릴리즈 버퍼 보정 */
+    /* 룩업 테이블 기반 판스워스 타이밍 및 가변 장단 비율(dahRatio) 적용 */
     function playMorseTextWithCallback(text, wpm, toneFreq, sessionToken, onCharProgress) {
       return new Promise((resolve) => {
         const dspFactor = _CW_CORE_DSP.getVal();
         if (!currentSession.isRunning || sessionToken !== globalSessionToken || !audioCtx || audioCtx.state === 'closed' || dspFactor < 0.5) return resolve();
 
-        const dotDuration = (1200 / wpm) / 1000;
+        const isFarnsworthEnabled = document.getElementById('enableFarnsworthToggle').checked;
+
+        let charWpm = wpm;
+        let spaceWpm = wpm;
+        let dahRatio = 3.0;
+
+        if (isFarnsworthEnabled && wpm < 25) {
+          let clampedWpm = Math.max(5, Math.min(45, wpm));
+          let farnsworthData = FARNSWORTH_TABLE[clampedWpm] || { charWpm: clampedWpm, spaceWpm: clampedWpm, dahRatio: 3.0 };
+          charWpm = farnsworthData.charWpm;
+          spaceWpm = farnsworthData.spaceWpm;
+          dahRatio = farnsworthData.dahRatio;
+        }
+
+        const dotDuration = (1200 / charWpm) / 1000;
+        const spaceDotDuration = (1200 / spaceWpm) / 1000;
+
         let currentTime = audioCtx.currentTime + 0.12;
 
         const osc = audioCtx.createOscillator();
@@ -1580,7 +1640,7 @@
           charIndexTracker += token.length;
 
           if (token === ' ') {
-            currentTime += dotDuration * 4;
+            currentTime += spaceDotDuration * 3.0;
             continue;
           }
 
@@ -1596,7 +1656,7 @@
 
           for (let j = 0; j < pattern.length; j++) {
             const symbol = pattern[j];
-            const duration = (symbol === '.') ? dotDuration : (dotDuration * 3);
+            const duration = (symbol === '.') ? dotDuration : (dotDuration * dahRatio);
 
             mainGain.gain.setValueAtTime(0, currentTime);
             mainGain.gain.linearRampToValueAtTime(0.85 * dspFactor, currentTime + 0.005);
@@ -1605,10 +1665,10 @@
             mainGain.gain.linearRampToValueAtTime(0, currentTime);
             currentTime += dotDuration;
           }
-          currentTime += dotDuration * 2;
+          
+          currentTime += spaceDotDuration * 3.0;
         }
 
-        // 마지막 심볼의 릴리즈 잔향이 완전히 보장되도록 stopTime 여유를 충분히 확보
         const stopTime = currentTime + 0.35;
         if (audioCtx && audioCtx.state !== 'closed') {
           mainGain.gain.setValueAtTime(0, stopTime - 0.08);
