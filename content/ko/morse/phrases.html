@@ -7,7 +7,6 @@
   <style>
     * { box-sizing: border-box; }
     body {
-      display: none;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       max-width: 600px;
       margin: 0 auto;
@@ -17,6 +16,32 @@
       background-color: #1a202c;
     }
     
+    /* 상단 메뉴 네비게이션 박스 스타일 */
+    .top-menu-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background: #2d3748;
+      border: 1px solid #4a5568;
+      border-radius: 10px;
+      height: 50px;
+      padding: 0 10px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    }
+    .top-menu-item {
+      font-size: 15px;
+      font-weight: bold;
+      color: #38bdf8;
+      cursor: pointer;
+      padding: 6px 10px;
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+    .top-menu-item:hover {
+      color: #4ade80;
+    }
+
     .title-header {
       display: flex;
       align-items: baseline;
@@ -401,7 +426,6 @@
       text-align: center;
     }
 
-    /* 패널 4단 영역: 하단 팁 메시지 (화면 비표시 처리) */
     .bottom-random-msg {
       font-size: 12px;
       color: #718096;
@@ -410,14 +434,14 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      display: none; /* 화면에 표시되지 않도록 숨김 처리 */
+      display: none;
       align-items: center;
       justify-content: center;
       height: 100%;
     }
     .tip-prefix {
       color: #38bdf8;
-      font-weight: 400; /* 보통체(Regular) 적용 */
+      font-weight: 400;
       margin-right: 5px;
       letter-spacing: 0.5px;
     }
@@ -617,6 +641,16 @@
   </style>
 </head>
 <body id="cwAppRoot">
+
+  <!-- 상부 메뉴 네비게이션 바 추가 -->
+  <div class="top-menu-bar">
+    <a class="top-menu-item" href="#home">홈</a>
+    <a class="top-menu-item" href="#call">호출부호</a>
+    <a class="top-menu-item" href="#term">용어</a>
+    <a class="top-menu-item" href="#sentence">문장</a>
+    <a class="top-menu-item" href="#qso">교신</a>
+    <a class="top-menu-item" href="#deep">심화</a>
+  </div>
 
   <div id="mainTrainView">
     <div class="title-header">
@@ -866,55 +900,8 @@
       'DOKDO': ['IS01']
     };
 
-    /* [절대 지우지 말 것] 미사용 QTH / KDN 지역 확장 맵 주석 데이터 */
-    /*
-      // 'DAEJEON': ['R01', 'R03', 'R05'],
-      // 'INCHEON': ['N03', 'N07', 'N011'],
-      // 'GWANGJU': ['Q01', 'Q03', 'Q05'],
-      // 'CHEONAN': ['F02'],
-      // 'GUNSAN': ['G02'],
-      // 'POHANG': ['K05'],
-      // 'ANDONG': ['K04'],
-      // 'GIMHAE': ['L08'],
-      // 'JEONJU': ['G01'],
-      // 'SEJONG': ['T01'],
-      // 'BUCHEON': ['C05'],
-      // 'SIHEUNG': ['C018'],
-      // 'GOYANG': ['C020'],
-      // 'YONGIN': ['C022'],
-      // 'ICHEON': ['C023'],
-      // 'POCHEON': ['C029'],
-      // 'YANGJU': ['C030'],
-      // 'SOKCHO': ['D04'],
-      // 'DONGHAE': ['D05'],
-      // 'TAEBAEK': ['D06'],
-      // 'YANGYANG': ['D20'],
-      // 'YANGGU': ['D23'],
-      // 'CHUNGJU': ['E02'],
-      // 'JECHEON': ['E03'],
-      // 'GOESAN': ['E15'],
-      // 'DANYANG': ['E20'],
-      // 'GONGJU': ['F03'],
-      // 'SEOSAN': ['F06'],
-      // 'NONSAN': ['F09'],
-      // 'DANGJIN': ['F011'],
-      // 'NAMWON': ['G06'],
-      // 'JANGSU': ['G21'],
-      // 'HWASUN': ['H21'],
-      // 'HAENAM': ['H29'],
-      // 'YEONGJU': ['K07'],
-      // 'SANGJU': ['K09'],
-      // 'SEONGJU': ['K13'],
-      // 'YECHEON': ['K20'],
-      // 'YANGSAN': ['L014'],
-      // 'NAMHAE': ['L18'],
-      // 'HADONG': ['L21'],
-      // 'MARADO': ['IS02']
-    */
-
     const QTH_GROUP = Object.keys(QTH_KDN_MAP);
 
-    /* [절대 지우지 말 것] 햄라디오 실전 교신 팁 메시지 목록 */
     const TIP_MESSAGES = [
       "NAME, QTH 등은 2회 또는 3회 반복 송신함.",
       "교신 시작시 GM 또는 GE로 인사를 먼저 보내기도 함.",
@@ -930,12 +917,6 @@
       "삐~익삑거리는 이상한 소리면 강한 신호라도 (RS)T는 9 이하"
     ];
 
-    /* 
-      [판스워스(Farnsworth) 룩업 테이블 (5~22 WPM 가동, 23 WPM 이상 정상화)]
-      - 5 WPM: 부호 속도 13 WPM, 장단 비율 3.3배
-      - 5~22 WPM: 부호 속도 및 장단 비율(3.3배 → 3.0배) 점진적 비례 변화
-      - 간격 재분배: 단어 간격 비중 25% 축소 후 부호 간격으로 추가 반영
-    */
     const FARNSWORTH_TABLE = {};
     for (let w = 5; w <= 45; w++) {
       let c, s, dahRatio;
@@ -1341,7 +1322,7 @@
       let rstParts = [rstPronoun, isIsRst, chosenRstNum, chosenRstAbbr].filter(Boolean);
       let rstText = rstParts.join(' ') + (connSymbol ? ' ' + connSymbol : '');
 
-      // 2. NAME (끝에 <BT> 절대 배제 적용)
+      // 2. NAME
       let nameVal = '';
       if (isRandomMode) {
         nameVal = getFilteredRandomChoice(NAME_GROUP, lastGeneratedValues.name);
@@ -1358,7 +1339,7 @@
         { label: 'NAME', fullText: nameText, targetValue: nameVal }
       ];
 
-      // QTH 및 KDN 3가지 경우의 수 무작위 선택 (0: 둘 다, 1: QTH만, 2: KDN만)
+      // QTH 및 KDN 3가지 경우의 수 무작위 선택
       const qthKdnMode = Math.floor(Math.random() * 3);
 
       let qthVal = '';
@@ -1844,7 +1825,6 @@
       toggleSettingsBtn.innerText = '⚙️ 세부 사항 설정';
       toggleSettingsBtn.classList.remove('btn-close-active');
 
-      // 시작 버튼 누르면 하단 팁 메시지 내부 데이터도 비워줌
       document.getElementById('bottomRandomMsg').innerHTML = '';
 
       const thisSessionToken = ++globalSessionToken;
