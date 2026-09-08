@@ -398,6 +398,28 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      text-align: center;
+    }
+
+    /* 패널 4단 영역: 하단 팁 메시지 (현재 화면 비표시 처리, 기능 및 스타일 유지) */
+    .bottom-random-msg {
+      font-size: 12px;
+      color: #718096;
+      width: 100%;
+      padding: 0 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: none; /* 화면에 표시되지 않도록 숨김 처리 */
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+    .tip-prefix {
+      color: #38bdf8;
+      font-weight: 400; /* 보통체(Regular) 적용 */
+      margin-right: 5px;
+      letter-spacing: 0.5px;
     }
 
     .panel-top-right-control {
@@ -732,7 +754,10 @@
         <div class="quiz-wrapper" id="quizWrapper" style="display: none;"></div>
       </div>
 
-      <div class="panel-row-4" id="panelRow4"></div>
+      <!-- 패널 4단 영역: 하단 팁 메시지 (화면 비표시 처리) -->
+      <div class="panel-row-4" id="panelRow4">
+        <div class="bottom-random-msg" id="bottomRandomMsg"></div>
+      </div>
     </div>
   </div>
 
@@ -783,8 +808,8 @@
       'U': '..-',   'V': '...-',  'W': '.--',   'X': '-..-',   'Y': '-.--',
       'Z': '--..',  '1': '.----', '2': '..---', '3': '...--',  '4': '....-',
       '5': '.....', '6': '-....', '7': '--...', '8': '---..',  '9': '----.',
-      '0': '-----', '/': '-..-.', '?': '..--..', '<AR>': '.-.-.', '<SK>': '...-.-',
-      '<AS>': '.-...', '<BT>': '-...-', '.': '.-.-.-', ',': '--..--'
+      '0': '-----', '/': '-..-.', '?': '..--..', '<IMI>': '..--..', '<AR>': '.-.-.', 
+      '<SK>': '...-.-', '<AS>': '.-...', '<BT>': '-...-', '.': '.-.-.-', ',': '--..--'
     };
 
     const RST_DATA = {
@@ -842,20 +867,36 @@
     };
     const QTH_GROUP = Object.keys(QTH_KDN_MAP);
 
+    /* 햄라디오 실전 교신 팁 메시지 목록 */
+    const TIP_MESSAGES = [
+      "NAME, QTH 등은 2회 또는 3회 반복 송신함.",
+      "교신 시작시 GM 또는 GE로 인사를 먼저 보내기도 함.",
+      "(UR, MY)는 전체 사용 또는 전체 제거가 일반적. 부분적 사용하기도 함.",
+      "KDN은 꼭 필요한 것은 아님. 해외 교신에서는 대부분 송신 하지 않음.",
+      "<IMI> '반복한다'는 뜻의 프로사인. '?'와 같은 부호.",
+      "IS는 전체 사용 또는 전체 제거가 일반적. 부분적 사용하기도 함.",
+      "RST 송신시 숫자 약어를 사용하지 않는 경우도 있음.",
+      "모든 숫자에 약어가 있지만 RST에서는 9만 N으로 사용함.",
+      "RST 송신시 GUD, WEAK, QSB 등을 추가해서 설명하기도 함.",
+      "신호가 약해도 톤이 이상하지 않으면 (RS)T는 9",
+      "혼신 또는 잡음이 있어도 톤이 정상이면 (RS)T는 9",
+      "삐~익삑거리는 이상한 소리면 강한 신호라도 (RS)T는 9 이하"
+    ];
+
     /* 
-      [판스워스(Farnsworth) 룩업 테이블 (5~24 WPM 가동, 25 WPM 이상 정상화)]
+      [판스워스(Farnsworth) 룩업 테이블 (5~22 WPM 가동, 23 WPM 이상 정상화)]
       - 5 WPM: 부호 속도 13 WPM, 장단 비율 3.3배
-      - 5~24 WPM: 부호 속도 및 장단 비율(3.3배 → 3.0배) 점진적 비례 변화
+      - 5~22 WPM: 부호 속도 및 장단 비율(3.3배 → 3.0배) 점진적 비례 변화
       - 간격 재분배: 단어 간격 비중 25% 축소 후 부호 간격으로 추가 반영
     */
     const FARNSWORTH_TABLE = {};
     for (let w = 5; w <= 45; w++) {
       let c, s, dahRatio;
-      if (w < 25) {
-        c = Math.round((13 + (w - 5) * (12 / 20)) * 10) / 10;
+      if (w < 23) {
+        c = Math.round((13 + (w - 5) * (10 / 18)) * 10) / 10;
         if (c < w) c = w;
         
-        dahRatio = Math.round((3.3 - (3.3 - 3.0) * ((w - 5) / 20)) * 100) / 100;
+        dahRatio = Math.round((3.3 - (3.3 - 3.0) * ((w - 5) / 18)) * 100) / 100;
         
         let unitInflation = (50 + 4 * (dahRatio - 3.0)) / 50;
         let adjustedSpace = w * (w / c) * 0.90 / unitInflation;
@@ -1021,6 +1062,16 @@
       waitingView.style.display = 'flex';
       hideContentLabelWrapper.style.display = 'none';
       setUIState('waiting');
+      
+      showRandomTipMessage();
+    }
+
+    function showRandomTipMessage() {
+      const tipEl = document.getElementById('bottomRandomMsg');
+      if (TIP_MESSAGES.length > 0) {
+        const randomTip = TIP_MESSAGES[Math.floor(Math.random() * TIP_MESSAGES.length)];
+        tipEl.innerHTML = `<span class="tip-prefix">TIP:</span>${escapeHtml(randomTip)}`;
+      }
     }
 
     function selectType(typeVal, doSave = true) {
@@ -1056,6 +1107,8 @@
       sentenceDisplayBox.style.display = 'flex';
       hideContentLabelWrapper.style.display = 'flex';
       
+      showRandomTipMessage();
+
       panelRow2.innerHTML = '<div id="readyMsgEl" class="ready-msg-text triple-blink-text">새로운 문장 준비</div>';
 
       renderSentenceBox(-1, -1);
@@ -1221,8 +1274,11 @@
       const isRandomMode = (currentSession.selectedType === '랜덤예문연습');
 
       const connPool = ['<BT>', '<BT>', '<BT>', '', '', '', '.', ','];
+      const nameConnPool = ['', '', '', '.', ','];
+      
       const connSymbol = getRandomChoice(connPool);
-      const qPool = ['', '', '', '?'];
+      const nameConnSymbol = getRandomChoice(nameConnPool);
+      const imiOrSpacePool = ['', '', '', '<IMI>'];
 
       const isIsRst = Math.random() < 0.5 ? 'IS' : '';
       const isIsName = Math.random() < 0.5 ? 'IS' : '';
@@ -1238,7 +1294,7 @@
       let rstParts = [rstPronoun, isIsRst, chosenRstNum, chosenRstAbbr].filter(Boolean);
       let rstText = rstParts.join(' ') + (connSymbol ? ' ' + connSymbol : '');
 
-      // 2. NAME
+      // 2. NAME (끝에 <BT> 절대 배제 적용)
       let nameVal = '';
       if (isRandomMode) {
         nameVal = getFilteredRandomChoice(NAME_GROUP, lastGeneratedValues.name);
@@ -1247,10 +1303,17 @@
         nameVal = document.getElementById('myNameInput').value.trim().toUpperCase() || 'KIM';
       }
       const namePronoun = getRandomChoice(['MY NAME', 'NAME', 'OP']);
-      let nameParts = [namePronoun, isIsName, nameVal, getRandomChoice(qPool), nameVal].filter(Boolean);
-      let nameText = nameParts.join(' ') + (connSymbol ? ' ' + connSymbol : '');
+      let nameParts = [namePronoun, isIsName, nameVal, getRandomChoice(imiOrSpacePool), nameVal].filter(Boolean);
+      let nameText = nameParts.join(' ') + (nameConnSymbol ? ' ' + nameConnSymbol : '');
 
-      // 3. QTH
+      let lines = [
+        { label: 'RST', fullText: rstText, targetValue: chosenRstNum },
+        { label: 'NAME', fullText: nameText, targetValue: nameVal }
+      ];
+
+      // QTH 및 KDN 3가지 경우의 수 무작위 선택 (0: 둘 다, 1: QTH만, 2: KDN만)
+      const qthKdnMode = Math.floor(Math.random() * 3);
+
       let qthVal = '';
       if (isRandomMode) {
         qthVal = getFilteredRandomChoice(QTH_GROUP, lastGeneratedValues.qth);
@@ -1258,11 +1321,7 @@
       } else {
         qthVal = document.getElementById('myQthInput').value.trim().toUpperCase() || 'BUSAN';
       }
-      const qthPronoun = Math.random() < 0.5 ? 'MY QTH' : 'QTH';
-      let qthParts = [qthPronoun, isIsQth, qthVal, getRandomChoice(qPool), qthVal].filter(Boolean);
-      let qthText = qthParts.join(' ') + (connSymbol ? ' ' + connSymbol : '');
 
-      // 4. KDN
       let kdnVal = '';
       if (isRandomMode) {
         const matchingKdns = QTH_KDN_MAP[qthVal] || ['B11'];
@@ -1271,16 +1330,23 @@
       } else {
         kdnVal = document.getElementById('myKdnInput').value.trim().toUpperCase() || 'B11';
       }
-      const kdnPronoun = Math.random() < 0.5 ? 'MY KDN' : 'KDN';
-      let kdnParts = [kdnPronoun, isIsKdn, kdnVal, getRandomChoice(qPool), kdnVal].filter(Boolean);
-      let kdnText = kdnParts.join(' ');
 
-      return [
-        { label: 'RST', fullText: rstText, targetValue: chosenRstNum },
-        { label: 'NAME', fullText: nameText, targetValue: nameVal },
-        { label: 'QTH', fullText: qthText, targetValue: qthVal },
-        { label: 'KDN', fullText: kdnText, targetValue: kdnVal }
-      ];
+      const qthPronoun = Math.random() < 0.5 ? 'MY QTH' : 'QTH';
+      const kdnPronoun = Math.random() < 0.5 ? 'MY KDN' : 'KDN';
+
+      if (qthKdnMode === 0 || qthKdnMode === 1) {
+        let qthParts = [qthPronoun, isIsQth, qthVal, getRandomChoice(imiOrSpacePool), qthVal].filter(Boolean);
+        let qthText = qthParts.join(' ') + ((qthKdnMode === 0 && connSymbol) ? ' ' + connSymbol : '');
+        lines.push({ label: 'QTH', fullText: qthText, targetValue: qthVal });
+      }
+
+      if (qthKdnMode === 0 || qthKdnMode === 2) {
+        let kdnParts = [kdnPronoun, isIsKdn, kdnVal, getRandomChoice(imiOrSpacePool), kdnVal].filter(Boolean);
+        let kdnText = kdnParts.join(' ');
+        lines.push({ label: 'KDN', fullText: kdnText, targetValue: kdnVal });
+      }
+
+      return lines;
     }
 
     let audioCtx = null;
@@ -1542,7 +1608,6 @@
       return tokens;
     }
 
-    /* 룩업 테이블 기반 판스워스 타이밍 및 가변 장단 비율(dahRatio) 적용 */
     function playMorseTextWithCallback(text, wpm, toneFreq, sessionToken, onCharProgress) {
       return new Promise((resolve) => {
         const dspFactor = _CW_CORE_DSP.getVal();
@@ -1554,7 +1619,7 @@
         let spaceWpm = wpm;
         let dahRatio = 3.0;
 
-        if (isFarnsworthEnabled && wpm < 25) {
+        if (isFarnsworthEnabled && wpm < 23) {
           let clampedWpm = Math.max(5, Math.min(45, wpm));
           let farnsworthData = FARNSWORTH_TABLE[clampedWpm] || { charWpm: clampedWpm, spaceWpm: clampedWpm, dahRatio: 3.0 };
           charWpm = farnsworthData.charWpm;
@@ -1732,6 +1797,9 @@
       toggleSettingsBtn.innerText = '⚙️ 세부 사항 설정';
       toggleSettingsBtn.classList.remove('btn-close-active');
 
+      // 시작 버튼 누르면 하단 팁 메시지 내부 데이터도 비워줌
+      document.getElementById('bottomRandomMsg').innerHTML = '';
+
       const thisSessionToken = ++globalSessionToken;
 
       if (currentSession.selectedType === '나의송신예문') {
@@ -1872,10 +1940,12 @@
     }
 
     let quizRound = 0;
-    const quizItemsToTest = ['RST', 'NAME', 'QTH', 'KDN'];
+    let quizItemsToTest = [];
 
     function startQuizSession() {
       quizRound = 0;
+      quizItemsToTest = currentSession.lines.map(l => l.label);
+      
       hideContentLabelWrapper.style.display = 'none';
       sentenceDisplayBox.style.display = 'none';
       quizWrapper.style.display = 'flex';
@@ -1964,9 +2034,10 @@
       const reportView = document.getElementById('finalReportView');
       reportView.style.display = 'block';
 
+      const totalItemsCount = quizItemsToTest.length;
       document.getElementById('finalScore').innerText = currentSession.score;
-      document.getElementById('finalTotal').innerText = `/ ${quizItemsToTest.length}`;
-      const pct = Math.round((currentSession.score / quizItemsToTest.length) * 100);
+      document.getElementById('finalTotal').innerText = `/ ${totalItemsCount}`;
+      const pct = Math.round((currentSession.score / totalItemsCount) * 100);
       document.getElementById('accuracyText').innerText = `정답률: ${pct}%`;
 
       const tbody = document.getElementById('historyTableBody');
