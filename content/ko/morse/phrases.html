@@ -401,7 +401,7 @@
       text-align: center;
     }
 
-    /* 패널 4단 영역: 하단 팁 메시지 (현재 화면 비표시 처리, 기능 및 스타일 유지) */
+    /* 패널 4단 영역: 하단 팁 메시지 (화면 비표시 처리) */
     .bottom-random-msg {
       font-size: 12px;
       color: #718096;
@@ -865,9 +865,56 @@
       'GEOJE': ['L012'],
       'DOKDO': ['IS01']
     };
+
+    /* [절대 지우지 말 것] 미사용 QTH / KDN 지역 확장 맵 주석 데이터 */
+    /*
+      // 'DAEJEON': ['R01', 'R03', 'R05'],
+      // 'INCHEON': ['N03', 'N07', 'N011'],
+      // 'GWANGJU': ['Q01', 'Q03', 'Q05'],
+      // 'CHEONAN': ['F02'],
+      // 'GUNSAN': ['G02'],
+      // 'POHANG': ['K05'],
+      // 'ANDONG': ['K04'],
+      // 'GIMHAE': ['L08'],
+      // 'JEONJU': ['G01'],
+      // 'SEJONG': ['T01'],
+      // 'BUCHEON': ['C05'],
+      // 'SIHEUNG': ['C018'],
+      // 'GOYANG': ['C020'],
+      // 'YONGIN': ['C022'],
+      // 'ICHEON': ['C023'],
+      // 'POCHEON': ['C029'],
+      // 'YANGJU': ['C030'],
+      // 'SOKCHO': ['D04'],
+      // 'DONGHAE': ['D05'],
+      // 'TAEBAEK': ['D06'],
+      // 'YANGYANG': ['D20'],
+      // 'YANGGU': ['D23'],
+      // 'CHUNGJU': ['E02'],
+      // 'JECHEON': ['E03'],
+      // 'GOESAN': ['E15'],
+      // 'DANYANG': ['E20'],
+      // 'GONGJU': ['F03'],
+      // 'SEOSAN': ['F06'],
+      // 'NONSAN': ['F09'],
+      // 'DANGJIN': ['F011'],
+      // 'NAMWON': ['G06'],
+      // 'JANGSU': ['G21'],
+      // 'HWASUN': ['H21'],
+      // 'HAENAM': ['H29'],
+      // 'YEONGJU': ['K07'],
+      // 'SANGJU': ['K09'],
+      // 'SEONGJU': ['K13'],
+      // 'YECHEON': ['K20'],
+      // 'YANGSAN': ['L014'],
+      // 'NAMHAE': ['L18'],
+      // 'HADONG': ['L21'],
+      // 'MARADO': ['IS02']
+    */
+
     const QTH_GROUP = Object.keys(QTH_KDN_MAP);
 
-    /* 햄라디오 실전 교신 팁 메시지 목록 */
+    /* [절대 지우지 말 것] 햄라디오 실전 교신 팁 메시지 목록 */
     const TIP_MESSAGES = [
       "NAME, QTH 등은 2회 또는 3회 반복 송신함.",
       "교신 시작시 GM 또는 GE로 인사를 먼저 보내기도 함.",
