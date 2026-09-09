@@ -1,5 +1,5 @@
 ---
-linkTitle: ▪통역QSO
+linkTitle: ▪AI통역QSO
 title: AI를 통역을 이용한 QSO
 # description:
 type: docs
