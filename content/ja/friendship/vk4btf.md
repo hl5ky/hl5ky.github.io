@@ -1,6 +1,6 @@
 ---
 linkTitle: VK4BTF
-title: "VK4BTF: CQ、半世紀の絆"
+title: "HL5BTFとVK4BTF: CQ、半世紀の絆"
 # description: HL5BTF와 VK4BTF의 소중한 인연
 type: docs
 # icon: fa-solid fa-star

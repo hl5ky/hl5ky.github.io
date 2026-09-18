@@ -1,6 +1,6 @@
 ---
 linkTitle: VK4BTF
-title: "VK4BTF: CQ, Un lazo de medio siglo"
+title: "HL5BTF y VK4BTF: CQ, Un lazo de medio siglo"
 # description: HL5BTF와 VK4BTF의 소중한 인연
 type: docs
 # icon: fa-solid fa-star

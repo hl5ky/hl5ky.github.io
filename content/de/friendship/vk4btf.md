@@ -1,6 +1,6 @@
 ---
 linkTitle: VK4BTF
-title: "VK4BTF: CQ, Ein Band über ein halbes Jahrhundert"
+title: "HL5BTF und VK4BTF: CQ, Ein Band über ein halbes Jahrhundert"
 # description: HL5BTF와 VK4BTF의 소중한 인연
 type: docs
 # icon: fa-solid fa-star
